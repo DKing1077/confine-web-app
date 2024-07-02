@@ -27,7 +27,6 @@ def main(config):
 def relationalmapping(session, data, start):
     if start == 1:
         for index in data.index:
-
             artist = session.query(Artists).filter_by(id=int(data['artist_id'][index])).first()
             if not artist:
                 artist = Artists(
@@ -45,7 +44,6 @@ def relationalmapping(session, data, start):
 
     elif start == 2:
         for index in data.index:
-
             song = session.query(Songs).filter_by(id=int(data['song_id'][index])).first()
             if not song:
                 artist = session.query(Artists).filter_by(id=int(data['artist'][index])).first()
@@ -61,7 +59,6 @@ def relationalmapping(session, data, start):
 
     elif start == 3:
         for index in data.index:
-
             album = session.query(Albums).filter_by(id=data['album_id'][index]).first()
             if not album:
                 artist = session.query(Artists).filter_by(id=data['artist'][index]).first()
@@ -78,13 +75,12 @@ def relationalmapping(session, data, start):
 
 def check_db(session, engine):
     sql_file = 'sql/check.sql'
-
     with open(sql_file, 'r') as file:
+
         sql = file.read()
-
         result = session.execute(text(sql))
-        table_exists = result.fetchone()[0]
 
+        table_exists = result.fetchone()[0]
         if not table_exists:
             load_db(session, engine)
 
@@ -99,7 +95,6 @@ def load_db(session, engine):
 
             session.execute(text(sql))
             session.commit()
-
     else:
         reg.metadata.create_all(engine)
 
