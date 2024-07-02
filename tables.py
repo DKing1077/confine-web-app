@@ -1,5 +1,5 @@
 from sqlalchemy import Integer, String, ForeignKey, Text
-from sqlalchemy.orm import relationship, registry, Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship, registry
 
 reg = registry()
 
