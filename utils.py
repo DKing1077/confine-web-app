@@ -1,11 +1,10 @@
 from sqlalchemy import create_engine, text
 from sqlalchemy.orm import sessionmaker
-import lyricsgenius
 from tables import reg
+import lyricsgenius
 
 
 def parse_arguments(parser):
-
     parser.add('--config', default='config.cfg', is_config_file=True)
     parser.add_argument('--db_user')
     parser.add_argument('--db_pass')
@@ -22,7 +21,6 @@ def parse_arguments(parser):
 
 
 def db_connection(config):
-
     db_uri = f'postgresql://{config.db_user}:{config.db_pass}@{config.db_host}:{config.db_port}/{config.db_name}'
     engine = create_engine(db_uri)
 
