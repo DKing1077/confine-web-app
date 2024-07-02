@@ -1,5 +1,6 @@
 from sqlalchemy import create_engine, text
 from sqlalchemy.orm import sessionmaker
+import lyricsgenius
 from tables import reg
 
 
@@ -11,6 +12,10 @@ def parse_arguments(parser):
     parser.add_argument('--db_name')
     parser.add_argument('--db_host')
     parser.add_argument('--db_port')
+
+    parser.add_argument('--client_id')
+    parser.add_argument('--client_secret')
+    parser.add_argument('--access_token')
 
     args = parser.parse_args()
     return args
@@ -38,5 +43,13 @@ def db_connection(config):
         print(f"Error connecting to PostgreSQL database: {e}")
 
 
-def api_connection():
-    pass
+def api_connection(config):
+    try:
+        genius = lyricsgenius.Genius(config.access_token, remove_section_headers=True,
+                                     excluded_terms=['(Remix)', '(Live)'], timeout=None)
+        return genius
+
+    except Exception as e:
+        print(f"Error connecting to lyrics genius api: {e}")
+
+

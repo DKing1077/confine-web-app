@@ -1,4 +1,3 @@
-import dataclasses
 from sqlalchemy import Integer, String, ForeignKey, Text
 from sqlalchemy.orm import relationship, registry, Mapped, mapped_column
 

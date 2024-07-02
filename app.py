@@ -1,10 +1,10 @@
 import os
 import configargparse
-import pandas as pd
 import subprocess
 from sqlalchemy import text
 from utils import parse_arguments, db_connection, api_connection
 from tables import Artists, Albums, Songs, reg
+from lyrics_api import api
 
 
 def main(config):
@@ -12,6 +12,13 @@ def main(config):
     # make connection, load data
     session, engine = db_connection(config)
     check_db(session, engine)
+
+    # make api connection
+    genius = api_connection(config)
+    start = int(input('1) search artist\n2) search song\n3) search album\n'))
+
+    data = api(genius, start)
+    print(data)
 
     # saving db, commit session, close session
     save_db(config), session.commit(), session.close()
