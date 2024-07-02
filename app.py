@@ -9,27 +9,25 @@ from tables import Artists, Albums, Songs, reg
 
 def main(config):
 
-    # make connection
+    # make connection, load data
     session, engine = db_connection(config)
-
-    # check/load data
-    if not check_db(session):
-        load_db(session, engine)
+    check_db(session, engine)
 
     # saving db, commit session, close session
     save_db(config), session.commit(), session.close()
 
 
-def check_db(session):
+def check_db(session, engine):
     sql_file = 'data/check.sql'
 
     with open(sql_file, 'r') as file:
-        sql_commands = file.read()
+        sql = file.read()
 
-        result = session.execute(text(sql_commands))
+        result = session.execute(text(sql))
         table_exists = result.fetchone()[0]
 
-        return table_exists
+        if not table_exists:
+            load_db(session, engine)
 
 
 def load_db(session, engine):
@@ -37,10 +35,10 @@ def load_db(session, engine):
     if os.path.exists(sql_file):
 
         with open(sql_file, 'r') as file:
-            sql_commands = file.read()
-            sql_commands = sql_commands.replace(r'\.', '')
+            sql = file.read()
+            sql = sql.replace(r'\.', '')
 
-            session.execute(text(sql_commands))
+            session.execute(text(sql))
             session.commit()
 
     else:
