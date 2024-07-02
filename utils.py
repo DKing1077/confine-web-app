@@ -1,5 +1,6 @@
 from sqlalchemy import create_engine, text
 from sqlalchemy.orm import sessionmaker
+from tables import reg
 
 
 def parse_arguments(parser):
@@ -30,7 +31,8 @@ def db_connection(config):
         db_version = result.fetchone()[0]
         print(f"Connected to PostgreSQL! Server version: {db_version}")
 
-        return session
+        reg.metadata.create_all(engine)
+        return session, engine
 
     except Exception as e:
         print(f"Error connecting to PostgreSQL database: {e}")

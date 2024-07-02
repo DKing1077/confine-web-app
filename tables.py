@@ -1,5 +1,6 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, Text
-from sqlalchemy.orm import relationship, registry
+import dataclasses
+from sqlalchemy import Integer, String, ForeignKey, Text
+from sqlalchemy.orm import relationship, registry, Mapped, mapped_column
 
 reg = registry()
 
@@ -8,37 +9,36 @@ reg = registry()
 class Artists:
     __tablename__ = 'artists'
 
-    id: int = Column(Integer, primary_key=True)
-    name: str = Column(String, nullable=False)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    name: Mapped[str] = mapped_column(String, nullable=False)
 
-    albums = relationship('Album', back_populates='artist')
-    songs = relationship('Song', back_populates='artist')
+    albums: list['Albums'] = relationship('Albums', back_populates='artist')
+    songs: list['Songs'] = relationship('Songs', back_populates='artist')
 
 
 @reg.mapped_as_dataclass
 class Albums:
     __tablename__ = 'albums'
 
-    id: int = Column(Integer, primary_key=True)
-    name: str = Column(String, nullable=False)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    name: Mapped[str] = mapped_column(String, nullable=False)
+    lyrics: Mapped[str] = mapped_column(Text, nullable=True)
 
-    artist_id = Column(Integer, ForeignKey('artists.id'), nullable=False)
-    artist = relationship('Artist', back_populates='albums')
-
-    lyrics: str = Column(Text, nullable=True)
+    artist_id: int = mapped_column(Integer, ForeignKey('artists.id'), nullable=False)
+    artist: Artists = relationship('Artists', back_populates='albums')
 
 
 @reg.mapped_as_dataclass
 class Songs:
     __tablename__ = 'songs'
 
-    id: int = Column(Integer, primary_key=True)
-    name: str = Column(String, nullable=False)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    name: Mapped[str] = mapped_column(String, nullable=False)
+    lyrics: Mapped[str] = mapped_column(Text, nullable=True)
 
-    artist_id = Column(Integer, ForeignKey('artists.id'), nullable=False)
-    artist = relationship('Artist', back_populates='songs')
+    artist_id: int = mapped_column(Integer, ForeignKey('artists.id'), nullable=False)
+    artist: Artists = relationship('Artists', back_populates='songs')
 
-    lyrics: str = Column(Text, nullable=True)
 
 
 
