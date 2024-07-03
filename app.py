@@ -2,6 +2,8 @@ import os
 import configargparse
 import subprocess
 from sqlalchemy import text
+
+import lyrics_api
 from utils import parse_arguments, db_connection, api_connection
 from tables import Artists, Albums, Songs, reg
 from lyrics_api import geniusapi
@@ -18,59 +20,70 @@ def main(config):
     start = int(input('1) search artist\n2) search song\n3) search album\n'))
 
     data = geniusapi(genius, start)
-    relationalmapping(session, data, start)
+    relationalmapping(genius, session, data, start)
 
     # saving db, commit session, close session
     save_db(config), session.commit(), session.close()
 
 
-def relationalmapping(session, data, start):
+def relationalmapping(genius, session, data, start):
     if start == 1:
         for index in data.index:
+
             artist = session.query(Artists).filter_by(id=int(data['artist_id'][index])).first()
             if not artist:
-                artist = Artists(
-                    id=int(data['artist_id'][index]), name=data['artist'][index], albums=[], songs=[]
-                )
-                session.add(artist)
+                add_artist(session, data, index)
 
             song = session.query(Songs).filter_by(id=int(data['song_id'][index])).first()
             if not song:
-                song = Songs(
-                    id=int(data['song_id'][index]), name=data['title'][index],
-                    lyrics=data['lyrics'][index], artist_id=int(data['artist_id'][index]), artist=artist
-                )
-                session.add(song)
+                add_song(session, data, index, artist)
 
     elif start == 2:
         for index in data.index:
             song = session.query(Songs).filter_by(id=int(data['song_id'][index])).first()
-            if not song:
-                artist = session.query(Artists).filter_by(id=int(data['artist'][index])).first()
-                if not artist:
-                    # TODO
-                    pass
 
-                song = Songs(
-                    id=int(data['song_id'][index]), name=data['title'][index],
-                    lyrics=data['lyrics'][index], artist=artist
-                )
-                session.add(song)
+            if not song:
+                artist = session.query(Artists).filter_by(id=data['artist'][index]).first()
+                if not artist:
+                    artist_data = lyrics_api.search_by_artist(genius, data['artist'][index], max_songs=1)
+                    add_artist(session, artist_data, 0)
+                else:
+                    add_song(session, data, index, artist)
 
     elif start == 3:
         for index in data.index:
             album = session.query(Albums).filter_by(id=data['album_id'][index]).first()
+
             if not album:
                 artist = session.query(Artists).filter_by(id=data['artist'][index]).first()
                 if not artist:
-                    # TODO
-                    pass
+                    artist_data = lyrics_api.search_by_artist(genius, data['artist'][index], max_songs=1)
+                    add_artist(session, artist_data, 0)
+                else:
+                    add_album(session, data, index, artist)
 
-                album = Albums(
-                    id=int(data['album_id'][index]), name=data['title'][index],
-                    lyrics=data['lyrics'][index], artist=artist
-                )
-                session.add(album)
+
+def add_artist(session, data, index):
+    artist = Artists(
+        id=int(data['artist_id'][index]), name=data['artist'][index], albums=[], songs=[]
+    )
+    session.add(artist)
+
+
+def add_song(session, data, index, artist):
+    song = Songs(
+        id=int(data['song_id'][index]), name=data['title'][index],
+        lyrics=data['lyrics'][index], artist_id=int(data['artist_id'][index]), artist=artist
+    )
+    session.add(song)
+
+
+def add_album(session, data, index, artist):
+    album = Albums(
+        id=int(data['album_id'][index]), name=data['title'][index],
+        lyrics=data['lyrics'][index], artist=artist
+    )
+    session.add(album)
 
 
 def check_db(session, engine):
