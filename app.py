@@ -2,7 +2,6 @@ import os
 import configargparse
 import subprocess
 from sqlalchemy import text
-
 import lyrics_api
 from utils import parse_arguments, db_connection, api_connection
 from tables import Artists, Albums, Songs, reg
@@ -27,39 +26,51 @@ def main(config):
 
 
 def relationalmapping(genius, session, data, start):
+
     if start == 1:
         for index in data.index:
 
-            artist = session.query(Artists).filter_by(id=int(data['artist_id'][index])).first()
-            if not artist:
-                add_artist(session, data, index)
+            artist_id = int(data['artist_id'][index])
+            song_id = int(data['song_id'][index])
 
-            song = session.query(Songs).filter_by(id=int(data['song_id'][index])).first()
+            artist = check_if_exists(session, Artists, 'id', artist_id)
+            if not artist:
+                artist = add_artist(session, data, index)
+
+            song = check_if_exists(session, Songs, 'id', song_id)
             if not song:
                 add_song(session, data, index, artist)
 
     elif start == 2:
         for index in data.index:
-            song = session.query(Songs).filter_by(id=int(data['song_id'][index])).first()
 
+            artist = data['artist'][index]
+            song_id = int(data['song_id'][index])
+
+            song = check_if_exists(session, Songs, 'id', song_id)
             if not song:
-                artist = session.query(Artists).filter_by(id=data['artist'][index]).first()
+                artist = check_if_exists(session, Artists, 'name', artist)
+
                 if not artist:
-                    artist_data = lyrics_api.search_by_artist(genius, data['artist'][index], max_songs=1)
-                    add_artist(session, artist_data, 0)
-                else:
+                    artist_data = lyrics_api.search_by_artist(genius, artist, max_songs=1)
+
+                    artist = add_artist(session, artist_data, 0)
                     add_song(session, data, index, artist)
 
     elif start == 3:
         for index in data.index:
-            album = session.query(Albums).filter_by(id=data['album_id'][index]).first()
 
+            artist = data['artist'][index]
+            album_id = data['album_id'][index]
+
+            album = check_if_exists(session, Albums, 'id', album_id)
             if not album:
-                artist = session.query(Artists).filter_by(id=data['artist'][index]).first()
+                artist = check_if_exists(session, Artists, 'name', artist)
+
                 if not artist:
-                    artist_data = lyrics_api.search_by_artist(genius, data['artist'][index], max_songs=1)
-                    add_artist(session, artist_data, 0)
-                else:
+                    artist_data = lyrics_api.search_by_artist(genius, artist, max_songs=1)
+
+                    artist = add_artist(session, artist_data, 0)
                     add_album(session, data, index, artist)
 
 
@@ -68,6 +79,7 @@ def add_artist(session, data, index):
         id=int(data['artist_id'][index]), name=data['artist'][index], albums=[], songs=[]
     )
     session.add(artist)
+    return artist
 
 
 def add_song(session, data, index, artist):
@@ -84,6 +96,12 @@ def add_album(session, data, index, artist):
         lyrics=data['lyrics'][index], artist=artist
     )
     session.add(album)
+
+
+def check_if_exists(session, table, column, value):
+    column_attr = getattr(table, column)
+    record = session.query(table).filter(column_attr == value).first()
+    return record
 
 
 def check_db(session, engine):
