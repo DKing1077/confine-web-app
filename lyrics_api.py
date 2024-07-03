@@ -18,9 +18,9 @@ def geniusapi(genius, start):
     return df
 
 
-def search_by_artist(genius, artist_name):
+def search_by_artist(genius, artist_name, max_songs=5):
     df = pd.DataFrame(columns=['artist_id', 'artist', 'song_id', 'title', 'lyrics'])
-    artist = genius.search_artist(artist_name, max_songs=5, sort='popularity')
+    artist = genius.search_artist(artist_name, max_songs=max_songs, sort='popularity')
 
     for song in artist.songs:
         new_row = {
