@@ -1,6 +1,5 @@
 from sqlalchemy import create_engine, text
 from sqlalchemy.orm import sessionmaker
-from tables import reg
 import lyricsgenius
 
 
@@ -34,7 +33,6 @@ def db_connection(config):
         db_version = result.fetchone()[0]
         print(f"Connected to PostgreSQL! Server version: {db_version}")
 
-        reg.metadata.create_all(engine)
         return session, engine
 
     except Exception as e:
@@ -43,8 +41,7 @@ def db_connection(config):
 
 def api_connection(config):
     try:
-        genius = lyricsgenius.Genius(config.access_token, remove_section_headers=True,
-                                     excluded_terms=['(Remix)', '(Live)'], timeout=None)
+        genius = lyricsgenius.Genius(config.access_token, remove_section_headers=True, timeout=None)
         return genius
 
     except Exception as e:
