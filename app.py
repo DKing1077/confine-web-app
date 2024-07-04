@@ -41,32 +41,34 @@ def relationalmapping(genius, session, data, start):
                 add_song(session, data, index, artist)
 
     elif start == 2:
-        for index in data.index:
-            artist = data['artist'][index]
-            song_id = int(data['song_id'][index])
+        artist_name = data['artist'][0]
+        song_id = int(data['song_id'][0])
 
-            song = check_if_exists(session, Songs, 'id', song_id)
-            if not song:
-                artist = check_if_exists(session, Artists, 'name', artist)
+        song = check_if_exists(session, Songs, 'id', song_id)
+        if not song:
+            artist = check_if_exists(session, Artists, 'name', artist_name)
 
-                if not artist:
-                    artist_data = lyrics_api.search_by_artist(genius, artist, max_songs=1)
-                    artist = add_artist(session, artist_data, 0)
-                    add_song(session, data, index, artist)
+            if not artist:
+                artist_data = lyrics_api.search_by_artist(genius, artist_name, max_songs=1)
+                artist = add_artist(session, artist_data, 0)
+
+                data['artist_id'] = artist_data['artist_id']
+                add_song(session, data, 0, artist)
 
     elif start == 3:
-        for index in data.index:
-            artist = data['artist'][index]
-            album_id = data['album_id'][index]
+        artist_name = data['artist'][0]
+        album_id = data['album_id'][0]
 
-            album = check_if_exists(session, Albums, 'id', album_id)
-            if not album:
-                artist = check_if_exists(session, Artists, 'name', artist)
+        album = check_if_exists(session, Albums, 'id', album_id)
+        if not album:
+            artist = check_if_exists(session, Artists, 'name', artist_name)
 
-                if not artist:
-                    artist_data = lyrics_api.search_by_artist(genius, artist, max_songs=1)
-                    artist = add_artist(session, artist_data, 0)
-                    add_album(session, data, index, artist)
+            if not artist:
+                artist_data = lyrics_api.search_by_artist(genius, artist_name, max_songs=1)
+                artist = add_artist(session, artist_data, 0)
+
+                data['artist_id'] = artist_data['artist_id']
+                add_album(session, data, 0, artist)
 
 
 def add_artist(session, data, index):
@@ -88,7 +90,7 @@ def add_song(session, data, index, artist):
 def add_album(session, data, index, artist):
     album = Albums(
         id=int(data['album_id'][index]), name=data['title'][index],
-        lyrics=data['lyrics'][index], artist=artist
+        lyrics=data['lyrics'][index], artist_id=int(data['artist_id'][index]), artist=artist
     )
     session.add(album)
 
