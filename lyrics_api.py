@@ -48,7 +48,7 @@ def search_by_album(genius, album):
     df = pd.DataFrame(columns=['album_id', 'artist', 'title', 'lyrics'])
 
     album = genius.search_album(album)
-    new_row = [album.id, album.artist.lower(), album.title.lower(), album.to_text()]
+    new_row = [album.id, album.artist.name.lower(), album.name.lower(), album.to_text()]
 
     df.loc[0] = new_row
     return df
