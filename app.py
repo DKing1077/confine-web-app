@@ -29,7 +29,6 @@ def relationalmapping(genius, session, data, start):
 
     if start == 1:
         for index in data.index:
-
             artist_id = int(data['artist_id'][index])
             song_id = int(data['song_id'][index])
 
@@ -43,7 +42,6 @@ def relationalmapping(genius, session, data, start):
 
     elif start == 2:
         for index in data.index:
-
             artist = data['artist'][index]
             song_id = int(data['song_id'][index])
 
@@ -53,13 +51,11 @@ def relationalmapping(genius, session, data, start):
 
                 if not artist:
                     artist_data = lyrics_api.search_by_artist(genius, artist, max_songs=1)
-
                     artist = add_artist(session, artist_data, 0)
                     add_song(session, data, index, artist)
 
     elif start == 3:
         for index in data.index:
-
             artist = data['artist'][index]
             album_id = data['album_id'][index]
 
@@ -69,7 +65,6 @@ def relationalmapping(genius, session, data, start):
 
                 if not artist:
                     artist_data = lyrics_api.search_by_artist(genius, artist, max_songs=1)
-
                     artist = add_artist(session, artist_data, 0)
                     add_album(session, data, index, artist)
 
