@@ -16,5 +16,3 @@ CREATE DATABASE genius_db
     LOCALE_PROVIDER = 'libc'
     CONNECTION LIMIT = -1
     IS_TEMPLATE = False;
-
-SELECT pg_size_pretty(pg_database_size('genius_db')) AS size;

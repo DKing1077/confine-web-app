@@ -18,7 +18,7 @@ def geniusapi(genius, start):
     return df
 
 
-def search_by_artist(genius, artist_name, max_songs=2):
+def search_by_artist(genius, artist_name, max_songs=10):
     df = pd.DataFrame(columns=['artist_id', 'artist', 'song_id', 'title', 'lyrics'])
     artist = genius.search_artist(artist_name, max_songs=max_songs, sort='popularity')
 
