@@ -111,8 +111,8 @@ def check_if_exists(session, table, column, value):
 
 def check_db(session, engine):
     sql_file = 'sql/check.sql'
-    with open(sql_file, 'r') as file:
 
+    with open(sql_file, 'r') as file:
         sql = file.read()
         result = session.execute(text(sql))
 
