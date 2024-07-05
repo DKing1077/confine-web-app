@@ -52,9 +52,10 @@ def relationalmapping(genius, session, data, start):
                 artist_data = lyrics_api.search_by_artist(genius, artist_name, max_songs=1)
                 artist_rec = add_artist(session, artist_data, 0)
 
-                song_rec = check_if_exists(session, Songs, 'id', int(artist_data['song_id'][0]))
-                if not song_rec:
-                    add_song(session, artist_data, 0, artist_rec)
+                if song_id != int(artist_data['song_id'][0]):
+                    song_rec = check_if_exists(session, Songs, 'id', int(artist_data['song_id'][0]))
+                    if not song_rec:
+                        add_song(session, artist_data, 0, artist_rec)
 
             data['artist_id'] = artist_rec.id
             add_song(session, data, 0, artist_rec)
