@@ -12,17 +12,18 @@ def main(config):
 
     # make db connection, load sql
     session, engine = db_connection(config)
-    check_db(session, engine)
+    check_db(session, engine, config)
 
     # make api connection
     genius = api_connection(config)
     start = int(input('1) search artist\n2) search song\n3) search album\n'))
 
+    # get, store some data
     data = geniusapi(genius, start)
     relationalmapping(genius, session, data, start)
 
     # saving db, commit session, close session
-    save_db(config), session.commit(), session.close()
+    session.commit(), save_db(config), session.close()
 
 
 def relationalmapping(genius, session, data, start):
@@ -110,28 +111,29 @@ def check_if_exists(session, table, column, value):
     return record
 
 
-def check_db(session, engine):
+def check_db(session, engine, config):
     sql_file = 'sql/check.sql'
 
     with open(sql_file, 'r') as file:
         sql = file.read()
         result = session.execute(text(sql))
-
         table_exists = result.fetchone()[0]
+
         if not table_exists:
-            load_db(session, engine)
+            load_db(engine, config)
 
 
-def load_db(session, engine):
+def load_db(engine, config):
     sql_file = 'sql/database.sql'
     if os.path.exists(sql_file):
-
-        with open(sql_file, 'r') as file:
-            sql = file.read()
-            sql = sql.replace(r'\.', '')
-
-            session.execute(text(sql))
-            session.commit()
+        command = [
+            'psql',
+            '-U', str(config.db_user),
+            '-d', str(config.db_name),
+            '-f', sql_file,
+        ]
+        os.environ['PGPASSWORD'] = str(config.db_pass)
+        subprocess.run(command, check=True)
     else:
         reg.metadata.create_all(engine)
 
@@ -139,11 +141,11 @@ def load_db(session, engine):
 def save_db(config):
     command = [
         'pg_dump',
+        '--column-inserts',
         '-U', str(config.db_user),
         '-d', str(config.db_name),
         '-f', 'sql/database.sql'
     ]
-
     os.environ['PGPASSWORD'] = str(config.db_pass)
     subprocess.run(command, check=True)
 
