@@ -1,11 +1,30 @@
 import os
 import subprocess
 from sqlalchemy import text
-import lyrics_api
+from lyrics_api import *
 from tables import Artists, Albums, Songs, reg
 
 
-def relationalmapping(genius, session, data, start):
+def collect_data(session, genius, search, start):
+    if start == 1:
+        data = session.query(Artists).filter(Artists.name == search).limit(10).all()
+        if len(data) < 10:
+            data = search_by_artist(genius, search)
+            relational_mapping(session, genius, data, start)
+    elif start == 2:
+        data = session.query(Songs).filter(Songs.name == search).limit(1).all()
+        if len(data) < 1:
+            data = search_by_song(genius, search)
+            relational_mapping(session, genius, data, start)
+    else:
+        data = session.query(Albums).filter(Albums.name == search).limit(1).all()
+        if len(data) < 1:
+            data = search_by_album(genius, search)
+            relational_mapping(session, genius, data, start)
+    return data
+
+
+def relational_mapping(session, genius, data, start):
 
     if start == 1:
         for index in data.index:
@@ -29,7 +48,7 @@ def relationalmapping(genius, session, data, start):
             artist_rec = check_if_exists(session, Artists, 'name', artist_name)
 
             if not artist_rec:
-                artist_data = lyrics_api.search_by_artist(genius, artist_name, max_songs=1)
+                artist_data = search_by_artist(genius, artist_name, max_songs=1)
                 artist_rec = add_artist(session, artist_data, 0)
 
                 if song_id != int(artist_data['song_id'][0]):
@@ -49,7 +68,7 @@ def relationalmapping(genius, session, data, start):
             artist_rec = check_if_exists(session, Artists, 'name', artist_name)
 
             if not artist_rec:
-                artist_data = lyrics_api.search_by_artist(genius, artist_name, max_songs=1)
+                artist_data = search_by_artist(genius, artist_name, max_songs=1)
                 artist_rec = add_artist(session, artist_data, 0)
 
                 song_rec = check_if_exists(session, Songs, 'id', int(artist_data['song_id'][0]))
@@ -90,7 +109,7 @@ def check_if_exists(session, table, column, value):
     return record
 
 
-def check_db(session, engine, config):
+def configure_db(session, engine, config):
     sql_file = 'sql/check.sql'
 
     with open(sql_file, 'r') as file:
