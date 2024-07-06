@@ -5,19 +5,6 @@ pd.options.display.width = 0
 pd.set_option('display.max_rows', None)
 
 
-def geniusapi(genius, start):
-    if start == 1:
-        artist = input('please enter artist name : ')
-        df = search_by_artist(genius, artist)
-    elif start == 2:
-        song = input('plese enter song name : ')
-        df = search_by_song(genius, song)
-    else:
-        album = input('please enter album name : ')
-        df = search_by_album(genius, album)
-    return df
-
-
 def search_by_artist(genius, artist_name, max_songs=10):
     df = pd.DataFrame(columns=['artist_id', 'artist', 'song_id', 'title', 'lyrics'])
     artist = genius.search_artist(artist_name, max_songs=max_songs, sort='popularity')
@@ -72,3 +59,4 @@ def clean_lyrics(df):
         for regex in regexlist:
             df.loc[index, 'lyrics'] = re.sub(regex, '', df['lyrics'][index])
     return df
+

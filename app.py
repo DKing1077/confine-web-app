@@ -6,17 +6,17 @@ from lyrics_api import *
 
 def main(config):
 
-    # make db connection, load sql
+    # make db connection, make api connection, configure db
     session, engine = db_connection(config)
-    check_db(session, engine, config)
-
-    # make api connection
     genius = api_connection(config)
-    start = int(input('1) search artist\n2) search song\n3) search album\n'))
+    configure_db(session, engine, config)
 
-    # get, store some data
-    data = geniusapi(genius, start)
-    relationalmapping(genius, session, data, start)
+    # start app, take input
+    start = int(input('1) analyze artist\n2) analyze song\n3) analyze album\n'))
+    search = input('please enter name : ')
+
+    # collect data
+    data = collect_data(session, genius, search, start)
 
     # commit session, save db, close session
     session.commit(), save_db(config), session.close()
