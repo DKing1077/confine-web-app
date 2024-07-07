@@ -8,20 +8,20 @@ from tables import Artists, Albums, Songs, reg
 def collect_data(session, genius, search, start):
     if start == 1:
         search = f'%{search}%'
-        data = session.query(Songs).join(Artists).filter(func.replace(Artists.name, "’", "'").ilike(search)).limit(10).all()
+        data = session.query(Songs).join(Artists).filter(Artists.name.ilike(search)).limit(10).all()
         if len(data) < 10:
             data = search_by_artist(genius, search)
             relational_mapping(session, genius, data, start)
     elif start == 2:
         search = f"%{search}%"
-        data = session.query(Songs).filter(func.replace(Songs.name, "’", "'").ilike(search)).limit(1).all()
+        data = session.query(Songs).filter(func.replace(Songs.name, '’', '').ilike(search)).limit(1).all()
         print(data)
         if len(data) < 1:
             data = search_by_song(genius, search)
             relational_mapping(session, genius, data, start)
     else:
         search = f'%{search}%'
-        data = session.query(Albums).filter(func.replace(Albums.name, "’", "'").ilike(search)).limit(1).all()
+        data = session.query(Albums).filter(Albums.name.ilike(search)).limit(1).all()
         if len(data) < 1:
             data = search_by_album(genius, search)
             relational_mapping(session, genius, data, start)
