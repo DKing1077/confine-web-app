@@ -158,19 +158,13 @@ ALTER TABLE ONLY public.songs ALTER COLUMN id SET DEFAULT nextval('public.songs_
 --
 
 INSERT INTO public.artists (id, name) VALUES (130, 'Drake');
-INSERT INTO public.artists (id, name) VALUES (68, 'Kid Cudi');
 INSERT INTO public.artists (id, name) VALUES (492, 'Big Sean');
-INSERT INTO public.artists (id, name) VALUES (26507, 'Ariana Grande');
-INSERT INTO public.artists (id, name) VALUES (8351, 'Coldplay');
-INSERT INTO public.artists (id, name) VALUES (357, 'Justin Bieber');
-INSERT INTO public.artists (id, name) VALUES (20185, 'Travis Scott');
-INSERT INTO public.artists (id, name) VALUES (1479967, 'Fontaines D.C.');
-INSERT INTO public.artists (id, name) VALUES (72, 'Kanye West');
-INSERT INTO public.artists (id, name) VALUES (69, 'J. Cole');
-INSERT INTO public.artists (id, name) VALUES (75841, 'The Wombats');
-INSERT INTO public.artists (id, name) VALUES (1174, 'Kings of Leon');
 INSERT INTO public.artists (id, name) VALUES (7922, 'Logic');
-INSERT INTO public.artists (id, name) VALUES (89, 'Rihanna');
+INSERT INTO public.artists (id, name) VALUES (68, 'Kid Cudi');
+INSERT INTO public.artists (id, name) VALUES (1177, 'Taylor Swift');
+INSERT INTO public.artists (id, name) VALUES (357, 'Justin Bieber');
+INSERT INTO public.artists (id, name) VALUES (8351, 'Coldplay');
+INSERT INTO public.artists (id, name) VALUES (2300, 'Adele');
 
 
 --
@@ -520,41 +514,82 @@ Home (Going home)
 (Hold on)
 (Oh, oh)
 ', 130);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (77594, 'The Scientist', '
-Come up to meet you, tell you I''m sorry
-You don''t know how lovely you are
-I had to find you, tell you I need you
-And tell you I set you apart
-Tell me your secrets and ask me your questions
-No, let''s go back to the start
-Runnin'' in circles, comin'' up tails
-Heads on a science apart
+INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (1687, 'Mr. Rager', '
+Inhale and I want you to exhale
+And I want you to follow your breath
+10... 9... 8... 7... 6... 5... 4... 3... 2... 1...
 
-Nobody said it was easy
-It''s such a shame for us to part
-Nobody said it was easy
-No one ever said it would be this hard
-Oh, take me back to the start
-I was just guessin'' at numbers and figures
-Pullin'' your puzzles apart
-Questions of science, science and progress
-Do not speak as loud as my heart
-And tell me you love me, come back and haunt me
-Oh, and I rush to the start
-Runnin'' in circles, chasin'' our tails
-Comin'' back as we are
-See Coldplay LiveGet tickets as low as $68You might also like
-Nobody said it was easy
-Oh, it''s such a shame for us to part
-Nobody said it was easy
-No one ever said it would be so hard
-I''m goin'' back to the start
+I''m off on a (Yeah) adventure (We''re good)
+(This here is dedicated to all of the kids like me)
+I''m on my way to heaven (Wherever you are, yep, now)
+(We''re good)
 
+Birds sing, flying around
+You never see them too long on the ground
+You want to be one of them (Yeah)
+You want to be one of them (Yeah)
+You might hear the birds singing, flying around
+You never see them too long on the ground
+You want to be one of them (Yeah)
+You want to be one of them (Yeah)
 
-Oh-ooh, ooh-ooh-ooh-ooh
-Ah-ooh, ooh-ooh-ooh-ooh
-Oh-ooh, ooh-ooh-ooh-ooh
-Oh-ooh, ooh-ooh-ooh-ooh', 8351);
+Woah now, hey
+Mr. Rager, Mr. Rager
+Tell me where you''re going, tell us where you''re headed
+(I''m off on a adventure) Mr. Rager
+Tell me some of your stories, tell us of your travels
+Hey, Mr. Rager, Mr. Rager
+Tell me where you''re going, tell us where you''re headed
+(I''m on my way to heaven) Mr. Rager
+Can we tag along? Can we take the journey?
+You might also like
+Knocked down, round for round
+You''re feeling like you''re shot down on the ground
+When will the fantasy end?
+When will the heaven begin? (Yeah)
+You might be knocked down, round for round
+You''re feeling like you''re shot down on the ground
+When will the fantasy end? (Yeah)
+When will the heaven begin? (Yeah)
+
+Woah now, hey
+Mr. Rager, Mr. Rager
+Tell me where you''re going, tell us where you''re headed
+(I''m off on a adventure) Mr. Rager
+Tell us some of your stories, tell us of your travels
+Hey, Mr. Rager, Mr. Rager
+Tell me where you''re going, tell us where you''re headed
+(I''m on my way to heaven) Mr. Rager
+Can we tag along? Can we take the journey?
+
+Oh, oh, oh, oh, oh
+Oh, oh, oh, oh, oh, oh
+Oh, oh, oh, oh, oh
+Oh, oh, oh, oh, oh, oh (Can we take the journey?)
+Oh, oh, oh, oh, oh
+Oh, oh, oh, oh, oh, oh
+Oh, oh, oh, oh, oh
+Hey, Mr. Rager, Mr. Rager
+Tell me where you''re going, tell me where you''re headed
+(I''m off on a adventure) Mr. Rager
+Tell me some of your stories, tell us of your travels
+Mr. Rager-er-er-er-er
+Tell me where you''re going, tell us where you''re headed
+(I''m on my way to heaven)  Mr. Rager
+Can we tag along? Can we take that journey?
+
+Can we take that journey?
+(I''m off on the adventure)
+
+Hey, Mr. Rager
+Hey, Mr. Rager
+Hey, Mr. Rager (I''m on my way to heaven)
+Hey, Mr. Rager
+Hey
+
+3... 2... 1...
+Scott. Scott. Scott. Scott!
+That''s good. You alright?', 68);
 INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (703654, 'Know Yourself', '
 
 Hol'' it yute, hol'' it, hol'' it, hol'' it, hol'' it, hol'' it
@@ -1085,766 +1120,6 @@ Been have up di ting dem from time, G
 So I don''t know what''s wrong with these
 Little wasteman out here, eh?
 Y''all need to know yourself', 130);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (84641, 'Just What I Am', '
-I''m just what you made, God, not many I trust
-I''ma go my own way, God, take my fate to wherever you want
-I''m out here, on my son, won''t stop ''til I get me some
-Club-hoppin'', tryna get me some, bad bitches wanna get me sprung
-Early in the morning, I''m wakin'', bakin'', drinkin'', contemplatin''
-Ain''t no such thing as Satan, evil is what you make it
-Thank the Lord for that burning bush
-That big body Benz I was born to push
-On my way I''m burning kush, nigga, don''t be worried ''bout us
-Neighbors knockin'' on the door, asking can we turn it down
-I say, "Ain''t no music on", she said, "No, that weed is loud"
-Nigga, we ballin'', straight swaggin'', lost Hawk, but I''m maintainin''
-I''ve been told that I''m amazing, make sure keep that fire blazin'', we livin''
-
-I (I need) need smoke (Oh, oh, oh, I need)
-I (I need) need to smoke
-Who gon'' hold me down now?
-I-I wanna get high y''all (Woah)
-I-I wanna get high y''all
-Nee-need it, need it to get by y''all (Woah, yeah)
-Can you get me high y''all? (Hey)
-I-I wanna get high y''all
-I-I-I wanna get high y''all
-Nee-need it, need it to get by y''all
-Can you get me high y''all? (Hey)
-You might also like
-I''m just what you made, God, just what you made, God (Nee-need it)
-I''m just what you made, God, I''m just what you made
-(Nee-nee-need it) I''m just what you made, God
-I''m just what you made, God, I''m just what you made, (Mmm)
-
-Let me tell you ''bout my month y''all
-Endless shopping, I had a ball
-I had to ball for therapy, my shrink don''t think that helps at all
-Whatever, that man ain''t wearing these leather pants
-I diagnose my damn self, these damn pills ain''t working fam
-In-In my spare time, punching walls, fucking up my hand
-I know that shit sound super cray, but if you had my life you''d understand
-But, I can''t fold, some poor soul got it way worse
-We''re all troubled in a world of trouble
-It''s scary to have a kid walk this Earth
-I''m what you made, God, fuck yes, I''m so odd
-Thinking ''bout all my old friends who weren''t my friends all along
-Hm, when it rains it pours, whiskey bottles on the sinks and floors
-Every day to find sane''s a chore, amidst a dream with no exit doors
-
-I (I need) need smoke (Oh, oh, oh, I need)
-I (I need) need to smoke
-Who gon'' hold me down now?
-I-I wanna get high y''all (Woah)
-I-I wanna get high y''all
-Nee-need it, need it to get by y''all (Woah, yeah)
-Can you get me high y''all? (Hey)
-I-I wanna get high y''all
-I-I-I wanna get high y''all
-Nee-need it, need it to get by y''all
-Can you get me high y''all? (Hey)
-I''m just what you made, God, just what you made, God (Nee-need it)
-I''m just what you made, God, I''m just what you made
-(Nee-nee-need it) I''m just what you made, God
-I''m just what you made, God, I''m just what you made (Mmm)
-
-Nee-need it to get by, yeah
-Willy', 68);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (401, 'Pursuit of Happiness (Nightmare)', '
-Mm, ayy-oh
-Hey, Ratatat, yeah
-Na-na-na-na
-Na-na-na-na
-
-Crush a bit, little bit, roll it up, take a hit
-Feelin'' lit, feelin'' right, 2 a.m., summer night
-I don''t care, hand on the wheel
-Driving drunk, I''m doing my thing
-Rolling the Midwest side and out
-Living my life, getting our dreams
-People told me slow my roll, I''m screaming out "Fuck that"
-I''ma do just what I want, looking ahead, no turnin'' back
-If I fall, if I die, know I lived it to the fullest
-If I fall, if I die, know I lived and missed some bullets
-
-I''m on the pursuit of happiness, and I know
-Everything that shine ain''t always gonna be gold, hey
-I''ll be fine once I get it
-I''ll be good
-I''m on the pursuit of happiness and I know
-Everything that shine ain''t always gonna be gold, hey
-I''ll be fine once I get it
-I''ll be good
-You might also like
-Tell me, what you know about dreamin'', dreamin''?
-You don''t really know about nothin'', nothin''
-Tell me, what you know about the night terrors every night?
-5 a.m., cold sweats, waking up to the sky
-Tell me, what you know about dreams, dreams?
-Tell me, what you know about night terrors? Nothing
-You don''t really care about the trials of tomorrow
-Rather lay awake in the bed full of sorrow
-
-I''m on the pursuit of happiness, and I know
-Everything that shine ain''t always gonna be gold, hey
-I''ll be fine once I get it
-I''ll be good
-I''m on the pursuit of happiness, and I know
-Everything that shine ain''t always gonna be gold, hey
-I''ll be fine once I get it
-I''ll be good
-
-I''m on the pursuit of happiness
-I know everything that shine ain''t always gold
-I''ll be fine once I get it
-I''ll be good
-
-I''m on the pursuit of happiness, and I know
-Everything that shine ain''t always gonna be gold, hey
-I''ll be fine once I get it
-I''ll be good
-I''m on the pursuit of happiness, and I know
-Everything that shine ain''t always gonna be gold, hey
-I''ll be fine once I get it
-I''ll be good
-
-Pursuit of happiness, yeah
-I gon'' get it, I''ll be good
-Oh, oh, man, oh, ugh
-Room''s spinning, room''s spinning
-Pat, Zuli, oh, fuck
-Oh my God, why''d I drink so much and smoke so much? Oh
-Oh, fuck', 68);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (131, 'Day ‘N’ Nite (Nightmare)', '
-Uh, uh
-Uh, uh
-Uh, uh
-
-Day and night
-I toss and turn, I keep stress in my mind, mind
-I look for peace, but see, I don''t attain
-What I need for keeps, this silly game we play, play
-Now look at this
-Madness, the magnet keeps attracting me, me
-I try to run, but see, I''m not that fast
-I think I''m first but surely finish last, last
-''Cause day and night
-The lonely stoner seems to free his mind at night
-He''s all alone through the day and night
-The lonely loner seems to free his mind at night, at, at, at night
-Day and night
-The lonely stoner seems to free his mind at night
-He''s all alone, some things will never change
-The lonely loner seems to free his mind at night, at, at, at night
-
-Hold the phone
-The lonely stoner, Mr. Solo Dolo
-He''s on the move, can''t seem to shake the shade
-Within his dreams he sees the life he made, made
-The pain is deep
-A silent sleeper, you won''t hear a peep, peep
-The girl he wants don''t seem to want him too
-It seems the feelings that she had are through, through
-You might also like
-''Cause day and night
-The lonely stoner seems to free his mind at night
-He''s all alone through the day and night
-The lonely loner seems to free his mind at night, at, at, at night
-Day and night
-The lonely stoner seems to free his mind at night
-He''s all alone, some things will never change (Yeah)
-The lonely loner seems to free his mind at night, at, at, at night
-(Yeah, yeah)
-
-Slow mo''
-When the tempo slows up and creates that new, new
-He seems alive though he is feeling blue
-The sun is shining, man, he''s super cool, cool
-The lonely nights
-They fade away, he slips into his white Nikes
-He smokes a clip and then he''s on the way
-To free his mind in search of, to free his mind in search of
-To free his mind in search of
-Day and night
-The lonely stoner seems to free his mind at night
-He''s all alone through the day and night
-The lonely loner seems to free his mind at night, at, at, at night
-Day and night
-The lonely stoner seems to free his mind at night
-He''s all alone, some things will never change
-The lonely loner seems to free his mind at night, at, at, at night
-At, at, at night, night
-Na-na-na-na-na-na, Kid Cudi
-Cleveland status, grind all day
-Cleveland status, grind all night
-Cleveland status, grind all day
-Cleveland status, grind all night', 68);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (402, 'Soundtrack 2 My Life', '
-I got 99 problems and they all bitches
-Wish I was Jigga man, carefree livin''
-But I''m not Shawn or Martin Louis
-I''m that Cleveland nigga rollin'' with them Brooklyn boys
-You knowin'' how it be when you start living large
-I control my own life, Charles was never in charge
-No sitcom could teach Scott about the dram
-Or even explain the troubles that haunted my mom
-On Christmas time, my mom Christmas grind
-Got me most of what I wanted, how''d you do it, Mom, huh?
-She copped the toys I would play with in my room by myself
-"Why he by himself?"
-He got two older brothers; one hood, one good
-An independent older sister kept me fly when she could
-But they all didn''t see
-The little bit of sadness in me
-Scotty
-
-I''ve got some issues that nobody can see
-And all of these emotions are pouring out of me
-I bring them to the light for you, it''s only right
-This is the soundtrack to my life, the soundtrack to my life
-
-I''m super paranoid, like a sixth sense
-Since my father died, I ain''t been right since
-And I tried to piece the puzzle of the universe
-Split an eighth of shrooms just so I could see the universe
-I try and think about myself as a sacrifice
-Just to show the kids they ain''t the only ones who up at night
-The moon will illuminate my room
-And soon I''m consumed by my doom
-Once upon a time, nobody gave a fuck
-It''s all said and done and my cock''s been sucked
-So now I''m in the cut, alcohol in the wound
-My heart''s an open sore that I hope heals soon
-I live in a cocoon opposite of Cancún
-Where it is never sunny, the dark side of the moon
-So it''s more than right I try and shed some light on a man
-Not many people of this planet understand, fam
-You might also like
-I''ve got some issues that nobody can see
-And all of these emotions are pouring out of me
-I bring ''em to the light for you, it''s only right
-This is the soundtrack to my life, the soundtrack to my life
-
-I''m this close to go and trying some coke
-And a happy ending would be slittin'' my throat
-Ignorance to cope, man, ignorance is bliss
-Ignorance is love and I need that shit
-If I never did shows then I''d prolly be a myth
-If I cared about the blogs then I''d prolly be a jackass
-Don''t give a shit what people talkin'' ''bout, fam
-Haters shake my hand but I keep the sanitizer on deck
-Hope I really get to see 30
-Wanna settle down, stop being so flirty
-Most of the clean faces be the most dirty
-I just need a thoroughbred, cook when I''m hungry
-Ass all chunky, brain is insanity
-Only things that calm me down; pussy, and some Cali tree
-And I get both, never truly satisfied
-I am happy, that''s just the saddest lie
-
-I''ve got some issues that nobody can see
-And all of these emotions are pouring out of me
-I bring ''em to the light for you, it''s only right
-This is the soundtrack to my life, the soundtrack to my life
-To my life, to my life, to my life...
-Uh
-Yeah, uh-huh
-Yeah, uh-huh
-Yeah, uh-huh
-Yeah, uh-huh
-Yeah
-Yeah
-Yeah', 68);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (5748123, 'The Adventures of Moon Man & Slim Shady', '
-Yep (Aww)
-Yep (Mmm-aww)
-Uh-huh
-Yeah, nigga
-
-Yeah, it''s been a minute, but I''m back in it (Uh)
-Y''all ain''t dealing with the same boy (No)
-Got a little trippy, then I transitioned (Yeah)
-New attitude mixed with that pure raw (Aw)
-The night game, your girl called
-She like, "Do me, baby, down to get busy, busy?" (Yes)
-No dice, chill, whoadie (No)
-In life, feeling dizzy
-Oh, having visions of the city and I go to war
-See me in the day through the late night (Night)
-Tell ''em it''s the charm, I''m in freeze mode
-To the gods, can''t stop a hero when he in flight (Flight)
-I''m swimming in the light right
-Go and get you some, go and show ''em something, this a new thang
-Yeah, I let my nuts hang (Yeah)
-Knock your top off with LeBron or Dwyane Wade (Yeah)
-Aww, lift off
-Can''t stunt a nigga growth, better get gone, move along (Uh)
-You don''t wanna trip, wanna get it on (Uh)
-You don''t wanna act, don''t get me wrong (Nah)
-They don''t listen to the words in the song (Uh-huh)
-We ain''t gotta tell ''em, we just getting ready (Yeah)
-See ''em fronting, we ain''t kidding
-If you want it, you can get it
-Members of the rage, come and get you some
-Next step''s out the jet from the lean back
-Running ''round the world and we ain''t packed
-Hit ''em, vroom, vroom, leave ''em stuck, oh, you seen that?
-I''m chillin'' where the team at
-See a black Benz pull up with some jawns, yeah, I need that
-So crazy, can''t believe it
-No cams, damn, no filming at all, real nigga facts (Come on)
-Years ago, rehab
-All good, helped me figure out another plan
-It got bad, so bad
-Nah, I ain''t fucking love that, man
-Then I hopped out in a new zone with my Louis bag
-True story, take you through the dark and the light (Yeah)
-Godson, got through new
-Back up in the world, it''s the day in the life (Cud)
-Hit the blunt and get it (Dude)
-Raised bars (Uh), same song, we did it (Yeah)
-Hot sauce, pour it on all jams, explicit
-Carry on, smoke strong, got your mama down with it (Come on)
-And the game fuckin'' needed something dirty raw
-Tell them this the law and we weeded (Uh)
-You might also like
-So if it''s God you believe in (Yeah)
-Bob your head and just nod in agreement (Yeah)
-They say time''s undefeated
-I''ma be the first one who can beat it (Yeah)
-I had hoop dreams, now I shoot threes (What?)
-Got a lil'' green (Yeah), but I don''t do weed (Nope)
-Purp nor lean (Nah), that''s Tunechi (Yeah)
-That''s New Orleans (What?), fuck Drew Brees (Yeah)
-Snoop D-O-double (Uh), that''s two G''s (Yup)
-I probably spent on paper, ooh-wee
-Since Tuesday, probably killed a few trees (Yeah)
-But the only ones I smoke are the loose leaf
-Not high, but I''m your highness (What?)
-And secretly, you''re on my dick (Hah)
-But you haters are butthurt (Ow), bunch of sore hind-ends (Ow)
-I was just a poor white kid (Yeah)
-Now if rap was B-ball, I''d be Jordan-like, bitch (What?)
-You wish you could score like this (Nah), yeah
-Not even at half court, I''d miss (Nah)
-I''m mouthwash, ''cause if I was on the floor, I''d swish (Fluoride, fluoride, swish)
-But I cannot lie (Nah)
-I got you in my top five
-Worst rappers of all time (Hah)
-I lost my spot, y''all got Alzheim'' (Uh)
-King of rap? Nah, their words, not mine (Yeah)
-King of swear words and not lying (Yeah)
-You should never compare yours (Nope)
-A toll-free number (Yeah), only way you''ll ever have a hot line
-Fuck''s going on, man? (Yeah)
-Bunch of half-wits up in office (What?)
-Half of us walking around like a zombie apocalypse
-Other half are just pissed off and (Yeah)
-Don''t wanna wear a mask and they''re just scoffing
-And that''s how you end up catching the shit off ''em
-I just used the same basket as you shopping
-Now I''m in a fuckin'' casket from you coughin'' (Damn)
-Always stay ahead of haters, let ''em hate
-But never let a traitor penetrate your circle
-Separate yourself from those who try to pull you down
-The real ones never stray, it''s sort of like Medusa (Yeah)
-That''s how you stay ahead of snakes (Woo)
-Emcees pull out gats, I don''t give a fuck how strapped
-You''re gonna out-rap me? I doubt that
-Please, bitch, I''m a house rat
-These raps are ''bout that cheese like mousetraps
-Earthlings, I adapt to ''em
-Certain things, I don''t want to do, but have to in
-Order to just act human
-Like using a bathroom and vacuuming (Yeah)
-Rapping in the booth in a triple fat goose hazmat suit
-Bubble wrap and a mask too and
-I don''t think that''s what they meant by trap music (Nah)
-Running through ink like I''m tattooing (Yeah)
-This is music to be murdered by, you love
-Turn the volume up, I am fired up like a blunt
-Bread is long like an Italian sub, I am drugs
-That is probably why your opinion of me''s high as fuck
-And it''s nonstop fury (Yeah)
-''Cause I ain''t holding ''em up like an armed robbery (Nah)
-And God''s my jury, so when I die, I''m not worried (Nah)
-Prayers to George Floyd and Ahmaud Arbery (Yeah)
-How the fuck is it that so many cops are dirty? (Huh?)
-Stop, man, please, officer, I''m sorry
-But I can''t breathe when I got you on top of me
-Your goddamn knee''s on my carotid artery (Fuck)
-The adventures of Moon Man & Slim (Ah)
-Yes, who want it with them?
-The trilogy continues
-Serving niggas, yes, see what''s on the menu (Yeah)
-Watch ''em panic, hot damnit (Let''s get it, baby)
-Hope you fuckers understand it
-The realer for you niggas
-Come and get these scriptures (Yeah)
-Rap God (Uh)
-Rager', 68);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (1687, 'Mr. Rager', '
-Inhale and I want you to exhale
-And I want you to follow your breath
-10... 9... 8... 7... 6... 5... 4... 3... 2... 1...
-
-I''m off on a (Yeah) adventure (We''re good)
-(This here is dedicated to all of the kids like me)
-I''m on my way to heaven (Wherever you are, yep, now)
-(We''re good)
-
-Birds sing, flying around
-You never see them too long on the ground
-You want to be one of them (Yeah)
-You want to be one of them (Yeah)
-You might hear the birds singing, flying around
-You never see them too long on the ground
-You want to be one of them (Yeah)
-You want to be one of them (Yeah)
-
-Woah now, hey
-Mr. Rager, Mr. Rager
-Tell me where you''re going, tell us where you''re headed
-(I''m off on a adventure) Mr. Rager
-Tell me some of your stories, tell us of your travels
-Hey, Mr. Rager, Mr. Rager
-Tell me where you''re going, tell us where you''re headed
-(I''m on my way to heaven) Mr. Rager
-Can we tag along? Can we take the journey?
-You might also like
-Knocked down, round for round
-You''re feeling like you''re shot down on the ground
-When will the fantasy end?
-When will the heaven begin? (Yeah)
-You might be knocked down, round for round
-You''re feeling like you''re shot down on the ground
-When will the fantasy end? (Yeah)
-When will the heaven begin? (Yeah)
-
-Woah now, hey
-Mr. Rager, Mr. Rager
-Tell me where you''re going, tell us where you''re headed
-(I''m off on a adventure) Mr. Rager
-Tell us some of your stories, tell us of your travels
-Hey, Mr. Rager, Mr. Rager
-Tell me where you''re going, tell us where you''re headed
-(I''m on my way to heaven) Mr. Rager
-Can we tag along? Can we take the journey?
-
-Oh, oh, oh, oh, oh
-Oh, oh, oh, oh, oh, oh
-Oh, oh, oh, oh, oh
-Oh, oh, oh, oh, oh, oh (Can we take the journey?)
-Oh, oh, oh, oh, oh
-Oh, oh, oh, oh, oh, oh
-Oh, oh, oh, oh, oh
-Hey, Mr. Rager, Mr. Rager
-Tell me where you''re going, tell me where you''re headed
-(I''m off on a adventure) Mr. Rager
-Tell me some of your stories, tell us of your travels
-Mr. Rager-er-er-er-er
-Tell me where you''re going, tell us where you''re headed
-(I''m on my way to heaven)  Mr. Rager
-Can we tag along? Can we take that journey?
-
-Can we take that journey?
-(I''m off on the adventure)
-
-Hey, Mr. Rager
-Hey, Mr. Rager
-Hey, Mr. Rager (I''m on my way to heaven)
-Hey, Mr. Rager
-Hey
-
-3... 2... 1...
-Scott. Scott. Scott. Scott!
-That''s good. You alright?', 68);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (1822, 'The Prayer', '
-Ah, da-da, da-da, da-da-nah
-Ba-ba, ba-ba, ba-ba-da-ba-da
-La-la, la-la, la-la, la-la, la-la, la-la-la
-La-la, la-la, la-la, la-la-la
-Plain Pat, what up?
-
-My heart thump, not from being nervous
-Sometimes I''m thinking God made me special here on purpose
-So all the while, ''til I''m gone make my words important
-So if I slip away, if I die today
-The last thing you remember won''t be
-About some apple bottom jeans with the boots with the fur
-Maybe how I dream of being free since my birth
-Cursed, but the demons I confronted would disperse
-Have you ever heard of some shit so real?
-Beyond, from the heart, from the soul, you can feel
-
-And if I die before I wake
-I pray the Lord, my soul, to take
-But please don''t cry
-Just know that I have made these songs for you
-And if I die before I wake
-I pray the Lord, my soul, to take
-''Cause I''m ready for the funeral
-Uh-oh, uh-oh, uh-oh
-You might also like
-My mind runs, I could never catch it
-Even if I got a head start, God, please help me
-I am feeling so alone, wait
-I don''t need to worry ''cause I know the world''ll feel this nigga
-Blessing in disguise, but I am not hiding who I am, open your eyes, bruh
-If I ever met you, I appreciate the love, yo
-Girls that I dated, it''s okay, I am not mad, yo
-Unless you stabbed me in the heart, no love ho
-This shit is so ill
-Play it back from the top if you recognize real
-
-And if I die before I wake
-I pray the Lord, my soul, to take
-But please don''t cry
-Just know that I have made these songs for you
-And if I die before I wake
-I pray the Lord, my soul, to take
-''Cause I''m ready for the funeral
-And if I die before I wake
-I pray the Lord, my soul, to take
-But please don''t cry
-Just know that I have made these songs for you
-And if I die before I wake
-I pray the Lord, my soul, to take
-''Cause I''m ready for the funeral
-I''m ready for that
-I''m ready for the funeral, hey-hey
-I''m ready for the funeral, hey
-I''m ready for the funeral
-Hey, I''m ready for it
-I''m ready for it
-I''m ready for the funeral', 68);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (621, 'Erase Me', '
-She said I don''t spend time like I really should
-She said she don''t know me anymore
-I think she hates me deep down, I know she does
-She wants to erase me, hmm
-A couple days, no talking, I see my baby
-And this what she tells me
-
-She said I keep on running, keep on running
-And nothing works, I can''t get away from you, no
-I keep on ducking, keep on ducking you, nothing helps
-I can''t stop missing you (Yeah)
-
-It''s like I''m her new nightmare, she ain''t escaping
-It makes me feel a bit complete (Yeah)
-Knowing someone you love don''t feel the same way about ya
-Memories they soon delete (Hmm)
-A couple weeks, no talking, I see my baby
-I missed you so damn much
-Hey, I wish we could start over, I told my baby
-This what this bitch tells me
-
-She said I keep on running, keep on running, and nothing works
-I can''t get away from you, no
-I keep on ducking, keep on ducking you, nothing helps
-I can''t stop missing you
-You might also like
-Yeah, ''cause I''m in the magazines, on the TV
-No matter where you are, you might hear me (Uh)
-I''m in the magazines (Yeah), on the TV
-No matter where you go, you might see me (Hello, haha)
-
-Uh, I''m Yeezy, she say "Hi, I''m Aria"
-No, you a angel, you wave "Hi" to Aaliyah
-I got a show in Korea, they built a new arena
-Why don''t you come and watch a nigga tear the whole scene up
-I know I seen you before, but don''t know where I seen ya
-Oh I remember now, you something that I dreamed of
-Don C says she cool, but don''t let her fuck your cream up
-Monica Lewinsky on the dress, she''ll take you to the cleaners
-Sure enough, a week later, I''m in extra love
-And everybody know she''s mine so she extra plugged
-Every bouncer, every club show her extra love
-We just praying the new fame don''t get the best of us
-But all good things gotta come to a en-a
-She let it go to her head, "No, not my Aria"
-The height of her shopping was writer''s blocking me
-I couldn''t get my shit out anyway, I hope you die, Aria
-
-She said I keep on running, keep on running
-And nothing works, I can''t get away from you, no
-I keep on ducking, keep on ducking you, nothing helps
-I can''t stop missing you', 68);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (716442, '​love.', '
-
-I am happy to be alive
-''Cause I know I could not be in a place that''s filled with lies
-Can''t stand no quiet nights, while I fill up my glass with pride
-Hopeful is all I know, how to keep me from silent cries
-Nothing I can say, facing all this pain in my way
-
-I fight it every day
-Why am I this way?
-A nigga tryna maintain
-I sit and tell myself, "Okay"
-We gotta find another way
-You gotta find another way
-You gotta find another way
-
-Don''t be so down, c''mon, young homie
-You''ll be okay, you''ll find real love
-All of the stories, the hero gets lonely
-Now is the time to show what you''re made of
-Don''t be so down, c''mon, young homie
-You''ll be okay, you''ll find real love
-All of the stories, the hero gets lonely
-Now is the time to show what you''re made of
-You might also like
-Now is the time to show what you''re made of
-
-I am happy to be alive
-''Cause I know I could not be in a place so filled with lies
-Can''t stand no quiet nights, while I fill up my glass with pride
-Hopeful is all I know, how to keep me from silent cries
-Nothing I can say, done running from this pain in my way
-
-I''m fighting every day
-Why am I this way?
-A nigga tryna maintain
-I sit and tell myself, "Okay"
-We gotta find another way
-You gotta find another way
-You gotta find another way
-
-Don''t be so down, c''mon, young homie
-You''ll be okay, you''ll find real love
-All of the stories, the hero gets lonely
-Now is the time to show what you''re made of
-Don''t be so down, c''mon, young homie
-You''ll be okay, you''ll find real love
-All of the stories, the hero gets lonely
-Now is the time to show what you''re made of
-Don''t be so down, c''mon, young homie
-You''ll be okay, you''ll find real love
-All of the stories, the hero gets lonely
-Now is the time to show what you''re made of
-Don''t be so down, c''mon, young homie
-You''ll be okay, you''ll find real love
-All of the stories, the hero gets lonely
-Now is the time to show what you''re made of
-Now is the time to show what you''re made of
-
-Don''t be so down, c''mon, young homie
-You''ll be okay, you''ll find real love
-All of the stories, the hero gets lonely
-Now is the time to show what you''re made of
-Don''t be so down, c''mon, young homie
-You''ll be okay, you''ll find real love
-All of the stories, the hero gets lonely
-Now is the time to show what you''re made of', 68);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (77782, 'Yellow', '
-Look at the stars
-Look how they shine for you
-And everything you do
-Yeah, they were all yellow
-I came along
-I wrote a song for you
-And all the things you do
-And it was called "Yellow"
-So then I took my turn
-Oh, what a thing to have done
-And it was all yellow
-
-(Aah) Your skin, oh, yeah, your skin and bones
-(Ooh) Turn into something beautiful
-(Aah) And you know, you know I love you so
-You know I love you so
-
-I swam across
-I jumped across for you
-Oh, what a thing to do
-''Cause you were all yellow
-I drew a line
-I drew a line for you
-Oh, what a thing to do
-And it was all yellow
-See Coldplay LiveGet tickets as low as $68You might also like
-(Aah) And your skin, oh, yeah, your skin and bones
-(Ooh) Turn into something beautiful
-(Aah) And you know, for you, I''d bleed myself dry
-For you, I''d bleed myself dry
-
-It''s true
-Look how they shine for you
-Look how they shine for you
-Look how they shine for
-Look how they shine for you
-Look how they shine for you
-Look how they shine
-
-Look at the stars
-Look how they shine for you
-And all the things that you do', 8351);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (1652, 'Man on the Moon (The Anthem)', '
-(Yawn)
-Alright, run it
-I never gave a fuck
-I never gave a fuck about what niggas thought about me
-I mean, I did, but like, fuck it, you know what I''m saying?
-You gon'' love me, man
-You gon'' love me, man
-
-They can''t comprehend
-Or even come close to understanding him
-I guess if I was boring they would love me more
-Guess if I was simple in the mind, everything would be fine
-Maybe if I was a jerk to girls
-Instead of being nice and speaking kind words
-Then maybe it would be okay to say then
-I wasn''t a good guy to begin with
-
-But my mind is all crazy, crazy, crazy, crazy
-They got me thinking I ain''t human
-Like I came in from above, above, above, above
-Feeling like an airplane in the sky
-But then they say I''m crazy, crazy, crazy, crazy
-They got me thinking I ain''t human
-Like I came in from above, above, above, above
-Feeling like a bird sitting high, high
-You might also like
-I be that man on the moon, I''m that man on the moon
-And I''mma do what I do, so do you, hey-hey
-I be posted with my blunt and a brew, my dude
-I''m that man on the moon, I''m up-up on the moon
-
-It''s like, I''mma play all my stuff for everybody
-And you know, and all my people, they give me feedback
-You know, and they''ll be like
-"Yo, yo, why, why your shit sound so different?"
-You know what I''m saying?
-"Why yo- why yo- why your shit- like on another level- Why''s-
-Why''s it sound so different?"
-Like that''s a bad thing
-And I be like, "Why not, nigga?"
-
-Close my eyes, high in the dark
-It''s a curtain call; come one, come all
-All I do is try to make it simple
-The ones that make it complicated
-Never get congratulated
-I''m something different, all aspects
-Don''t want a woman just to love her assets
-I''ll still wife her up, even with her flat chest
-The type to get hurt, but that''s the past tense
-My mind is all hazy, hazy, hazy, hazy
-I be thinkin'' that I''m wrong
-''Cause they used to call me lame, lame, lame, lame
-My swag was a little different
-But then my mind is hazy, hazy, hazy, hazy
-I be thinkin'' that I''m wrong
-But they the ones who lame, lame, lame, lame
-I got the last laugh, nigga
-
-I be that man on the moon, I''m that man on the moon
-And I''mma do what I do, so do you, hey-hey
-I be posted with my blunt and a brew, my dude
-I''m that man on the moon, I''m up-up on the moon', 68);
 INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (203961, 'Control', '
 
 Mhm, I look up
@@ -2594,40 +1869,6 @@ I wouldn''t call her, man
 Hey, I''m outside
 What are you doing here?
 ', 492);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (79647, 'Fix You', '
-When you try your best, but you don''t succeed
-When you get what you want, but not what you need
-When you feel so tired, but you can''t sleep
-Stuck in reverse
-And the tears come streamin'' down your face
-When you lose somethin'' you can''t replace
-When you love someone, but it goes to waste
-Could it be worse?
-
-Lights will guide you home
-And ignite your bones
-And I will try to fix you
-
-And high up above or down below
-When you''re too in love to let it go
-But if you never try, you''ll never know
-Just what you''re worth
-
-Lights will guide you home
-And ignite your bones
-And I will try to fix you
-See Coldplay LiveGet tickets as low as $68You might also like
-
-Tears stream down your face
-When you lose somethin'' you cannot replace
-Tears stream down your face, and I...
-Tears stream down your face
-I promise you I will learn from my mistakes
-Tears stream down your face, and I...
-
-Lights will guide you home
-And ignite your bones
-And I will try to fix you', 8351);
 INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (703531, 'I Know', '
 
 Mustard on the beat, ho
@@ -2888,5695 +2129,6 @@ Four, three, two, one
 See me gettin'' guap right now, hell nah, won''t stop right now
 Hell nah, won''t stop right now, see me gettin'' guap right now
 Four, three, two, one', 492);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (4063065, '​thank u, next', '
-Thought I''d end up with Sean
-But he wasn''t a match
-Wrote some songs about Ricky
-Now I listen and laugh
-Even almost got married
-And for Pete, I''m so thankful
-Wish I could say, "Thank you" to Malcolm
-''Cause he was an angel
-
-One taught me love
-One taught me patience
-And one taught me pain
-Now, I''m so amazing
-Say I''ve loved and I''ve lost
-But that''s not what I see
-So, look what I got
-Look what you taught me
-And for that, I say
-
-Thank you, next (Next)
-Thank you, next (Next)
-Thank you, next
-I''m so fuckin'' grateful for my ex
-Thank you, next (Next)
-Thank you, next (Next)
-Thank you, next (Next)
-I''m so fuckin''—
-You might also like
-Spend more time with my friends
-I ain''t worried ''bout nothin''
-Plus, I met someone else
-We havin'' better discussions
-I know they say I move on too fast
-But this one gon'' last
-''Cause her name is Ari
-And I''m so good with that (So good with that)
-
-She taught me love (Love)
-She taught me patience (Patience)
-How she handles pain (Pain)
-That shit''s amazing (Yeah, she''s amazing)
-I''ve loved and I''ve lost (Yeah, yeah)
-But that''s not what I see (Yeah, yeah)
-''Cause look what I''ve found (Yeah, yeah, I''ve found)
-Ain''t no need for searching, and for that, I say
-
-Thank you, next (Thank you, next)
-Thank you, next (Thank you, next)
-Thank you, next (Thank you)
-I''m so fuckin'' grateful for my ex
-Thank you, next (Thank you, next)
-Thank you, next (Said thank you, next)
-Thank you, next (Next)
-I''m so fuckin'' grateful for my ex
-Thank you, next
-Thank you, next
-Thank you, next
-I''m so fuckin''—
-
-One day I''ll walk down the aisle
-Holding hands with my mama
-I''ll be thanking my dad
-''Cause she grew from the drama
-Only wanna do it once, real bad
-Gon'' make that shit last
-God forbid something happens
-Least this song is a smash (Song is a smash)
-
-I''ve got so much love (Love)
-Got so much patience (Patience)
-And I''ve learned from the pain (Pain)
-I turned out amazing (Turned out amazing)
-Say I''ve loved and I''ve lost (Yeah, yeah)
-But that''s not what I see (Yeah, yeah)
-''Cause look what I''ve found (Yeah, yeah)
-Ain''t no need for searching
-And for that, I say
-Thank you, next (Thank you, next)
-Thank you, next (Thank you, next)
-Thank you, next
-I''m so fuckin'' grateful for my ex
-Thank you, next (Thank you, next)
-Thank you, next (Said thank you, next)
-Thank you, next (Next)
-I''m so fuckin'' grateful for my ex
-
-Thank you, next
-Thank you, next
-Thank you, next
-Yeah, yee
-Thank you, next
-Thank you, next
-Thank you, next
-Yeah, yee', 26507);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (566, 'Baby', '
-
-Oh, woah
-Oh, woah
-Oh, woah
-
-You know you love me (Yo), I know you care (Uh-huh)
-Just shout whenever (Yo), and I''ll be there (Uh-huh)
-You are my love (Yo), you are my heart (Uh-huh)
-And we will never, ever, ever be apart (Yo, uh-huh)
-Are we an item? (Yo) Girl, quit playin'' (Uh-huh)
-We''re just friends (Yo), what are you sayin''? (Uh-huh)
-Said, "There''s another" (Yo), and looked right in my eyes (Uh-huh)
-My first love broke my heart for the first time, and I was like (Yo, uh-huh)
-
-Baby, baby, baby, oh
-Like baby, baby, baby, no
-Like baby, baby, baby, oh
-I thought you''d always be mine, mine
-Baby, baby, baby, oh
-Like baby, baby, baby, no
-Like baby, baby, baby, oh
-I thought you''d always be mine, mine
-You might also like
-Oh, for you, I would''ve done whatever (Uh-huh)
-And I just can''t believe we ain''t together (Yo, uh-huh)
-And I wanna play it cool (Yo), but I''m losin'' you (Uh-huh)
-I''ll buy you anything (Yo), I''ll buy you any ring (Uh-huh)
-And I''m in pieces (Yo), baby, fix me (Uh-huh)
-And just shake me till you wake me from this bad dream (Yo, uh-huh)
-I''m goin'' down (Yo), down, down, down (Uh-huh)
-And I just can''t believe my first love won''t be around, and I''m like
-
-Baby, baby, baby, oh
-Like baby, baby, baby, no
-Like baby, baby, baby, oh
-I thought you''d always be mine, mine
-Baby, baby, baby, oh
-Like baby, baby, baby, no
-Like baby, baby, baby, oh
-I thought you''d always be mine, mine (Luda!)
-
-When I was thirteen, I had my first love
-There was nobody that compared to my baby, and nobody came between us nor could ever come above
-She had me goin'' crazy, oh, I was starstruck
-She woke me up daily, don''t need no Starbucks (Woo)
-She made my heart pound, and skip a beat when I see her in the street and
-At school on the playground, but I really wanna see her on the weekend
-She knows she got me dazing ''cause she was so amazing
-And now my heart is breakin'', but I just keep on sayin''
-Baby, baby, baby, oh
-Like baby, baby, baby, no
-Like baby, baby, baby, oh
-I thought you''d always be mine, mine
-Baby, baby, baby, oh
-Like baby, baby, baby, no
-Like baby, baby, baby, oh
-I thought you''d always be mine, mine
-
-I''m gone (Yeah-yeah-yeah, yeah-yeah-yeah)
-Now I''m all gone (Yeah-yeah-yeah, yeah-yeah-yeah)
-Now I''m all gone (Yeah-yeah-yeah, yeah-yeah-yeah)
-Now I''m all gone (Gone, gone, gone, gone), I''m gone', 357);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (4067762, '7 rings', '
-Yeah, breakfast at Tiffany''s and bottles of bubbles
-Girls with tattoos who like getting in trouble
-Lashes and diamonds, ATM machines
-Buy myself all of my favorite things (Yeah)
-Been through some bad shit, I should be a sad bitch
-Who woulda thought it''d turn me to a savage?
-Rather be tied up with calls and not strings
-Write my own checks like I write what I sing, yeah (Yeah)
-
-My wrist, stop watchin'', my neck is flossy
-Make big deposits, my gloss is poppin''
-You like my hair? Gee, thanks, just bought it
-I see it, I like it, I want it, I got it (Yeah)
-
-I want it, I got it, I want it, I got it
-I want it, I got it, I want it, I got it
-You like my hair? Gee, thanks, just bought it
-I see it, I like it, I want it, I got it (Yep)
-Wearing a ring, but ain''t gon'' be no "Mrs."
-Bought matching diamonds for six of my bitches
-I''d rather spoil all my friends with my riches
-Think retail therapy my new addiction
-Whoever said money can''t solve your problems
-Must not have had enough money to solve ''em
-They say, "Which one?" I say, "Nah, I want all of ''em"
-Happiness is the same price as red-bottoms
-You might also like
-My smile is beamin'' (Yeah), my skin is gleamin'' (Is gleamin'')
-The way it shine, I know you''ve seen it (You''ve seen it)
-I bought a crib just for (Just for) the closet (Closet)
-Both his and hers, I want it, I got it, yeah
-
-I want it, I got it, I want it, I got it
-I want it, I got it, I want it, I got it (Baby)
-You like my hair? Gee, thanks, just bought it (Oh yeah)
-I see it, I like it, I want it, I got it (Yep)
-
-Yeah, my receipts be lookin'' like phone numbers
-If it ain''t money, then wrong number
-Black card is my business card
-The way it be settin'' the tone for me
-I don''t mean to brag, but I be like, "Put it in the bag," yeah
-When you see them racks, they stacked up like my ass, yeah
-Shoot, go from the store to the booth
-Make it all back in one loop, gimme the loot
-Never mind, I got the juice
-Nothing but net when we shoot
-Look at my neck, look at my jet
-Ain''t got enough money to pay me respect
-Ain''t no budget when I''m on the set
-If I like it, then that''s what I get, yeah
-I want it, I got it, I want it, I got it (Oh yeah)
-I want it, I got it, I want it, I got it (Oh yeah, yeah)
-You like my hair? Gee, thanks, just bought it
-I see it, I like it, I want it, I got it (I see, yep)', 26507);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (3681280, '​God is a woman', '
-You, you love it how I move you
-You love it how I touch you, my one
-When all is said and done
-You''ll believe God is a woman
-And I, I feel it after midnight
-A feelin'' that you can''t fight, my one
-It lingers when we''re done
-You''ll believe God is a woman
-
-I don''t wanna waste no time, yeah
-You ain''t got a one-track mind, yeah
-Have it any way you like, yeah
-And I can tell that you know I know how I want it
-Ain''t nobody else can relate
-Boy, I like that you ain''t afraid
-Baby, lay me down and let''s pray
-I''m tellin'' you the way I like it, how I want it
-
-(Yeah) And I can be all the things you told me not to be
-(Yeah) When you try to come for me, I keep on flourishing (Yeah)
-(Yeah) And he see the universe when I''m the company (Yeah)
-It''s all in me
-You might also like
-You, you love it how I move you
-You love it how I touch you, my one
-When all is said and done
-You''ll believe God is a woman
-And I, I feel it after midnight
-A feelin'' that you can''t fight, my one
-It lingers when we''re done
-You''ll believe God is a woman
-
-(Yeah)
-I tell you all the things you should know
-So, baby, take my hands, save your soul
-We can make it last, take it slow, mm
-And I can tell that you know I know how I want it, yeah
-But you''re different from the rest
-And, boy, if you confess, you might get blessed (Yeah)
-See if you deserve what comes next
-I''m tellin'' you the way I like it, how I want it (Yeah)
-
-(Yeah) And I can be all the things you told me not to be (Ooh)
-(Yeah) When you try to come for me, I keep on flourishing (Yeah)
-(Yeah) And he see the universe when I''m the company (Yeah)
-It''s all in me (Ooh)
-You, you love it how I move you (Ooh)
-You love it how I touch you, my one
-When all is said and done
-You''ll believe God is a woman
-And I, I feel it after midnight
-A feelin'' that you can''t fight, my one
-It lingers when we''re done
-You''ll believe God is a woman
-
-Yeah, yeah (God is a woman)
-Yeah, yeah (God is a woman, yeah)
-My one (One)
-When all is said and done
-You''ll believe God is a woman
-You''ll believe God (God is a woman)
-Oh yeah (God is a woman, yeah)
-Ooh (One)
-It lingers when we''re done
-You''ll believe God is a woman', 26507);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (2457495, 'Side To Side', '
-I''ve been here all night (Ariana)
-I''ve been here all day (Nicki Minaj)
-And, boy, got me walkin'' side to side (Let them hoes know)
-
-I''m talkin'' to ya
-See you standing over there with your body
-Feeling like I wanna rock with your body
-And we don''t gotta think ''bout nothin'' (''Bout nothin'')
-I''m comin'' at ya
-''Cause I know you got a bad reputation
-Doesn''t matter, ''cause you give me temptation
-And we don''t gotta think ''bout nothin'' (''Bout nothin'')
-
-These friends keep talkin'' way too much
-Say I should give you up
-Can''t hear them, no, ''cause I—
-
-I''ve been here all night
-I''ve been here all day
-And, boy, got me walkin'' side to side
-I''ve been here all night
-I''ve been here all day
-And, boy, got me walkin'' side to side (Side to side)
-You might also like
-Been tryna hide it
-Baby, what''s it gonna hurt if they don''t know?
-Makin'' everybody think that we solo
-Just as long as you know you got me (You got me)
-And, boy, I got ya
-''Cause tonight I''m making deals with the devil
-And I know it''s gonna get me in trouble
-Just as long as you know you got me
-
-These friends keep talkin'' way too much
-Say I should give you up
-Can''t hear them, no, ''cause I—
-
-I''ve been here all night
-I''ve been here all day
-And, boy, got me walkin'' side to side (Side to side)
-I''ve been here all night (Been here all night, baby)
-I''ve been here all day (Been here all day, baby, yeah)
-And, boy, got me walkin'' side to side (Side to side, boy)
-
-Uh, yo
-This the new style with the fresh type of flow
-Wrist icicle, ride dick bicycle
-Come through, yo, get you this type of blow
-If you wanna ménage, I got a tricycle
-All these bitches'' flows is my mini-me
-Body smoking, so they call me Young Nicki Chimney
-Rappers in they feelings ''cause they feelin'' me (Murder)
-Uh, I-I give zero fucks and I got zero chill in me
-Kissing me, copped the blue box that say Tiffany
-Curry with the shot, just tell ''em to call me Stephanie
-Gun pop, then I make my gum pop
-I''m the queen of rap, young Ariana run pop, uh
-These friends keep talkin'' way too much (Way too much)
-Say I should give him up (Give him up)
-Can''t hear them, no, ''cause I—
-
-I''ve been here all night (Been here all night, baby)
-I''ve been here all day (Been here all night, baby, yeah)
-And, boy (Boy), got me walkin'' side to side (Side to side)
-I''ve been here all night (Been here all night, babe)
-I''ve been here all day (Been here all day, baby, yeah; Ooh, baby)
-And, boy (No), got me walkin'' side to side (Side to side)
-(Yeah, yeah-yeah-yeah)
-
-Uh, yo
-This the new style with the fresh type of flow (Been here all night, baby)
-Wrist icicle, ride dick bicycle (Been here all day, baby; Ayy)
-Come through, yo, get you this type of blow (No)
-If you want a ménage, I got a tricycle (Side to side, yeah)', 26507);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (3649172, '​​no tears left to cry', '
-Right now, I''m in a state of mind
-I wanna be in like all the time
-Ain''t got no tears left to cry
-So, I''m pickin'' it up, pickin'' it up
-I''m lovin'', I''m livin'' (Oh, ayy), I''m pickin'' it up
-I''m pickin'' it up, pickin'' it up (Yeah)
-I''m lovin'', I''m livin'', I''m pickin'' it up (Oh, yeah)
-
-I''m pickin'' it up (Yeah), pickin'' it up (Yeah, ayy)
-Lovin'', I''m livin'', so we turnin'' up (We turnin'' it up)
-Yeah, we turnin'' it up
-
-Ain''t got no tears in my body
-I ran out, but, boy, I like it
-I like it, I like it
-Don''t matter how, what, where, who tries it
-We out here vibin''
-We vibin'', we vibin''
-
-Comin'' out
-Even when it''s rainin'' down
-Can''t stop now
-Can''t stop so shut your mouth
-Shut your mouth
-And if you don''t know, then now you know it, babe
-Know it, babe, yeah
-You might also like
-Right now, I''m in a state of mind
-I wanna be in like all the time
-Ain''t got no tears left to cry
-So, I''m pickin'' it up, pickin'' it up (Oh, yeah)
-I''m lovin'', I''m livin'', I''m pickin'' it up
-Oh, I just want you to come with me (Ooh)
-We on another mentality
-Ain''t got no tears left to cry (To cry)
-So, I''m pickin'' it up, pickin'' it up (Oh, yeah)
-I''m lovin'', I''m livin'', I''m pickin'' it up (Oh)
-
-Pickin'' it up (Yeah), pickin'' it up (Yeah, ayy)
-Lovin'', I''m livin'', so we turnin'' up (We turnin'' it up)
-Yeah (Yeah), we turnin'' it up
-
-They point out the colors in you, I see ''em too
-And, boy, I like ''em
-I like ''em, I like ''em
-We way too fly to partake in all this hate
-We out here vibin''
-We vibin'', we vibin''
-
-Comin'' out
-Even when it''s rainin'' down
-Can''t stop now
-Can''t stop, so shut your mouth
-Shut your mouth
-And if you don''t know, then now you know it, babe
-Know it, babe, yeah
-Right now, I''m in a state of mind
-I wanna be in like all the time
-Ain''t got no tears left to cry
-So, I''m pickin'' it up, pickin'' it up (Oh, yeah)
-I''m lovin'', I''m livin'', I''m pickin'' it up
-Oh, I just want you to come with me (Ooh)
-We on another mentality (Oh)
-Ain''t got no tears left to cry (To cry)
-So, I''m pickin'' it up, pickin'' it up (Oh, yeah)
-I''m lovin'', I''m livin'', I''m pickin'' it up
-
-Comin'' out
-Even when it''s rainin'' down
-Can''t stop now (Mm-oh)
-Shut your mouth
-Ain''t got no tears left to cry
-Oh, yeah, oh, yeah
-
-Oh, I just want you to come with me (Me)
-We on another mentality
-Ain''t got no tears left to cry (Cry)
-So, I''m pickin'' it up (Yeah), pickin'' it up (Oh, yeah)
-I''m lovin'', I''m livin'', I''m pickin'' it up (Pickin'' it up)
-Pickin'' it up (Mm), pickin'' it up (Mm)
-Lovin'', I''m livin'', so we turnin'' up (Mm-hm)
-Yeah, we turnin'' it up', 26507);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (6071429, '34+35', '
-Hmm
-
-You might think I''m crazy
-The way I''ve been cravin''
-If I put it quite plainly
-Just gimme them babies
-So what you doin'' tonight?
-Better say, "Doin'' you right" (Yeah)
-Watchin'' movies, but we ain''t seen a thing tonight (Yeah)
-
-I don''t wanna keep you up (You up)
-But show me, can you keep it up? (It up)
-''Cause then I''ll have to keep you up
-Shit, maybe I''ma keep you up, boy
-I''ve been drinkin'' coffee (I''ve been drinkin'' coffee; coffee)
-And I''ve been eatin'' healthy (I''ve been eatin'' healthy; healthy)
-You know I keep it squeaky, yeah (You know I keep it squeaky; squeaky)
-Savin'' up my energy (Yeah, yeah, savin'' up my energy)
-
-Can you stay up all night?
-Fuck me ''til the daylight
-Thirty-four, thirty-five (Ah)
-Can you stay up all night? (All night)
-Fuck me ''til the daylight
-Thirty-four, thirty-five (Ah)
-You might also like
-You drink it just likе water (Water)
-You say it tastes likе candy
-So what you doin'' tonight? (Tonight)
-Better say, "Doin'' you right" (Alright)
-Watchin'' movies, but we ain''t seen a thing tonight (Yeah)
-
-I don''t wanna keep you up (You up)
-But show me, can you keep it up? (It up)
-''Cause then I''ll have to keep you up
-Shit, maybe I''ma keep you up, boy
-I''ve been drinkin'' coffee (Said I''ve been drinkin'' coffee; coffee)
-And I''ve been eatin'' healthy (And I''ve been eatin'' healthy; healthy)
-You know I keep it squeaky, yeah (Except this wine though; squeaky)
-Savin'' up my energy (Yeah, yeah, yeah)
-
-Can you stay up all night? (All night)
-Fuck me ''til the daylight (Daylight)
-Thirty-four, thirty-five (Ah; thirty-five)
-Can you stay up all night? (Can you stay?)
-Fuck me ''til the daylight (Can you stay?)
-Thirty-four, thirty-five (Ah)
-
-Oh yeah, yeah
-Baby, you might need a seat belt when I ride it
-I''ma leave it open like a door, come inside it
-Even though I''m wifey, you can hit it like a side chick
-Don''t need no side dick, no
-Got the neighbors yellin'', "Earthquake!" (Earthquake)
-4.5 when I make the bed shake (Bed shake)
-Put it down heavy even though it''s lightweight (It''s lightweight, yeah, yeah, yeah, ayy)
-We started at midnight
-Go ''til the sunrise (Sunrise)
-Done at the same time (Yeah)
-But who''s countin'' the time when we got it for life? (Got it for life)
-I know all your favorite spots (Favorite spots)
-We can take it from the top (From the top)
-You''re such a dream come true, true
-Make a bitch wanna hit snooze, ooh
-Can you stay up all night?
-Fuck me ''til the daylight (Yeah, yeah)
-Thirty-four, thirty-five (Ah; thirty-four, thirty-five)
-Can you stay up all night? (Do you know what that means?)
-Fuck me ''til the daylight (Do you know what that means?)
-Thirty-four, thirty-five (Ah)
-
-Means I wanna "69" with you
-No shit
-Math class
-Never was good', 26507);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (4226433, '​break up with your girlfriend, i’m bored', '
-You got me some type of way (Hmm)
-Ain''t used to feelin'' this way (Mmm-mmm)
-I do not know what to say (Yeah, yeah)
-But I know I shouldn''t think about it
-Took one fuckin'' look at your face (Hmm)
-Now I wanna know how you taste (Mmm-mmm)
-Usually don''t give it away (Yeah, yeah)
-But you know I''m out here thinkin'' ''bout it
-
-Then I realize she''s right there
-And I''m at home like, "Damn, this ain''t fair"
-
-Break up with your girlfriend (Girlfriend)
-Yeah, yeah, ''cause I''m bored
-You could hit it in the mornin'' (Mornin'')
-Yeah, yeah, like it''s yours
-I know it ain''t right
-But I don''t care (Care)
-Break up with your girlfriend (Girlfriend)
-Yeah, yeah, ''cause I''m bored
-
-This shit always happen to me (Yeah)
-Why can''t we just play for keeps? (Mmm-mmm)
-Practically on my knees (Yeah, yeah)
-But I know I shouldn''t think about it
-You know what you''re doin'' to me
-You''re singin'' my songs in the streets, yeah, yeah
-Actin'' all innocent, please
-When I know you out here thinkin'' ''bout it
-You might also like
-Then you realize she''s right there (Yeah)
-And you''re at home like, "Damn, she can''t compare"
-
-Break up with your girlfriend (Girlfriend)
-Yeah, yeah, ''cause I''m bored
-You could hit it in the mornin'' (In the mornin'')
-Yeah, yeah, like it''s yours
-I know it ain''t right
-But I don''t care (I don''t care, yee)
-Break up with your girlfriend (With your girlfriend)
-Yeah, yeah, ''cause I''m bored
-
-With your girlfriend, girlfriend, girlfriend, girlfriend
-With your girlfriend
-With your girlfriend, girlfriend, girlfriend, girlfriend
-
-You could say I''m hatin'' if you want to
-But I only hate on her ''cause I want you
-Say I''m trippin'' if you feel like
-But you without me ain''t right (Ain''t right)
-You could call me crazy ''cause I want you
-And I never even ever fuckin'' met you
-Say I''m trippin'' and it ain''t right
-But you without me ain''t nice (Ain''t nice, yeah)
-Break up with your girlfriend (With your girlfriend)
-Yeah, yeah, ''cause I''m bored
-You could hit it in the mornin'' (Hit in the mornin'', yeah, yeah, yeah)
-Yeah, yeah, like it''s yours
-I know it ain''t right
-But I don''t care (Care, yeah)
-Break up with your girlfriend (With your girlfriend)
-Yeah, yeah, ''cause I''m bored
-
-With your girlfriend, girlfriend, girlfriend, baby, girlfriend
-With your girlfriend
-With your girlfriend, girlfriend, girlfriend, girlfriend
-With your girlfriend', 26507);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (5168488, 'Intentions', '
-Picture perfect, you don''t need no filter
-Gorgeous, make ''em drop dead, you a killer
-Shower you with all my attention
-Yeah, these are my only intentions
-Stay in the kitchen cookin'' up, got your own bread
-Heart full of equity, you''re an asset
-Make sure that you don''t need no mentions
-Yeah, these are my only intentions
-
-Shout-out to your mom and dad for makin'' you
-Standin'' ovation, they did a great job raisin'' you
-When I create, you''re my muse
-That kind of smile that makes the news
-Can''t nobody throw shade on your name in these streets
-Triple threat, you a boss, you a bae, you a beast
-You make it easy to choose
-You got a mean touch, I can''t refuse (No, I can''t refuse it)
-
-Picture perfect, you don''t need no filter
-Gorgeous, make ''em drop dead, you a killer
-Shower you with all my attention
-Yeah, these are my only intentions
-Stay in the kitchen cookin'' up, got your own bread
-Heart full of equity, you''re an asset
-Make sure that you don''t need no mentions
-Yeah, these are my only intentions
-You might also like
-Already passed, you don''t need no approval
-Good everywhere, don''t worry ''bout no refusal
-Second to none, you got the upper hand now
-Don''t need a sponsor, nope, you''re the brand now
-You''re my rock, my Colorado
-Got that ring, just like Toronto
-Love you now, a little more tomorrow
-This how I feel, act like you know that you are
-
-Picture perfect, you don''t need no filter
-Gorgeous, make ''em drop dead, you a killer
-Shower you with all my attention
-Yeah, these are my only intentions
-Stay in the kitchen cookin'' up, got your own bread (Whip it)
-Heart full of equity, you''re an asset (Asset)
-Make sure that you don''t need no mentions (Yeah, yeah)
-Yeah, these are my only intentions (Quavo)
-
-No cap, no pretendin'', you don''t need mentions (No cap)
-Got ''em sayin'' "goals," they don''t wanna be independent (''Pendent)
-Tell them to mind your business (Woo), we in our feelings
-It''s fifty-fifty percentage (Fifty), attention, we need commitment (Oh)
-We gotta both admit it (Both), it''s funny, we both listen (Both)
-It''s a blessing (Blessing) ''cause we both get it (Both)
-You the best thing (Woo), and I don''t need a witness (Best thing)
-I''ma find me a ring and pray it''s perfect fitted (Perfect, perfect, perfect)
-Picture perfect, you don''t need no filter (No filter)
-Gorgeous, make ''em drop dead, you a killer (Oh-oh)
-Shower you with all my attention (I will)
-Yeah, these are my only intentions (Yeah)
-Stay in the kitchen cookin'' up, got your own bread (You do)
-Heart full of equity, you''re an asset (Uh-huh)
-Make sure that you don''t need no mentions (No mentions)
-Yeah, these are my only intentions
-
-Only intentions
-That''s all I plan to do', 357);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (3681287, '​​breathin', '
-​​lacigam gnihtemos od oT
-​​thgin laiceps ruoy s''thginot tuB
-
-Some days, things just take
-Way too much of my energy
-I look up and the whole room''s spinning
-You take my cares away
-I can so over-complicate, people tell me to medicate
-
-Feel my blood runnin'', swear the sky''s fallin''
-I know that all this shit''s fabricated, mmm
-Time goes by and I can''t control my mind
-Don''t know what else to try, but you tell me every time
-
-Just keep breathin'' and breathin'' and breathin'' and breathin''
-And oh, I gotta keep, keep on breathin''
-Just keep breathin'' and breathin'' and breathin'' and breathin''
-And oh, I gotta keep, keep on breathin'', mmm-mmm
-
-Sometimes, it''s hard to find
-Find my way up into the clouds
-Tune it out, they can be so loud
-You remind me of a time
-When things weren''t so complicated
-All I need is to see your face
-You might also like
-Feel my blood runnin'', swear the sky''s fallin''
-I know that all this shit''s fabricated, mmm
-Time goes by and I can''t control my mind
-Don''t know what else to try, but you tell me every time
-
-Just keep breathin'' and breathin'' and breathin'' and breathin''
-And oh, I gotta keep, I keep on breathin''
-Just keep breathin'' and breathin'' and breathin'' and breathin''
-And oh, I gotta keep, I keep on breathin'', mmm, yeah
-
-My, my air, my, my air
-My, my air, my air
-My, my air, my, my air
-My, my air, yeah
-
-Just keep breathin'' and breathin'' and breathin'' and breathin''
-And oh, I gotta keep, I keep on breathin''
-Just keep breathin'' and breathin'' and breathin'' and breathin''
-And oh, I gotta keep, I keep on breathin'', mmm, yeah
-
-Feel my blood runnin'', swear the sky''s fallin'', oh, woah
-I keep on breathin'', oh yeah
-Time goes by and I can''t control my mind
-I keep on breathin'', mmm, yeah', 26507);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (6068618, '​positions', '
-Heaven sent you to me
-I''m just hopin’ I don''t repeat history
-
-Boy, I''m tryna meet your mama on a Sunday
-Then make a lotta love on a Monday (Ah, ah)
-Never need no (No), no one else, babe
-’Cause I''ll be
-
-Switchin'' them positions for you
-Cookin'' in the kitchen and I''m in the bedroom
-I''m in the Olympics, way I''m jumpin'' through hoops
-Know my love infinite, nothin’ I wouldn’t do
-That I won''t do, switchin’ for you
-
-Perfect, perfect
-You''re too good to be true (You''re too good to be true)
-But I get tired of runnin'', fuck it
-Now, I’m runnin'' with you (With you)
-
-Said, boy, I''m tryna meet your mama on a Sunday
-Then make a lotta love on a Monday (Ah, ah)
-Never need no (No), no onе else, babe
-''Causе I''ll be
-You might also like
-Switchin'' them positions for you
-Cookin'' in the kitchen and I''m in the bedroom
-I''m in the Olympics, way I''m jumpin'' through hoops
-Know my love infinite, nothin'' I wouldn''t do
-That I won''t do, switchin'' for you
-Cookin'' in the kitchen and I''m in the bedroom
-I''m in the Olympics, way I''m jumpin'' through hoops
-Know my love infinite, nothin'' I wouldn''t do (Nothin'')
-That I won''t do, switchin'' for you
-
-This some shit that I usually don''t do (Yeah)
-But for you, I kinda, kinda want to (Mmm)
-''Cause you''re down for me and I''m down too (And I''m down too)
-Yeah, I''m down too
-Switchin'' the positions for you
-This some shit that I (Yeah) usually don''t do (Don''t do)
-But for you, I kinda, kinda want to (Mmm)
-''Cause you''re down for me and I''m down too (''Cause you''re down for me)
-
-Switchin'' them positions for you
-Cookin'' in the kitchen and I''m in the bedroom
-I''m in the Olympics, way I''m jumpin'' through hoops (Jumpin'', jumpin'')
-Know my love infinite, nothin'' I wouldn''t do
-That I won''t do, switchin'' for you (Ooh woah)
-Cookin'' in the kitchen and I''m in the bedroom
-I''m in the Olympics, way I''m jumpin'' through hoops
-Know my love infinite, nothin'' I wouldn''t do (I wouldn''t do)
-That I won''t do, switchin'' for you
-Yeah
-Ah, yeah
-Ah (Ah), yeah', 26507);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (9888882, '​yes, and?', '
-In case you haven''t noticed
-Well, everybody''s tired
-And healin'' from somebody
-Or somethin'' we don''t see just right
-
-Boy, come on, put your lipstick on (No one can tell you nothin'')
-Come on and walk this way through the fire (Don''t care what''s on their mind)
-And if you find yourself in a dark situation
-Just turn on your light and be like
-
-"Yes, and?"
-Say that shit with your chest, and
-Be your own fuckin'' best friend
-Say that shit with your chest
-Keep moving like, "What''s next?"
-"Yes, and?"
-
-Now, I''m so done with caring
-What you think, no, I won''t hide
-Underneath your own projections
-Or change my most authentic life
-You might also like
-Boy, come on, put your lipstick on (No one can tell you nothin'')
-Come on and walk this way through the fire (Don''t care what''s on their mind)
-And if you find yourself in a dark situation
-Just turn on your light and be like
-
-"Yes, and?"
-Say that shit with your chest, and
-Be your own fuckin'' best friend
-Say that shit with your chest
-Keep moving like, "What''s next?"
-"Yes, and?" (Yeah)
-
-My tongue is sacred, I speak upon what I like
-Protected, sexy, discerning with my time (My time)
-Your energy is yours and mine is mine (It''s mine, it''s mine)
-What''s mine is mine
-My face is sitting, I don''t need no disguise (I don''t need no disguise)
-Don''t comment on my body, do not reply
-Your business is yours and mine is mine
-Why do you care so much whose **** I ride?
-Why?
-
-"Yes, and?" (Yes, and?)
-Say that shit with your chest, and (Say that shit with your chest)
-Be your own fuckin'' best friend (Oh, be your own, be your own)
-Say that shit with your chest (Say that shit with your chest, baby)
-Keep moving like, "What''s next?"
-"Yes, and?"
-"Yes (Ooh), and?"
-Say that shit with your chest (Ooh), and
-Be your own fuckin'' best (Be your own) friend
-Say that shit with your chest
-Keep moving like, "What''s next?"
-"Yes, and?" (Yeah)', 26507);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (49192, 'Viva La Vida', '
-I used to rule the world
-Seas would rise when I gave the word
-Now in the morning, I sleep alone
-Sweep the streets I used to own
-
-
-I used to roll the dice
-Feel the fear in my enemy''s eyes
-Listen as the crowd would sing
-"Now the old king is dead, long live the king"
-One minute, I held the key
-Next, the walls were closed on me
-And I discovered that my castles stand
-Upon pillars of salt and pillars of sand
-
-I hear Jerusalem bells a-ringin''
-Roman cavalry choirs are singin''
-Be my mirror, my sword and shield
-My missionaries in a foreign field
-For some reason, I can''t explain
-Once you''d gone, there was never
-Never an honest word
-And that was when I ruled the world
-See Coldplay LiveGet tickets as low as $68You might also like
-
-It was a wicked and wild wind
-Blew down the doors to let me in
-Shattered windows and the sound of drums
-People couldn''t believe what I''d become
-Revolutionaries wait
-For my head on a silver plate
-Just a puppet on a lonely string (Mmm, mmm)
-Aw, who would ever wanna be king?
-
-I hear Jerusalem bells a-ringin''
-Roman cavalry choirs are singin''
-Be my mirror, my sword and shield
-My missionaries in a foreign field
-For some reason, I can''t explain
-I know Saint Peter won''t call my name
-Never an honest word
-But that was when I ruled the world
-
-Oh-oh-oh, oh-oh, oh
-Oh-oh-oh, oh-oh, oh
-Oh-oh-oh, oh-oh, oh
-Oh-oh-oh, oh-oh, oh
-(Oh-oh-oh, oh-oh, oh)
-Hear Jerusalem bells a-ringin''
-(Oh-oh-oh, oh-oh, oh)
-Roman cavalry choirs are singin''
-(Oh-oh-oh, oh-oh, oh)
-Be my mirror, my sword and shield
-(Oh-oh-oh, oh-oh, oh)
-My missionaries in a foreign field
-(Oh-oh-oh, oh-oh, oh)
-For some reason, I can''t explain
-(Oh-oh-oh, oh-oh, oh)
-I know Saint Peter won''t call my name
-Never an honest word
-But that was when I ruled the world
-
-Mmm, mmm, mmm, mmm
-Mmm, mmm, mmm, mmm
-Mmm, mmm', 8351);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (2353271, 'Hymn for the Weekend', '
-And said drink from me, drink from me
-(I, oh, I, oh, I)
-That we shoot across the sky
-Got me feeling drunk and high
-Poured on a symphony
-So high, so high
-That we shoot across the sky
-Poured on a symphony
-Drink from me, drink from me
-(I, oh, I, oh, I)
-That we shoot across the sky
-Got me feelin'' drunk and high
-Poured on a symphony
-So high, so high
-That we shoot across the sky
-
-Oh, angel sent from up above
-You know you make my world light up
-When I was down, when I was hurt
-You came to lift me up
-Life is a drink and love''s a drug
-Oh, now I think I must be miles up
-When I was a river dried up
-You came to rain a flood
-See Coldplay LiveGet tickets as low as $68You might also like
-I said, drink from me, drink from me
-When I was so thirsty
-Poured on a symphony
-Now I just can''t get enough
-Put your wings on me, wings on me
-When I was so heavy
-Poured on a symphony
-When I''m low, low, low, low
-
-I, oh, I, oh, I
-Got me feeling drunk and high, so high, so high
-Oh, I, oh, I, oh, I
-Now I''m feeling drunk and high, so high, so high (Woo)
-(Ooh, ooh, ooh)
-
-Oh, angel sent from up above
-I feel you coursing through my blood
-Life is a drink and your love''s about
-To make the stars (Stars) come out
-
-Put your wings on me, wings on me
-When I was so heavy
-Poured on a symphony
-When I''m low, low, low, low
-I, oh, I, oh, I
-Got me feeling drunk and high, so high, so high
-Oh, I, oh, I, oh, I
-Now I''m feeling drunk and high, so high, so high
-
-I, oh, I, oh, I
-La, la, la, la, la, la, la, so high, so high
-I, oh, I, oh, I
-Now I''m feeling drunk and high, so high, so high
-That we shoot across the sky
-That we shoot across the
-That we shoot across the sky
-That we shoot across the (That we shoot)
-That we shoot across the sky
-That we shoot across the
-That we shoot across the sky
-That we shoot across the', 8351);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (77781, 'Sparks', '
-Did I drive you away?
-I know what you''ll say
-You say, "Oh, sing one we know"
-But I promise you this
-I''ll always look out for you
-Yeah, that''s what I''ll do
-
-I say, oh
-I say, oh
-
-My heart is yours
-It''s you that I hold onto
-Yeah, that''s what I do
-And I know I was wrong
-But I won''t let you down
-Oh yeah I will, yeah I will, yes I will
-
-I said, oh
-I cry, oh
-
-Yeah, I saw sparks
-Yeah, I saw sparks
-And I saw sparks
-Yeah, I saw sparks
-See Coldplay LiveGet tickets as low as $68You might also like
-Sing it out
-La-la-la-la, oh-oh
-La-la-la-la, oh-oh
-La-la-la-la, oh-oh
-La-la-la-la, oh-oh', 8351);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (387508, 'A Sky Full of Stars', '
-''Cause you''re a sky, ''cause you''re a sky full of stars
-I''m gonna give you my heart
-''Cause you''re a sky, ''cause you''re a sky full of stars
-''Cause you light up the path
-
-I don''t care, go on and tear me apart
-I don''t care if you do, ooh-ooh, ooh
-''Cause in a sky, ''cause in a sky full of stars
-I think I saw you ooh-ooh-ooh, ooh-ooh-ooh
-
-''Cause you''re a sky, ''cause you''re a sky full of stars
-I wanna die in your arms, oh-oh-oh, oh-oh
-''Cause you get lighter the more it gets dark
-I''m gonna give you my heart, oh
-
-I don''t care, go on and tear me apart
-I don''t care if you do, ooh-ooh, ooh
-''Cause in a sky, ''cause in a sky full of stars
-I think I see you ooh-ooh-ooh, ooh-ooh-ooh
-I think I see you ooh-ooh-ooh, ooh-ooh-ooh
-
-''Cause you''re a sky, you''re a sky full of stars
-Such a heavenly view
-You''re such a heavenly view
-(Yeah, yeah, yeah, ooh)See Coldplay LiveGet tickets as low as $68You might also like', 8351);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (2349494, 'Adventure of a Lifetime', '
-
-"Turn your magic on," Umi, she''d say
-"Everythin'' you want''s a dream away
-We are legends, every day"
-That''s what she told me
-"Turn your magic on," to me, she''d say
-"Everythin'' you want''s a dream away
-Under this pressure, under this weight
-We are diamonds"
-
-Now, I feel my heart beatin''
-I feel my heart underneath my skin
-Now, I feel my heart beatin''
-Oh, you make me feel
-
-Like I''m alive again
-(Alive again)
-Oh, you make me feel
-Like I''m alive again
-
-Said, "I can''t go on, not in this way
-I''m a dream that died by light of day
-Gonna hold up half the sky and say
-Only I own me"
-See Coldplay LiveGet tickets as low as $68You might also like
-Now, I feel my heart beatin''
-I feel my heart underneath my skin
-Oh, I can I feel my heart beatin''
-''Cause you make me feel
-
-Like I''m alive again
-(Alive again)
-Oh, you make me feel
-Like I''m alive again
-
-"Turn your magic on," Umi, she''d say
-"Everythin'' you want''s a dream away
-Under this pressure, under this weight
-We are diamonds takin'' shape
-We are diamonds takin'' shape"
-
-(Woo, woo-hoo)
-(Woo, woo-hoo)
-If we''ve only got this life, this adventure, oh, then I
-And if we''ve only got this life, you''ll get me through alive
-And if we''ve only got this life, in this adventure, oh, then I
-Want to share it with you, with you, with you
-Oh, see, yeah, see, yeah, I
-Do-hoo (Woo-hoo)
-Woo-hoo (Woo-hoo)
-Woo-hoo (Woo-hoo)
-Woo-hoo (Woo-hoo)
-Woo-hoo (Woo-hoo)
-Woo-hoo (Woo-hoo)
-Woo-hoo (woo-hoo)
-Woo-hoo (Woo-hoo)
-Woo-hoo (Woo-hoo)
-Woo-hoo (Woo-hoo)
-Woo-hoo (Woo-hoo)
-Woo-hoo (Woo-hoo)', 8351);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (2378782, 'Everglow', '
-Oh, they say people come, say people go
-This particular diamond was extra special
-And though you might be gone, and the world may not know
-Still I see you celestial
-
-Like a lion you ran, a goddess you rolled
-Like an eagle you circled in perfect purple
-So how come things move on? How come cars don''t slow?
-When it feels like the end of my world
-When I should but I can''t let you go
-
-But when I''m cold, cold
-Yeah, when I''m cold, cold
-There''s a light that you give me when I''m in shadow
-There''s a feelin'' within me, everglow
-
-Like brothers in blood, sisters who ride
-And we swore on that night we''d be friends ''til we die
-But the changin'' of winds and the way waters flow
-Life is short as the fallin'' of snow
-And now I''m gonna miss you, I know
-See Coldplay LiveGet tickets as low as $68You might also like
-But when I''m cold, cold
-In water rolled, salt
-And I know that you''re with me and the way you will show
-And you''re with me wherever I go
-And you give me this feelin'', this everglow
-
-Oh, what I wouldn''t give for just a moment to hold
-Yeah, I live for this feelin'', this everglow
-
-So if you love someone, you should let them know
-Oh, the light that you left me will everglow', 8351);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (53753, 'Clocks', '
-The lights go out, and I can''t be saved
-Tides that I tried to swim against
-Have brought me down upon my knees
-Oh, I beg, I beg and plead, singin''
-Come out of things unsaid
-Shoot an apple off my head, and a
-Trouble that can''t be named
-A tiger''s waitin'' to be tamed, singin''
-
-You are
-You are
-
-Confusion never stops
-Closin'' walls and tickin'' clocks, gonna
-Come back and take you home
-I could not stop, that you now know, singin''
-Come out upon my seas
-Cursed missed opportunities, am I
-A part of the cure?
-Or am I part of the disease? Singin''
-
-You are
-You are
-You are
-You are
-See Coldplay LiveGet tickets as low as $68You might also like
-You are
-You are
-
-And nothin'' else compares
-Oh, nothin'' else compares
-And nothin'' else compares
-
-You are
-You are
-
-Home, home, where I wanted to go
-Home, home, where I wanted to go
-Home (You are) home, where I wanted to go
-Home (You are) home, where I wanted to go', 8351);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (2342329, 'Love Yourself', '
-
-For all the times that you rained on my parade
-And all the clubs you get in using my name
-You think you broke my heart, oh girl, for goodness'' sake
-You think I''m cryin'' on my own, well, I ain''t
-
-And I didn''t wanna write a song
-''Cause I didn''t want anyone thinking I still care
-I don''t, but you still hit my phone up
-And baby, I''ll be movin'' on
-And I think you should be somethin'' I don''t wanna hold back
-Maybe you should know that
-
-My mama don''t like you and she likes everyone
-And I never like to admit that I was wrong
-And I''ve been so caught up in my job, didn''t see what''s going on
-But now I know, I''m better sleeping on my own
-
-''Cause if you like the way you look that much
-Oh baby, you should go and love yourself
-And if you think that I''m still holdin'' on to somethin''
-You should go and love yourself
-You might also like
-But when you told me that you hated my friends
-The only problem was with you and not them
-And every time you told me my opinion was wrong
-And tried to make me forget where I came from
-
-And I didn''t wanna write a song
-''Cause I didn''t want anyone thinking I still care
-I don''t, but you still hit my phone up
-And baby, I''ll be movin'' on
-And I think you should be somethin'' I don''t wanna hold back
-Maybe you should know that
-
-My mama don''t like you and she likes everyone
-And I never like to admit that I was wrong
-And I''ve been so caught up in my job, didn''t see what''s going on
-But now I know, I''m better sleeping on my own
-
-''Cause if you like the way you look that much
-Oh baby, you should go and love yourself
-And if you think that I''m still holdin'' on to somethin''
-You should go and love yourself
-For all the times that you made me feel small
-I fell in love, now I feel nothin'' at all
-I never felt so low and I was vulnerable
-Was I a fool to let you break down my walls?
-
-''Cause if you like the way you look that much
-Oh baby, you should go and love yourself
-And if you think that I''m still holdin'' on to somethin''
-You should go and love yourself
-''Cause if you like the way you look that much
-Oh baby, you should go and love yourself
-And if you think that I''m still holdin'' on to somethin''
-You should go and love yourself', 357);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (2323822, 'Sorry', '
-
-You gotta go and get angry at all of my honesty
-You know I try, but I don''t do too well with apologies
-I hope I don''t run out of time, could someone call a referee?
-''Cause I just need one more shot at forgiveness
-I know you know that I made those mistakes maybe once or twice
-And by once or twice, I mean maybe a couple of hundred times
-So let me, oh, let me redeem, oh, redeem, oh, myself tonight
-''Cause I just need one more shot at second chances
-
-Yeah, is it too late now to say sorry?
-''Cause I''m missing more than just your body
-Oh, is it too late now to say sorry?
-Yeah, I know that I let you down
-Is it too late to say I''m sorry now?
-
-I''m sorry, yeah
-Sorry, yeah
-Sorry
-Yeah, I know that I let you down
-Is it too late to say I''m sorry now?
-You might also like
-I''ll take every single piece of the blame if you want me to
-But you know that there is no innocent one in this game for two
-I''ll go, I''ll go and then you go, you go out and spill the truth
-Can we both say the words and forget this?
-
-Yeah, is it too late now to say sorry?
-''Cause I''m missing more than just your body
-Oh, is it too late now to say sorry?
-Yeah, I know that I let you down
-Is it too late to say I''m sorry now?
-I''m not just tryna get you back on me (Oh, no, no)
-''Cause I''m missing more than just your body (Your body)
-Oh, is it too late now to say sorry?
-Yeah, I know that I let you down
-Is it too late to say I''m sorry now?
-
-I''m sorry, yeah
-Sorry, oh
-Sorry
-Yeah, I know that I let you down (I know I let you down)
-Is it too late to say I''m sorry now?
-I''m sorry, yeah
-Sorry, oh
-Sorry
-Yeah, I know that I let you down (I know I let you down)
-Is it too late to say I''m sorry now?', 357);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (5124449, 'Yummy', '
-Yeah, you got that yummy-yum
-That yummy-yum, that yummy-yummy
-Yeah, you got that yummy-yum
-That yummy-yum, that yummy-yummy
-Say the word, on my way
-Yeah, babe, yeah, babe, yeah, babe
-Any night, any day
-Say the word, on my way
-Yeah, babe, yeah, babe, yeah, babe
-In the mornin'' or the late
-Say the word, on my way
-
-Bona fide stallion
-Ain''t in no stable, no, you stay on the run
-Ain''t on the side, you''re number one
-Yeah, every time I come around, you get it done
-
-Fifty-fifty, love the way you split it
-Hundred racks, help me spend it, babe
-Light a match, get litty, babe
-That jet set, watch the sunset kinda, yeah, yeah
-Rollin'' eyes back in my head, make my toes curl, yeah, yeah
-You might also like
-Yeah, you got that yummy-yum
-That yummy-yum, that yummy-yummy
-Yeah, you got that yummy-yum
-That yummy-yum, that yummy-yummy
-Say the word, on my way
-Yeah, babe, yeah, babe, yeah, babe
-Any night, any day
-Say the word, on my way
-Yeah, babe, yeah, babe, yeah, babe
-In the mornin'' or the late
-Say the word, on my way
-
-Standin'' up, keep me on the rise
-Lost control of myself, I''m compromised
-You''re incriminating, no disguise
-And you ain''t never runnin'' low on supplies
-
-Fifty-fifty, love the way you split it
-Hundred racks, help me spend it, babe
-Light a match, get litty, babe
-That jet set, watch the sunset kinda, yeah, yeah
-Rollin'' eyes back in my head, make my toes curl, yeah, yeah
-Yeah, you got that yummy-yum
-That yummy-yum, that yummy-yummy (You stay flexin'' on me)
-Yeah, you got that yummy-yum (Yeah, yeah)
-That yummy-yum, that yummy-yummy
-Say the word, on my way
-Yeah, babe, yeah, babe, yeah, babe (Yeah, babe)
-Any night, any day
-Say the word, on my way
-Yeah, babe, yeah, babe, yeah, babe (Yeah, babe)
-In the mornin'' or the late
-Say the word, on my way
-
-Hop in the Lambo'', I''m on my way
-Drew House slippers on with a smile on my face
-I''m elated that you are my lady
-You got the yum, yum, yum, yum
-You got the yum, yum-yum, woah
-Woah-ooh
-
-Yeah, you got that yummy-yum
-That yummy-yum, that yummy-yummy
-Yeah, you got that yummy-yum
-That yummy-yum, that yummy-yummy
-Say the word, on my way
-Yeah, babe, yeah, babe, yeah, babe (Yeah, babe)
-Any night, any day
-Say the word, on my way
-Yeah, babe, yeah, babe, yeah, babe (Yeah, babe)
-In the mornin'' or the late
-Say the word, on my way', 357);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (77547, 'As Long As You Love Me', '
-As long as you love me
-(Love me, love me, love me, love me, love me, love me)
-As long as you love me
-(Love me, love me, love me, love me)
-As long as you love me
-
-We''re under pressure (We''re under pressure)
-Seven billion people in the world tryna fit in (Tryna fit in)
-Keep it together (Keep it together)
-Smile on your face, even though your heart is frowning (Frowning)
-But hey now (Hey now), you know, girl (You know, girl)
-We both know, it''s a cruel world (Cruel world)
-But I will (But I will) take my chances
-
-As long as you love me
-We could be starving, we could be homeless, we could be broke
-As long as you love me
-I''ll be your platinum, I''ll be your silver, I''ll be your gold
-As long as you love me, love me
-As long as you love me, love me
-
-I''ll be your soldier (I''ll be your soldier)
-Fighting every second of the day for your dreams, girl
-(For your dreams, girl)
-I''ll be your Hova (I''ll be your Hova)
-You could be my Destiny''s Child on the scene, girl
-So don''t stress (Don''t stress), and don''t cry (And don''t cry)
-Oh, we don''t need no wings to fly (Wings to fly)
-Just take (Take), my hand
-You might also like
-As long as you love me
-We could be starving, we could be homeless, we could be broke
-As long as you love me
-I''ll be your platinum, I''ll be your silver, I''ll be your gold
-As long as you love me, love me
-As long as you love me, love me
-
-Woah, woah, B-I-G
-I don''t know if this makes sense, but, you''re my hallelujah
-Give me a time and place, I''ll rendezvous it
-I''ll fly you to it, I''ll beat you there
-Girl, you know I got you
-Us, trust, a couple things I can''t spell without ''U''
-Now we on top of the world (World) ''cause that''s just how we do
-Used to tell me sky''s the limit, now the sky''s our point of view
-Man, we stepping out, like woah (Oh God)
-Cameras point and shoot (Shoot)
-Ask me, "What''s my best side?"
-I stand back and point at you, you, you
-The one that I argue with, feel like I need a new girl to be bothered with
-But the grass ain''t always greener on the other side
-It''s green where you water it
-So I know, we got issues baby, true, true, true
-But I''d rather work on this with you
-Than to go ahead and start with someone new
-As long as you love me
-As long as you love me (Yeah, yeah, baby)
-We could be starving, we could be homeless, we could be broke
-As long as you love me
-I''ll be your platinum (Platinum), I''ll be your silver, I''ll be your gold
-
-As long as you love me
-As long as you love me
-As long as you love me (I''ll be your silver, I''ll be your gold)
-As long as you love me, you love me, you love me, yeah
-(It''s all I want, baby)
-As long as you love me, you love me (Please don''t go)
-As long as you love me, as long as you love me
-As long as you love me, yeah
-As long as you love me (Love me, love me, love me, love me)', 357);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (2286779, 'What Do You Mean?', '
-
-What do you mean?  Oh, oh
-When you nod your head yes, but you wanna  say no
-What do you mean?  Hey, yeah
-When you don''t want me to move, but you tell me to go
-What do  you mean? Oh,  what do you mean?
-Said you''re runnin'' outta time,  what do you mean?
-Oh, oh, oh, what do you mean?
-Better make up your mind, what do you mean?
-
-You''re so indecisive of what I''m sayin''
-Tryna catch the beat, make up your heart
-Don''t know if you''re happy or complainin''
-Don''t want for us to end, where do I start?
-
-First you wanna go to the left, then you wanna turn right (Right)
-Wanna argue all day, makin'' love all night (All night)
-First you''re up, then you’re down, and then  between (''Tween)
-Oh, I really wanna know
-
-What do you mean? Oh, oh
-When you nod your head yes, but you wanna say no
-What do you mean? Hey, yeah
-When you don''t want me to move, but you tell me to go
-What do you mean? Oh, what do you mean?
-Said you''re runnin'' outta time, what do you mean?
-Oh, oh, oh, what do you mean? Better make up your mind
-What do you mean?
-You might also like
-You''re overprotective when I''m leavin''
-Tryna compromise, but I can’t win
-You wanna make a point, but you keep preachin''
-You had me from the start, won''t let this end
-
-First you wanna go to the left, then you wanna turn right
-(Turn right)
-Wanna argue all day, makin'' love all night (All night)
-First you''re up, then you’re down, and then between (''Tween)
-Oh, I really wanna know
-
-What do you mean? Oh, oh (Yeah, yeah, yeah, yeah)
-When you nod your head yes, but you wanna say no
-What do you mean? (Oh, what do you mean?) Hey, yeah
-When you don''t want me to move, but you tell me to go
-What do you mean? (I wanna know, ooh)
-Oh, what do you mean? (Ooh)
-Said you''re runnin'' outta time, what do you mean? (Oh, baby)
-Oh, oh, oh, what do you mean? Better make up your mind
-What do you mean? (Don''t be so selfish, baby, yeah, yeah) Oh, oh
-When you nod your head yes, but you wanna say no
-What do you mean? (You''re so confusin'', baby) Hey, yeah
-When you don''t want me to move (Hey), but you tell me to go
-What do you mean? (Be more straightforward)
-Oh, what do you mean? (Hey, ah, ah, ah)
-Said you''re runnin'' outta time, what do you mean? (Hey, ah, ah, ah)
-Oh, oh, oh, what do you mean?
-Better make up your mind, what do you mean?', 357);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (6326342, 'Peaches', '
-I got my peaches out in Georgia (Oh, yeah, shit)
-I get my weed from California (That''s that shit)
-I took my chick up to the North, yeah (Badass bitch)
-I get my light right from the source, yeah (Yeah, that’s it)
-
-And I say, oh (Oh)
-The way I breathe you in (In)
-It''s the texture of your skin
-I wanna wrap my arms around you, baby
-Never let you go, oh
-And I say, oh
-There''s nothing like your touch
-It’s the way you lift me up, yeah
-And I''ll be right here with you ''til the end of time
-
-I got my peaches out in Georgia (Oh, yeah, shit)
-I get my weed from California (That''s that shit)
-I took my chick up to the North, yeah (Badass bitch)
-I get my light right from the source, yeah (Yeah, that''s it)
-
-You ain''t sure yet
-But I''m for ya
-All I can want, all I can wish for
-Nights alone that we miss more
-And days we save as souvenirs
-There''s no time, I wanna make more time
-And give you my whole life
-I left my girl, I’m in Mallorca
-Hate to leave her, call it torture
-Remember when I couldn’t hold her
-Left her baggage for Rimowa
-You might also like
-I got my peaches out in Georgia (Oh, yeah, shit)
-I get my weed from California (That''s that shit)
-I took my chick up to the North, yeah (Badass bitch)
-I get my light right from the source, yeah (Yeah, that’s it)
-
-I get the feeling, so I''m sure (Sure)
-Hand in my hand because I''m yours, I can''t
-I can’t pretend, I can''t ignore, you''re right for me
-Don''t think you wanna know just where I''ve been, oh
-Done bein'' distracted
-The one I need is right in my arms (Oh)
-Your kisses taste the sweetest with mine
-And I''ll be right here with you ''til the end of time
-
-I got my peaches out in Georgia (Oh, yeah, shit)
-I get my weed from California (That''s that shit)
-I took my chick up to the North, yeah (Badass bitch)
-I get my light right from the source, yeah (Yeah, that''s it)
-I got my peaches out in Georgia (Oh, yeah, shit)
-I get my weed from California (That''s that shit)
-I took my chick up to the North, yeah (Badass bitch)
-(I get my light right from the source, yeah, yeah, that''s it)
-I got my peaches out in Georgia (Oh, yeah, shit)
-I get my weed from California (That''s that shit)
-I took my chick up to the North, yeah (Badass bitch)
-I get my light right from the source, yeah (Yeah, that''s it)
-I got my peaches out in Georgia (Oh, yeah, shit)
-I get my weed from California (That''s that shit)
-I took my chick up to the North, yeah (Badass bitch)
-I get my light right from the source, yeah (Yeah, that''s it)', 357);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (5956102, 'Holy', '
-I hear a lot about sinners
-Don''t think that I''ll be a saint
-But I might go down to the river
-''Cause the way that the sky opens up when we touch
-Yeah, it''s makin'' me say
-
-That the way you hold me, hold me, hold me, hold me, hold me
-Feels so holy, holy, holy, holy, holy
-On God
-Runnin'' to the altar like a track star
-Can''t wait another second
-''Cause the way you hold me, hold me, hold me, hold me, hold me
-Feels so holy
-
-I don''t do well with the drama
-And, no, I can''t stand it being fake
-(No, no, no, no, no, no, no, no)
-I don''t believe in nirvana
-But the way that we love in the night gave me life
-Baby, I can''t explain
-
-That the way you hold me, hold me, hold me, hold me, hold me
-Feels so holy, holy, holy, holy, holy
-On God
-Runnin'' to the altar like a track star
-Can''t wait another second
-''Cause the way you hold me, hold me, hold me, hold me, hold me
-Feels so holy
-You might also like
-They say we''re too young and
-The pimps and the players say, "Don''t go crushin''"
-Wise men say fools rush in
-But I don''t know (Ah-ah-ah-ah)
-They say we''re too young and
-The pimps and the players say, "Don''t go crushin''"
-Wise men say fools rush in
-But I don''t know (Chance the Rapper)
-
-The first step pleases the Father
-Might be the hardest to take
-But when you come out of the water
-I''m a believer, my heart is fleshy
-Life is short with a temper like Joe Pesci
-They always come and sing your praises, your name is catchy
-But they don''t see you how I see you, Parlay and Desi
-Cross, Tween, Tween, Hesi'' hit the jet speed
-When they get messy, go lefty like Lionel Messi
-Let''s take a trip and get the Vespas or rent a Jet Ski
-I know the spots that got the best weed, we goin'' next week
-I wanna honor, wanna honor you, bride''s groom, I''m my father''s child
-I know when the son takes the first steps, the Father''s proud (Yes)
-If you make it to the water, He''ll part the clouds (Uh)
-I know He made you a snack like Oscar Proud (Mwah)
-Suffer it to be so now gotta clean it up (Ooh)
-Formalize the union in communion, He can trust (Woo)
-I know I ain''t leavin'' you like I know He ain''t leavin'' us (Ah)
-I know we believe in God, and I know God believes in us
-''Cause the way you hold me, hold me, hold me, hold me, hold me
-Feels so holy, holy, holy, holy, holy
-On God
-Runnin'' to the altar like a track star
-Can''t wait another second, on God
-Runnin'' to the altar like a track star
-Can''t wait another second, on God
-Runnin'' to the altar like a track star
-Can''t wait another second
-''Cause the way you hold me, hold me, hold me, hold me
-Feels so ho-ho-ho-holy', 357);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (2854045, 'Waste a Moment', '
-All the way from Waco to WeHo with a rabbit on her chain
-Drove a little slick car to tend bar with the static on her brain
-She''s a little burner, burner, gonna throw you to the flame
-Little ticking time bomb, time bomb, gonna blow us all away
-
-Oh, take the time to waste a moment
-Oh, never ask to be forgiven
-
-Tex, he was her boyfriend with no kin always running from the law
-Every other weekend, the week ends with his back in her claw
-He''s a livewire, wired, shooting sparks in the night
-He’s a gun for a hire, hired with a bead in his sights
-
-Oh, take the time to waste a moment
-Oh, facing where the lines are broken
-Oh, name your price to all this living
-Oh, never ask to be forgiven
-
-
-Oh, take the time to waste a moment
-Oh, face it where the lines are broken
-Oh, name a price to all that''s living
-Oh, never ask to be forgivenSee Kings of Leon LiveGet tickets as low as $26You might also like', 1174);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (77735, 'Beauty and a Beat', '
-Yeah
-Young Money
-Nicki Minaj
-Justin, rrr
-
-Show you off
-Tonight, I wanna show you off (Ayy-ayy-ayy)
-What you got
-A billion could''ve never bought (Ayy-ayy-ayy)
-
-We gonna party like it''s 3012 tonight
-I wanna show you all the finer things in life
-So just forget about the world, we young tonight
-I''m coming for ya, I''m coming for ya
-
-''Cause all I need
-Is a beauty and a beat
-Who can make my life complete
-It''s all ''bout you
-When the music makes you move
-Baby, do it like you do
-Cause all-
-You might also like
-
-Body rock
-Girl, I can feel your body rock (Ayy-ayy-ayy)
-Take a bow
-You''re on the hottest ticket now, ooh (Ayy-ayy-ayy)
-
-We gonna party like it''s 3012 tonight
-I want to show you all the finer things in life
-So just forget about the world, we young tonight
-I''m coming for ya, I''m coming for ya
-
-''Cause all I need
-Is a beauty and a beat
-Who can make my life complete
-It''s all ''bout you
-When the music makes you move
-Baby, do it like you do (Uh, uh)
-Cause all-
-
-I-I-I-I-In time, ink lines
-B-B-Bitches couldn''t get on my incline
-World tours, i-i-it''s mine
-Ten little letters on a big sign
-Justin Bieber
-You know I''ma hit ''em with the ether
-Buns out, wiener
-But I gotta keep an eye out for Selener
-B-B-Beauty, beauty and the beast
-Beauty from the East
-Beautiful confessions of the priest
-Beast, beauty from the streets
-Beat will get deceased
-Every time Beauty on the beat eats
-Body rock (Yeah, yeah)
-Oh (Yeah, yeah)
-I wanna feel your body rock (Let''s go, let''s go)
-(Frrrrr, yeah)
-''Cause all I need (All I need is love)
-Is a beauty and a beat (A beat)
-Who can make my life complete (Complete, oh-oh-oh, oh woah)
-It''s all ''bout you (All I need is you)
-When the music makes you move
-Baby, do it like you do (Do)
-Cause all-
-', 357);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (3876994, 'SICKO MODE', '
-
-Astro, yeah
-
-Sun is down, freezin'' cold
-That''s how we already know, winter''s here
-My dawg would probably do it for a Louis belt
-That''s just all he know, he don''t know nothin'' else
-I tried to show ''em, yeah
-I tried to show ''em, yeah, yeah
-Yeah, yeah, yeah
-Goin'' on you with the pick and roll
-Young La Flame, he in sicko mode
-
-(Woo) Made this here with all the ice on in the booth
-At the gate outside, when they pull up, they get me loose
-Yeah, Jump Out boys, that''s Nike boys, hoppin'' out coupes
-This shit way too big, when we pull up, give me the loot (Gimme the loot!)
-Was off the Remy, had a Papoose
-Had to hit my old town to duck the news
-Two-four hour lockdown, we made no moves
-Now it''s 4 AM and I''m back up poppin'' with the crew
-I just landed in, Chase B mixes pop like Jamba Juice
-Different colored chains, think my jeweler really sellin'' fruits
-And they chokin'', man, know the crackers wish it was a noose
-See Travis Scott LiveGet tickets as low as $20You might also like
-Some-some-some-someone said
-To win the retreat, we all in too deep
-Play-play-playin'' for keeps, don''t play us for weak (Someone said)
-To win the retreat, we all in too deep
-Play-play-playin'' for keeps, don''t play us for weak
-
-Yeah, this shit way too formal, y''all know I don''t follow suit
-Stacey Dash, most of these girls ain''t got a clue
-All of these hoes I made off records I produced
-I might take all my exes and put ''em all in a group
-Hit my eses, I need the bootch
-''Bout to turn this function to Bonnaroo
-Told her, "Hop in, you comin'' too"
-In the 305, bitches treat me like I''m Uncle Luke
-(Don''t stop, pop that pussy!)
-Had to slop the top off, it''s just a roof, uh
-She said, "Where we goin''?" I said, "The moon"
-We ain''t even make it to the room
-She thought it was the ocean, it''s just the pool
-Now I got her open, it''s just the Goose
-Who put this shit together? I''m the glue
-
-Someone said
-Shorty FaceTimed me out the blue
-Someone said
-Play-playin'' for keeps
-Someone said, mother****, someone said
-Don''t play us for weak
-
-Yeah!
-Astro, yeah, yeah
-(Tay Keith, fuck these niggas up!)
-Ayy, ayy
-
-She''s in love with who I am
-Back in high school, I used to bus it to the dance (Yeah)
-Now I hit the FBO with duffels in my hands
-I did half a Xan, thirteen hours ''til I land
-Had me out like a light, ayy, yeah
-Like a light, ayy, yeah
-
-Like a light, ayy, slept through the flight, ayy
-Knocked for the night, ayy
-767, man, this shit got double bedroom, man
-I still got scores to settle, man
-I crept down the block (Down the block)
-Made a right (Yeah, right)
-Cut the lights (Yeah, what?), paid the price (Yeah)
-Niggas think it''s sweet (Nah, never), it''s on sight (Yeah, what?)
-Nothin'' nice (Yeah), baguettes in my ice (Aw, man)
-Jesus Christ (Yeah), checks over stripes (Yeah)
-That''s what I like (Yeah), that''s what we like (Yeah)
-Lost my respect, you not a threat
-When I shoot my shot, that shit wetty like I''m Sheck (Bitch)
-See the shots that I took (Ayy), wet like I''m Book (Ayy)
-Wet like I''m Lizzie
-I be spinnin'' Valley, circle blocks ''til I''m dizzy (Yeah, what?)
-Like where is he? (Yeah, what?)
-No one seen him (Yeah, yeah)
-I''m tryna clean ''em (Yeah)
-She''s in love with who I am
-Back in high school, I used to bus it to the dance
-Now I hit the FBO with duffels in my hands (Woo)
-I did half a Xan, thirteen hours ''til I land
-Had me out like a light (Like a light)
-Like a light (Like a light)
-Like a light (Like a light)
-Like a light
-
-Yeah, passed the dawgs a celly
-Sendin'' texts, ain''t sendin'' kites, yeah
-He said, "Keep that on lock"
-I say, "You know this shit, it''s stife," yeah
-It''s absolute, yeah (Yeah), I''m back, reboot (It''s lit)
-LaFerrari to Jamba Juice, yeah (Skrrt, skrrt)
-We back on the road, they jumpin'' off, no parachute, yeah
-Shorty in the back
-She said she workin'' on her glutes, yeah (Oh my God)
-Ain''t by the book, yeah, this how it look, yeah
-''Bout a check, yeah (Check), just check the foots, yeah
-Pass this to my daughter, I''ma show her what it took (Yeah)
-Baby mama cover Forbes, got these other bitches shook
-Yeah', 20185);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (2849767, '​goosebumps', '
-Yeah
-7:30 in the night, yeah
-Ooh, ooh
-
-I get those goosebumps every time, yeah, you come around, yeah
-You ease my mind, you make everything feel fine
-Worried ''bout those comments
-I''m way too numb, yeah, it''s way too dumb, yeah
-I get those goosebumps every time, I need the Heimlich
-Throw that to the side, yeah
-I get those goosebumps every time, yeah
-When you''re not around (Straight up)
-When you throw that to the side, yeah (It''s lit)
-I get those goosebumps every time, yeah
-
-7-1-3
-Through the 2-8-1, yeah, I''m ridin'', why they on me?
-Why they on me? I''m flyin'', sippin'' low-key
-I''m sippin'' low-key in Onyx, rider, rider
-When I''m pullin'' up right beside ya
-Pop star, lil'' Mariah
-When I text a cute game, wildness
-Throw a stack on the Bible
-Never Snapchat or took molly
-She fall through plenty, her and all her ginnies, yeah
-We at the top floor, right there off Doheny, yeah
-Oh no, I can''t fuck with y''all
-Yeah, when I''m with my squad, I cannot do no wrong
-Yeah, saucin'' in the city, don''t get misinformed
-Yeah, they gon'' pull up on you (Brr, brr, brr)
-Yeah, we gon'' do some things, some things you can''t relate
-Yeah, ''cause we from a place, a place you cannot stay
-Oh, you can''t go, oh, I don''t know
-Oh, back the fuck up off me (Brr, brr, brr)
-See Travis Scott LiveGet tickets as low as $20You might also like
-I get those goosebumps every time, yeah, you come around, yeah
-You ease my mind, you make everything feel fine
-Worried ''bout those comments
-I''m way too numb, yeah, it''s way too dumb, yeah
-I get those goosebumps every time, I need the Heimlich
-Throw that to the side, yeah
-I get those goosebumps every time, yeah
-When you''re not around
-When you throw that to the side, yeah
-I get those goosebumps every time
-
-Uh, I want to press my like, yeah, I wanna press my
-I want a green light, I wanna be like
-I wanna press my line, yeah
-I wanna take that ride, yeah
-I''m gonna press my line
-I want a green light, I wanna be like, I wanna press my—
-Mama dearest, spare your feelings
-I''m relivin'' moments, peelin'' more residual
-I can buy the buildin'', burn the buildin''
-Take your bitch, rebuild the buildin'' just to fuck some more
-I can justify my love for ya
-And touch the sky for God to stop debating war
-Put the pussy on a pedestal (Ayy)
-Put the pussy on a high horse
-That pussy to die for
-That pussy to die for
-Peter Piper picked a pepper
-So I could pick your brain and put your heart together
-We depart the shady parts and party hard
-The diamonds yours, the coupe forever
-My best shot just might shoot forever like (Brr)
-I get those goosebumps every time, yeah, you come around, yeah
-You ease my mind, you make everything feel fine
-Worried ''bout those comments
-I''m way too numb, yeah, it''s way too dumb, yeah
-I get those goosebumps every time, I need the Heimlich
-Throw that to the side, yeah
-I get those goosebumps every time, yeah
-When you''re not around
-When you throw that to the side, yeah
-I get those goosebumps every time', 20185);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (3089187, 'BUTTERFLY EFFECT', '
-(All the commas)
-(Murda on the beat, so it''s not nice)
-Ooh, hmm
-
-For this life, I cannot change (Change)
-Hidden Hills, deep off in the main (Main)
-M&M''s, sweet like candy cane (Cane)
-Drop the top, pop it, let it bang (Pop it, pop it)
-For this life, I cannot change
-In the hills, deep off in the main
-M&M''s, sweet like candy cane
-Drop the top, pop it, let it bang (Pop it, pop it)
-
-Drop the top, play hide and seek (Yeah)
-Jump inside, jump straight to the league (League)
-Take a sip, feel just how I be (It''s lit)
-On Freeway, but no, ain''t nothin'' free (Straight up)
-Bend laws, bend lanes (Skrrt, skrrt)
-Been bustin'' bills, but still, ain''t nothin'' change (Skrrt, skrrt, skrrt, skrrt)
-You in the mob soon as you rock the chain (Skrrt, skrrt, mob)
-She caught the waves, just thumbin'' through my braids (Alright)
-Heatin'' up, baby, I''m just heatin'' up (It''s lit)
-Need your love, not a need, it is a must (Yeah)
-Feelin'' stuck, you know how to keep me up (Yeah, yeah)
-Icy love, icy like a hockey puck (Alright)
-See Travis Scott LiveGet tickets as low as $20You might also like
-For this life, I cannot change (Change)
-Hidden Hills, deep off in the main (Main)
-M&M''s, sweet like candy cane (Cane)
-Drop the top, pop it, let it bang (Pop it, pop it)
-For this life, I cannot change
-Hidden Hills, deep off in the main (Yeah, yeah)
-M&M''s, sweet like candy cane
-Drop the top, pop it, let it bang
-
-All the ones, all the chains piled on the mantle (Yeah)
-All the dawgs, all the dawgs low creep right behind me in the Phantom (It''s lit)
-Yeah, never go, never go dip on the set, stayed Santana
-Yeah, run it back, turn the lights on when I hit up Green Lantern (It''s lit, alright)
-Yeah, fly the broads, fly the dawgs down to Atlanta
-Yeah, in the cut in Medusa, lay low, yeah, I might be
-Yeah, roll up, help me calm down when I''m movin'' high speed
-Yeah, if I send one, need to text back ''cause you know what I need (Straight up)
-Oh, please, oh, me, oh, my
-We been movin'', we been movin'' for some time (Alright)
-Flexin'', flexin'', try to exercise
-Exercise (Exercise), exercise (Exercise), exercise (Exercise), exercise (Exercise)
-(Yeah, yeah)
-
-(For this life)
-For this life, I cannot change (Change)
-Hidden Hills, deep off in the main (Main)
-M&M''s, sweet like candy cane (Cane)
-Drop the top, pop it, let it bang (Pop it, pop it)
-For this life, I cannot change
-Hidden Hills, deep off in the main
-M&M''s, sweet like candy cane
-Drop the top, pop it, let it bang (Bang, yeah)', 20185);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (4497172, 'HIGHEST IN THE ROOM', '
-I got room in my fumes (Yeah)
-She fill my mind up with ideas
-I''m the highest in the room (It’s lit)
-Hope I make it outta here (Let''s go)
-
-She saw my eyes, she know I''m gone (Ah)
-I see some things that you might fear
-I’m doin'' a show, I''ll be back soon (Soon)
-That ain''t what she wanna hear (Nah)
-Now I got her in my room (Ah)
-Legs wrapped around my beard
-Got the fastest car, it zoom (Skrrt)
-Hope we make it outta here (Ah)
-When I''m with you, I feel alive
-You say you love me, don''t you lie (Yeah)
-Won''t cross my heart, don''t wanna die
-Keep the pistol on my side (Yeah)
-
-Case it’s fumes (Smoke)
-She fill my mind up with ideas (Straight up)
-I’m the highest in the room (It''s lit)
-Hope I make it outta here (Let’s go, yeah)
-See Travis Scott LiveGet tickets as low as $20You might also like
-We ain''t stressin'' ''bout the loot (Yeah)
-My block made of quesería
-This not the molly, this the boot
-Ain’t no comin'' back from here
-Live the life of La Familia
-It''s so much gang that I can''t see ya (Yeah)
-Turn it up ''til they can''t hear (We can''t)
-Runnin'', runnin'' ''round for the thrill
-Yeah, dawg, dawg, ''round my real (Gang)
-Raw, raw, I been pourin'' to the real (Drank)
-Nah, nah, nah, they not back of the VIP (In the VIP)
-Gorgeous, baby, keep me hard as steel
-Ah, this my life, I did not choose
-Uh, been on this since we was kids
-We gon'' stay on top and break the rules
-Uh, I fill my mind up with ideas
-
-Case it''s fumes
-She fill my mind up with ideas (Straight up)
-I''m the highest in the room (I''m the highest, it''s lit)
-Hope I make it outta here
-', 20185);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (2145913, 'Antidote', '
-Don''t you open up that window
-Don''t you let out that antidote (Yeah)
-Poppin'' pills is all we know (Ooh)
-In the hills is all we know (Hollywood)
-Don''t go through the front door (Through the back)
-It''s lowkey at the night show (Ooh)
-So, don''t you open up that window (Ooh)
-Don''t you let out that antidote, yeah
-Party on a Sunday (That was fun)
-Do it all again on Monday (One more time)
-Spent a check on a weekend (Oh my God)
-I might do it all again (That''s boss shit)
-I just hit a three peat (Ooh)
-Fucked three hoes I met this week (Robert Horry)
-I don''t do no old hoes (Oh, no, no)
-My nigga, that''s a no-no (Straight up)
-She just want the coco (Cocaína)
-I just want dinero (Paper hunt, wait)
-Who that at the front door? (Who that is?)
-If it''s the feds, oh, no, no, no (Don''t let ''em in, shh)
-
-Don''t you open up that window (Yeah, yeah, yeah, yeah)
-Don''t you let out that antidote (Yeah, yeah, yeah, ooh, yeah)
-Poppin'' pills is all we know (Yeah)
-In the hills is all we know (Hollywood)
-Don''t go through the front door (In the back)
-It''s lowkey at the night show (Ooh)
-See Travis Scott LiveGet tickets as low as $20You might also like
-Yeah, ooh, ooh, at the night show (Ooh-ooh-ooh, ah)
-At the night show (Higher)
-At the night show (Ooh-ooh-ooh, ah)
-Ooh, at the night show (Get lit, my nigga)
-Ooh, at the night show (Yeah)
-Anything can happen at the night show (Ooh-ooh-ooh, ah)
-Everything can happen at the night show
-Ooh, at the night show
-Anything can happen at the night show
-Ooh, at the night show
-Ooh, your bitch not at home, she at the night show
-Ooh (Straight up), fuckin'' right, ho
-Ooh, had to catch a flight for the night show
-Ooh (Let''s go), let''s get piped though
-Bottles got us right though, we ain''t sippin'' light, no (Rrr, La Flame)
-I ain''t got no type though
-Only got one night though
-We can do it twice though (Rrr, it''s lit)
-
-At the night show, ooh
-At the night show (Ooh, ooh)
-At the night show
-Ooh, at the night show
-Yeah, at the night show
-Everything can happen at the night show
-Ooh, at the night show
-Anything can happen at the night show, ooh
-Stackin'' up day to day, young nigga
-You know you gotta go get it, go get it, my nigga
-They hatin'', they stankin'', they waitin''
-Don''t be mistaken, we dyin'', they stayin''
-Lord, I''m on fire, they think that I''m Satan
-Callin'' me crazy on different occasions
-Kickin'' the cameraman off of my stages
-''Cause I don''t like how he snappin'' my angles
-I''m overboard and I''m over-impatient
-Over my niggas and these kids my ages
-Dealin'' with Mo'' shit that''s more complicated
-Like these two bitches that might be related
-H-Town, you got one, and you Bun B like a number-one
-It''s late night, got a late show
-If you wanna roll, I got a place where, ah
-
-Poppin'' pills is all we know (Ooh)
-In the hills is all we know (Hollywood)
-Don''t go through the front door (Through the back)
-It''s lowkey at the night show (Ooh)
-
-So don''t you open up that window (Ooh)
-(Don''t you let out that antidote)', 20185);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (3648112, 'STARGAZING', '
-
-(Ah)
-
-Rollin'', rollin'', rollin'', got me stargazin'' (Yeah)
-Sippin'' on purp, feelin'' like the Barre Baby (It''s lit)
-Whatever I downed, it got me goin'' crazy (Yeah)
-Psychedelics got me goin'' crazy (Alright)
-
-I was hot as hell out in the heat (Yeah, yeah)
-Then a storm came in and saved my life
-Head up to the sky, down on my knees (Straight up)
-Out of nowhere, you came here to save the night
-In the nighttime (Woo, yeah)
-
-Rollin'', rollin'', rollin'', got me stargazin'' (Roll)
-Psychedelics got me goin'' crazy (Oh, no)
-Niggas femalin'', they excellin'' (Yeah)
-Are they intellin''? (What you tellin''?)
-We propellin'', up top with Ellen, uh (With the choppers)
-Kill the jealous with propane repellent
-Got me goin'' crazy (It''s lit)
-On tour, we''ll tell ''em, we brought the section (Gang)
-They keep on callin'' up, it''s getting hectic (Brrt)
-Like we projected
-So we cut the plug, he''s interjected (Got me goin'' crazy)
-See Travis Scott LiveGet tickets as low as $20You might also like
-Rollin'', rollin'', rollin'', got me stargazin'' (Yeah)
-Sippin'' on purp, feelin'' like the Barre Baby (It''s lit)
-Whatever I downed, it got me goin'' crazy (Yah)
-Psychedelics got me goin'' crazy (Alright)
-
-I was hot as hell out in the heat (Yeah, yeah)
-Then the storm came in and saved my life
-Head up to the sky, down on my knees (Straight up)
-Out of nowhere, you came here to save the night
-In the nighttime (Woo, yeah)
-Got me goin'' crazy
-
-Okay, I been up for some days, I ain''t got time to lay
-Just to drown out all these thoughts, I tried all kind of things
-If I take you to my past, you will be traumatized
-Got a thousand kids outside that''s tryna come alive
-''99, took AstroWorld, it had to relocate
-Told the dawgs I''d bring it back, it was a seal of faith
-Before no car notes, baby girl, she played the tourist guide
-Got the keys into my city, now she know the rides
-Got new money, got new problems, got new enemies
-When you make it to the top, that''s the amenities
-Packin'' out Toyota like I''m in the league
-And it ain''t a mosh pit if ain''t no injuries
-I got ''em stage divin'' out the nosebleeds (Alright, alright, alright)
-And she hit that booger sugar ''til her nose bleed (Alright, alright, alright)
-Bounce that shit forever, she on both knees
-She was talkin'' ''bout forever, got a whole week (Alright, alright, alright)
-Plus, she know my baby mama is a trophy
-She be throwin'' up them B''s, feel like we both bleed
-She keep my dick jumpin'' up, feel like I''m Moby
-I''m way too gold for this beef, feel like I''m Kobe, yeah
-This right here is astronomical
-I see you picked up all my ways, I feel responsible
-They tryna say that all my problems is improbable
-They keep itchin'' at my spirit, I''m diabolical, you feel me?', 20185);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (2849762, '​beibs in the trap', '
-That coca
-
-I just poured an eight in a liter
-Throw some Jolly Rancher in, make it sweeter
-Versace my clothes, I''m with a white ho
-And she snortin'' three lines like Adidas
-Got a black girl rollin'' off molly
-Got a white bitch snortin'' up snow
-Say she want real niggas in the party
-Parents gon'' leave the keys to the condo
-
-Bitch, close the door, there''s shit on your nose (That coca)
-She said she want more, she said she want more
-So I''ma get more, yeah, I''ma get more
-Bitch, close the door, there''s shit on your nose
-She said she want more, she said she want more
-So I''ma get more, yeah, I''ma get more
-I just poured an eight in a liter
-With a white bitch sniffin'' on Bieber
-Are you sure you wanna party with the demons?
-Bitch, lookin'' for her phone, I ain''t seen it
-Told Frost, "Bring the water," no Fiji
-Free Stix, I''m poured up and I''m leanin''
-I got a couple pussy niggas in they feelings
-''Cause the main bitch wanna come see me
-She said she want more, your girl is a ho
-You need to let go, she fucked all my bros
-She snortin'' the snow (That coca), now she touchin'' her toes
-She got Anna Nicole all in her nose
-If they kick down the door, we gon'' get locked for sure
-She said she want more, fuck it, I''ma get more (I''ma get more)
-See Travis Scott LiveGet tickets as low as $20You might also like
-Nightmare, high-life, sleepy, night-night (Yeah)
-Flashes, spotlight, pull up, night sky (Yeah, yeah)
-Help it, peace, peace, peaced it (Yeah)
-Bite me, ride me (Yeah), strike me, indict me (Yeah, yeah)
-Snipe it, swipe it, rapper, trapper (Ooh, yeah)
-I''m lit, light–(Yeah)—nin'' (Lit)
-White bitch (Bitch), she thick (Thick)
-Pulled out of the hood, Toyota
-Drove back to the hood, Lambo'' (Ooh)
-Crushed Xans, crushed Xans in my soda
-Ridin'' ''round the city with my eyes closed (Yeah, yeah)
-Crazy Girls got it poppin'', AOD got it poppin'' (Yeah, yeah)
-Tryna text my accountant, ain''t no service in the mountains (Straight up)
-Won''t you come to the bottom? Know you heard a lot about ''em (Yeah)
-Heard they take that, then they change like a mood ring (Yeah, yeah)
-I watch ''em take that, then they change like a mood ring
-Pulled out of the hood, Toyota
-Drove back to the hood, Lambo'' (Ooh)
-Crushed Xans, crushed Xans in my soda
-Ridin'' ''round the city with my eyes closed (Ooh)
-
-I just poured an eight in a liter
-Throw some Jolly Rancher in, make it sweeter
-Versace my clothes, I''m with a white ho
-And she snortin'' three lines like Adidas
-Got a black girl rollin'' off molly (Molly)
-Got a white bitch snortin'' up snow
-Say she want real niggas in the party
-Parents gon'' leave the keys to the condo
-Bitch, close the door, there''s shit on your nose (That coca)
-She said she want more, she said she want more
-So I''ma get more (Ooh), yeah, I''ma get more (Ooh)
-Bitch, close the door (Ooh), there''s shit on your nose (Ooh)
-She said she want more (Ooh), she said she want more (Ooh)
-So I''ma get more (Ooh), yeah, I''ma get more
-
-Mmm-mmm, mmm-mmm, mmm-mmm, mmm-mmm
-Mmm-mmm-mmm, mmm-mmm-mmm
-Mmm-mmm-mmm, mmm-mmm-mmm', 20185);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (2290813, '90210', '
-
-(Dean, what''s poppin''? Hahahahaha. Yo, Travis)
-Mhm, ooh-ooh-ooh-ooh-ooh-ooh-ooh-ooh-ooh
-Mama''s mailin'' out that blow, cravin'' 9021—
-Ooh-ooh-ooh-ooh-ooh
-
-She a porn star girl, ah, from the valley
-(Honestly, God bless)
-Who left her hometown world all for that alley
-Ooh, created Lake Tahoe all from her panties
-(I hope it was wet like my jumper, though)
-Ooh, used to take the long way home
-Long way home, all for that candy (Hahahahaha, mhm)
-
-Baby''s hooked on feeling low-ow
-Do, do, do
-Do, do
-
-Jacques turned La Flame, now he rollin'' on an Addy
-Fifty on a chain, ''nother fifty on a Caddy
-Ooh, he might pop him a pill, pop him a seal
-Pop anyone, pop anything
-Pop anything to find that alley
-Mhm, yeah, to find that alley (Mhm)
-See Travis Scott LiveGet tickets as low as $20You might also like
-Baby''s hooked on feeling low-ow
-Do, do, do
-Do, do
-
-In the 90210, 90210, lookin'' for that alley
-In the 90210, 90210, lookin'' for that alley, ooh
-It''s the superstar girl, superstar girl, roamin'' in that alley
-(Baby''s hooked on feeling low-ow)
-Ooh, in the 90210, 90210, somewhere in that alley
-(Do, do, do)
-(Do, do)
-Ooh, ahh
-(I gotta tell ya)
-
-(Ooh-ooh-ooh-ooh)
-(Ooh-ooh-ooh-ooh)
-(Ooh-ooh-ooh-ooh)
-Ooh-ooh
-(All, all, all thang, thang)
-(All, all, all thang, thang)
-Ooh-ooh-ooh-ooh-ooh
-(All, all, all thang, thang)
-(All, all, all thang, thang)
-Yeah
-My granny called, she said, "Travvy, you work too hard
-I''m worried you forget about me"
-(All, all, all)
-I''m fallin'' in and out of clouds
-Don''t worry, I''ma get it, Granny, uh
-What happened? Now my daddy happy
-Mama called me up, that money comin'' and she love me
-(All, all, all thang, thang)
-I done made it now, I done found life''s meanin'' now
-(All, all, all thang, thang)
-All them days her heart''d break, her heart not in pieces now
-Friends turnin'' into fraud niggas
-Practicin'' half the passion, you niggas packaged different
-(All, all, all thang, thang)
-All you niggas, you niggas want the swag, you can''t have it
-(All, all, all thang, thang)
-I''ma sell it, your niggas salary, we ''bout to cap, bitch
-Youngest nigga out of Houston at the Grammys
-Smilin'' at ''em laughin'' at me
-I passed the rock to Ye, he pump faked, then passed it back, bitch
-(All, all, all thang, thang)
-All of this off of rappin'', should''ve wrote this in Latin, yeah-yeah
-(All, all, all thang, thang)
-Mmm, I know, I know, I know, I know, I know
-I know, I know, I know, I know, I know
-Cuzzo said we hit the store, yeah, we ''bout to drop a four
-He passed the cigarette, I choke, woo
-Told my auntie, "Put them ''Ports down, them ''Ports down"
-Now you know you love your own now
-Hit the stage, they got their hands up, don''t put your nose down
-I ain''t knockin'', nigga, I knocked the door down, for sure now
-Whole crew, I swear they countin'' on me
-Gold chains, gold rings, I got an island on me
-Houses on me, he got them ounces on him
-Holy Father, come save these niggas, I''m stylin'' on ''em
-Good Lord, I see my good fortune in all these horses
-I''m drivin'' too fast to stop, so all these signs, I ignore them
-Just this guy from north of the border, my chips is in order
-My mom''s biggest supporter, so now a nigga support a nigga
-(Ooh-ooh-ooh-ooh-ooh-ooh-ooh)
-(Ooh-ooh-ooh-ooh-ooh-ooh-ooh)', 20185);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (3876940, 'YOSEMITE', '
-Ice on my neck, flawless baguettes
-Hop off a jet, barely get rest
-Cash through the month, I get a check (Check)
-Yves Saint Laurent on my pants and my chest (Drip)
-Chanel, her dress, clean up her mess
-I eat her flesh, you know the rest
-Count up a hun'', cop a Rolex (Checks)
-Shine like the sun, you truly blessed (Shine)
-Two-tone Patek (Mmm-mmm-mmm)
-In The Clearport like I Uber these jets (Jets)
-VVS''s on me, got my Gucci shirt wet
-Put an M in my bag (Mmm), gon'' get used to these racks (Used)
-I went to school where they teach you finesse (Mmm)
-Five hundred shoes for the drip, I invest (''Vest, mmm)
-I''m the bossman, I keep cash in the desk (Mmm-mmm-mmm)
-Know the coupe fast (Yeah), when it end with an "S"
-
-Now that I''m home, back off the road
-We shut it down where it ain''t so
-With checks in the streets, Jay number 4s
-Saint Laurent feet, put it on toes
-Take it with me, double your dose
-Covered with angels that''s watchin'' my soul
-Jet got a bed, it''s bigger windows
-Said, "I''ll be there in ten," but I got there in four
-See Travis Scott LiveGet tickets as low as $20You might also like
-I feel like I''m chosen, I''m covered in gold (Gold, gold, gold)
-Mmm-hmm-mmm-hmm-mmm-hmm-mmm
-Mmm-hmm-mmm-hmm-mmm-hmm-mmm
-I left her wide open, no self control (''Trol, ''trol, ''trol)
-Mmm-hmm-mmm-hmm-mmm-hmm-mmm
-Mmm-hmm-mmm-hmm-mmm-hmm-mmm
-Took nothin'' but five minutes, she hopped in and drove (Drove, drove, drove)
-Mmm-hmm-mmm-hmm-mmm-hmm-mmm
-
-Ice on my neck, flawless baguettes (Flawless baguettes)
-Hop off a jet, barely get rest
-Cash through the month, I get a check (Check)
-Yves Saint Laurent on my pants and my chest (Drip)
-Chanel, her dress, clean up her mess
-I eat her flesh, you know the rest
-Count up a hun'', cop a Rolex (Checks)
-Shine like the sun, you truly blessed (Shine, yeah)
-Two-tone Pateks (Mmm-mmm-mmm)
-In The Clearport like I Uber the jets (Jets)
-VVS''s on me, got my Louis shirt wet
-It''s an M in my bag (Mmm), gon'' get used to these racks (Used)
-I went to school where they teach you finesse (Mmm)
-Five hundred shoes for the drip, I invest (''Vest, mmm)
-I''m the bossman, I keep cash in the desk (Mmm-mmm-mmm)
-Know the coupe fast (Yeah), when it end with an "S"
-La Flame on an island, me and Cash, Gunna hopped on a Learjet
-Got Pradas every color and I got CCs you ain''t seen yet
-Said I''d kick the cup and now I''m askin'', "Where the codeine at?"
-Thirty pointers and up, Eliantte, drippin'', my whole team wet', 20185);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (3876999, 'CAN’T SAY', '
-No, you can''t say if I''m mad or not
-Smokin'' hella weed, I''m on that alcohol
-And shawty lick me clean the way she suck me off
-I keep two hoes in my bed, I got ''em turnin'' out
-What would you do if you heard I got it goin'' on?
-I had to burn, I left skrrt marks, I had to dip (I had to)
-Gotta watch for 12 ''round my town, you might get killed (Better watch for 12)
-I''m out my mind, yeah, I''m high above the rim (I''m out my mind)
-You cop it live, boy, I got it all on film
-
-You gotta watch out where you rock ''cause shit get real
-Drink too real, I can''t be fake, don''t know the feel
-Gotta take a long drive up the hill
-Gang too wavy, move like Navy Seals
-I''m too wavy, think I need a Lyft
-Chicago baby, she just wanna drill
-The vibe''s too wavy, it''s too hard to kill
-Gotta watch out where you go ''cause shit get real
-
-Uh-huh, yeah
-Swang, when I swang, when I swang to the left
-Oh, yeah
-Po—pop my trunk, dip—dip—dip—dip
-Oh my
-See Travis Scott LiveGet tickets as low as $20You might also like
-You can''t say if I''m mad or nah
-Smokin'' hella weed, I''m on that alcohol
-And shawty lick me clean the way she suck me off
-I keep two hoes in my bed, I got ''em turnin'' out
-What would you do if you heard I got it burnin'' out?
-I let it burn, skrrt that mark, I had to dip (I had to)
-Better watch for 12 ''round my town, you might get killed (Better watch for 12)
-I''m out my mind, yeah, I''m high above the rim (I''m out my mind)
-You cop it live, boy, I got it all on film
-
-You must be cautious, told the lil'' hoes, "I''m all in"
-Play this ballers offense, I left ol'' girl, she callin''
-You know I hit in the mornin'', oh, yeah, she yawnin''
-I met you in the club, bitch, you know this shit mean nothin''
-Oh, didn''t I hit your cousin? Mmm, no, no discussion
-Sippin'' on lean, no Robitussin, oh, yeah, I know you love me
-I beat it, ain''t no cuddlin'', you down bad, you sufferin''
-I don''t give a fuck how hard it get, that lil'' bitch know I started this
-Uh-huh, oh, yeah, get to the cash, no layup
-Spend a big bag, Rodeo, some may ride for the fresh cut
-Hoes come through just to touch us, I''ma tell the truth like Usher
-You already know how I bust her, slang my chop'' from Russia
-
-Swang, when I swang, when I swang to the left
-Pop, pop my trunk, dip, dip, dip, dip
-Swang—swang, when I swang, when I swang to the left
-Pop, pop my trunk, dip
-No, you can''t say if I''m mad or not
-Smokin'' hella weed, I''m on that alcohol
-Shawty lick me clean the way she suck me off
-I keep two hoes in my bed, I got ''em turnin'' out
-What would you do if you heard I got it goin'' on?
-I had to burn, I left skrrt marks, I had to dip
-Gotta watch for 12 ''round my town, you might get killed
-I''m out my mind, yeah, I''m high above the rim
-You cop it live, boy, I got it all on film', 20185);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (7713201, 'I Love You', '
-I love you, I love you, I told you I do
-It''s all I''ve ever felt, I''ve never felt so well
-And if you don''t know it, I wrote you this tune
-To be here loving you when I''m in the tomb
-I''ve eddied the heart now, from Dublin to Paris
-And if there was sunshine, it was never on me
-So close, the rain, so pronounced is the pain
-Yeah
-
-Well, I love you, imagine a world without you
-It''s only ever you, I only think of you
-And if it''s a blessing, I want it for you
-If I must have a future, I want it with you
-Systеm in our hearts, you only had it before
-You only opеn the window, never open up the door
-And I love you, I love you, told you I do
-
-Selling genocide and half-cut pride, I understand
-I had to be there from the start, I had to be the fucking man
-It was a clamber of the life, I sucked the ring off every hand
-Had ''em plying me with drink, even met with their demands
-When the cherries lined up, I kept the spoilings for myself
-''Til I had thirty ways of dying looking at me from the shelf
-Cloud-parting smile I had, a real good child I was
-But this island''s run by sharks with children''s bones stuck in their jaws
-Now the morning''s filled with cokeys tryna talk you through it all
-Is their mammy Fine Gael and is their daddy Fianna Fáil?
-And they say they love the land, but they don''t feel it go to waste
-Hold a mirror to the youth and they will only see their face
-Makes flowers read like broadsheets, every young man wants to die
-Say it to the man who profits, and the bastard walks by
-And the bastard walks by, and the bastard walks by
-Say it to him fifty times and still the bastard won''t cry
-Would I lie?
-You might also like
-I love you, I love you, I told you I do
-It''s all I''ve ever felt, I''ve never felt so well
-And if you don''t know it, I wrote you this tune
-To be here loving you when I''m in the tomb
-System in our hearts, you only had it before
-Echo, echo, echo, the lights, they go
-The lights, they go, the lights, they go
-Echo, echo
-
-Selling genocide and half-cut pride, I understand
-I had to be there from the start, I had to be the fucking man
-It was a clamber of the life, I sucked the ring off every hand
-Had ''em plying me with drink, even met with their demands
-And I loved you like a penny loves the pocket of a priest
-And I''ll love you ''til the grass around my gravestone is deceased
-And I''m heading for the cokeys, I will tell them ''bout it all
-About the gall of Fine Gael and the fail of Fianna Fáil
-And now the flowers read like broadsheets, every young man wants to die
-Say it to the man who profits, and the bastard walks by
-And the bastard walks by, and the bastard walks by
-Say it to him fifty times and still the bastard won''t cry
-Would I lie?', 1479967);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (10288606, 'Starburster', '
-It may feel bad
-It may feel bad
-It may feel bad
-
-I wanna see you alone, I wanna sharp the stone
-I wanna bounce the bone, I wanna mess with it
-I wanna lay the deville, the whole crew on the sill
-I want the preacher and pill, I wanna bless with it
-I wanna head to a mass and get cast in it
-That shit''s funnier than any A-class, in'' it?
-I wanna talk with the clown who has apologies down
-Pay him 300 pound to take a class in it
-I wanna bite the phone, I wanna bleed the tone
-I wanna see you alone, alone, alone-lone
-I wanna strait the shark and find me somewhere to park
-Like the light when it''s dark, it''s dark, it''s dark-dark
-A few stars about make it feel like peace in a way
-A complimentary round
-Constellation got a twist in it
-For a GPO and all the hits in it
-
-I''m gon'' hit your business if it''s momentary blissness
-I''m gon'' hit your business if it''s momentary blissness
-I''m gon'' hit your business if it''s momentary blissness
-I''m gon'' hit your business if it''s momentary—
-(It may feel bad)
-You might also like
-I wanna talk with a gag if it''s a bottle or bag
-I wanna strike with the SAG, I need the friends from it
-I want a shot in the dark, I wanna make the mark
-I want to live the arc, I call the ends on it
-I wanna take the truth without a lens on it
-My God given insanity, it depends on it
-How I feel? How I feel? How I feel? I wanna keel
-Over harder than a turned up challenger
-I wanna keep all of your charm in a canister
-Do you inspire like the same did Salinger?
-I''m the pig on the Chinese calendar
-I got a shadow like a .58 Caliber
-I wanna move like a new Salamander
-I love the carrion who''s a real Scavenger
-It''s moral tyranny keeping me from thee
-
-
-Hit me for the day
-For the light
-That you suffered
-To come by
-Take to my sky
-Never wanting
-Only wonder
-To live out of reach
-Sloping family
-Short to tall
-One to three
-Swallow the key
-In their footprints
-I will follow
-I''m gon'' hit your business if it''s momentary blissness
-I''m gon'' hit your business if it''s momentary blissness
-I''m gon'' hit your business if it''s momentary blissness
-I''m gon'' hit your business if it''s momentary blissness', 1479967);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (4071418, 'Boys in the Better Land', '
-
-You''re not alive until you start kicking
-When the room is spinning and the words aren''t sticking
-And the radio is all about a runaway model with a face like sin and a heart like a James Joyce novel
-
-Saying "Sister, sister, how I missed ya, missed ya
-Let''s go wrist to wrist and take the skin off of the blister"
-If you''re a rockstar, pornstar, superstar, doesn''t matter what you are
-Get yourself a good car, get outta here
-
-Well
-But the boys in the better land
-You''re always talking ''bout the boys in the better land
-The boys in the better land
-But the boys in the better land
-You''re always talking ''bout the boys in the better land
-The boys in the better land
-
-Driver''s got names to fill two double barrels
-He spits out "Brits out", only smokes Carrolls
-And he''s refreshing the world in mind, body and spirit
-Mind body and spirit, you better hear it and fear it
-Oh, that''s the spirit
-You might also like
-Saying "Sister, sister, how I missed ya, missed ya
-Let''s go wrist to wrist and take the skin off of the blister"
-If you''re a rockstar, pornstar, superstar, doesn''t matter what you are
-Get yourself a good car, get outta here
-
-Yeah
-But the boys in the better land
-You''re always talking ''bout the boys in the better land
-The boys in the better land
-But the boys in the better land
-You''re always talkin'' about the boys in the better land
-The boys in the better land
-
-Driver''s got names to fill two double barrels
-He spits out "Brits out", only smokes Carrolls
-And he''s refreshing the world in mind, body and spirit
-Mind body and spirit, you better hear it and fear it
-Oh, that''s the spirit
-
-Saying "Sister, sister, how I missed ya, missed ya
-Let''s go wrist to wrist and take the skin off of the blister"
-If you''re a rockstar, pornstar, superstar, doesn''t matter what you are
-Get yourself a good car, get outta here
-Yeah
-But the boys in the better land
-You''re always talking ''bout the boys in the better land
-The boys in the better land
-But the boys in the better land
-You''re always talkin'' about the boys in the better land
-The boys in the better land
-', 1479967);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (7582582, 'Jackie Down the Line', '
-Do-do-do
-La-la-la
-
-My friend Sally says she knows ya
-Got a funny point of view
-Says you''ve got away with murder
-Maybe one time, maybe two
-Something happens in the morning
-When I can''t see those failing eyes
-I can''t find a good word for ya
-Does it come as a surprise?
-
-I don''t think we rhyme
-I will wear you down in time
-I will hurt you, I''ll desert you
-I am Jackie down the line
-
-Said did Sally ''bout a future
-Before you bored of her as well
-If all you want is entertainment
-If you can''t have it you make hell
-You might also like
-Don''t make no odds for ye
-To be told, yeah
-Don''t make no odds for ye
-To be told, yeah
-
-I don''t think we rhyme
-I will wear you down in time
-I will hurt you, I''ll desert you
-I am Jackie down the line
-I don''t think we rhyme
-I will make your secrets mine
-I will hate ye, I''ll debase ye
-I am Jackie down the line
-Do-do-do
-La-la-la
-
-So come on down to Sally''s boneyard
-See her spirit in decline
-See the handsome mourners crying
-They hawked a beating heart for a sturdy spine, yeah
-What good is happiness to me
-If I''ve to wield it carefully?
-For care I''ll always come up short
-It''s only right
-I don''t think we rhyme
-I will wear you down in time
-I will hurt ye, I''ll desert ye
-I''m one Jackeen of a line
-I don’t think we rhyme
-I will take up all your time
-I will chew ye, I''ll go through ye
-I am Jackie down the line
-I don''t think we rhyme
-I will make your secrets mine
-I will hate ye, I''ll debase ye
-I am Jackie down the line
-And I will stone ye, I''ll alone ye
-I am Jackie down the line
-If I can make you, I can break you
-I am Jackie down the line
-I am Jackie down the line
-
-Do-do-do
-La-la-la', 1479967);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (5536773, 'A Hero’s Death', '
-Ooh-ooh
-Ooh-ooh
-Ooh-ooh
-Ooh-ooh
-
-Life ain’t always empty
-Life ain’t always empty
-Life ain’t always empty
-Life ain’t always empty
-Life ain’t always empty
-Life ain’t always empty
-
-Don’t get stuck in the past
-Say your favourite things at mass
-Tell your mother that you love her
-And go out of your way for others
-Sit beneath a light that suits ya
-And look forward to a brighter future
-
-(Ooh) Life ain’t always empty
-(Ooh) Life ain’t always empty
-(Ooh) Life ain’t always empty
-(Ooh) Life ain’t always empty
-(Ooh) Life ain’t always empty
-(Ooh) Life ain’t always empty
-You might also like
-Ooh-ooh
-
-Sink as far down as you can be pulled up
-Happiness really ain’t all about luck
-Let your demeanour be your deep down self
-And don’t sacrifice your life for your health
-When you speak, speak sincere
-And believe me friend, everyone will hear
-
-(Ooh) Life ain’t always empty
-(Ooh) Life ain’t always empty
-(Ooh) Life ain’t always empty
-(Ooh) Life ain’t always empty
-(Ooh) Life ain’t always empty
-(Ooh) Life ain’t always empty
-
-Ooh-ooh
-
-Bap, bap, bap, bap, bap
-Bap, bap, bap, bap, bap
-Bap, bap, bap, bap, bap
-Bap, bap, bap, bap, bap
-Bap, bap, bap, bap, bap
-Bap, bap, bap, bap, bap
-Bap, bap, bap, bap, bap
-Bap, bap, bap, bap, bap
-Bring your own two cents
-Never borrow them from someone else
-Buy yourself a flower every hundredth hour
-Throw your hair down from your lonely tower
-And if, and if you find yourself in the family way
-Give the kid more than what you got in your day
-
-(Ooh) Life ain’t always empty
-(Ooh) Life ain’t always empty
-(Ooh) Life ain’t always empty
-(Ooh) Life ain’t always empty
-(Ooh) Life ain’t always empty
-(Ooh) Life ain’t always empty
-
-Ooh-ooh
-
-Ah, never let a clock tell you what you got time for
-It only goes around, goes around, goes around
-Take your family name for your own great sins
-''Cause each day is where it all begins
-And don’t give up too quick
-You only get one line, you better make it stick
-If we give ourselves to every breath
-Then we’re all in the running for a hero’s death
-(Ooh) Life ain’t always empty
-(Ooh) Life ain’t always empty
-(Ooh) Life ain’t always empty
-(Ooh) Life ain’t always empty
-(Ooh) Life ain’t always empty
-(Ooh) Life ain’t always empty
-
-Ooh-ooh
-
-Bap, bap, bap, bap, bap
-Bap, bap, bap, bap, bap
-Bap, bap, bap, bap, bap
-Bap, bap, bap, bap, bap
-Bap, bap, bap, bap, bap
-Bap, bap, bap, bap, bap
-Bap, bap, bap, bap, bap
-Bap, bap, bap, bap, bap
-That was the year of the sneer
-Now the real thing''s here', 1479967);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (10290610, 'Favourite', '
-(Pa-pa-pa-pa-pa)
-(Pa-pa-pa-pa-pa) All the pieces last forever
-
-Did you know
-I could claim the dreamer from the dream?
-Make you feel
-Everything you''ve never even seen
-Yeah, it''s been
-A long, a long, a long, a long, a long-long
-You were my
-Favourite for a long time
-
-Stitch and fall
-The faces rearranged
-You will see
-Beauty give the way to something strange
-Yeah, it''s been
-A long, a long, a long, a long, a long-long
-You were my
-Favourite for a long time
-
-Well, look who''s just the newest clown
-Thirty-five hours coming down
-How the sun shines on new pavement
-And you don''t even feel it
-It''s a cry far from bed radios
-And days spent playing football indoors
-When they painted town with Thatcher
-And they never even wanted to know ya
-You might also like
-Feel alone?
-I can split the sunshine to the day
-Yeah and
-Stick your heart to everything you say
-Yeah
-To be gone, be gone, be gone, be gone, be gone
-You were my favourite for a long time
-You were my favourite for a long time
-
-Favourite for a long time
-Favourite for a long time
-Favourite for a long time
-(Pa-pa-pa-pa-pa) All the pieces last forever
-(Pa-pa-pa-pa-pa) All the pieces last forever
-(Pa-pa-pa-pa-pa) And all the pieces
-Dara-dara-dara-dara-dara
-(Pa-pa-pa-pa-pa) And all the pieces
-Dara-da, dara-da
-
-Did you know
-Cities on return are often strange?
-Yeah, and now
-Every time you blink, you feel it change
-And it''s been
-A long, a long, a long, a long, long-long
-You''ve been my
-Favourite for a while
-Ah, it makes sense when you understand
-The misery made me another marked man
-And I''m always looking over my shoulder
-And each new day, I get another year older
-Shoulder bounce through the frame of a door
-Chewed into shape like a stone on the shore
-But if there was lightning in me
-You''d know who it was for
-
-Did you know
-I could claim the dreamer from the dream?
-Make you feel
-Everything you''ve never even seen
-Yeah, it''s been
-A long, a long, a long, a long, long-long
-You were my
-Favourite for a long time
-(Favourite for a long time)
-You were my favourite for a long time
-(Favourite for a long time)
-You were my favourite for a long time
-(Favourite for a long time)
-You were my favourite for a long time (All the pieces last forever)', 1479967);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (7582597, 'In ár gCroíthe go deo', '
-(In ár gCroíthe)
-(In ár gCroíthe)
-Gone is the day, gone is the night, gone is the day
-(In ár gCroíthe)
-Gone is the day, gone is the night, gone is the day
-Gone is the day, gone is the night, gone is the day
-(In ár gCroíthe)
-Gone is the day, gone is the night, gone is the day
-
-She defines the only answer
-And I never had the time
-She defines the only reason
-For feeling
-All in all is all we tailor
-And they always have the best
-And she defines the only reason
-For feeling
-
-Gone is the day, gone is the night, gone is the day
-Gone is the day, gone is the night, gone is the day
-Gone is the day, gone is the night, gone is the day
-Gone is the day, gone is the night, gone is the day
-You might also like
-She defines the only answer
-And I never had the time
-She defines the only reason
-For feeling
-All in all is all we tailor
-And they always have the best
-And she defines the only reason
-For feeling, ah, ah
-
-Gone is the day, gone is the night, gone is the day
-Gone is the day, gone is the night, gone is the day
-Gone is the day, gone is the night, gone is the day
-Gone is the day, gone is the night
-It''s gone, it''s gone, it''s gone, it''s gone, it''s gone
-(In ár gCroíthe)
-(In ár gCroíthe)
-
-She defines the only answer
-And I never had the time
-She defines the only answer
-To feeling
-All in all is all we tailor
-And they always had the best
-She defines the only reason
-For feeling, ah, ah, ah
-Gone is the day, gone is the night, gone is the day
-Gone is the day, gone is the night, gone is the day
-Gone is the day, gone is the night, gone is the day
-It''s gone, it''s gone, it''s gone, it''s gone, it''s gone, it''s gone, it''s gone, it''s gone
-
-(In ár gCroíthe)
-(In ár gCroíthe)Embed', 1479967);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (7582601, 'Roman Holiday', '
-Baby, come on, get stoned, get stoned
-Get inside it, inside it, inside it, inside
-Get along, get along, get alone, get alone, get
-Heard about the week on the Dalymount seat, yeah
-Baby, come on, before the going gets gone
-Heard you lied to the Major, won''t be long
-Well, I wish upon a wedding for a picture in the star
-When they knock for ya don''t forget who you are
-Skinty Fia
-
-Baby, come on, whose sidе are you on?
-I don''t wanna see the queen
-I already sing hеr song
-While they''re snuffing out hopes, and they''re blotting out suns
-They claim to know the form in which genius comes, yeah
-Baby, come on, get your high heels on
-It’s the body is cold, it''s the course is run
-What artless living all this soft pain thrills
-What calamities usher all our brilliance to the hills!
-Can you feel it?
-
-Baby, come on, get stoned, get stoned
-Get inside it, inside it, inside it, inside
-Get along, get along, get alone, get alone, get
-Was it the weed or the moment that stoned ye?
-You might also likeBaby, come on, get the hourglass on
-I will dart into town, no, I won’t be long
-If the talk''s getting cold, we''ll be chancing none
-Well, you know what I’m saying, our day will come
-Can you feel it?
-Won''t be long
-Can you feel it?Embed', 1479967);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (4294578, 'Big', '
-Dublin in the rain is mine
-A pregnant city with a catholic mind
-Starch those sheets for the birdhouse jail
-All mescalined when the past is stale, pale
-Dublin in the rain is mine
-A pregnant city with a catholic mind
-Slick little boy with a mind of Ritz
-Pulling that thread for the next big fix, this
-
-My childhood was small
-My childhood was small
-But I''m gonna be big
-But I''m gonna be big
-My childhood was small
-My childhood was small
-But I''m gonna be big
-But I''m gonna be big
-But I''m gonna be big
-
-Well, Dublin in the rain is mine
-A pregnant city with a catholic mind
-Starch those sheets for the birdhouse jail
-All mescalined when the past is stale, pale
-Dublin in the rain is mine
-A loose ambassador for all that crime
-Slick little boy with a mind of Ritz
-Pulling that thread for the next big fix, this
-You might also like
-My childhood was small
-My childhood was small
-But I''m gonna be big
-But I''m gonna be big
-My childhood was small, oh yeah, yeah, yeah
-My childhood, it was small
-But I''m gonna be big
-But I''m gonna be big
-But I''m gonna be big
-I''m gonna be big', 1479967);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (4190001, 'Too Real', '
-Ah
-
-None can pull the passion loose from youth''s ungrateful hands
-As it stands, I''m about to make a lot of money
-Gold harps in the pan
-None can revolution lead with selfish needs aside
-As I cried, I''m about to make a lot of money
-Gold harps on the side
-
-Is it too real for ya?
-Is it too real for ya?
-Is it too real for ya?
-Is it too real?
-
-The winter evening settles down
-The bruised and beat up open sky, six o''clock
-The city in its final dress
-And now a gusty shower wraps the grimy scraps
-Of withered leaves all about your feet
-And then the ringing of a twitching hand
-Six o''clock, six o''clock
-You might also like
-Is it too real for ya?
-Is it too real for ya?
-Is it too real for ya?
-Is it too real?
-Is it too real for ya?
-Is it too real for ya?
-Is it too real for ya?
-Is it too real for ya?
-
-None can pull the passion loose from youth''s ungrateful hands
-As it stands, I''m about to make a lot of money
-Gold harps in the pan
-None can revolution lead with selfish needs aside
-As I climbed, I''m about to make a lot of money
-Goes around and around and around
-Oh yeah, boya
-
-Is it too real for ya?
-Is it too real for ya?
-Is it too real for ya?
-Is it too real for ya?
-Is it too real for ya?
-Is it too real for ya?
-Is it too real for ya?
-Is it too real for ya?', 1479967);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (70324, 'Mercy', '
-Well, it is a weepin'' and a moanin'' and a gnashin'' of teeth
-It is a weepin'' and a moanin'' and a gnashin'' of teeth
-It is a—when it comes to my sound which is the champion sound
-Believe, believe
-O-o-o-o-o-okay, Lamborghini Mercy
-Your chick, she so thirsty
-I-I-I-I-I''m in that two-seat Lambo
-With your girl, she tryna jerk me (Believe)
-O-o-o-o-o-okay, Lamborghini Mercy
-Your chick, she so thirsty
-I-I-I-I-I''m in that two-seat Lambo
-With your girl, she tryna jerk me
-O-o-o-o-o-okay, Lamborghini Mercy (Swerve)
-Your chick, she so thirsty (Swerve)
-I-I-I-I-I''m in that two-seat Lambo
-With your girl, she tryna jerk me (Woah, believe)
-O-o-o-o-o-okay, Lamborghini Mercy
-Your chick, she so thirsty (Boy)
-I-I-I-I-I''m in that two-seat Lambo (Boy)
-With your girl, she tryna jerk me
-
-Okay, drop it to the floor, make that ass shake (Shake, shake)
-Woah, make the ground move: that''s an ass quake
-Built a house up on that ass: that''s an ass-state
-Roll–roll–roll my weed on it: that''s an ass tray
-Say, Ye, say, Ye, don''t we do this every day–day? (Huh?)
-I work them long nights, long nights to get a payday (Huh?)
-Finally got paid, now I need shade and a vacay
-And niggas still hatin''
-So much hate, I need a AK (AK)
-Now we out in Paris, yeah, I''m Perrierin''
-White girls politickin'' and that''s that Sarah Palin
-Get–get–get–get–get–gettin'' hot, Californicatin''
-I give her that D, ''cause that''s where I was born and raised in
-You might also like
-O-o-o-o-o-okay, Lamborghini Mercy (Swerve)
-Your chick, she so thirsty (Swerve)
-I-I-I-I-I''m in that two-seat Lambo (Swerve)
-With your girl, she tryna jerk me (Swerve, believe)
-O-o-o-o-o-okay, Lamborghini Mercy (Swerve)
-Your chick, she so thirsty (Swerve)
-I-I-I-I-I''m in that two-seat Lambo (Swerve)
-With your girl, she tryna jerk me (Swerve)
-Well, it is a weepin'' and a moanin'' (Swerve)
-And a gnashin'' of teeth (Swerve)
-It is a weepin'' and a mournin'' (Swerve)
-And a gnashin'' of teeth (Swerve)
-It is a—when it comes to my sound (Swerve)
-Which is the champion sound (Swerve)
-Believe, believe (Swerve)
-Believe, believe (Swerve)
-Yuugh! It''s prime time, my top back, this pimp game, ho
-I''m red leather, this cocaine, I''m Rick James, ho
-I''m bill-droppin'', Ms. Pac-Man, this pill-poppin'' ass ho
-I''m poppin'' too, these blue dolphins need two coffins
-All she want is some heel money
-All she need is some bill money
-He take his time, he counts it out
-I weighs it up, that''s real money
-Check the neck, check the wrist
-Them heads turnin'': that''s exorcist
-My Audemars like Mardi Gras
-That''s Swiss time, and that''s excellence
-Two-door preference
-Roof gone, George Jefferson
-That white frost on that pound cake
-So your Duncan Hines is irrelevant, woo
-Lambo Murciélago
-She go wherever I go
-Wherever we go, we do it pronto, it''s like—
-O-o-o-o-o-okay, Lamborghini Mercy (Swerve)
-Your chick, she so thirsty (Swerve)
-I-I-I-I-I''m in that two-seat Lambo (Swerve)
-With your girl, she tryna jerk me (Swerve, believe)
-O-o-o-o-o-okay, Lamborghini Mercy (Swerve)
-Your chick, she so thirsty (Swerve)
-I-I-I-I-I''m in that two-seat Lambo (Swerve)
-With your girl, she tryna jerk me (Swerve)
-Well, it is a weepin'' and a moanin'' (Swerve)
-And a gnashin'' of teeth (Swerve)
-It is a weepin'' and a mournin'' (Swerve)
-And a gnashin'' of teeth (Swerve)
-It is a—when it comes to my sound (Swerve)
-Which is the champion sound (Swerve)
-Believe, believe (Swerve)
-Believe (Swerve)
-
-Well, it is a weepin'' and a moanin''
-And a gnashin'' of teeth in the dancehall
-And who no have teeth gwan rub pon dem gums
-Cuh when time it comes to my sound
-Which is the champion sound
-The bugle has blown fi many times
-And it still have one more time left
-Cuh the amount of stripe weh deh pon our shoulder
-Let the suicide doors up
-I threw suicides on the tour bus
-I threw suicides on the private jet
-You know what that mean, I''m fly to death
-I step in Def Jam buildin'' like I''m the shit
-Tell ''em gimme fifty million or I''ma quit
-Most rappers'' taste level ain''t at my waist level
-Turn up the bass ''til it''s up-in-yo-face level
-Don''t do no press but I get the most press, kid
-Plus, yo, my bitch make your bitch look like Precious
-Somethin'' ''bout Mary, she gone off that molly
-Now the whole party is melting like Dalí
-Now everybody is movin'' they body
-Don''t sell me apartment, I''ll move in the lobby (Yah)
-Niggas is loiterin'' just to feel important
-You gon'' see lawyers and niggas in Jordans (2 Chainz)
-Okay, now catch up to my campaign
-Coupe the color of mayonnaise
-I''m drunk and high at the same time
-Drinkin'' champagne on the airplane (Tell ''em)
-Spit rounds like a gun range (Baow)
-Beat it up like Rampage
-Hundred bands, cut your girl
-Now your girl need a Band-Aid (Damn)
-Grade A, A1
-Chain the color of Akon
-Black diamonds, backpack rhymin''
-Co-signed by Louis Vuitton (Yep)
-Horsepower, horsepower
-All this Polo on, I got horsepower
-Pound of this cost four thousand
-Now I make it rain, she want more showers
-Rain (Rain) pourin'' (Pourin'')
-All my cars is foreign (Foreign)
-All my broads is foreign (Foreign)
-Money tall like Jordan
-O-o-o-o-o-okay, Lamborghini Mercy (Swerve)
-Your chick, she so thirsty (Swerve)
-I-I-I-I-I''m in that two-seat Lambo (Swerve)
-With your girl, she tryna jerk me (Swerve)
-O-o-o-o-o-okay, Lamborghini Mercy (Swerve)
-Your chick, she so thirsty (Swerve)
-I-I-I-I-I''m in that two-seat Lambo (Swerve, believe)
-With your girl, she tryna jerk me (Swerve, believe)
-Well, it is a weepin'' and a moanin'' (Swerve)
-And a gnashin'' of teeth (Swerve)
-It is a weepin'' and a moanin'' (Swerve)
-And a gnashin'' of teeth (Swerve)
-It is a—when it comes to my sound (Swerve)
-Which is the champion sound (Swerve)
-Believe, believe (Swerve)
-Believe, believe (Swerve)
-Well, it is a weepin'' and a moanin'' and a gnashin'' of teeth
-It is a weepin'' and a moanin'' and a gnashin'' of teeth
-It is a—when it comes to my sound which is the champion sound
-Believe, believe, believe, believe', 72);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (1149, 'Monster', '
-I shoot the lights out
-Hide ''til it''s bright out
-Oh, just another lonely night
-Are you willing to sacrifice your life?
-
-Bitch, I''m a monster, no-good bloodsucker
-Fat motherfucker, now look who''s in trouble
-As you run through my jungles, all you hear is rumbles
-Kanye West samples, here''s one for example
-
-Gossip, gossip, nigga, just stop it
-Everybody know I''m a motherfuckin'' monster
-I''ma need to see your fuckin'' hands at the concert
-I''ma need to see your fuckin'' hands at the concert
-Profit, profit, nigga, I got it
-Everybody know I''m a motherfuckin'' monster
-I''ma need to see your fuckin'' hands at the concert
-I''ma need to see your fuckin'' hands
-Uh, the best living or dead hands down, huh
-Less talk, more head right now, huh
-And my eyes more red than the devil is
-And I''m ''bout to take it to another level, bitch
-Matter who you go and get, ain''t nobody cold as this
-Do the rap and the track, triple-double, no assists
-And my only focus is stayin'' on some bogus shit
-Arguin'' with my older bitch, actin'' like I owe her shit
-I heard the beat, the same raps that gave the track pain
-Bought the chain that always give me back pain
-Fucking up my money so, yeah, I had to act sane
-Chi nigga, but these hoes love my accent
-Chick came up to me and said, "This the number to dial
-If you wanna make your number one your number two now"
-Mix that Goose and Malibu, I call it "Malibooyah"
-Goddamn, Yeezy always hit ''em with a new style
-Know that motherfucker, well, what you gon'' do now?
-Whatever I wanna do, gosh, it''s cool now
-Know I''m gonna do, ah, it''s the new now
-Think you motherfuckers really really need to cool out
-''Cause you''ll never get on top of this
-So, mami, best advice is just to get on top of this
-Have you ever had sex with a pharaoh?
-Ah, put the pussy in a sarcophagus
-Now she claiming that I bruised her esophagus
-Head of the class and she just won a swallowship
-I''m livin'' in the future so the present is my past
-My presence is a present, kiss my ass
-You might also like
-Gossip, gossip, nigga, just stop it
-Everybody know I''m a motherfuckin'' monster
-I''ma need to see your fuckin'' hands at the concert
-I''ma need to see your fuckin'' hands at the concert (Yeah)
-Profit, profit, nigga, I got it
-Everybody know I''m a motherfuckin'' monster
-I''ma need to see your fuckin'' hands at the concert
-I''ma need to see your fuckin'' hands
-Sasquatch, Godzilla, King Kong, Loch Ness
-Goblin, ghoul, a zombie with no conscience
-Question, what do these things all have in common?
-Everybody knows I''m a motherfuckin'' monster
-Conquer, stomp ya, stop your silly nonsense
-Nonsense, none of you niggas know where the swamp is
-None of you niggas have seen the carnage that I''ve seen
-I still hear fiends scream in my dreams
-Murder, murder in black convertibles, I
-Kill a block, I murder the avenues, I
-Rape and pillage your village, women and children
-Everybody want to know what my Achilles heel is
-Love, I don''t get enough of it
-All I get is these vampires and bloodsuckers
-All I see is these niggas I made millionaires
-Millin'' about, spillin'' they feelings in the air
-All I see is these fake fucks with no fangs
-Tryna draw blood from my ice-cold veins
-I smell a massacre
-Seems to be the only way to back you bastards up
-Gossip, gossip, nigga, just stop it
-Everybody know I''m a motherfuckin'' monster
-I''ma need to see your fuckin'' hands at the concert
-I''ma need to see your fuckin'' hands at the concert
-Profit, profit, nigga, I got it
-Everybody know I''m a motherfuckin'' monster
-I''ma need to see your fuckin'' hands at the concert
-I''ma need to see your fuckin'' hands
-Pull up in the monster, automobile gangsta
-With a bad bitch that came from Sri Lanka
-Yeah, I''m in that Tonka, color of Willy Wonka
-You could be the king, but watch the queen conquer
-Okay, first things first, I''ll eat your brains
-Then I''ma start rocking gold teeth and fangs
-''Cause that''s what a motherfuckin'' monster do
-Hair dresser from Milan, that''s the monster ''do
-Monster Giuseppe heel, that''s the monster shoe
-Young Money is the roster and a monster crew
-And I''m all up, all up, all up in the bank with the funny face
-And if I''m fake, I ain''t notice ''cause my money ain''t
-So let me get this straight, wait, I''m the rookie?
-But my features and my shows ten times your pay?
-50K for a verse, no album out
-Yeah, my money''s so tall that my Barbies got to climb it
-Hotter than a Middle Eastern climate, violent
-Tony Matterhorn, dutty wine it, wine it
-Nicki on them titties when I sign it
-That''s how these niggas so one-track-minded
-But really, really I don''t give an F-U-C-K
-"Forget Barbie, fuck Nicki, sh-she''s fake"
-"She on a diet," but my pockets eatin'' cheesecake
-And I''ll say, bride of Chucky, it''s child''s play
-Just killed another career, it''s a mild day
-Besides, Ye, they can''t stand besides me
-I think me, you, and Am'' should ménage Friday
-Pink wig, thick ass, give ''em whiplash
-I think big, get cash, make ''em blink fast
-Now look at what you just saw, this is what you live for
-Ah, I''m a motherfuckin'' monster
-I, I crossed the limelight
-And I''ll, I''ll let God decide
-And I, I wouldn''t last these shows
-So I, I am headed home (Headed home)
-I, I crossed the limelight
-And I''ll, I''ll let God decide, ''cide (No)
-And I, I wouldn''t last these shows
-So I, I am headed home (Head home)
-I, I crossed the limelight (No, the limelight)
-And I''ll, I''ll let God decide, ''cide
-And I, I wouldn''t last these shows
-So I, I am headed home
-', 72);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (2412669, 'Father Stretch My Hands Pt. 1', '
-You''re the only power (Power)
-You''re the only power that can
-You''re the only power (Power)
-You''re the only power that can
-Oh, oh, oh, Father
-(If Young Metro don''t trust you, I''m gon'' shoot you)
-
-Beautiful mornin'', you''re the sun in my mornin'', babe (Who can I turn to?)
-Nothin'' unwanted (After all, who can I turn to?)
-Beautiful mornin'', you''re the sun in my mornin'', babe (If I don''t turn to you)
-Nothin'' unwanted (No other help I know, I stretch my hands)
-
-I just wanna feel liberated, I-I, na-na-na (Who can I turn to?)
-I just wanna feel liberated, I-I, na-na-na (After all, who can I turn to?)
-If I ever instigated, I am sorry (If I don''t turn to you)
-Tell me who in here could relate, I-I-I (No other help I know, I stretch my hands)
-
-Now, if I fuck this model
-And she just bleached her asshole
-And I get bleach on my T-shirt
-I''ma feel like an asshole
-I was high when I met her
-We was down in Tribeca
-She''ll get under your skin if you let her
-She''ll get under your skin if you— (Uh)
-I don''t even wanna talk about it
-I don''t even wanna talk about it
-I don''t even wanna say nothin''
-Everybody gon'' say somethin''
-I''d be worried if they said nothin''
-Remind me where I know you from
-She lookin'' like she owe you somethin''
-You know just what we want
-I wanna wake up with you in my—
-You might also like
-Beautiful mornin'', you''re the sun in my mornin'', babe (Who can I turn to?)
-Beautiful mornin''
-Nothin'' unwanted (After all, who can I turn to?)
-Beautiful mornin'', you''re the sun in my mornin'', babe (If I don''t turn to you)
-Nothin'' unwanted (No other help I know)
-
-I just wanna feel liberated, I-I, na-na-na (Who can I turn to?)
-I just wanna feel liberated, I-I, na-na-na (After all, who can I turn to?)
-If I ever instigated, I am sorry (If I don''t turn to you)
-Tell me who in here could relate, I-I-I (No other help I know, I stretch my hands)', 72);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (2413549, 'Ultralight Beam', '
-(Yes, God)
-We don''t want no devils in the house, God (Yes, Lord)
-We want the lord (Yes, Jesus)
-And that''s it (Yes, God)
-Hallej— hand over Satan (Yes, Jesus)
-Jesus praise the Lord (Yes, God)
-Hallelujah, God (Yes, God)
-We don''t want no devils in the house, God (Yes, Lord)
-We want the lord (Yes, Jesus)
-And that''s it (Yes, God)
-Hallej— hand over Satan (Yes, Jesus)
-Jesus praise the Lord (Yes, God)
-I''m tryna keep my faith
-We on an ultralight beam
-We on an ultralight beam
-This is a God dream
-This is a God dream
-This is everything
-This is everything
-
-Deliver us serenity
-Deliver us peace
-Deliver us loving
-We know we need it
-You know we need it
-You know we need it
-That''s why we need You now, oh
-Pray for Paris
-Pray for the parents
-This is a God dream
-This is a God dream
-This is a God dream
-You might also like
-We on an ultralight beam
-We on an ultralight beam
-This is a God dream
-This is a God dream
-This is everything
-Everything (Thing, thing, thing)
-
-I''m tryna keep my faith
-But I''m looking for more
-Somewhere I can feel safe
-And end my holy war
-I''m tryna keep my faith
-So why send oppression, not blessings?
-Why, oh, why''d You do me wrong? (More)
-You persecute the weak
-Because it makes You feel so strong (Safe)
-Don''t have much strength to fight
-So I look to the light (War)
-To make these wrongs turn right
-Head up high, I look to the light
-Hey, ''cause I know that You''ll make everything alright
-And I know that You''ll take good care of Your child
-Oh, no longer am afraid of the night
-''Cause I, I look to the light
-When they come for You, I will shield Your name
-I will field their questions, I will feel Your pain
-No one can judge
-They don''t, they don''t know
-They don''t know
-
-Foot on the Devil''s neck ''til it drifted, Pangaea
-I''m moving all my family from Chatham to Zambia
-Treat the demons just like Pam
-I mean, I fuck with your friends, but damn, Gina
-I been this way since Arthur was anteater
-Now they wanna hit me with the woo wap, the bam
-Tryna snap photos of familia
-My daughter look just like Sia, you can''t see her
-You can feel the lyrics, the spirit coming in braille
-Tubman of the underground, come and follow the trail
-I made “Sunday Candy,” I''m never going to hell
-I met Kanye West, I''m never going to fail
-He said, "Let''s do a good ass job with ''Chance 3''"
-I hear you gotta sell it to snatch the Grammy
-Let''s make it so free and the bars so hard
-That there ain''t one gosh darn part you can''t tweet
-This is my part, nobody else speak
-This is my part, nobody else speak
-This little light of mine
-Glory be to God, yeah
-I''ma make sure that they go where they can''t go
-If they don''t wanna ride, I''ma still give ''em raincoats
-Know what God said when He made the first rainbow
-Just throw this at the end if I''m too late for the intro
-Ugh, I''m just having fun with it
-You know that a nigga was lost
-I laugh in my head
-''Cause I bet that my ex looking back like a pillar of salt
-Ugh, ''cause they''ll flip the script on your ass like Wesley and Spike
-You cannot mess with the light
-Look at lil'' Chano from 79th
-We on an ultralight beam
-We on an ultralight beam
-This is a God dream
-This is a God dream
-This is everything
-Everything
-
-(Yes, God)
-(Hallelujah)
-I''m tryna keep my faith
-(Yes, Jesus)
-But I''m looking for more
-Somewhere I can feel safe
-And end my holy war
-Father, this prayer is for everyone that feels they''re not good enough
-This prayer''s for everybody that feel that they''re too messed up
-For everyone that feels they''ve said "I''m sorry" too many times
-You can never go too far when you can''t come back home again
-That''s why I need...
-Faith, more, safe, war', 72);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (158615, 'Bound 2', '
-B-B-B-B-Bound to fall in love
-Bound to fall in love
-Uh-huh, honey
-All them other niggas lame, and you know it now
-When a real nigga hold you down, you s''posed to drown
-(Bound to fall in love)
-Bound
-(B-B-B-B-Bound to fall in love)
-Bound
-Uh-huh, honey
-
-What you doin'' in the club on a Thursday?
-She say she only here for her girl birthday
-They ordered champagne but still look thirsty
-Rock Forever 21, but just turned thirty
-I know I got a bad reputation
-Walk-around-always-mad reputation
-Leave-a-pretty-girl-sad reputation
-Start a Fight Club, Brad reputation
-I turnt the nightclub out of the basement
-I''ll turn the plane around, your ass keep complainin''
-How you gon'' be mad on vacation?
-Dutty wining ''round all these Jamaicans
-Uh, this that prom shit
-This that what-we-do-don''t-tell-your-mom shit
-This that red-cup-all-on-the-lawn shit
-Got a fresh cut, straight out the salon, bitch
-You might also like
-I know you''re tired of lovin'', of lovin'' (Oh)
-With nobody to love, nobody, no—
-Uh-huh, honey
-Close your eyes and let the word paint a thousand pictures
-One good girl is worth a thousand bitches
-(Bound to fall in love)
-Bound
-(Bound to fall in love)
-Bound
-Uh-huh, honey
-
-I wanna fuck you hard on the sink
-After that, give you somethin'' to drink
-Step back, can''t get spunk on the mink
-I mean damn, what would Jeromey Romey Romey Rome think?
-Hey, you remember where we first met?
-Okay, I don''t remember where we first met
-But hey, admittin'' is the first step
-And hey, you know ain''t nobody perfect
-And I know, with the hoes I got the worst rep
-But hey, their backstroke I''m tryna perfect
-And hey, ayo, we made it: Thanksgivin''
-So hey, maybe we can make it to Christmas
-She asked me what I wished for on my wishlist
-Have you ever asked your bitch for other bitches?
-Maybe we could still make it to the church steps
-But first, you gon'' remember how to forget
-After all these long-ass verses
-I''m tired, you tired, Jesus wept
-I know you''re tired (Tired) of lovin'', of lovin''
-With nobody to love, nobody, nobody
-So just grab somebody, no leavin'' this party
-With nobody to love, nobody, nobody
-Uh-huh, honey
-
-Jerome''s in the house, watch your mouth
-Jerome''s in the house, watch your mouth
-(Bound to fall in love)
-Bound
-(Bound to fall in love)
-Bound
-Uh-huh, honey
-', 72);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (152640, 'New Slaves', '
-Chill, chill, chill, chill, chill, chill
-Chill, chill, chill, chill, chill, chill
-Chill, chill, chill, chill, chill, chill
-Chill, chill, chill, chill, chill, chill
-My mama was raised in the era when
-Clean water was only served to the fairer skin
-Doin'' clothes, you would''ve thought I had help
-But they wasn''t satisfied unless I picked the cotton myself
-You see it''s broke nigga racism
-That''s that, "Don''t touch anything in the store"
-And it''s rich nigga racism
-That''s that, "Come in, please buy more"
-"What you want, a Bentley? Fur coat? A diamond chain?
-All you blacks want all the same things"
-Used to only be niggas, now everybody playin''
-Spendin'' everything on Alexander Wang
-New slaves
-
-You see it''s leaders and it''s followers
-But I''d rather be a dick than a swallower
-You see it''s leaders and it''s followers
-But I''d rather be a dick than a swallower
-You might also like
-I throw these Maybach keys
-I wear my heart on the sleeve
-I know that we the new slaves
-I see the blood on the leaves
-I see the blood on the leaves
-I see the blood on the leaves
-I know that we the new slaves
-I see the blood on the leaves
-They throwin'' hate at me
-Want me to stay at ease
-Fuck you and your corporation
-Y''all niggas can''t control me
-I know that we the new slaves
-I know that we the new slaves
-I''m ''bout to wild the fuck out
-I''m goin'' Bobby Boucher
-I know that pussy ain''t free
-You niggas pussy, ain''t me
-Y''all throwin'' contracts at me
-You know that niggas can''t read
-Throw on some Maybach keys
-Fuck it, c''est la vie
-I know that we the new slaves
-Y''all niggas can''t fuck with me
-Y''all niggas can''t fuck with Ye
-Y''all niggas can''t fuck with Ye
-I''ll move my family out the country
-So you can''t see where I stay
-So go and grab the reporters
-So I can smash their recorders
-See, they''ll confuse us with some bullshit
-Like the New World Order
-Meanwhile the DEA
-Teamed up with the CCA
-They tryna lock niggas up
-They tryna make new slaves
-See, that''s that privately owned prison
-Get your peace today
-They prolly all in the Hamptons
-Braggin'' ''bout what they made
-Fuck you and your Hampton house
-I''ll fuck your Hampton spouse
-Came on her Hampton blouse
-And in her Hampton mouth
-Y''all ''bout to turn shit up
-I''m ''bout to tear shit down
-I''m ''bout to air shit out
-Now what the fuck they gon'' say now?
-Nothing bad, nothing bad, noth—
-Noth-Noth—, —ing bad, noth— (Noth-Noth—)
-Bad, nothing bad, nothing bad
-Nothing—
-
-I won''t end this fight, not this time again
-So long, so long, so long, you cannot survive
-And I''m not dyin'', and I can''t lose
-I can''t lose, no, I can''t lose
-''Cause I can''t leave it to you
-So let''s get too high, get too high again
-Too high again, too high, ooh hoo-hoo-hooh, woo
-Yeah, h-h-h-high, h-high-high, high-high high-igh-high-high
-H-high-igh, yeah, high, high-igh
-Egyszer a Nap úgy elfáradt (Yeah, mhm-igh)
-Elaludt mély zöld tó ölén
-Az embereknek fájt a sötét
-Ő megsajnált, eljött közénk
-', 72);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (1295, 'Runaway', '
-Look at ya, look at ya, look at ya, look at ya
-Look at ya, look at ya, look at ya, look at ya
-Look at ya, look at ya, look at ya, look at ya
-Look at ya, look at ya, look at ya, look at ya (Ladies and gentlemen, ladies, ladies and gentlemen)
-
-And I always find, yeah, I always find something wrong
-You been puttin'' up with my shit just way too long
-I''m so gifted at finding what I don''t like the most
-So I think it''s time for us to have a toast
-
-Let''s have a toast for the douchebags
-Let''s have a toast for the assholes
-Let''s have a toast for the scumbags
-Every one of them that I know
-Let''s have a toast for the jerk-offs
-That''ll never take work off
-Baby, I got a plan
-Run away fast as you can
-
-She find pictures in my email
-I sent this bitch a picture of my dick
-I don''t know what it is with females
-But I''m not too good at that shit
-See, I could have me a good girl
-And still be addicted to them hoodrats
-And I just blame everything on you
-At least you know that''s what I''m good at
-You might also like
-And I always find, yeah, I always find
-Yeah, I always find something wrong
-You been puttin'' up with my shit just way too long
-I''m so gifted at finding what I don''t like the most
-So I think it''s time for us to have a toast
-
-Let''s have a toast for the douchebags
-Let''s have a toast for the assholes
-Let''s have a toast for the scumbags
-Every one of them that I know
-Let''s have a toast for the jerk-offs
-That''ll never take work off
-Baby, I got a plan
-Run away fast as you can
-
-Run away from me, baby
-Ah, run away
-Run away from me, baby (Look at ya, look at ya, look at ya)
-Run away
-When it starts to get crazy (Look at ya, look at ya, look at ya)
-Then run away
-Babe, I got a plan, run away as fast as you can
-Run away from me, baby
-Run away
-Run away from me, baby (Look at, look at, look at, look at, look at, look at, look at ya)
-Run away
-When it starts to get crazy (Look at ya, look at ya, look at ya, look at ya)
-Why can''t she just run away?
-Baby, I got a plan
-Run away as fast as you can (Look at ya, look at ya, look at ya)
-Twenty-four seven, three sixty-five, pussy stays on my mind
-I-I-I-I did it, alright, alright, I admit it
-Now pick your next move, you could leave or live with it
-Ichabod Crane with that motherfuckin'' top off
-Split and go where? Back to wearing knockoffs?
-Haha, knock it off, Neimans, shop it off
-Let''s talk over mai tais, waitress, top it off
-Hoes like vultures, wanna fly in your Freddy loafers
-You can''t blame ''em, they ain''t never seen Versace sofas
-Every bag, every blouse, every bracelet
-Comes with a price tag, baby, face it
-You should leave if you can''t accept the basics
-Plenty hoes in the baller-nigga matrix
-Invisibly set, the Rolex is faceless
-I''m just young, rich, and tasteless, P
-
-Never was much of a romantic
-I could never take the intimacy
-And I know I did damage
-''Cause the look in your eyes is killing me
-I guess you knew of that advantage
-''Cause you could blame me for everything
-And I don''t know how I''ma manage
-If one day, you just up and leave
-And I always find, yeah, I always find something wrong
-You been puttin'' up with my shit just way too long
-I''m so gifted at finding what I don''t like the most
-So I think it''s time for us to have a toast
-
-Let''s have a toast for the douchebags
-Let''s have a toast for the assholes
-Let''s have a toast for the scumbags
-Every one of them that I know
-Let''s have a toast for the jerk-offs
-That''ll never take work off
-Baby, I got a plan
-Run away fast as you can
-
-', 72);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (167180, 'Blood On the Leaves', '
-Strange fruit hangin'' from the poplar trees
-Blood on the leaves
-
-I just need to clear my mind now
-It''s been racin'' since the summertime
-Now I''m holdin'' down the summer now
-And all I want is what I can''t buy now
-''Cause I ain''t got the money on me right now
-And I told you to wait
-Yeah, I told you to wait
-So I''ma need a little more time now
-''Cause I ain''t got the money on me right now
-And I thought you could wait
-Yeah, I thought you could wait
-These bitches surroundin'' me (Black bodies)
-All want something out me
-Then they talk about me
-Would be lost without me
-We could''ve been somebody
-Thought you''d be different ''bout it
-Now I know you naughty
-So let''s get on with it
-You might also like
-We could''ve been somebody
-''Stead, you had to tell somebody
-Let''s take it back to the first party
-When you tried your first molly
-And came out of your body
-And came out of your body
-Running naked down the lobby
-And you were screamin'' that you love me
-Before the limelight tore ya
-Before the limelight stole ya
-Remember we were so young
-When I would hold you
-Before the blood on the leaves
-I know there ain''t wrong with me
-Something strange is happenin''
-
-You could''ve been somebody
-We could''ve, ugh, we could''ve been somebody
-Or was it on the first party
-When we tried our first molly
-And came out of our body
-And came out of our body
-Before they call lawyers
-Before you tried to destroy us
-How you gon'' lie to the lawyer?
-It''s like I don''t even know ya
-I gotta bring it back to the ''nolia
-Fuck them other niggas ''cause I''m down with my niggas
-Fuck them other niggas ''cause I''m down with my niggas
-Fuck them other niggas ''cause I''m down with my niggas
-I ride with my niggas, I''d die for my...
-
-To all my second-string bitches, tryin'' get a baby
-Tryin'' get a baby, now you talkin'' crazy
-I don''t give a damn if you used to talk to JAY-Z
-He ain''t with you, he with Beyoncé, you need to stop actin'' lazy
-She Instagram herself like #BadBitchAlert
-He Instagram his watch like #MadRichAlert
-He only wanna see that ass in reverse
-Two-thousand-dollar bag with no cash in your purse
-Now you sittin'' courtside, wifey on the other side
-Gotta keep ''em separated, I call that apartheid
-Then she said she pregnant-ated, that''s the night your heart died
-Then you gotta go into your girl and report that
-Main reason ''cause your pastor said you can''t abort that
-Now your driver say that new Benz, you can''t afford that
-All that cocaine on the table, you can''t snort that
-That go into that, all that money that the court got
-All in on that alimony, uh
-Yeah-yeah, she got you, homie, yeah
-''Til death, but do your part, uh
-Unholy matrimony
-That summer night holdin'' long and long, ''din long
-No waiting for the summer rose and (Breeze)
-And breathe and breathe
-And breathe and breathe
-And breathe and breathe
-And live and learn
-And live and learn
-And livin'' and livin'' like I’m lonely
-Lonely, lonely
-And livin'' all I have
-And livin'' all
-And live
-And live', 72);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (152933, 'Black Skinhead', '
-
-For my theme song (Black)
-My leather black jeans on (Black)
-My by-any-means on
-Pardon, I''m getting my scream on (Black)
-Enter the kingdom (Black)
-But watch who you bring home
-They see a black man with a white woman
-At the top floor they gone come to kill King Kong
-Middle America packed in (Black)
-Came to see me in my black skin (Black)
-Number one question they''re askin''
-Fuck every question you askin'' (Black)
-If I don''t get ran out by Catholics (Black)
-Here come some conservative Baptists
-Claiming I''m overreactin''
-Like them black kids in Chiraq, bitch
-
-Four in the mornin'', and I''m zonin''
-They say I''m possessed, it''s an omen
-I keep it 300, like the Romans
-300 bitches, where the Trojans?
-Baby, we livin'' in the moment
-I''ve been a menace for the longest
-But I ain''t finished, I''m devoted
-And you know it, and you know it
-You might also like
-So follow me up ''cause this shit ''bout to go (Down)
-I''m doing 500, I''m outta control (Now)
-But there''s nowhere to go (Now)
-And there''s no way to slow (Down)
-If I knew what I knew in the past
-I would''ve been blacked out on your ass
-
-Four in the mornin'', and I''m zonin''
-They say I''m possessed, it''s an omen
-I keep it 300, like the Romans
-300 bitches, where the Trojans?
-Baby, we livin'' in the moment
-I''ve been a menace for the longest
-But I ain''t finished, I''m devoted
-And you know it, and you know it
-
-Stop all that coon shit (Black)
-Early morning cartoon shit (Black)
-This is that goon shit
-Fuck up your whole afternoon shit
-I''m aware I''m a wolf
-Soon as the moon hit
-I''m aware I''m a king
-Back out the tomb, bitch (Black)
-Black out the room, bitch (Black)
-Stop all that coon shit (Black)
-These niggas ain''t doin'' shit (Black)
-Them niggas ain''t doin'' shit
-Come on, homie, what happened?
-You niggas ain''t breathin'', you gaspin''
-These niggas ain''t ready for action
-Ready—ready for action—action
-Four in the mornin'', and I''m zonin''
-I think I''m possessed, it''s an omen
-I keep it 300 like the Romans
-300 bitches, where the Trojans?
-Baby, we livin'' in the moment
-I''ve been a menace for the longest
-But I ain''t finished, I''m devoted
-And you know it, and you know it
-
-So follow me up ''cause this shit ''bout to go (Down)
-I''m doing 500, I''m outta control (Now)
-But there''s nowhere to go (Now)
-And there''s no way to slow (Down)
-If I knew what I knew in the past
-I would''ve been blacked out on your ass
-
-God! God! God! God!
-God! God! God! God!
-God! God! God!', 72);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (2403856, 'No More Parties in LA', '
-La-di-da-da-a, da-a (I like this flavor)
-La-da-da-da-di-da-da-a, la-a (La-a, la-a, la-a)
-Let me tell you, I''m out here
-From a very far away place
-All for a chance to be a star
-Nowhere seems to be too far
-
-No more parties in L.A.
-Please, baby, no more parties in L.A., uh
-No more parties in L.A.
-Please, baby, no more parties in L.A., uh
-No more (Los Angeles)
-Please (Shake that body, party that bod—)
-Please (Shake that body, party that bod—)
-Please (Shake that body, party that body)
-
-Hey, baby, you forgot your Ray Bans
-And my sheets still orange from your spray-tan
-It was more than soft porn for the K-Man
-She remember my Sprinter, said "I was in the grape van"
-Um—well, cutie, I like your bougie booty
-Come, Erykah Badu-me—well, let''s make a movie
-Hell, you know my repertoire is like a wrestler
-I show you the ropes, connect the dots
-A country girl in North Hollywood
-Mama used to cook red beans and rice
-Now it''s Denny''s, 4 in the morning, spoil your appetite
-Liquor pouring and niggas swarming your section with erection
-Smoke in every direction, middle finger pedestrians
-R&B singers and lesbians, rappers and managers
-Music and iPhone cameras
-This shit unanimous for you, it''s damaging for you, I think
-That pussy should only be holding exclusive rights to me, I mean
-He flew you in this motherfucker on first class
-Even went out his way so you could check in an extra bag
-Now you wanna divide the yam like it equate the math?
-That shit don''t add up, you''re making him mad as fuck
-She said she came out here to find an A-list rapper
-I said, "Baby, spin that ''round and say the alphabet backwards"
-You''re dealing with malpractice, don''t kill a good nigga''s confidence
-Just ''cause he a nerd and you don''t know what a condom is
-The head still good, though; the head still good, though
-Make me say "Nam Myoho Renge Kyo"
-Make a nigga say big words and act lyrical
-Make me get spiritual, make me believe in miracles
-Buddhist monks and Cap''n Crunch cereal
-Lord have mercy, thou will not hurt me
-Five buddies all herded up on a Thursday
-Bottle service, head service, I came in first place
-The opportunity, the proper top of breast and booty cheek
-The pop community, I mean these bitches come with union fee
-And I want two of these, moving units through consumer streets
-Then my shoe released, she was kickin'' in gratuity
-And yeah, G, I was all for it
-She said, "K-Lamar, you kinda dumb to be a poet
-I''ma put you on game for the lames that don''t know they a rookie
-Instagram is the best way to promote some pussy"
-You might also like
-Scary, scary
-No more parties in L.A.
-Please, baby, no more parties in L.A.
-Friday night, tryna make it into the city
-Breakneck speeds, passenger seat—somethin'' pretty
-Thinking back to how I got here in the first place
-Second-class bitches wouldn''t let me on first base
-A backpack nigga with luxury tastebuds
-And the Louis Vuitton store got all of my pay stubs
-Got pussy from beats I did for niggas more famous
-When did I become A-list? I wasn''t even on a list
-Strippers get invited to where they only got hired
-When I get on my Steve Jobs, somebody gon'' get fired
-I was uninspired since Lauryn Hill retired
-And 3 Stacks, man, you preaching to the choir
-Any rumor you ever heard about me was true and legendary
-I done got Lewinsky''d and paid secretaries
-For all my niggas with babies by bitches
-That use they kids as meal tickets
-Not knowin'' the disconnect from the father
-The next generation will be the real victims
-I can''t fault ''em, really
-I ''member Amber told my boy
-No matter what happens, she ain''t goin'' back to Philly
-Back to our regularly scheduled programmin''
-Of weak content and slow jammin''
-But don''t worry, this one''s so jammin''
-You know it, L.A., it''s so jammin''
-I be thinkin'' every day
-Mulholland Drive need to put up some goddamn barricades
-I be paranoid every time, the pressure
-The problem ain''t I be drivin'', the problem is I be textin''
-My psychiatrist got kids that I inspired
-First song they played for me was ''bout their friend that just died
-Textin'' and drivin'' down Mulholland Drive
-That''s why I''d rather take the 405
-I be worried ''bout my daughter, I be worried ''bout Kim
-But Saint is baby Ye, I ain''t worried ''bout him
-Had my life threatened by best friends with selfish intents
-What I''m supposed to do?
-Ride around with a bulletproof car and some tints?
-Every agent I know know I hate agents
-I''m too black, I''m too vocal, I''m too flagrant
-Something smellin'' like shit, that''s the new fragrance
-It just mean, I do it my way, bitch
-Some days I''m in my Yeezys, some days I''m in my Vans
-If I knew y''all made plans, I wouldn''t have popped the Xans
-I know some fans thought I wouldn''t rap like this again
-But the writer''s block is over; emcees, cancel your plans
-A thirty-eight-year-old eight-year-old with rich nigga problems
-Tell my wife that I hate the Rolls so I don''t never drive it
-It took six months to get the Maybach all matted out
-And my assistant crashed it soon as they backed it out
-Goddamn! Got a bald fade, I might slam
-Pink fur, got Nori dressin'' like Cam
-Thank God for me (Los Angeles)
-Whole family gettin'' money, thank God for E
-I love rockin'' jewelry, a whole neckful
-Bitches say he funny and disrespectful
-I feel like Pablo when I''m workin'' on my shoes
-I feel like Pablo when I see me on the news
-I feel like Pablo when I''m workin'' on my house
-Tell ''em party''s in here, we don''t need to go out
-We need the turbo thots, high speed, turbo thots
-Drop-dro-dro-dro-drop, like Robocop
-She brace herself and hold my stomach, good dick''ll do that
-She keep pushin'' me back, good dick''ll do that
-She push me back when the dick go too deep
-This good dick''ll put your ass to sleep
-Get money (Money, money, money)
-Big, big money (Money, money, money)
-And as far as real friends, tell all my cousins I love ''em
-Even the one that stole the laptop, you dirty motherfucker
-I just keep on lovin'' you, baby
-And there''s no one else I know can take your pla—, pla—, pla—
-Please, no more parties in L.A. (Shake that body, party that body)
-Please, baby, no more parties in L.A., uh (Shake that body, party that body)
-No more parties in L.A. (Los Angeles)
-Please, baby, no more parties in L.A., uh
-No more parties in L.A.
-Please, baby, no more parties in L.A., uh
-
-Let me tell you, I''m out here from a very far away place
-All for a chance to be a star
-Nowhere seems to be too far
-Swish
-', 72);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (599427, 'No Role Modelz', '
-First things first: rest in peace, Uncle Phil
-For real
-You the only father that I ever knew
-I get my bitch pregnant, I''ma be a better you
-Prophecies that I made way back in the Ville
-Fulfilled
-Listen, even back when we was broke, my team ill
-Martin Luther King woulda been on Dreamville, talk to a nigga
-
-One time for my L.A. sisters
-One time for my L.A. ho
-Lame niggas can''t tell the difference
-One time for a nigga who know
-
-Don''t save her, she don''t wanna be saved
-Don''t save her, she don''t wanna be saved
-Don''t save her, she don''t wanna be saved
-Don''t save her, she don''t wanna be saved
-
-No role models, and I''m here right now
-No role models to speak of
-Searchin'' through my memory, my memory, I couldn''t find one
-Last night, I was gettin'' my feet rubbed by the baddest bitch
-Not Trina, but I swear to God, this bitch''ll make you call your girl up
-And tell her, "Hey, what''s good?
-Sorry, I''m never comin'' home, I''ma stay for good"
-Then hang the phone up and proceed to lay the wood
-I came fast like 9-1-1 in White neighborhoods
-Ain''t got no shame ''bout it
-She think I''m spoiled and I''m rich ''cause I can have any bitch
-I got defensive and said, "Nah, I was the same without it"
-But then I thought back, back to a better me
-Before I was a B-list celebrity
-''Fore I started callin'' bitches "bitches" so heavily
-Back when you could get a platinum plaque without no melody, you wadn''t sweatin'' me
-You might also like
-One time for my L.A. sisters
-One time for my L.A. ho
-Lame niggas can''t tell the difference
-One time for a nigga who know
-
-Don''t save her, she don''t wanna be saved
-Don''t save her, she don''t wanna be saved
-Don''t save her, she don''t wanna be saved
-Don''t save her, she don''t wanna be saved
-
-I want a real love, dark-skinned Aunt Viv love
-That Jada and that Will love
-That leave a toothbrush at your crib love
-And you ain''t gotta wonder whether that''s your kid love
-Nigga, I don''t want no bitch from reality shows
-Out-of-touch-with-reality hoes
-Out in Hollywood bringin'' back five or six hoes
-Fuck ''em then we kick ''em to the do'', nigga, you know how it go
-She deserved that, she a bird, it''s a bird trap
-You think if I didn''t rap she would flirt back?
-Takin'' off her skirt, let her wear my shirt ''fore she leave
-"I''ma need my shirt back" (Nigga, you know how it go)
-One time for my L.A. sisters
-One time for my L.A. ho
-Lame niggas can''t tell the difference
-One time for a nigga who know
-
-Don''t save her, she don''t wanna be saved
-Don''t save her, she don''t wanna be saved
-Don''t save her, she don''t wanna be saved
-Don''t save her, she don''t wanna be saved
-There''s an old saying in Tennessee—I know it''s in Texas, probably in Tennessee—that says, fool me once... shame on... shame on you
-Fool me—can''t get fooled again
-
-Fool me one time, shame on you (Ayy)
-Fool me twice, can''t put the blame on you (Ayy)
-Fool me three times, fuck the peace sign
-Load the chopper, let it rain on you (Bop, bop, bop)
-Fool me one time, shame on you (Ayy)
-Fool me twice, can''t put the blame on you (Ayy)
-Fool me three times, fuck the peace sign
-Load the chopper, let it rain on you (Bop, bop, bop)
-My only regret was too young for Lisa Bonet
-My only regret was too young for Nia Long
-Now all I''m left with is hoes from reality shows
-Hand her a script, the bitch prolly couldn''t read along
-My only regret was too young for Sade Adu
-My only regret, could never take Aaliyah home
-Now all I''m left with is hoes up in Greystone
-With the stale face ''cause they know it''s they song
-
-She shallow but the pussy deep (She shallow, she shallow)
-She shallow but the pussy deep (She shallow), yeah, ayy
-(She shallow)
-She shallow but the pussy deep (She shallow), haha
-(She shallow)
-She shallow but the pussy deep (She shallow, she shallow)
-
-Don''t save her, she don''t wanna be saved
-Don''t save her, she don''t wanna be saved
-Don''t save her, she don''t wanna be saved
-Don''t save her, she don''t wanna be saved
-Don''t save her, she don''t wanna be saved
-Don''t save her, she don''t wanna be saved
-Don''t save her, she don''t wanna be saved
-Don''t save her, she don''t wanna be saved
-', 69);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (118063, 'Power Trip', '
-Got me up all night
-All I''m singin'' is love songs
-She got me up all night
-Constant drinkin'' and love songs
-She got me up all night
-Down-and-out with these love songs
-She got me up all night
-Drownin'' out with these love songs
-She got me up all night (Yeah)
-All I''m singin'' is love songs
-She got me up all night (Yeah)
-Constant drinkin'' and love songs
-She got me up all night (Yeah)
-Down-and-out with these love songs
-She got me open all night (Uh-huh)
-Got me open all night, hey
-
-Okay, back when I was sleeping in my mama crib
-Or even back when I was up there in Mohammed crib
-Paying seventeen hundred for the rent, money well spent
-No heater, but a nigga made heat, may I vent?
-Had a thing for ya, even wrote the song "Dreams" for ya
-‘Cause I had dreams for ya, thoughts of a ring for ya
-Childish shit, you know child and shit
-Anonymous flowers sent, you know coward shit
-Now a nigga signed to Hov, took a power trip
-Back home, I''m grown now, and the city''s my throne now, huh
-The same clubs that I used to get tossed out
-Life got Kriss Kross''d: totally crossed out
-‘Cause now I''m in this bitch and I''m totally bossed out
-Old chicks crying ‘cause they know that they lost out
-But I''m still on you, I''m still on you
-My drink spill on me, while I feel on you, I''m sayin''—
-You might also like
-Would you believe me if I said I''m in love?
-Baby, I want you to want me
-Would you believe me if I said I''m in love?
-Baby, I want ya
-
-And we are, we are, we are
-Got me up all night
-And we are, we are, we are
-All I''m singin'' is love songs
-And we are, we are, we are
-Got me up all night
-And we are, we are, we are (She got me)
-And we are, we are, we are (She got me)
-
-Well, this has got to be the longest crush ever
-If I ever get to fuck it''d be the longest bust ever
-Love is a drug, like the strongest stuff ever and
-Fuck it, I''m on one, you feel me?
-She on a power trip, she got me where she want a nigga
-Wife''ing in the club, man, my homies gon'' disown a nigga
-Like, "Give me twenty dollars, dollars!"
-Ass stupid, how you get to college, college?
-I''m in your city and I''m wonderin'' if you''re home now
-Went and found a man, but I''m hopin'' you''re alone now
-Can''t help but feeling like I dropped the ball, cliché
-I used to pop up on you at the mall each day
-Now, typically I kick game like Eastbay
-But you got a nigga freeze-framed yelling: "Please play!"
-For Pete''s sake, homie, pull it together
-Just fuck her one time and be through with forever, but—
-Would you believe me if I said I''m in love?
-Baby, I want you to want me
-Would you believe me if I said I''m in love?
-Baby, I want ya, yeah
-
-And we are, we are, we are
-Got me up all night
-And we are, we are, we are
-All I''m singin'' is love songs
-And we are, we are, we are
-Got me up all night
-And we are, we are, we are (She got me)
-And we are, we are, we are (She got me)
-
-Got me up all night (All night)
-All I''m singin'' is love songs
-She got me up all night (All night)
-Constant drinkin'' and love songs
-She got me up all night (All night)
-Down-and-out with these love songs
-She got me up all night (All night)
-Drownin'' out with these love songs
-She got me up all night (Yeah)
-All I''m singin'' is love songs
-She got me up all night (Yeah)
-Constant drinkin'' and love songs
-She got me up all night (Yeah)
-Down-and-out with these love songs
-She got me open all night (Uh-huh)
-Got me open all night, hey
-Back when I was sleeping in my mama crib
-*Space Bar Tap*
-', 69);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (599388, 'Wet Dreamz', '
-Cole
-Cole world
-Yeah
-Let me take y''all back, man
-As I do so well
-Wadn''t nuttin'' like that
-Man, it wadn''t nuttin'' like that
-First time, she was in my math class (Uh-huh)
-Long hair, brown skin with the fat ass
-Sat beside me, used to laugh, had mad jokes
-The teacher always got mad, so we passed notes
-It started off so innocent
-She had a vibe and a nigga started diggin'' it, uh
-I was a youngin, straight crushin'', tryna play the shit cool
-But a nigga couldn''t wait to get to school, ‘cause when I seen
-Them thighs on her and them hips on her and them lips on her
-Got me daydreamin'', man, what
-I''m thinkin'' how she rides on it, if she sits on it, if she licks on it
-Make it hard for me to stand up, as time goes by
-Attractions gettin'' deep and
-Wet dreamin'', thinkin'' that I''m smashin'' but I''m sleepin'', I want it bad
-And I ain''t never been obsessed before
-She wrote a note that said, "You ever had sex before?" Damn…
-You might also like
-And I ain''t never did this before, no
-And I ain''t never did this before, no
-And I ain''t never did this before, no
-And I ain''t never did this before, no
-And I ain''t never did this before, no
-I ain''t never did this before, no
-And I ain''t never did this before, no
-And I ain''t never did this before, no
-I wrote back and said
-"Of course I had sex before," knowin'' I was frontin''
-I said, "I''m like a pro, baby," knowin'' I was stuntin''
-But if I told the truth, I knew that I''d get played out, son
-Hadn''t been in pussy since the day I came out one, but
-She don''t know that, so she done wrote back and told me
-"Oh, you a pro, homie? Well, I want you to show me
-My mama gone for the weekend
-So Saturday, baby, we can get to freakin''."
-That''s when my heart start racin'' and my body start sweatin''
-Baby, you done woke my lil'' man up
-I''m thinkin'' how that body look naked when you layin'' on the bed
-Teacher, please, don''t make me stand up, I wrote back like
-"Yeah, baby, sound like a plan."
-Still tryna play it cool, sound like the man
-But I was scared to death, my nigga, my stomach turnin''
-Talkin'' shit, knowin'' damn well I was a virgin, fuck
-And I ain''t never did this before, no
-And I ain''t never did this before, no
-And I ain''t never did this before, no
-And I ain''t never did this before, no
-And I ain''t never did this before, no
-I ain''t never did this before, no
-And I ain''t never did this before, no
-And I ain''t never did this before, no
-Yeah, you know that feelin'' when you
-Know you finna bone for the first time?
-I''m hopin'' that she won''t notice it''s my first time
-I''m hopin'' that my shit is big enough to fuck wit''
-And most of all I''m prayin'', "God, don''t let me bust quick"
-I''m watchin'' pornos, tryna see just how to stroke right
-Practice puttin'' condoms on—how it go? Right
-I''m in her crib, now a nigga palm sweatin''
-With a pocket full of rubbers and an erection
-That''s when my hands start touchin'' and her face start blushin''
-And a nigga roll over on top and then she
-Get my pants unbuckled and her hands start rubbin''
-On me, ooh girl, don''t stop, it''s time for action
-Pull out the condoms real smooth, yeah, just how I practiced
-But right before I put it in, she flinched and grabbed it and said
-"I wanna get somethin'' off my mental
-I can tell you''re a pro, but baby, be gentle, ‘cause—"
-‘Cause I ain''t never did this before, no
-And I ain''t never did this before, no
-And I ain''t never did this before, no
-And I ain''t never did this before, no
-And I ain''t never did this before, no
-I ain''t never did this before, no
-And I ain''t never did this before, no
-And I ain''t never did this before, no
-', 69);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (93987, 'Crooked Smile', '
-Even though I—
-On my way, on my way, on my way down
-On my way, on my way, on my way down
-You were the one that was tryna keep me way down
-But like the sun, know you know I find my way back round
-They tell me I should fix my grill ‘cause I got money now
-I ain''t gon'' sit around and front like I ain''t thought about it
-A perfect smile is more appealing, but it''s funny how
-My shit is crooked—look at how far I done got without it!
-I keep my twisted grill, just to show the kids it''s real
-We ain''t picture perfect, but we worth the picture still
-I got smart, I got rich and I got bitches still
-And they all look like my eyebrows: thick as hell
-Love yourself, girl, or nobody will
-Though you a woman I don''t know how you deal
-With all the pressure to look impressive and go out in heels
-I feel for you, killin'' yourself to find a man that''ll kill for you
-You wake up, put makeup on
-Stare in the mirror, but it''s clear that you can’t face what’s wrong
-No need to fix what God already put his paintbrush on
-Your roommate yelling, "Why you gotta take so long?!"
-What it''s like to have a crooked smile
-You might also like
-Even though I—
-On my way, on my way, on my way down
-On my way, on my way, on my way down (This crooked smile)
-You were the one that was tryna keep me way down
-But like the sun, know you know I find my way back round (Yeah)
-
-To all the women with the flaws, know it''s hard, my darling
-You wonder why you''re lonely and your man''s not calling
-You keep falling victim ‘cause you''re insecure
-And when I tell you that you''re beautiful you can''t be sure
-‘Cause he don''t seem to want you back and it''s got you askin''
-So all you see is what you lackin'', not what you packin''
-Take it from a man that loves what you got
-And baby girl, you a star, don''t let ''em tell you you''re not
-Now is it real? Eyebrows, fingernails, hair
-Is it real? If it''s not, girl, you don''t care
-‘Cause what''s real is somethin'' that the eyes can''t see
-That the hands can’t touch, that them broads can’t be
-And that’s you, never let ''em see your frown
-And if you need a friend to pick you up, I’ll be around
-And we can ride with the windows down, the music loud
-I can tell you ain’t laughed in a while
-But I wanna see that crooked smile
-Even though I—
-On my way, on my way, on my way down
-On my way, on my way, on my way down
-You were the one that was tryna keep me way down
-But like the sun, know you know I find my way back round
-
-We got the crooked smile, we can style on ''em
-Back round, crooked smile, we can style on ''em
-You were the one that was tryna keep me way down
-But like the sun, know you know I find my way back round
-We don''t look nothin'' like the people on the screen
-You know, the movie stars, picture perfect beauty queens
-But we got dreams and we got the right to chase ‘em
-Look at the nation
-That’s a crooked smile braces couldn’t even straighten
-Seem like half the race is either on probation or in jail
-Wonder why we inhale, ‘cause we in Hell already
-I ask: If my skin pale, would I then sell like Eminem or Adele?
-But one more time for the ''Ville
-And fuck all of that beef shit, nigga, let’s make a mil
-Hey officer man, we don’t want nobody gettin'' killed
-Just open up that cell, let my brother outta jail
-I got money for the bail now, and well now
-If you askin'' will I tell now—ayy, hell nah
-I ain’t snitchin'' ''cause, man, they get them niggas stitches now
-If you was around then you wouldn’t need a witness now
-How you like this crooked smile?
-Even though I—
-On my way, on my way, on my way down
-On my way, on my way, on my way down (That crooked smile)
-You were the one that was tryna keep me way down
-But like the sun, know you know I find my way back round
-
-We got the crooked smile, we can style on ''em
-Back round, crooked smile, we can style on ''em
-You were the one that was tryna keep me way down
-But like the sun, know you know I find my way back round
-
-
-La la la, la la la, la-la—la—la
-La la la, la la la, la-la—la—la
-La la la, la la la, la-la—la—la
-La la la, la la la, la-la—la—la
-On my way, on my way, on my way down
-On my way, on my way, on my way down
-You were the one that was tryna keep me way down
-But like the sun, know you know I find my way back round
-Back round
-You were the one that was tryna keep me way down
-But like the sun, know you know I find my way back round
-Back round
-You were the one that was tryna keep me way down
-But like the sun, know you know I find my way back round
-Round
-', 69);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (4248426, 'MIDDLE CHILD', '
-You good, T-Minus?
-
-Niggas been countin'' me out
-I’m countin'' my bullets, I''m loadin’ my clips
-I''m writin'' down names, I''m makin'' a list
-I''m checkin'' it twice and I''m gettin’ ’em hit
-The real ones been dyin'', the fake ones is lit
-The game is off balance, I’m back on my shit
-The Bentley is dirty, my sneakers is dirty
-But that''s how I like it, you all on my dick
-
-I''m all in my bag, this hard as it get
-I do not snort powder, I might take a sip
-I might hit the blunt, but I''m liable to trip
-I ain’t poppin'' no pill, but you do as you wish
-I roll with some fiends, I love ''em to death
-I got a few mil'' but not all of them rich
-What good is the bread if my niggas is broke?
-What good is first class if my niggas can''t sit?
-That''s my next mission, that''s why I can''t quit
-Just like LeBron, get my niggas more chips
-Just put the Rollie right back on my wrist
-This watch came from Drizzy, he gave me a gift
-Back when the rap game was prayin'' I''d diss
-They act like two legends cannot coexist
-But I''d never beef with a nigga for nothin''
-If I smoke a rapper, it''s gon'' be legit
-It won''t be for clout, it won''t be for fame
-It won''t be ''cause my shit ain''t sellin'' the same
-It won''t be to sell you my latest lil'' sneakers
-It won''t be ''cause some nigga slid in my lane
-Everything grows, it''s destined to change
-I love you lil'' niggas, I''m glad that you came
-I hope that you scrape every dollar you can
-I hope you know money won''t erase the pain
-To the OGs, I''m thankin'' you now
-Was watchin'' you when you was pavin'' the ground
-I copied your cadence, I mirrored your style
-I studied the greats, I''m the greatest right now
-Fuck if you feel me, you ain''t got a choice
-I ain''t do no promo, still made all that noise
-This year gon'' be different, I set my intentions
-I promise to slap all that hate out your voice
-You might also like
-Niggas been countin'' me out
-I''m countin'' my bullets, I''m loadin'' my clips
-I''m writin'' down names, I''m makin'' a list
-I''m checkin'' it twice and I''m gettin'' ''em hit
-The real ones been dyin'', the fake ones is lit
-The game is off balance, I''m back on my shit
-The Bentley is dirty, my sneakers is dirty
-But that''s how I like it, you all on my dick
-
-I just poured somethin'' in my cup
-I''ve been wantin'' somethin'' I can feel
-Promise I am never lettin'' up
-Money in your palm don''t make you real
-Foot is on they neck, I got ''em stuck
-I''ma give ''em somethin'' they can feel
-If it ain''t ''bout the squad, don''t give a fuck
-Pistol in your hand don''t make you real
-
-I''m dead in the middle of two generations
-I''m little bro and big bro all at once
-Just left the lab with young 21 Savage
-I''m ''bout to go and meet Jigga for lunch
-Had a long talk with the young nigga Kodak
-Reminded me of young niggas from ''Ville
-Straight out the projects, no fakin'', just honest
-I wish that he had more guidance, for real
-Too many niggas in cycle of jail
-Spending they birthdays inside of a cell
-We coming from a long bloodline of trauma
-We raised by our mamas, Lord, we gotta heal
-We hurting our sisters, the babies as well
-We killing our brothers, they poisoned the well
-Distorted self-image, we set up to fail
-I''ma make sure that the real gon'' prevail, nigga
-I just poured somethin'' in my cup
-I''ve been wantin'' somethin'' I can feel
-Promise I am never lettin'' up
-Money in your palm don''t make you real
-Foot is on they neck, I got ''em stuck
-I''ma give ''em somethin'' they can feel
-If it ain''t ''bout the squad, don''t give a fuck
-Pistol in your hand don''t make you real
-
-Money in your palm don''t make you real
-Pistol in your hand don''t make you real
-Money in your palm don''t make you real', 69);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (164574, 'She Knows', '
-She knows
-She knows, ayy
-Bad things happen to the people you love
-And you find yourself praying up to heaven above
-But honestly, I''ve never had much sympathy
-''Cause those bad things, I always saw them coming for me
-I''m gonna run, run away (Oh, I), run run away, run away (Oh, I-I-I)
-Run away and never come back (Well, alright)
-Run run away, run run away (Oh, I), run away (Oh, I-I-I)
-Show ''em that your color is black (Well, alright)
-
-Damned if I do, damned if I don''t
-You know I got a girl back home
-You got a man, what you want, what you want?
-What these bitches want from a nigga?
-On some DMX shit, huh
-I know them other niggas love tricking
-On some BMX shit, but not me
-Now I''m sure you done heard about me
-A black star, Mos Def, Kweli
-Good so them bad hoes try me, they try me
-This is Martin Luther King in the club, getting dubs
-With a bad bitch in his ear, sayin'' that she down for whatever
-In the back of his mind is Coretta
-You might also like
-And she knows, she knows
-And I know she knows, and I know she knows
-And deep down, she knows, she knows
-And I know she knows, and I know she knows
-
-Well, alright, oh, I, oh, I-I-I
-I can''t be what you want from me, well, alright
-Oh, I, oh, I-I-I
-I can''t be what you want from me, well, alright
-
-Damned if I do, shit, damned if I don''t
-I''m passing up on bad hoes
-Trying to be the man that she want, what she want?
-What she—What she want from a nigga?
-To put a ring on it
-Got a bitch on my dick right now
-And she just want to sing on it
-Got me up so high, try and get a piece of that apple pie
-I be up so high, try and get a piece of that apple pie
-Dancehall vibes with my pants on fire
-''Cause I told her I was sleep
-''Cause I creep with this pretty young thing that I chose
-She could be doing the same thing, I suppose
-And she knows, she knows
-And I know she knows, and I know she knows
-And deep down, she knows, she knows
-And I know she knows, and I know she knows
-
-Well, alright, oh, I, oh, I-I-I
-I can''t be what you want from me, well, alright
-Oh, I, oh, I-I-I
-I can''t be what you want from me, well, alright
-
-Niggas say, "Turn up," hoes say, "Turn up"
-Only bad thing ''bout a star is they burn up
-Niggas say, "Turn up," hoes say, "Turn up"
-Only bad thing ''bout a star is they burn up
-Rest in peace to Aaliyah
-Rest in peace to Left Eye (Left Eye)
-Michael Jackson, I''ll see ya
-Just as soon as I die (I die)
-
-Got me up so high, try and get a piece of that apple pie, uh
-I be up so high, try and get a piece of that apple pie
-Got me up so high, try and get a piece of that apple pie, uh
-I be up so high, try and get a piece of that apple pie
-Well, alright, oh, I, oh, I-I-I
-I can''t be what you want from me, well, alright
-Oh, I, oh, I-I-I
-I can''t be what you want from me, well, alright
-
-Run away, run away— Back
-Run away, run away— Back
-Run away, run away— Back
-Run away, run away— Back', 69);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (2516, 'Pyro', '
-Single book of matches, gonna burn what''s standing in the way
-Roaring down the mountain, now they''re calling on the fire brigade
-Bury all the pictures and tell the kids that I''m okay
-If''n I''m forgotten, they''ll remember me for today
-
-I, I won''t ever be your cornerstone
-I, I
-
-All the black inside me is slowly seeping from the bone
-Everything I cherish is slowly dying or it''s gone
-Little shaken babies and drunkards seem to all agree
-Once the show gets started, it''s bound to be a sight to see
-
-I, I won''t ever be your cornerstone
-I, I don''t wanna be here holdin'' on
-I, I won''t ever be your cornerstone
-I, I
-
-Watch her roll
-Can you feel it?
-Watch her roll
-Can you feel it?
-Watch her roll
-Can you feel it?
-Watch her roll
-Can you feel it?
-See Kings of Leon LiveGet tickets as low as $26You might also like
-I, I won''t ever be your cornerstone
-I, I don''t wanna be here holdin'' on (Watch her roll, can you feel it?)
-I, I won''t ever be your cornerstone (Watch her roll)
-I, I', 1174);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (599451, 'Love Yourz', '
-Hm, love yours
-Hm, love yours
-No such thing
-No such thing as a life that''s better than yours
-No such thing as a life that''s better than yours (Love yours)
-No such thing as a life that''s better than yours
-No such thing, no such thing
-
-Heart beatin'' fast, let a nigga know that he alive (''Live, live, live)
-Fake niggas mad, snakes
-Snakes in the grass let a nigga know that he arrived (''Rived, rived, rived)
-Don''t be sleepin'' on your level
-''Cause it''s beauty in the struggle, nigga (Beauty, beauty)
-Goes for all y''all
-It''s beauty in the struggle, nigga (Beauty, beauty)
-Let me explain, yeah
-
-It''s beauty in the struggle, ugliness in the success
-Hear my words and listen to my signal of distress
-I grew up in the city and know sometimes we had less
-Compared to some my niggas down the block, man, we were blessed
-And life can''t be no fairy tale, no once upon a time
-But I be goddamned if a nigga don''t be tryin''
-So tell me, Momma please, why you be drinking all the time?
-Does all the pain he brought you still linger in your mind?
-''Cause pain still lingers on mine
-On the road to riches, listen, this is what you''ll find
-The good news is, nigga, you came a long way
-The bad news is, nigga, you went the wrong way
-Think being broke was better
-You might also like
-No such thing as a life that''s better than yours (Hah)
-No such thing as a life that''s better than yours (Think being broke was better)
-No such thing as a life that''s better than yours
-(Think being broke was better, yeah) No such thing, no such thing
-For what''s money without happiness?
-Or hard times without the people you love?
-Though I''m not sure what''s ''bout to happen next
-I ask for strength from the Lord (Man) up above
-''Cause I been strong so far, but I can feel my grip loosenin''
-Quick, do somethin'' before you lose it for good, get it back and use it for good
-And touch the people how you did like before
-I''m tired of livin'' with demons ''cause they always invitin'' more
-Think being broke was better, now I don''t mean that phrase with no disrespect
-To all my niggas out there livin'' in debt
-Cashin'' minimal checks, turn on the TV, see a nigga Rolex
-And fantasize about a life with no stress
-I mean this shit sincerely, and as a nigga who was once in your shoes
-Livin'' with nothin'' to lose, I hope one day you hear me
-Always gon'' be a bigger house somewhere, but nigga, feel me
-Long as the people in that motherfucker love you dearly
-Always gon'' be a whip that''s better than the one you got
-Always gon'' be some clothes that''s fresher than the ones you rock
-Always gon'' be a bitch that''s badder out there on the tours
-But you ain''t never gon'' be happy ''til you love yours
-No such thing as a life that''s better than yours (Love yours)
-No such thing as a life that''s better than yours (Love yours)
-No such thing as a life that''s better than yours (Love yours)
-No such thing, no such thing
-Heart beatin'' fast, let a nigga know that he alive (''Live, live, live)
-Fake niggas mad, snakes
-Snakes in the grass let a nigga know that he arrived (''Rived, rived, rived)', 69);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (2924188, 'Deja Vu', '
-Huh, ayy, put a finger in the sky if you want it, nigga
-Ayy, put two fingers in the sky if you want her
-Ayy, put a finger in the sky if you want it, nigga
-Ayy, put two fingers in the sky if you want her
-Ayy, put a finger in the sky if you want it, nigga
-Ayy, put two fingers in the sky if you want her
-Ayy, put a finger in the sky if you want it, nigga
-Ayy, put two fingers in the sky if you want her
-
-Sometimes you worry ''bout the things he can provide for ya
-Whenever you around I seem to come alive for ya
-I finally recognize the feelings that''s inside for ya
-Although I know your man and trust me he would die for ya
-These quiet thoughts of you been going on for years now
-I saw you in the party, soft lips, soft-spoken
-I came to talk to you but homie interfered now
-He introduced you as his girl and I was heartbroken
-Some people talk about that love at first sight shit
-To keep it real I don''t know whether I believe it''s true
-But if it is then tell me if I''m wrong or right if
-I fell in love with you before I ever even knew
-I catch your eye then look away as if it never happened
-At times I feel as though I''m caught up in a strange dream
-If eyes could talk then mines would tell ya that I''m feeling you (Feeling you)
-Sometimes I swear your eyes be telling me the same thing
-You might also like
-She fuck with small-town niggas, I got bigger dreams (Bigger dream), hm
-She fuck with small-town niggas, I got bigger dream (Bigger dreams), hm, listen
-She fuck with small-town niggas, I got bigger dreams (Bigger dream)
-She fuck with small-town niggas, I got bigger dream, bigger dreams, listen
-
-Club jumping, don''t stop, off top
-But you know we only go ''til 2 o''clock
-Put yo'' motherfuckin'' hood up, it''s the weekend
-Drop that, back that ass up and bitches get to freaking
-Last call at the bar, ladies get a drink, nigga get some balls
-Ain''t no telling you gon'' see that bitch tomorrow
-Stop holding up the wall waiting for the right song
-Better holla ''cause you know they ''bout to cut the lights on
-
-And put my number in it—
-Huh, I''m staring at you from afar
-I''m wondering ''bout you, like where you from and who you are
-''Cause you a star, no, not the type that snort the white lines
-I mean the type that light the night time
-I heard you got a man, but who in their right mind letting you out the house alone?
-Tell me is your house a home?
-Why you in the club looking like you out to zone?
-Now be discreet and pull out your phone and put my number in it
-Text a nigga when your man leave you unattended
-On a scale from 1 to 10 that girl''s a hundred and I want it
-No question, I know destiny well
-And though I sin the Lord blessing me still
-Every saint got a past, every sinner got a future
-Every loser gotta win and every winner gotta lose someday
-They say it''s just a matter of time
-And if I had my way then you would be mine, huh
-She fuck with small-town niggas, I got bigger dreams (Bigger dream), yeah
-She fuck with small-town niggas, I got bigger dream (Bigger dreams), hm, listen
-She fuck with small-town niggas, I got bigger dreams (Bigger dream)
-She fuck with small-town niggas, I got bigger dream, bigger dreams
-
-Club jumping, don''t stop, off top
-But you know we only go ''til 2 o''clock
-Put yo'' motherfuckin'' hood up, it''s the weekend
-Drop that, back that ass up and bitches get to freaking
-Last call at the bar, ladies get a drink, nigga get some balls
-Ain''t no telling you gon'' see that bitch tomorrow
-Stop holding up the wall waiting for the right song
-Better holla ''cause you know they ''bout to cut the lights on
-
-I know you were made for me but
-Darling don''t you wait for me ''cause
-I can see the promised land but
-I can''t do no promising and
-I know you were made for me but
-Darling don''t you wait for me ''cause
-I can see the promised land but
-I can''t do no promising
-Ayy, put a finger in the sky if you want it, nigga
-Ayy, put two fingers in the sky if you want her
-Ayy, put a finger in the sky if you want it, nigga
-Ayy, put two fingers in the sky if you want her
-Ayy, put a finger in the sky if you want it, nigga
-Ayy, put two fingers in the sky if you want her
-Ayy, put a finger in the sky if you want it, nigga
-Ayy, put two fingers in the sky if you want her', 69);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (599424, 'G.O.M.D.', '
-Hollywood Cole, go
-Ayy, Hollywood, ayy, Hollywood Cole, go
-My nigga done went Hollywood
-
-You wanna know just where I''m at?
-Well, let me tell you ''bout it
-I put my city on the map
-But let me tell you ''bout it
-They tryna say I can''t come back
-Ayy, let me tell you ''bout it
-Man, fuck them niggas, I come back
-Ayy, let me tell you ''bout it
-I wanna tell you ''bout it:
-Heads up, e''rybody run
-Cole outside and he say he got a gun
-Niggas like, "Man, that''s what e''rybody said" (Uh-huh)
-Go and pop the trunk and now e''rybody dead
-E''rybody scared of the nigga, aware that the nigga is better (Better)
-All my bitches the pick of the litter (Yeah,) never bitter
-Niggas is fake, they anime
-Me, I never hate, get cake like Anna Mae, woah
-Eat the cake bitch, eat the damn cake (Cake), uh
-Fuck good, nigga, we demand great (Great)
-Order Domino then she take off all her cloth''
-Nigga, you know how it go, make the pizza man wait (Hol'' up! Hol'' up! Hol'' up!)
-The best-kept secret
-Even Hov tried to keep it then I leaked the damn tape, uh
-Rest in peace any nigga want beef
-Secret service couldn''t keep the man safe
-You might also like
-I said, to the window, to the wall (To the wall)
-My nigga ride when I call (I call)
-Got bitches all on my mind (My mind)
-Fuck nigga blockin'' my shine (My shine)
-I know the reason you feel a lil'' way
-I know just who you wan'' be
-So every day I thank the Man upstairs
-That I ain''t you and you ain''t me
-
-Get off my dick
-Woah (Get the fuck off my dick)
-Get off my dick
-Woah (Get the fuck off my dick, nigga)
-Get off my dick (Bitch)
-Woah (Get the fuck off my dick)
-Get off my dick
-Woah
-
-Man, fuck them niggas, I come home
-And I don''t tell nobody
-They gettin'' temporary dough
-And I don''t tell nobody
-Lord, will you tell me if I changed?
-I won''t tell nobody
-I wanna go back to Jermaine
-And I won''t tell nobody
-This is the part that the thugs skip!
-
-Young nigga never had love, you know
-Foot massage, back rub shit
-Blowin'' bubbles in the bathtub shit
-That is until I met you
-Together we done watched years go by
-Seen a river of your tears go by
-Got me thinkin'' ''bout some kids, still I
-Tell them hoes come through, the break-up
-Get to know somebody and you really learn
-A lot about ''em, won''t be long ''fore you start to doubt ''em
-Tell yourself you''re better off without ''em
-Then in time, you will find can''t walk without ''em
-Can''t talk without ''em, can''t breathe without ''em
-Came here together, you can''t leave without ''em
-So you walk back in, make a scene about ''em
-On your Amerie, it''s just 1 Thing about ''em, it''s called love
-Niggas don''t sing about it no more
-Don''t nobody sing about it no more
-(No more), no more
-It''s called love
-Niggas don''t sing about it no more
-Don''t nobody sing about it no more
-(Nigga, don''t sing about this shit, nigga)
-But e''ry nigga in the club singin''
-To the window, to the wall (To the wall)
-My nigga ride when I call (I call)
-Got bitches all on my mind (My mind)
-Fuck nigga blockin'' my shine (My shine)
-I know the reason you feel a lil'' way
-I know just who you wan'' be
-So every day I thank the Man upstairs
-That I ain''t you and you ain''t me
-
-Get off my dick
-But e''ry nigga in the club singin''
-Singin'' this song, yeah
-Got all the bitches in the club singin''
-Singin'' this song, yeah
-And all the mamas let their kids sing it
-Sing this song, yeah
-The baby mamas and the mistresses
-This song, yeah, song, yeah
-Song, yeah, song-song, yeah
-
-The make up
-This shit is retarded
-Goddamn
-Why every rich Black nigga gotta be famous?
-Why every broke Black nigga gotta be brainless?
-Uh, that''s a stereotype
-Driven by some people up in Aerial Heights, here''s a scenario:
-Young Cole pockets is fat like Lil Terrio
-Dreamville, give us a year, we''ll be on every show
-Yeah, fuck nigga, I''m very sure
-Heh
-Fuck the rest, I''m the best nigga out
-When I''m back home, I''m the best in the South
-When I''m in L.A., I''m the best in the West
-You contest? You can test, I''ma stretch niggas out
-Ooh, I''ma stretch niggas out
-That go for all y''all if I left niggas out
-This shit for e''rybody on my testicle
-Please make sure you put the rest in your mouth, ho
-', 69);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (599442, 'Apparently', '
-Oh, right, oh
-Oh, why, na-da-da-da, da, ah
-
-I keep my head high, uh
-I got my wings to carry me
-I don''t know freedom, uh
-I want my dreams to rescue me
-I keep my faith strong, uh
-I ask the Lord to follow me
-I''ve been unfaithful, uh
-I don''t know why you call on me
-This is my canvas (Yeah, my canvas)
-I''ma paint it how I want it baby, oh I (Paint it)
-This is my canvas
-I''ma paint it, paint it, paint it, how I want it nigga
-Fuck you ''cause there, there is no right or wrong, only a song
-I like to write alone, be in my zone
-Think back to Forest Hills, no perfect home
-But the only thing like home I''ve ever known
-Until they snatched it from my mama
-And foreclosed her on the loan
-I''m so sorry that I left you there to deal with that alone
-I was up in New York City chasing panties, getting dome
-Had no clue what you was going through
-How could you be so strong?
-And how could I be so selfish? I know I can be so selfish
-I could tell by how I treat you with my girl, damn, she so selfless
-But she put up with my ways because she loves me like you do
-And though it don''t always show, I love her just like I love you, and
-I need to treat you better
-Wish you could live forever
-So we could spend more time together, uh
-I love you mama, uh
-You might also like
-I keep my head high, uh
-I got my wings to carry me
-I don''t know freedom, uh
-I want my dreams to rescue me
-I keep my faith strong, uh
-I ask the Lord to follow me
-I''ve been unfaithful, uh
-I don''t know why you call on me
-
-E-e-eee, e-e, apparently (Uh)
-You believe in me, huh, you believe in me
-E-e-eee, e-e, apparently
-You believe in me, and I thank you for it, oh, I
-
-Another day, another rhyme, ho
-Another day, another time zone
-Today, I woke up feeling horny so it''s only right, I got two bitches playing on my trombone
-Keep up, never sure where the words would take me
-Niggas eat ''em up and regurgitate me
-Shit trump tight never slurred it lazy
-Give a virgin the urge to rape me, nigga please
-Best friends really make great for enemies
-My watch came, niggas can''t wait for one of these
-I see you, nigga, this ain''t no Rolex, it''s an AP, nigga
-I''m hot, dog, catch up to me, nigga— huh, couldn''t resist
-Aim for the stars and I shouldn''t have missed
-But I was riding on fumes, so I stopped by the moon
-Now I''m sitting on the hood of this bitch
-Like, "Thanks for the view," waiting on thanks from a few
-''Cause without me you wouldn''t exist
-You know that shit, gave you the blueprint, don''t forget
-Cole is your phone on zero percent
-Going off, now niggas showing off
-Niggas swear they hard, but they flowing soft
-I''m taking off like "boing!" on a big ass Boeing, and getting head like a coin toss, too easy
-I keep my head high, uh
-I got my wings to carry me
-I don''t know freedom, uh
-I want my dreams to rescue me
-I keep my faith strong, uh
-I ask the Lord to follow me
-I''ve been unfaithful, uh
-I don''t know why you call on me
-
-E-e-eee, e-e, apparently (Huh)
-You believe in me, you believe in me, huh
-E-e-eee, e-e, apparently
-You believe in me, and I thank you for it, oh I', 69);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (673932, 'Greek Tragedy', '
-We''re smashing mics in karaoke bars
-You''re running late with half your make-up on
-This method acting might pay our bills
-But soon enough there''ll be a different role to fill
-
-I love this feeling, but I hate this part
-I wanted this to work so much, I drew up our plans on a chart
-Cars are flipping; I''m in hot pursuit
-My character''s strong, but my head is loose
-
-She hits like ecstasy
-Comes up and bangs the sense out of me
-
-The tarot cards say it''s not so bad
-And the blades rotate; there''s just no landing pad
-And better have said it but, darling, you''re the best
-I''m just tired of falling up the Penrose steps
-
-I hate this feeling, but I love this part
-She really wants to make it work and I clearly want to let it start
-We''ll build a water slide as soon as I get home…
-You might also like
-Oh, and she hits like ecstasy
-Comes up and bangs the sense out of me
-It''s wrong, but surely worse to leave
-She hits like ecstasy
-
-So free up the cheaper seats
-Here comes a Greek Tragedy', 75841);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (584765, 'Kill The Director', '
-I''ve met someone that makes me feel seasick
-Oh, what a skill to have, oh, what a skill
-To have so many skills that make her distinctive
-But they''re not mine to have, no, they''re not mine
-
-Whenever she looks, I read the nearest paper
-Though I don''t care about the soaps;
-No, I don''t care about the soaps...
-Though I''m acting like I''m in an EastEnders episode!
-
-(Ooh, ooh, ooh, ooh)
-If this is a rom-com, kill the director!
-(Ooh, ooh, ooh, ooh)
-If this is a rom-com, kill the director, please!
-
-Carrots help us see much better in the dark
-Don''t talk to girls; they''ll break your heart
-And this is my head and this is my spout
-But they work together; they can''t figure anything out
-
-So with the angst of a teenage band
-Here''s another song about a gender I''ll never understand
-Here''s another song about a gender I''ll never understand
-You might also like
-(Ooh, ooh, ooh, ooh)
-If this is a rom-com, kill the director!
-(Ooh, ooh, ooh, ooh)
-If this is a rom-com, kill the director!
-(Ooh, ooh, ooh, ooh)
-If this is a rom-com, kill the director, please!
-
-This is no Bridget Jones
-This is no Bridget, Bridget (Kill the director!)
-This is no Bridget Jones
-This is no Bridget, Bridget (Kill the director!)
-This is no (Kill!) Bridget Jones (Kill!)
-This is no Bridget, Bridget (Kill the director!)
-This is no (Kill!) Bridget Jones (Kill!)
-This is no Bridget, Bridget (Well, double kill the director)
-(Ooh, ooh, ooh, ooh) This is no Bridget Jones
-This is no Bridget, Bridget (Kill the director!)
-(Ooh, ooh, ooh, ooh) This is no Bridget Jones
-This is no Bridget, Bridget (Kill the director!)
-(Ooh, ooh, ooh, ooh) This is no Bridget Jones
-This is no Bridget, Bridget Jones...', 75841);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (3307578, 'Turn', '
-I jump from thought to thought like a flea jumps to a light
-You could give an aspirin the headache of its life
-Maybe it''s the crazy that I''d miss
-Watering plastic plants in the hope that they''ll grow
-Seeing a message flash and then smashing up my phone
-Maybe it''s the crazy that I''d miss
-It won''t get better than this
-
-I like the way your brain works, I like the way you try
-To run with the wolf pack when your legs are tied
-I like the way you turn me inside and out
-I like the way you turn
-(Woo, ooh-ooh, ooh-ooh
-Ooh-ooh, ooh-ooh, ooh-ooh, ooh-ooh)
-I like the way your brain works
-(Woo, ooh-ooh, ooh-ooh
-Ooh-ooh, ooh-ooh, ooh-ooh, ooh-ooh)
-I like the way your brain works
-
-I want to get college girl drunk tonight
-No morning fears, no mountains to climb
-They say the best memories are the ones that we forget
-Like listening to Drake at your best friend''s swimming pool
-Floating anti-clockwise in a red mushroom
-Maybe it''s the crazy that I''d miss
-It won''t get better than this
-You might also like
-I like the way your brain works, I like the way you try
-To run with the wolf pack when your legs are tied
-I like the way you turn me inside and out
-I like the way you turn
-(Woo, ooh-ooh, ooh-ooh
-Ooh-ooh, ooh-ooh, ooh-ooh, ooh-ooh)
-I like the way your brain works
-(Woo, ooh-ooh, ooh-ooh
-Ooh-ooh, ooh-ooh, ooh-ooh, ooh-ooh)
-I like the way your brain works
-
-Baby, it''s the crazy I like
-I think I saw the world turn in your eyes
-Baby, it''s the crazy I like (ah-ah, ah)
-And maybe it''s the bullshit I''d miss
-Screaming at the moon in black lipstick
-Maybe it''s the bullshit I''d miss
-It won''t get better than this', 75841);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (3307441, 'Lemon to a Knife Fight', '
-Hero to zero, I pick up the bill
-The brake lights cast a red light
-And the road twists ''round the hill
-Lipstick on the backseat, saliva on the dash
-I''ve clawed my way out of here before
-But I keep on coming back
-
-I push and you tend to shove
-I give in and you don''t give up
-I''m not getting out of here this time
-I brought a lemon to a knife fight
-I kick and you like to punch
-I''m unhinged and you''re undone
-I''m not getting out of here alive
-I brought a lemon to a knife fight
-I brought a lemon to a knife fight
-
-Hero to zero at 60mph
-My eyes are getting wider with
-Every word you say
-Intoxicated, higher than the ISS
-I''ve clawed my way out of here before
-But tonight, I''m turning left
-You might also like
-I push and you tend to shove
-I give in and you don''t give up
-I''m not getting out of here this time
-I brought a lemon to a knife fight
-I kick and you like to punch
-I''m unhinged and you''re undone
-I''m not getting out of here alive
-I brought a lemon to a knife fight
-I brought a lemon to a knife fight
-
-
-I push and you tend to shove
-I give in and you don''t give up
-I''m not getting out of here this time
-I brought a lemon to a knife fight
-I kick and you like to punch
-I''m unhinged and you''re undone
-I''m not getting out of here alive
-I brought a lemon to a knife fight
-I brought a lemon to a knife fight
-I brought a lemon to a knife fight', 75841);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (584674, 'Let’s Dance to Joy Division', '
-I''m back in Liverpool and everything seems the same
-But I worked something out last night
-That changed this little boy''s brain
-A small piece of advice that took twenty-two years in the make
-And I will break it for you now, please learn from my mistakes
-Please learn from my mistakes
-
-Let''s dance to Joy Division and celebrate the irony
-Everything is going wrong, but we''re so happy
-Let''s dance to Joy Division and raise our glass to the ceiling
-''Cause this could all go so wrong, but we''re so happy
-Yeah, we''re so happy
-
-So if you''re ever feeling down, grab your purse and take a taxi
-To the darker side of town, that''s where we''ll be
-And we will wait for you and lead you through the dance floor
-Up to the DJ booth, you know what to ask for
-You know what to ask for
-
-Go ask for Joy Division and celebrate the irony
-Everything is going wrong, but we''re so happy
-Let''s dance to Joy Division and raise our glass to the ceiling
-''Cause this could all go so wrong, but we''re so happy
-Yeah, we''re so happy
-You might also like
-Let the love tear us apart, I''ve found the cure for a broken heart
-Let it tear us apart
-Let the love tear us apart, I''ve found the cure for a broken heart
-Let it tear us apart (Let it tear us apart)
-So let the love tear us apart, I''ve found the cure for a broken heart
-Let it tear us apart (Let it tear us apart)
-So let the love tear us apart, I''ve found the cure for a broken heart
-Let it tear us apart, let it tear us apart
-Let it tear us apart
-
-Let''s dance to Joy Division and celebrate the irony
-Everything is going wrong, but we''re so happy
-Let''s dance to Joy Division and raise our glass to the ceiling
-''Cause this could all go so wrong, but we''re so happy
-Yeah, we''re so happy
-
-So happy, yeah, we''re so happy
-So happy, yeah, we''re so happy', 75841);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (232934, 'Tokyo (Vampires & Wolves)', '
-We''re self-imploding
-Under the weight of your advice
-I wear a suitcase
-Under each one of my eyes
-
-Finally, I know now what it takes
-It takes money and aeroplanes
-
-If you love me, let me go back to that bar in Tokyo
-Where the demons from my past leave me in peace
-(Ah, ah-ah, ah-ah, ah, ah-ah, ah-ah-ah)
-I''ll be animated every night
-The grass''ll be greener on the other side
-And the vampires and wolves won''t sink their teeth
-(Ah, ah-ah, ah-ah, ah, ah-ah, ah-ah-ah)
-I''m sick of dancing with the beast
-
-Astrophysics
-You''ll never be my closest friend
-I find no comfort
-In what my mind can''t comprehend
-You might also like
-Finally, I work out what it takes
-It takes money and aeroplanes
-
-If you love me, let me go back to that bar in Tokyo
-Where the demons from my past leave me in peace
-(Ah, ah-ah, ah-ah, ah, ah-ah, ah-ah-ah)
-I''ll be animated every night
-The grass''ll be greener on the other side
-And the vampires and wolves won''t sink their teeth
-(Ah, ah-ah, ah-ah, ah, ah-ah, ah-ah-ah)
-I''m sick of dancing with the beast
-
-No matter how much it needs me
-Go and follow someone else''s lead
-(Ah, ah, ah, ah, ah)
-
-If you love me, let me go back to that bar in Tokyo
-Where the demons from my past leave me in peace
-(Ah, ah-ah, ah-ah, ah, ah-ah, ah-ah-ah)
-I''ll be animated every night
-The grass''ll be greener on the other side
-And the vampires and wolves won''t sink their teeth
-(Ah, ah-ah, ah-ah, ah, ah-ah, ah-ah-ah)
-I''m sick of dancing with the beast
-Ah-ah, ah-ah', 75841);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (740583, 'Pink Lemonade', '
-Another magical Friday night
-I think I''ll sit this one at home
-Unusual for me, I know
-But please go ahead
-I don''t wanna be
-The blinking rabbit to your wildebeest
-The jaded lover to his sex machine
-You should go ahead
-
-And please give those recycled house tracks my warmest regards
-And lock the door if you''re home before the sun, oh
-
-Pink, pink lemonade
-And does he kiss you ''til your lips explode?
-Pink, pink lemonade
-And does he take you places I can''t afford to go?
-Pink lemonade, you know I
-Know behind that sugar there''s only lies
-Lies, lies, lies
-
-Another magical Friday night
-I wonder what state you''re in
-In the powder or in the gin?
-This one''s ending bad
-You might also like
-So please give those recycled house tracks my warmest regards
-And, if you bring him home, can you use the spare bedroom? Oh
-
-Pink, pink lemonade
-And does he kiss you ''til your lips explode?
-Pink, pink lemonade
-And does he take you places I can''t afford to go?
-Pink lemonade, you know I
-Know behind that sugar there''s only lies
-Lies, lies, lies
-
-And that''s alright and that''s okay
-If I can write this song I can play that game
-And it''s all good with me if I know it''s all good with you
-''Cause getting lost in the middle of the in-between
-Is only half as frightening as it first may seem
-So do whatever you must and I''ll do whatever it must take
-
-Pink lemonade
-Pink lemonade
-Pink lemonade
-Pink lemonade', 75841);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (3307577, 'Cheetah Tongue', '
-I cut off my head and my cheetah tongue
-I can''t think straight and my mouth is numb
-Don''t shut your eyes till we fade to black
-Cause maybe this time the good stuff could last
-
-You won me over
-My orange cola got black flamingos crying for ya
-Well I''ll see you later
-I could be your faker
-My hands shake like jellyfish when you''re near
-
-I cut off my head and my cheetah tongue
-I can''t think straight and my mouth is numb
-Don''t shut your eyes till we fade to black
-Cause maybe this time the good stuff could last
-
-You''re a hammer, sweet firecracker
-Stumbling through Chinatown
-Liar, liar, my house is on fire
-Somewhere between Chinatown and here
-
-I cut off my head and my cheetah tongue
-I can''t think straight and my mouth is numb
-Don''t shut your eyes till we fade to black
-Cause maybe this time the good stuff could last
-You might also like
-Come a little closer, it''s alright
-I''ll be your character with flaws tonight
-Come a little closer, my firefly
-You''re not the only one who doesn''t want to be alone tonight
-
-I cut off my head and my cheetah tongue
-I can''t think straight and my mouth is numb
-Don''t shut your eyes till we fade to black
-Cause maybe this time the good stuff could last', 75841);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (740560, 'Be Your Shadow', '
-Tonight we''ll both go M.I.A
-In different towns but in similar ways
-I''ve tried my best, best to forget
-But I can''t, I can''t, I can''t
-Tonight we''ll scratch each other''s face
-If it''s in the moment no one complains
-I''ve tried my best to move along
-But I can''t, I can''t, I can''t
-
-Kiss me with your fist; it''s alright
-Wrap your hands around my throat; I won''t mind
-I''m permanent, now I won''t go
-I just want to be your shadow
-
-Just one more up-tempo tune
-The suits don''t care if their feet aren''t blue
-Are you aware of what''s going on
-In my heart, my heart, my heart?
-Those machine gun eyes
-Have fired crystals into me
-You''re such a violent high
-And I''m such a loose cannon, can''t you see?
-You might also like
-Kiss me with your fist; it''s alright
-Wrap your hands around my throat; I won''t mind
-I''m permanent, now I won''t go
-I just wanna be your shadow
-Hire a bus, drive it over my rib cage
-Snap my bank cards and throw them at my face
-I''m permanent, now I won''t go
-I just want to be your shadow
-
-And I just want to be
-The sum of your broken parts
-And I just want to be
-Your creature of the dark (I just want, I just want)
-And I just want to be (I just want, I just want)
-The sum of your broken parts (I just want, I just want)
-And I just want to be (I just want, I just want)
-Your creature of, your creature of the dark
-I just want to be your shadow...
-
-Kiss me with your fist; it''s alright
-Wrap your hands around my throat; I won''t mind
-I''m permanent, now I won''t go
-I just want to be your shadow
-I just want to be your shadow
-I just want to be your shadow', 75841);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (401718, 'Moving To New York', '
-I''ve just had the craziest week
-Like a party bag of lies, booze, and then deceit
-And I don''t know why I want to voice this out loud
-It''s therapeutic somehow
-
-So I''m moving to New York, ''cause I''ve got problems with my sleep
-And we''re not the same and I will wear that on my sleeve
-So I''m moving to New York, ''cause I''ve got issues with my sleep
-Looks like Christmas came early, Christmas came early for me
-
-I put one foot forward and ended up thirty yards back
-And am I losing touch or am I just completely off the track?
-And I don''t know why I want to voice this out loud
-It''s therapeutic somehow
-
-So I''m moving to New York, ''cause I''ve got problems with my sleep
-And we''re not the same and I will wear that on my sleeve
-So I''m moving to New York, ''cause I''ve got issues with my sleep
-Looks like Christmas came early, Christmas came early for me
-
-You might also like
-So I''m moving to New York, ''cause I''ve got problems with my sleep
-And we''re not the same and I will wear that on my sleeve
-So I''m moving to New York, ''cause I''ve got issues with my sleep
-Looks ', 75841);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (108833, 'Sex on Fire', '
-Lay where you''re layin''
-Don''t make a sound
-I know they''re watchin''
-They''re watchin''
-All the commotion
-The kiddie-like play
-It has people talkin''
-Talkin''
-
-You
-Your sex is on fire
-
-The dark of the alley
-The breakin'' of day
-Head while I''m drivin''
-I''m drivin''
-Soft lips are open
-Them knuckles are pale
-Feels like you''re dyin''
-You''re dyin''
-
-You
-Your sex is on fire
-Consumed
-With what''s to transpire
-See Kings of Leon LiveGet tickets as low as $26You might also like
-Hot as a fever
-Rattlin'' bones
-I could just taste it
-Taste it
-If it''s not forever
-If it''s just tonight
-Oh, we''re still the greatest
-The greatest, the greatest
-
-You
-Your sex is on fire
-You
-Your sex is on fire, ah
-Consumed
-With what''s to transpire
-And you
-Your sex is on fire
-Consume
-With what''s to transpire', 1174);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (51003, 'Use Somebody', '
-I''ve been roamin'' around, always lookin'' down at all I see
-Painted faces fill the places I can''t reach
-You know that I could use somebody
-You know that I could use somebody
-Someone like you and all you know and how you speak
-Countless lovers under cover of the street
-You know that I could use somebody
-You know that I could use somebody
-
-Someone like you
-
-Off in the night, while you live it up, I''m off to sleep
-Wagin'' wars to shape the poet and the beat
-I hope it''s gonna make you notice
-I hope it''s gonna make you notice
-
-Someone like me
-Someone like me
-Someone like me
-Somebody
-
-Don''t let it out
-Don''t let it out
-Don''t let it out
-Don''t let it out
-Don''t let it out
-Don''t let it out
-Don''t let it out
-See Kings of Leon LiveGet tickets as low as $26You might also like
-
-Someone like you
-Somebody
-Someone like you
-Somebody
-Someone like you
-Somebody
-
-I''ve been roamin'' around, always lookin'' down at all I see', 1174);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (2863016, 'WALLS', '
-I can''t get there on my own
-You can''t leave me here alone
-I’m just trying to do what’s right
-Oh a man ain''t a man ''less he''s fought the fight
-I could never point you out
-Waste of space in a faceless crowd
-Tell me what I have to say
-If you know what’s right, then you’ll walk away
-
-When the walls come down
-When the walls come down
-When the walls come down
-When the walls come down
-
-One by one I''ve seen em fall
-Some just don’t show up at all
-I’m just here to fight the fire
-Oh a man ain’t a man ''less he has desire
-
-And the walls come down
-And the walls come down
-When the walls come down
-When the walls come down
-See Kings of Leon LiveGet tickets as low as $26You might also like
-You tore out my heart
-And you threw it away
-The western girl with eastern eyes
-Took a wrong turn and found surprise awaits
-Now there’s nothing in the way
-In the way
-In the way
-In the way
-
-When the walls come down
-When the walls come down
-When the walls come down
-When the walls come down
-
-You tore out my heart
-You threw it away
-The western girl with eastern eyes
-Took a wrong turn and found surprise awaits
-Now there’s nothing in the way
-In the way
-In the way
-In the way', 1174);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (281627, 'Closer', '
-Stranded in this spooky town
-Stop lights are swaying and the phone lines are down
-Floor is crackling cold
-She took my heart, I think she took my soul
-With the moon I run
-Far from the carnage of the fiery sun
-
-Driven by the strangle of vein
-Showing no mercy, I''d do it again
-Open up your eyes
-You keep on crying, baby, I''ll bleed you dry
-Skies, they blink at me
-I see a storm bubbling up from the sea
-
-And it''s coming closer
-And it''s coming closer
-
-You shimmy shook my boat
-Leaving me stranded all in love on my own
-Do you think of me?
-Where am I now? Baby, where do I sleep?
-Feels so good, but I''m old
-Two thousand years of chasing taking it''s toll
-See Kings of Leon LiveGet tickets as low as $26You might also like
-And it''s coming closer
-And it''s coming closer
-And it''s coming closer
-And it''s coming closer', 1174);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (3182, 'I Want You', '
-Get back on track, pick me up some bottles of booze
-Fickle freshman, probably thinks she''s cooler than you
-A hay ride at 5, everybody''s coming around
-So go press your skirt, word is there''s a new girl in town
-I call shotgun, you can play your R&B tunes
-The fellowship time, it always comes a little too soon
-The land of the creeps, freshened up from baby-faced shave
-Put your eyes on me and I know a place where we can get away
-
-Just say, I want you
-Just ''xactly like I used to
-''Cause baby, this is only bringing me down
-
-Homeboy''s so proud, he finally got the video proof
-The night vision shows she was only ducking the truth
-It''s heavy, I know, the black cat with the gift down below
-A choke and a gag, she spit up and came back for more
-
-She said, I want you
-Just ''xactly like I used to
-And baby, this is only bringing me down
-She said, I want you
-See Kings of Leon LiveGet tickets as low as $26You might also like
-
-I want you
-Just ''xactly like I used to
-And baby, this is only bringing me down
-I said, I want you
-Just ''xactly like I used to
-And baby, this is only bringing me down', 1174);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (201408, 'Wait for Me', '
-Cut open my heart
-Right at the scar and loosen up
-Gonna do what I''m told
-Go where I''m told and loosen up
-Take a shot in the rain (Take a shot in the rain)
-One for the pain and loosen up
-I tried all the way
-
-Wait for me, wait for me
-Oh, it''s all better now, it''s all better now
-Wait for me, wait for me
-
-Goin'' to soften the blow
-Soften the blow and give it up
-I saw the surprise
-The look in your eyes, I gave it up
-Gonna be who I am
-Be who I am and give it up
-I tried all the way
-
-Wait for me, wait for me
-It''s all better now, it''s all better now
-Wait for me, wait for me
-Oh, it''s all better now, it''s all better now
-Wait for me, wait for me
-Oh, it''s all better now, it''s all better now
-Wait for me, wait for me
-See Kings of Leon LiveGet tickets as low as $26You might also like
-Woah
-
-It''s all better now, it''s all better now
-Wait for me, wait for me
-Oh, it''s all better now, it''s all better now
-Wait for me, wait for me
-Oh, it''s all better now, it''s all better now
-Wait for me, wait for me
-Oh, it''s all better now, it''s all better now
-Wait for me, wait for me', 1174);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (226428, 'Beautiful War', '
-Bite your tongue, don''t make a scene, dear
-Everybody''s been here at least once before
-But we''ve been here more
-Your heartbreak rolls down the window
-I''ve seen it all go and come back around
-And I''ve heard the sound
-
-The tip of your tongue, the top of your lungs
-Is doing my head in
-
-I said love don''t mean nothing
-''Less there''s something worth fighting for
-It''s a beautiful war
-
-When I hold the warmth of your body
-There is nobody that I''d rather hold
-Shattered and cold
-
-The tip of your tongue, the top of your lungs
-Is making me crazy
-See Kings of Leon LiveGet tickets as low as $26You might also like
-I said love don''t mean nothing
-''Less there''s something worth fighting for
-It''s a beautiful war
-I said love, it don''t mean nothing
-Unless there''s something worth fighting for
-It''s a beautiful war
-
-Oh
-It''s a beautiful war
-Beautiful war
-
-I said love
-I said love don''t mean nothing
-''Less there''s something worth fighting for
-I said love don''t mean nothing
-''Less there''s something worth fighting for
-It''s a beautiful war
-
-It''s a beautiful war
-It''s a beautiful war
-It''s a beautiful war', 1174);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (191353, 'Supersoaker', '
-My motivation is gone too soon
-The good vibrations all over you
-Act like you mean it
-You mean it
-You''ve got a story you never tell
-Down in the delta, you''re ringing bells
-I''ve never seen it
-Seen it
-Back of my mind, I''m on my way
-I see through smiles on every face
-I don''t believe it
-Believe it
-
-''Cause I''m the super soaker, red, white and blew ''em all away
-With a kiss as unclean as the words that you say
-
-I don''t mind sentimental girls at times
-Mr. Walker away, Walker away
-
-Your flags are flying across the plains
-I''ve got a secret picking in my brain
-I wanna see you
-See you
-The exit sign is on my face
-Don''t know my home, I don''t know my place
-I just wanna be there
-Be there
-See Kings of Leon LiveGet tickets as low as $26You might also like
-''Cause I''m the super soaker, red, white and blew ''em all away
-With a kiss as unclean as the words that you say
-
-I don''t mind sentimental girls at times
-Mr. Walker away, Walker away
-I don''t mind sentimental girls at times
-Mr. Walker away, oh
-
-I don''t mind sentimental girls at times
-I just lay it on the line, on the line
-(Away)
-
-I don''t mind sentimental girls at times
-Mr. Walker away, Walker away
-I don''t mind sentimental girls at times
-Mr. Walker away, oh', 1174);
 INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (3050777, '1-800-273-8255', '
 I''ve been on the low, I been taking my time
 I feel like I''m out of my mind
@@ -9537,660 +3089,3028 @@ KAI: Man, fuck yeah! That’s my dog!
 THOMAS: *Laughs* Okay. Thalia, simulate Big Sean
 THALIA: What up Kai, you lil'' bitch?
 KAI: Yeah, I''ma have to upgrade my shit', 7922);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (2398213, 'Work', '
-Work, work, work, work, work, work
-He said me haffi
-Work, work, work, work, work, work
-He see me do mi
-Dirt, dirt, dirt, dirt, dirt, dirt
-So me put in
-Work, work, work, work, work, work
-When you ah guh
-Learn, learn, learn, learn, learn?
-Me nuh cyar if him
-Hurt, hurt, hurt, hurt, hurting
+INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (84641, 'Just What I Am', '
+I''m just what you made, God, not many I trust
+I''ma go my own way, God, take my fate to wherever you want
+I''m out here, on my son, won''t stop ''til I get me some
+Club-hoppin'', tryna get me some, bad bitches wanna get me sprung
+Early in the morning, I''m wakin'', bakin'', drinkin'', contemplatin''
+Ain''t no such thing as Satan, evil is what you make it
+Thank the Lord for that burning bush
+That big body Benz I was born to push
+On my way I''m burning kush, nigga, don''t be worried ''bout us
+Neighbors knockin'' on the door, asking can we turn it down
+I say, "Ain''t no music on", she said, "No, that weed is loud"
+Nigga, we ballin'', straight swaggin'', lost Hawk, but I''m maintainin''
+I''ve been told that I''m amazing, make sure keep that fire blazin'', we livin''
 
-Dry, me ah desert him
-Nuh time to have you lurking
-Him ah go act like he nuh like it
-You know I dealt with you the nicest
-Nuh body touch me, you nuh righteous
-Nuh badda, text me in a crisis
-I believed all of your dreams, adoration
-You took my heart and my keys and my patience
-You took my heart on my sleeve for decoration
-You mistaken my love I brought for you for foundation
-All that I wanted from you was to give me
-Something that I never had
-Something that you''ve never seen
-Something that you''ve never been
-Mmmmm
-But I wake up and act like nothing''s wrong
-Just get ready fi
+I (I need) need smoke (Oh, oh, oh, I need)
+I (I need) need to smoke
+Who gon'' hold me down now?
+I-I wanna get high y''all (Woah)
+I-I wanna get high y''all
+Nee-need it, need it to get by y''all (Woah, yeah)
+Can you get me high y''all? (Hey)
+I-I wanna get high y''all
+I-I-I wanna get high y''all
+Nee-need it, need it to get by y''all
+Can you get me high y''all? (Hey)
 You might also like
-Work, work, work, work, work, work
-He said me haffi
-Work, work, work, work, work, work
-He see me do mi
-Dirt, dirt, dirt, dirt, dirt, dirt!
-So me put in
-Work, work, work, work, work, work
-Ner, ner, ner, ner, ner, ner
-When yuh ago learn, learn, learn, learn, learn, learn?
-Before the tables turn, turn, turn, turn, turn, turn
+I''m just what you made, God, just what you made, God (Nee-need it)
+I''m just what you made, God, I''m just what you made
+(Nee-nee-need it) I''m just what you made, God
+I''m just what you made, God, I''m just what you made, (Mmm)
 
-Beg you something, please
-Baby, don''t you leave
-Don''t leave me stuck here in the streets, uh-huh
-If I get another chance to
-I will never, no, never neglect you
-I mean, who am I to hold your past against you?
-I just hope that it gets to you
-I hope that you see this through
-I hope that you see this true
-What can I say?
-Please recognize I''m tryin'', babe
-I have to
-Work, work, work, work, work, work
-He said me haffi
-Work, work, work, work, work, work
-He see me do mi
-Dirt, dirt, dirt, dirt, dirt, dirt
-So me put in
-Work, work, work, work, work, work
-When you ah guh
-Learn, learn, learn, learn, learn?
-Me nuh cyar if him
-Hurt, hurt, hurt, hurt, hurting
+Let me tell you ''bout my month y''all
+Endless shopping, I had a ball
+I had to ball for therapy, my shrink don''t think that helps at all
+Whatever, that man ain''t wearing these leather pants
+I diagnose my damn self, these damn pills ain''t working fam
+In-In my spare time, punching walls, fucking up my hand
+I know that shit sound super cray, but if you had my life you''d understand
+But, I can''t fold, some poor soul got it way worse
+We''re all troubled in a world of trouble
+It''s scary to have a kid walk this Earth
+I''m what you made, God, fuck yes, I''m so odd
+Thinking ''bout all my old friends who weren''t my friends all along
+Hm, when it rains it pours, whiskey bottles on the sinks and floors
+Every day to find sane''s a chore, amidst a dream with no exit doors
 
-Yeah, okay
-You need to get done, done, done, done at work, come over
-We just need to slow the motion
-Don''t give that away to no one
-Long distance, I need you
-When I see potential, I just gotta see it through
-If you had a twin, I would still choose you
-I don''t wanna rush into it if it''s too soon
-But I know you need to get done, done, done, done
-If you come over
-Sorry if I''m way less friendly
-I got niggas tryna end me, oh (Yeah)
-I spilled all my emotions tonight, I''m sorry
-Rollin'', rollin'', rollin'', rollin'', rollin''
-How many more shots until you''re rollin''?
-We just need a face-to-face
-You could pick the time and the place
-You spent some time away
-Now you need to forward and give me all the
-Work, work, work, work, work, work
-He said me haffi
-Work, work, work, work, work, work
-He see me do mi
-Dirt, dirt, dirt, dirt, dirt, dirt
-So me put in
-Work, work, work, work, work, work
-When you ah guh
-Learn, learn, learn, learn, learn?
-Me nuh cyar if him
-Hurt, hurt, hurt, hurt, hurting
+I (I need) need smoke (Oh, oh, oh, I need)
+I (I need) need to smoke
+Who gon'' hold me down now?
+I-I wanna get high y''all (Woah)
+I-I wanna get high y''all
+Nee-need it, need it to get by y''all (Woah, yeah)
+Can you get me high y''all? (Hey)
+I-I wanna get high y''all
+I-I-I wanna get high y''all
+Nee-need it, need it to get by y''all
+Can you get me high y''all? (Hey)
+I''m just what you made, God, just what you made, God (Nee-need it)
+I''m just what you made, God, I''m just what you made
+(Nee-nee-need it) I''m just what you made, God
+I''m just what you made, God, I''m just what you made (Mmm)
 
-Mm
-Mm
-Work, work, work, work, work, work
-Mm
-', 89);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (2378935, 'Love on the Brain', '
-And you got me like, oh
-What you want from me? (What you want from me?)
-And I tried to buy your pretty heart, but the price too high
-Baby, you got me like, oh, mmm
-You love when I fall apart (Fall apart)
-So you can put me together and throw me against the wall
+Nee-need it to get by, yeah
+Willy', 68);
+INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (401, 'Pursuit of Happiness (Nightmare)', '
+Mm, ayy-oh
+Hey, Ratatat, yeah
+Na-na-na-na
+Na-na-na-na
 
-Baby, you got me like, I, woo, I
-Don''t you stop loving me (Loving me)
-Don''t quit loving me (Loving me)
-Just start loving me, oh (Loving me)
+Crush a bit, little bit, roll it up, take a hit
+Feelin'' lit, feelin'' right, 2 a.m., summer night
+I don''t care, hand on the wheel
+Driving drunk, I''m doing my thing
+Rolling the Midwest side and out
+Living my life, getting our dreams
+People told me slow my roll, I''m screaming out "Fuck that"
+I''ma do just what I want, looking ahead, no turnin'' back
+If I fall, if I die, know I lived it to the fullest
+If I fall, if I die, know I lived and missed some bullets
 
-And, babe, I''m fist-fighting with fire
-Just to get close to you
-Can we burn something, babe?
-And I''ll run for miles just to get a taste
-Must be love on the brain
-That''s got me feeling this way (Feeling this way)
-It beats me black and blue, but it fucks me so good
-And I can''t get enough
-Must be love on the brain, yeah
-And it keeps cursing my name (Cursing my name)
-No matter what I do, I''m no good without you
-And I can''t get enough
-Must be love on the brain
+I''m on the pursuit of happiness, and I know
+Everything that shine ain''t always gonna be gold, hey
+I''ll be fine once I get it
+I''ll be good
+I''m on the pursuit of happiness and I know
+Everything that shine ain''t always gonna be gold, hey
+I''ll be fine once I get it
+I''ll be good
 You might also like
-Baby, keep loving me
-Just love me, yeah
-Just love me
-All you need to do is love me, yeah
-Got me like, ow
-I''m tired of being played like a violin
-What do I gotta do to get in your motherfuckin'' heart?
+Tell me, what you know about dreamin'', dreamin''?
+You don''t really know about nothin'', nothin''
+Tell me, what you know about the night terrors every night?
+5 a.m., cold sweats, waking up to the sky
+Tell me, what you know about dreams, dreams?
+Tell me, what you know about night terrors? Nothing
+You don''t really care about the trials of tomorrow
+Rather lay awake in the bed full of sorrow
 
-Baby, like, I, woo I
-Don''t you stop loving me (Loving me)
-Don''t quit loving me (Loving me)
-Just start loving me, ooh (Loving me)
+I''m on the pursuit of happiness, and I know
+Everything that shine ain''t always gonna be gold, hey
+I''ll be fine once I get it
+I''ll be good
+I''m on the pursuit of happiness, and I know
+Everything that shine ain''t always gonna be gold, hey
+I''ll be fine once I get it
+I''ll be good
 
-And, babe, I''m fist-fighting with fire
-Just to get close to you
-Can we burn something, babe?
-And I''ll run for miles just to get a taste
-Must be love on the brain
-That''s got me feeling this way (Feeling this way)
-It beats me black and blue, but it fucks me so good
-And I can''t get enough
-Must be love on the brain, yeah
-And it keeps cursing my name (Cursing my name)
-No matter what I do, I''m no good without you
-And I can''t get enough
-Must be love on the brain
-', 89);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (2413890, 'Needed Me', '
-Mustard on the beat, ho!
+I''m on the pursuit of happiness
+I know everything that shine ain''t always gold
+I''ll be fine once I get it
+I''ll be good
 
-I was good on my own, that''s the way it was
-That''s the way it was
-You was good on the low for a faded fuck
-On some faded love
-Shit, what the fuck you complaining for?
-Feeling jaded, huh?
-Used to trip off that shit I was kickin'' to you
-Had some fun on the run though I''ll give it to you
+I''m on the pursuit of happiness, and I know
+Everything that shine ain''t always gonna be gold, hey
+I''ll be fine once I get it
+I''ll be good
+I''m on the pursuit of happiness, and I know
+Everything that shine ain''t always gonna be gold, hey
+I''ll be fine once I get it
+I''ll be good
 
-But baby, don''t get it twisted
-You was just another nigga on the hit list
-Tryna fix your inner issues with a bad bitch
-Didn''t they tell you that I was a savage?
-Fuck ya white horse and ya carriage
-Bet you never could imagine
-Never told you you could have it
+Pursuit of happiness, yeah
+I gon'' get it, I''ll be good
+Oh, oh, man, oh, ugh
+Room''s spinning, room''s spinning
+Pat, Zuli, oh, fuck
+Oh my God, why''d I drink so much and smoke so much? Oh
+Oh, fuck', 68);
+INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (131, 'Day ‘N’ Nite (Nightmare)', '
+Uh, uh
+Uh, uh
+Uh, uh
 
-You needed me
-Ooh, you needed me
-To feel a little more, and give a little less
-Know you hate to confess
-But baby ooh, you needed me
+Day and night
+I toss and turn, I keep stress in my mind, mind
+I look for peace, but see, I don''t attain
+What I need for keeps, this silly game we play, play
+Now look at this
+Madness, the magnet keeps attracting me, me
+I try to run, but see, I''m not that fast
+I think I''m first but surely finish last, last
+''Cause day and night
+The lonely stoner seems to free his mind at night
+He''s all alone through the day and night
+The lonely loner seems to free his mind at night, at, at, at night
+Day and night
+The lonely stoner seems to free his mind at night
+He''s all alone, some things will never change
+The lonely loner seems to free his mind at night, at, at, at night
+
+Hold the phone
+The lonely stoner, Mr. Solo Dolo
+He''s on the move, can''t seem to shake the shade
+Within his dreams he sees the life he made, made
+The pain is deep
+A silent sleeper, you won''t hear a peep, peep
+The girl he wants don''t seem to want him too
+It seems the feelings that she had are through, through
 You might also like
-You been rollin'' around, shit I''m rollin'' up
-Light and roll it up
-Break it down, like a pound, shit was never us
-Shit was never us
-That''s the real, on the real, are you serious?
-How you feel, how you feel?
-Used to trip off that shit I was kickin'' to ya
-Had some fun on the run though, I''ll give it to ya
+''Cause day and night
+The lonely stoner seems to free his mind at night
+He''s all alone through the day and night
+The lonely loner seems to free his mind at night, at, at, at night
+Day and night
+The lonely stoner seems to free his mind at night
+He''s all alone, some things will never change (Yeah)
+The lonely loner seems to free his mind at night, at, at, at night
+(Yeah, yeah)
 
-But baby, don''t get it twisted
-You was just another nigga on the hit list
-Tryna fix your inner issues with a bad bitch
-Didn''t they tell you that I was a savage?
-Fuck ya white horse and ya carriage
-Bet you never could imagine
-Never told you you could have it
+Slow mo''
+When the tempo slows up and creates that new, new
+He seems alive though he is feeling blue
+The sun is shining, man, he''s super cool, cool
+The lonely nights
+They fade away, he slips into his white Nikes
+He smokes a clip and then he''s on the way
+To free his mind in search of, to free his mind in search of
+To free his mind in search of
+Day and night
+The lonely stoner seems to free his mind at night
+He''s all alone through the day and night
+The lonely loner seems to free his mind at night, at, at, at night
+Day and night
+The lonely stoner seems to free his mind at night
+He''s all alone, some things will never change
+The lonely loner seems to free his mind at night, at, at, at night
+At, at, at night, night
+Na-na-na-na-na-na, Kid Cudi
+Cleveland status, grind all day
+Cleveland status, grind all night
+Cleveland status, grind all day
+Cleveland status, grind all night', 68);
+INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (402, 'Soundtrack 2 My Life', '
+I got 99 problems and they all bitches
+Wish I was Jigga man, carefree livin''
+But I''m not Shawn or Martin Louis
+I''m that Cleveland nigga rollin'' with them Brooklyn boys
+You knowin'' how it be when you start living large
+I control my own life, Charles was never in charge
+No sitcom could teach Scott about the dram
+Or even explain the troubles that haunted my mom
+On Christmas time, my mom Christmas grind
+Got me most of what I wanted, how''d you do it, Mom, huh?
+She copped the toys I would play with in my room by myself
+"Why he by himself?"
+He got two older brothers; one hood, one good
+An independent older sister kept me fly when she could
+But they all didn''t see
+The little bit of sadness in me
+Scotty
 
-You needed me
-Ooh, you needed me
-To feel a little more, and give a little less
-Know you hate to confess
-But baby ooh, you needed me', 89);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (97160, 'Stay', '
-All along, it was a fever
-A cold sweat, hot-headed believer
-I threw my hands in the air, said, "Show me something"
-He said, "If you dare, come a little closer"
+I''ve got some issues that nobody can see
+And all of these emotions are pouring out of me
+I bring them to the light for you, it''s only right
+This is the soundtrack to my life, the soundtrack to my life
 
-''Round and around and around and around, we go
-Oh, now, tell me now, tell me now, tell me now you know
-
-Not really sure how to feel about it
-Something in the way you move
-Makes me feel like I can''t live without you
-It takes me all the way
-I want you to stay
-It''s not much of a life you''re living
-It''s not just something you take, it''s given
-
-''Round and around and around and around, we go
-Oh, now, tell me now, tell me now, tell me now you know
-
-Not really sure how to feel about it
-Something in the way you move
-Makes me feel like I can''t live without you
-It takes me all the way
-And I want you to stay
+I''m super paranoid, like a sixth sense
+Since my father died, I ain''t been right since
+And I tried to piece the puzzle of the universe
+Split an eighth of shrooms just so I could see the universe
+I try and think about myself as a sacrifice
+Just to show the kids they ain''t the only ones who up at night
+The moon will illuminate my room
+And soon I''m consumed by my doom
+Once upon a time, nobody gave a fuck
+It''s all said and done and my cock''s been sucked
+So now I''m in the cut, alcohol in the wound
+My heart''s an open sore that I hope heals soon
+I live in a cocoon opposite of Cancún
+Where it is never sunny, the dark side of the moon
+So it''s more than right I try and shed some light on a man
+Not many people of this planet understand, fam
 You might also like
-Ooh
-The reason I hold on
-Ooh
-''Cause I need this hole gone
-Well, funny you''re the broken one
-But I''m the only one who needed saving
-''Cause when you never see the light
-It''s hard to know which one of us is caving
+I''ve got some issues that nobody can see
+And all of these emotions are pouring out of me
+I bring ''em to the light for you, it''s only right
+This is the soundtrack to my life, the soundtrack to my life
 
-Not really sure how to feel about it
-Something in the way you move
-Makes me feel like I can''t live without you
-It takes me all the way
-I want you to stay
-Stay
+I''m this close to go and trying some coke
+And a happy ending would be slittin'' my throat
+Ignorance to cope, man, ignorance is bliss
+Ignorance is love and I need that shit
+If I never did shows then I''d prolly be a myth
+If I cared about the blogs then I''d prolly be a jackass
+Don''t give a shit what people talkin'' ''bout, fam
+Haters shake my hand but I keep the sanitizer on deck
+Hope I really get to see 30
+Wanna settle down, stop being so flirty
+Most of the clean faces be the most dirty
+I just need a thoroughbred, cook when I''m hungry
+Ass all chunky, brain is insanity
+Only things that calm me down; pussy, and some Cali tree
+And I get both, never truly satisfied
+I am happy, that''s just the saddest lie
 
-I want you to stay
-Ooh', 89);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (2397579, 'Kiss It Better', '
-Kiss it, kiss it better, baby
-Kiss it, kiss it better, baby
+I''ve got some issues that nobody can see
+And all of these emotions are pouring out of me
+I bring ''em to the light for you, it''s only right
+This is the soundtrack to my life, the soundtrack to my life
+To my life, to my life, to my life...
+Uh
+Yeah, uh-huh
+Yeah, uh-huh
+Yeah, uh-huh
+Yeah, uh-huh
+Yeah
+Yeah
+Yeah', 68);
+INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (5748123, 'The Adventures of Moon Man & Slim Shady', '
+Yep (Aww)
+Yep (Mmm-aww)
+Uh-huh
+Yeah, nigga
 
-Been waitin'' on that sunshine, boy
-I think I need that back
-Can''t do it like that
-No one else gon'' get it like that
-So why argue? You yell, but cha take me back
-Who cares, when it feels like crack?
-Boy, ya know that you always do it right
-
-Man, fuck yo pride
-Just take it on back, boy, take it on back, boy
-Take it back all night
-Just take it on back, take it on back
-Mmm, do what cha gotta do, keep me up all night
-Hurtin'' vibe, man, it hurts inside when I look you in yo eye
-
-What are you willing to do?
-Oh, tell me what you’re willing to do
-(Kiss it, kiss it better, baby)
-Oh, what are you willing to do?
-Oh, tell me what you’re willing to do
-(Kiss it, kiss it better, baby)
+Yeah, it''s been a minute, but I''m back in it (Uh)
+Y''all ain''t dealing with the same boy (No)
+Got a little trippy, then I transitioned (Yeah)
+New attitude mixed with that pure raw (Aw)
+The night game, your girl called
+She like, "Do me, baby, down to get busy, busy?" (Yes)
+No dice, chill, whoadie (No)
+In life, feeling dizzy
+Oh, having visions of the city and I go to war
+See me in the day through the late night (Night)
+Tell ''em it''s the charm, I''m in freeze mode
+To the gods, can''t stop a hero when he in flight (Flight)
+I''m swimming in the light right
+Go and get you some, go and show ''em something, this a new thang
+Yeah, I let my nuts hang (Yeah)
+Knock your top off with LeBron or Dwyane Wade (Yeah)
+Aww, lift off
+Can''t stunt a nigga growth, better get gone, move along (Uh)
+You don''t wanna trip, wanna get it on (Uh)
+You don''t wanna act, don''t get me wrong (Nah)
+They don''t listen to the words in the song (Uh-huh)
+We ain''t gotta tell ''em, we just getting ready (Yeah)
+See ''em fronting, we ain''t kidding
+If you want it, you can get it
+Members of the rage, come and get you some
+Next step''s out the jet from the lean back
+Running ''round the world and we ain''t packed
+Hit ''em, vroom, vroom, leave ''em stuck, oh, you seen that?
+I''m chillin'' where the team at
+See a black Benz pull up with some jawns, yeah, I need that
+So crazy, can''t believe it
+No cams, damn, no filming at all, real nigga facts (Come on)
+Years ago, rehab
+All good, helped me figure out another plan
+It got bad, so bad
+Nah, I ain''t fucking love that, man
+Then I hopped out in a new zone with my Louis bag
+True story, take you through the dark and the light (Yeah)
+Godson, got through new
+Back up in the world, it''s the day in the life (Cud)
+Hit the blunt and get it (Dude)
+Raised bars (Uh), same song, we did it (Yeah)
+Hot sauce, pour it on all jams, explicit
+Carry on, smoke strong, got your mama down with it (Come on)
+And the game fuckin'' needed something dirty raw
+Tell them this the law and we weeded (Uh)
 You might also like
-Been waitin'' on that sunshine, boy
-I think I need that back
-Can''t do it like that
-No one else gon'' get it like that
-So why argue? You here, here to take me back
-Who cares, when it feels like crack?
-Boy, ya know that you always do it right
+So if it''s God you believe in (Yeah)
+Bob your head and just nod in agreement (Yeah)
+They say time''s undefeated
+I''ma be the first one who can beat it (Yeah)
+I had hoop dreams, now I shoot threes (What?)
+Got a lil'' green (Yeah), but I don''t do weed (Nope)
+Purp nor lean (Nah), that''s Tunechi (Yeah)
+That''s New Orleans (What?), fuck Drew Brees (Yeah)
+Snoop D-O-double (Uh), that''s two G''s (Yup)
+I probably spent on paper, ooh-wee
+Since Tuesday, probably killed a few trees (Yeah)
+But the only ones I smoke are the loose leaf
+Not high, but I''m your highness (What?)
+And secretly, you''re on my dick (Hah)
+But you haters are butthurt (Ow), bunch of sore hind-ends (Ow)
+I was just a poor white kid (Yeah)
+Now if rap was B-ball, I''d be Jordan-like, bitch (What?)
+You wish you could score like this (Nah), yeah
+Not even at half court, I''d miss (Nah)
+I''m mouthwash, ''cause if I was on the floor, I''d swish (Fluoride, fluoride, swish)
+But I cannot lie (Nah)
+I got you in my top five
+Worst rappers of all time (Hah)
+I lost my spot, y''all got Alzheim'' (Uh)
+King of rap? Nah, their words, not mine (Yeah)
+King of swear words and not lying (Yeah)
+You should never compare yours (Nope)
+A toll-free number (Yeah), only way you''ll ever have a hot line
+Fuck''s going on, man? (Yeah)
+Bunch of half-wits up in office (What?)
+Half of us walking around like a zombie apocalypse
+Other half are just pissed off and (Yeah)
+Don''t wanna wear a mask and they''re just scoffing
+And that''s how you end up catching the shit off ''em
+I just used the same basket as you shopping
+Now I''m in a fuckin'' casket from you coughin'' (Damn)
+Always stay ahead of haters, let ''em hate
+But never let a traitor penetrate your circle
+Separate yourself from those who try to pull you down
+The real ones never stray, it''s sort of like Medusa (Yeah)
+That''s how you stay ahead of snakes (Woo)
+Emcees pull out gats, I don''t give a fuck how strapped
+You''re gonna out-rap me? I doubt that
+Please, bitch, I''m a house rat
+These raps are ''bout that cheese like mousetraps
+Earthlings, I adapt to ''em
+Certain things, I don''t want to do, but have to in
+Order to just act human
+Like using a bathroom and vacuuming (Yeah)
+Rapping in the booth in a triple fat goose hazmat suit
+Bubble wrap and a mask too and
+I don''t think that''s what they meant by trap music (Nah)
+Running through ink like I''m tattooing (Yeah)
+This is music to be murdered by, you love
+Turn the volume up, I am fired up like a blunt
+Bread is long like an Italian sub, I am drugs
+That is probably why your opinion of me''s high as fuck
+And it''s nonstop fury (Yeah)
+''Cause I ain''t holding ''em up like an armed robbery (Nah)
+And God''s my jury, so when I die, I''m not worried (Nah)
+Prayers to George Floyd and Ahmaud Arbery (Yeah)
+How the fuck is it that so many cops are dirty? (Huh?)
+Stop, man, please, officer, I''m sorry
+But I can''t breathe when I got you on top of me
+Your goddamn knee''s on my carotid artery (Fuck)
+The adventures of Moon Man & Slim (Ah)
+Yes, who want it with them?
+The trilogy continues
+Serving niggas, yes, see what''s on the menu (Yeah)
+Watch ''em panic, hot damnit (Let''s get it, baby)
+Hope you fuckers understand it
+The realer for you niggas
+Come and get these scriptures (Yeah)
+Rap God (Uh)
+Rager', 68);
+INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (1822, 'The Prayer', '
+Ah, da-da, da-da, da-da-nah
+Ba-ba, ba-ba, ba-ba-da-ba-da
+La-la, la-la, la-la, la-la, la-la, la-la-la
+La-la, la-la, la-la, la-la-la
+Plain Pat, what up?
 
-Man, fuck yo pride
-Just take it on back, boy, take it on back, boy
-Take it back all night
-Just take it on back, take it on back
-Mmm, do what cha gotta do, keep me up all night
-Hurtin'' vibe, man, it hurts inside when I look you in yo eye
+My heart thump, not from being nervous
+Sometimes I''m thinking God made me special here on purpose
+So all the while, ''til I''m gone make my words important
+So if I slip away, if I die today
+The last thing you remember won''t be
+About some apple bottom jeans with the boots with the fur
+Maybe how I dream of being free since my birth
+Cursed, but the demons I confronted would disperse
+Have you ever heard of some shit so real?
+Beyond, from the heart, from the soul, you can feel
 
-What are you willing to do?
-Oh, tell me what you’re willing to do
-(Kiss it, kiss it better, baby)
-Oh, what are you willing to do?
-Oh, tell me what you’re willing to do
-(Kiss it, kiss it better, baby)
-
-I’ve been waitin'' up all night
-Baby tell me what’s wrong?
-You''re gonna make it right, make it all night long
-I’ve been waiting up all night
-Baby, tell me, what’s wrong?
-Going to make it right, make it all night long
-Man, fuck yo pride
-Just take it on back, boy, take it on back, boy
-Take it back all night
-Just take it on back, take it on back
-Mmm, do what cha gotta do, keep me up all night
-Hurtin'' vibe, man, it hurts inside when I look you in yo eye
-
-What are you willing to do?
-Oh, tell me what you’re willing to do
-(Kiss it, kiss it better, baby)
-Oh, what are you willing to do?
-Oh, tell me what you’re willing to do
-(Kiss it, kiss it better, baby)
-What are you willing to do?
-Oh, tell me what you’re willing to do
-(Kiss it, kiss it better, baby)
-Oh, what are you willing to do?
-Oh, tell me what you’re willing to do
-(Kiss it, kiss it better, baby)
-
-Kiss it, kiss it better, baby
-Kiss it, kiss it better, baby', 89);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (89794, 'Diamonds', '
-Shine bright like a diamond
-Shine bright like a diamond
-
-Find light in the beautiful sea, I choose to be happy
-You and I, you and I
-We''re like diamonds in the sky
-You''re a shooting star I see, a vision of ecstasy
-When you hold me, I''m alive
-We''re like diamonds in the sky
-
-I knew that we''d become one right away
-Oh, right away
-At first sight, I felt the energy of sun rays
-I saw the life inside your eyes
-
-So shine bright, tonight, you and I
-We''re beautiful, like diamonds in the sky
-Eye to eye, so alive
-We''re beautiful, like diamonds in the sky
-
-Shine bright like a diamond (Woah)
-Shine bright like a diamond (Woah)
-Shinin'' bright like a diamond
-We''re beautiful, like diamonds in the sky
-Shine bright like a diamond (Woah)
-Shine bright like a diamond (Woah)
-Shinin'' bright like a diamond
-We''re beautiful, like diamonds in the sky
+And if I die before I wake
+I pray the Lord, my soul, to take
+But please don''t cry
+Just know that I have made these songs for you
+And if I die before I wake
+I pray the Lord, my soul, to take
+''Cause I''m ready for the funeral
+Uh-oh, uh-oh, uh-oh
 You might also like
-Palms rise to the universe as we moonshine and molly
-Feel the warmth, we''ll never die
-We''re like diamonds in the sky
-You''re a shooting star I see, a vision of ecstasy
-When you hold me, I''m alive
-We''re like diamonds in the sky
+My mind runs, I could never catch it
+Even if I got a head start, God, please help me
+I am feeling so alone, wait
+I don''t need to worry ''cause I know the world''ll feel this nigga
+Blessing in disguise, but I am not hiding who I am, open your eyes, bruh
+If I ever met you, I appreciate the love, yo
+Girls that I dated, it''s okay, I am not mad, yo
+Unless you stabbed me in the heart, no love ho
+This shit is so ill
+Play it back from the top if you recognize real
 
-At first sight, I felt the energy of sun rays
-I saw the life inside your eyes
+And if I die before I wake
+I pray the Lord, my soul, to take
+But please don''t cry
+Just know that I have made these songs for you
+And if I die before I wake
+I pray the Lord, my soul, to take
+''Cause I''m ready for the funeral
+And if I die before I wake
+I pray the Lord, my soul, to take
+But please don''t cry
+Just know that I have made these songs for you
+And if I die before I wake
+I pray the Lord, my soul, to take
+''Cause I''m ready for the funeral
+I''m ready for that
+I''m ready for the funeral, hey-hey
+I''m ready for the funeral, hey
+I''m ready for the funeral
+Hey, I''m ready for it
+I''m ready for it
+I''m ready for the funeral', 68);
+INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (621, 'Erase Me', '
+She said I don''t spend time like I really should
+She said she don''t know me anymore
+I think she hates me deep down, I know she does
+She wants to erase me, hmm
+A couple days, no talking, I see my baby
+And this what she tells me
 
-So shine bright, tonight, you and I
-We''re beautiful, like diamonds in the sky
-Eye to eye, so alive
-We''re beautiful, like diamonds in the sky
+She said I keep on running, keep on running
+And nothing works, I can''t get away from you, no
+I keep on ducking, keep on ducking you, nothing helps
+I can''t stop missing you (Yeah)
 
-Shine bright like a diamond (Woah)
-Shine bright like a diamond (Woah)
-Shinin'' bright like a diamond
-We''re beautiful, like diamonds in the sky
-Shine bright like a diamond (Woah)
-Shine bright like a diamond (Woah)
-Shinin'' bright like a diamond
-We''re beautiful, like diamonds in the sky
-Shine bright like a diamond
-Shine bright like a diamond
-Shine bright like a diamond
+It''s like I''m her new nightmare, she ain''t escaping
+It makes me feel a bit complete (Yeah)
+Knowing someone you love don''t feel the same way about ya
+Memories they soon delete (Hmm)
+A couple weeks, no talking, I see my baby
+I missed you so damn much
+Hey, I wish we could start over, I told my baby
+This what this bitch tells me
 
-So shine bright, tonight, you and I
-We''re beautiful, like diamonds in the sky
-Eye to eye, so alive
-We''re beautiful, like diamonds in the sky
-
-Shine bright like a diamond (Woah)
-Shine bright like a diamond (Woah)
-Shine bright like a diamond
-Woah-oh, yeah
-Shine bright like a diamond (Woah)
-Shine bright like a diamond (Woah)
-Shine bright like a diamond
-Shine bright like a diamond', 89);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (1629, 'Umbrella', '
-Uh-huh, uh-huh (Yeah, Rihanna)
-Uh-huh, uh-huh (Good Girl Gone Bad)
-Uh-huh, uh-huh (Take three, action)
-Uh-huh, uh-huh (Hov)
-
-No clouds in my stones
-Let it rain, I hydroplane in the bank
-Comin'' down with the Dow Jones (Ayy, ayy, ayy)
-When the clouds come, we go, we Roc-A-Fella (Ayy-ayy-ayy, ayy)
-We fly higher than weather, in G5''s or better
-You know me (You know me)
-In anticipation for precipitation, stack chips for the rainy day
-Jay, Rain Man is back (Ayy-ayy-ayy, ayy)
-With Little Miss Sunshine, Rihanna, where you at?  (Ayy-ayy-ayy, ayy)
-
-You have my heart, and we''ll never be worlds apart
-May be in magazines but you''ll still be my star
-Baby, ''cause in the dark, you can''t see shiny cars
-And that''s when you need me there
-With you, I''ll always share because
-
-When the sun shine, we shine together
-Told you I''ll be here forever
-Said "I''ll always be your friend"
-Took an oath, I''ma stick it out ''til the end
-Now that it''s rainin'' more than ever
-Know that we''ll still have each other
-You can stand under my umbrella
-You can stand under my umbrella
-Ella-ella, ayy, ayy, ayy
-Under my umbrella
-Ella-ella, ayy, ayy, ayy
-Under my umbrella
-Ella-ella, ayy, ayy, ayy
-Under my umbrella
-Ella-ella, ayy, ayy, ayy, ayy, ayy, ayy
+She said I keep on running, keep on running, and nothing works
+I can''t get away from you, no
+I keep on ducking, keep on ducking you, nothing helps
+I can''t stop missing you
 You might also like
-These fancy things
-Will never come in between
-You''re part of my entity
-Here for infinity
-When the war has took its part
-When the world has dealt its cards
-If the hand is hard
-Together, we''ll mend your heart because
+Yeah, ''cause I''m in the magazines, on the TV
+No matter where you are, you might hear me (Uh)
+I''m in the magazines (Yeah), on the TV
+No matter where you go, you might see me (Hello, haha)
 
-When the sun shine, we shine together
-Told you I''ll be here forever
-Said "I''ll always be your friend"
-Took an oath, I''ma stick it out ''til the end
-Now that it''s rainin'' more than ever
-Know that we''ll still have each other
-You can stand under my umbrella
-You can stand under my umbrella
-Ella-ella, ayy, ayy, ayy
-Under my umbrella
-Ella-ella, ayy, ayy, ayy
-Under my umbrella
-Ella-ella, ayy, ayy, ayy
-Under my umbrella
-Ella-ella, ayy, ayy, ayy, ayy, ayy, ayy
-You can run into my arms
-It''s okay, don''t be alarmed
-Come into me
-There''s no distance in between our love
-So, gonna let the rain pour
-I''ll be all you need and more because
+Uh, I''m Yeezy, she say "Hi, I''m Aria"
+No, you a angel, you wave "Hi" to Aaliyah
+I got a show in Korea, they built a new arena
+Why don''t you come and watch a nigga tear the whole scene up
+I know I seen you before, but don''t know where I seen ya
+Oh I remember now, you something that I dreamed of
+Don C says she cool, but don''t let her fuck your cream up
+Monica Lewinsky on the dress, she''ll take you to the cleaners
+Sure enough, a week later, I''m in extra love
+And everybody know she''s mine so she extra plugged
+Every bouncer, every club show her extra love
+We just praying the new fame don''t get the best of us
+But all good things gotta come to a en-a
+She let it go to her head, "No, not my Aria"
+The height of her shopping was writer''s blocking me
+I couldn''t get my shit out anyway, I hope you die, Aria
 
-When the sun shine, we shine together
-Told you I''ll be here forever
-Said "I''ll always be your friend"
-Took an oath, I''ma stick it out ''til the end
-Now that it''s rainin'' more than ever
-Know that we''ll still have each other
-You can stand under my umbrella
-You can stand under my umbrella
-Ella-ella, ayy, ayy, ayy
-Under my umbrella
-Ella-ella, ayy, ayy, ayy
-Under my umbrella
-Ella-ella, ayy, ayy, ayy
-Under my umbrella
-Ella-ella, ayy, ayy, ayy, ayy, ayy, ayy
+She said I keep on running, keep on running
+And nothing works, I can''t get away from you, no
+I keep on ducking, keep on ducking you, nothing helps
+I can''t stop missing you', 68);
+INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (716442, '​love.', '
 
-It''s rainin'', rainin''
-Ooh, baby, it''s rainin'', rainin''
-Baby, come into me
-Come into me
-It''s rainin'', rainin''
-Ooh, baby, it''s rainin'', rainin''
-You can always come into me
-Come into me
-It''s pourin'' rain
-It''s pourin'' rain
-Come into me
-Come into me
-It''s pourin'' rain
-It''s pourin'' rain
-Come into me', 89);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (2414113, 'Sex With Me', '
-Sex with me, so amazing
-All this all hard work, no vacation
-Stay up off my Instagram, pure temptation
-Hit a switch on a fake nigga, like a station
-Sex with me, so amazing
-Sex with me, so amazing
+I am happy to be alive
+''Cause I know I could not be in a place that''s filled with lies
+Can''t stand no quiet nights, while I fill up my glass with pride
+Hopeful is all I know, how to keep me from silent cries
+Nothing I can say, facing all this pain in my way
 
-Vodka and water, and a lemon
-And a few other things I cannot mention
-Oh-na-na-na-na
-Five fingers on it (Five fingers)
-Hit it like you own it, I''ma hit it like I''m on it
-Straight shots of the blue dot
-(Shots, shots, shots, shots)
-Baby, I''ma pick your poison
-Oh-we, ah-yeah, you gon'' need it
-I''m off that la-la
-I''ma get it wet like jacuzzi, ah-yeah
+I fight it every day
+Why am I this way?
+A nigga tryna maintain
+I sit and tell myself, "Okay"
+We gotta find another way
+You gotta find another way
+You gotta find another way
 
-And sex with me, so amazing
-All this all hard work, no vacation
-Stay up off my Instagram, pure temptation
-Sex with me, sex with me, sex with me
-So amazing, so amazing, mmmm
+Don''t be so down, c''mon, young homie
+You''ll be okay, you''ll find real love
+All of the stories, the hero gets lonely
+Now is the time to show what you''re made of
+Don''t be so down, c''mon, young homie
+You''ll be okay, you''ll find real love
+All of the stories, the hero gets lonely
+Now is the time to show what you''re made of
 You might also like
-You know I got the sauce (Sauce), you know I''m saucy
-And it''s always wet, a bitch never ever had to use lip gloss on it
-I''ma need you deeper than six, it''s not a coffin
-We''re not making love, tryna get nasty
-Wrap up your drugs, come make me happy
-Sex with me is amazing, with her it''ll feel alright
-The sex doesn''t get any better, make it long, let it be all night
-I know, I know, I make it hard to let go
-Tonight, all night, I''m Monroe
-Even if I''m alone
+Now is the time to show what you''re made of
 
-Sex with me, so amazing
-All this all hard work, no vacation
-Stay up off my Instagram, pure temptation
-Hit a switch on a fake nigga, like a station
-Sex with me, sex with me, sex with me
-So amazing, so amazing, mmmm
+I am happy to be alive
+''Cause I know I could not be in a place so filled with lies
+Can''t stand no quiet nights, while I fill up my glass with pride
+Hopeful is all I know, how to keep me from silent cries
+Nothing I can say, done running from this pain in my way
 
-Sex with me, so amazing
-Sex with me so amazing
-(This is the best there is)', 89);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (731783, 'Bitch Better Have My Money', '
-Yayo, yayo
-Mula-la
-Yayo
+I''m fighting every day
+Why am I this way?
+A nigga tryna maintain
+I sit and tell myself, "Okay"
+We gotta find another way
+You gotta find another way
+You gotta find another way
 
-Bitch better have my money
-Y''all should know me well enough
-Bitch better have my money
-Please don''t call me on my bluff
-Pay me what you owe me
-Ballin'' bigger than LeBron
-Bitch, give me your money
-Who y''all think y''all frontin'' on?
+Don''t be so down, c''mon, young homie
+You''ll be okay, you''ll find real love
+All of the stories, the hero gets lonely
+Now is the time to show what you''re made of
+Don''t be so down, c''mon, young homie
+You''ll be okay, you''ll find real love
+All of the stories, the hero gets lonely
+Now is the time to show what you''re made of
+Don''t be so down, c''mon, young homie
+You''ll be okay, you''ll find real love
+All of the stories, the hero gets lonely
+Now is the time to show what you''re made of
+Don''t be so down, c''mon, young homie
+You''ll be okay, you''ll find real love
+All of the stories, the hero gets lonely
+Now is the time to show what you''re made of
+Now is the time to show what you''re made of
 
-Like bra, bra, bra
-Louis XIII, and it''s all on me, nigga, you just bought a shot
-Kamikaze, if you think that you gon'' knock me off the top
-Shit, your wife in the backseat of my brand new foreign car
-Don''t act like you forgot
-I call the shots, shots, shots
-Like bra, bra, bra
-Pay me what you owe me, don''t act like you forgot
+Don''t be so down, c''mon, young homie
+You''ll be okay, you''ll find real love
+All of the stories, the hero gets lonely
+Now is the time to show what you''re made of
+Don''t be so down, c''mon, young homie
+You''ll be okay, you''ll find real love
+All of the stories, the hero gets lonely
+Now is the time to show what you''re made of', 68);
+INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (1652, 'Man on the Moon (The Anthem)', '
+(Yawn)
+Alright, run it
+I never gave a fuck
+I never gave a fuck about what niggas thought about me
+I mean, I did, but like, fuck it, you know what I''m saying?
+You gon'' love me, man
+You gon'' love me, man
 
-Bitch better have my money
-Bitch better have my money
-Pay me what you owe me
-Bitch better have my (Bitch better have my)
-Bitch better have my (Bitch better have my)
-Bitch better have my money
+They can''t comprehend
+Or even come close to understanding him
+I guess if I was boring they would love me more
+Guess if I was simple in the mind, everything would be fine
+Maybe if I was a jerk to girls
+Instead of being nice and speaking kind words
+Then maybe it would be okay to say then
+I wasn''t a good guy to begin with
+
+But my mind is all crazy, crazy, crazy, crazy
+They got me thinking I ain''t human
+Like I came in from above, above, above, above
+Feeling like an airplane in the sky
+But then they say I''m crazy, crazy, crazy, crazy
+They got me thinking I ain''t human
+Like I came in from above, above, above, above
+Feeling like a bird sitting high, high
 You might also like
-Turn up to Rihanna while the whole club fuckin'' wasted
-Every time I drop by, I am the only thing y''all playin''
-In a drop top, doin'' hundred, y''all in my rearview mirror racin''
-Where y''all at? Where y''all at? Where y''all at? (Where y''all at?)
+I be that man on the moon, I''m that man on the moon
+And I''mma do what I do, so do you, hey-hey
+I be posted with my blunt and a brew, my dude
+I''m that man on the moon, I''m up-up on the moon
 
-Like bra, bra, bra
-Louis XIII, and it''s all on me, nigga, you just bought a shot
-Kamikaze, if you think that you gon'' knock me off the top
-Shit, your wife in the backseat of my brand new foreign car
-Don''t act like you forgot
-I call the shots, shots, shots
-Like bra, bra, bra
-Pay me what you owe me, don''t act like you forgot
+It''s like, I''mma play all my stuff for everybody
+And you know, and all my people, they give me feedback
+You know, and they''ll be like
+"Yo, yo, why, why your shit sound so different?"
+You know what I''m saying?
+"Why yo- why yo- why your shit- like on another level- Why''s-
+Why''s it sound so different?"
+Like that''s a bad thing
+And I be like, "Why not, nigga?"
 
-Bitch better have my money
-Bitch better have my money
-Pay me what you owe me
-Bitch better have my (Bitch better have my)
-Bitch better have my (Bitch better have my)
-Bitch better have my money
-Bitch better have my money
-Bitch better have my money
-Pay me what you owe me
-Bitch better have my (Bitch better have my)
-Bitch better have my (Bitch better have my)
-Bitch better have my money
-Bitch better have my money
-Bitch better have my money
-Bitch, bitch, bitch better have my money
-Yo, that bitch better have my money
-Hold up
-My money
-Yo, my money
-That bitch better have my money
-Bitch better have my money', 89);
-INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (2413944, 'Consideration', '
-I come flutterin'' in from Neverland
-Time can never stop me, no, no, no, no
-I know you tried to
-I come ridin'' in on a pale white horse
-Handin'' out highs to less fortunate
-I do advise you
-Run it back, run it on back
-When you''re breakin'' it down for me
-''Cause I can''t hear you
-Two times, run it on back
-Will it ever make sense to me?
+Close my eyes, high in the dark
+It''s a curtain call; come one, come all
+All I do is try to make it simple
+The ones that make it complicated
+Never get congratulated
+I''m something different, all aspects
+Don''t want a woman just to love her assets
+I''ll still wife her up, even with her flat chest
+The type to get hurt, but that''s the past tense
+My mind is all hazy, hazy, hazy, hazy
+I be thinkin'' that I''m wrong
+''Cause they used to call me lame, lame, lame, lame
+My swag was a little different
+But then my mind is hazy, hazy, hazy, hazy
+I be thinkin'' that I''m wrong
+But they the ones who lame, lame, lame, lame
+I got the last laugh, nigga
 
-I got to do things my own way, darlin''
-Will you ever let me?
-Will you ever respect me? No
-Do things my own way, darlin''
-You should just let me
-Why you ain''t ever let me grow?
-When I look outside my window
-I can''t get no peace of mind
-When I look outside my window
-I can''t get no peace of mind, oh
+I be that man on the moon, I''m that man on the moon
+And I''mma do what I do, so do you, hey-hey
+I be posted with my blunt and a brew, my dude
+I''m that man on the moon, I''m up-up on the moon', 68);
+INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (7076626, 'All Too Well (10 Minute Version) (Taylor’s Version) [From The Vault]', '
+I walked through the door with you, the air was cold
+But somethin'' ''bout it felt like home somehow
+And I left my scarf there at your sister''s house
+And you''ve still got it in your drawer, even now
+
+Oh, your sweet disposition and my wide-eyed gaze
+We''re singin'' in the car, getting lost upstate
+Autumn leaves fallin'' down like pieces into place
+And I can picture it after all these days
+
+And I know it''s long gone and
+That magic''s not here no more
+And I might be okay, but I''m not fine at all
+Oh, oh, oh
+
+''Causе there we arе again on that little town street
+You almost ran the red ''cause you were lookin'' over at me
+Wind in my hair, I was there
+I remember it all too well
+
+Photo album on the counter, your cheeks were turnin'' red
+You used to be a little kid with glasses in a twin-sized bed
+And your mother''s tellin'' stories ''bout you on the tee-ball team
+You taught me ''bout your past, thinkin'' your future was me
+And you were tossing me the car keys, "Fuck the patriarchy"
+Keychain on the ground, we were always skippin'' town
+And I was thinkin'' on the drive down, "Any time now
+He''s gonna say it''s love," you never called it what it was
+''Til we were dead and gone and buried
+Check the pulse and come back swearin'' it''s the same
+After three months in the grave
+And then you wondered where it went to as I reached for you
+But all I felt was shame and you held my lifeless frame
+See Taylor Swift LiveGet tickets as low as $334You might also like
+And I know it''s long gone and
+There was nothing else I could do
+And I forget about you long enough
+To forget why I needed to
+
+''Cause there we are again in the middle of the night
+We''re dancin'' ''round the kitchen in the refrigerator light
+Down the stairs, I was there
+I remember it all too well
+And there we are again when nobody had to know
+You kept me like a secret, but I kept you like an oath
+Sacred prayer and we''d swear
+To remember it all too well, yeah
+
+Well, maybe we got lost in translation, maybe I asked for too much
+But maybe this thing was a masterpiece ''til you tore it all up
+Runnin'' scared, I was there
+I remember it all too well
+And you call me up again just to break me like a promise
+So casually cruel in the name of bein'' honest
+I''m a crumpled-up piece of paper lyin'' here
+''Cause I remember it all, all, all
+They say all''s well that ends well, but I''m in a new hell
+Every time you double-cross my mind
+You said if we had been closer in age, maybe it would''ve been fine
+And that made me want to die
+The idea you had of me, who was she?
+A never-needy, ever-lovely jewel whose shine reflects on you
+Not weepin'' in a party bathroom
+Some actress askin'' me what happened, you
+That''s what happened, you
+You who charmed my dad with self-effacing jokes
+Sippin'' coffee like you''re on a late-night show
+But then he watched me watch the front door all night, willin'' you to come
+And he said, "It''s supposed to be fun turning twenty-one"
+
+Time won''t fly, it''s like I''m paralyzed by it
+I''d like to be my old self again, but I''m still tryin'' to find it
+After plaid shirt days and nights when you made me your own
+Now you mail back my things and I walk home alone
+But you keep my old scarf from that very first week
+''Cause it reminds you of innocence and it smells like me
+You can''t get rid of it
+''Cause you remember it all too well, yeah
+
+''Cause there we are again when I loved you so
+Back before you lost the one real thing you''ve ever known
+It was rare, I was there
+I remember it all too well
+Wind in my hair, you were there
+You remember it all
+Down the stairs, you were there
+You remember it all
+It was rare, I was there
+I remember it all too well
+And I was never good at tellin'' jokes, but the punch line goes
+"I''ll get older, but your lovers stay my age"
+From when your Brooklyn broke my skin and bones
+I''m a soldier who''s returning half her weight
+And did the twin flame bruise paint you blue?
+Just between us, did the love affair maim you too?
+''Cause in this city''s barren cold
+I still remember the first fall of snow
+And how it glistened as it fell
+I remember it all too well
+
+Just between us, did the love affair maim you all too well?
+Just between us, do you remember it all too well?
+Just between us, I remember it (Just between us) all too well
+Wind in my hair, I was there, I was there (I was there)
+Down the stairs, I was there, I was there
+Sacred prayer, I was there, I was there
+It was rare, you remember it all too well
+Wind in my hair, I was there, I was there (Oh)
+Down the stairs, I was there, I was there (I was there)
+Sacred prayer, I was there, I was there
+It was rare, you remember it (All too well)
+Wind in my hair, I was there, I was there
+Down the stairs, I was there, I was there
+Sacred prayer, I was there, I was there
+It was rare, you remember it
+Wind in my hair, I was there, I was there
+Down the stairs, I was there, I was there
+Sacred prayer, I was there, I was there
+It was rare, you remember it', 1177);
+INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (7394358, 'All Too Well (10 Minute Version) (Taylor’s Version) [Live Acoustic]', '
+I walked through the door with you, the air was cold
+But something ''bout it felt like home somehow
+And I left my scarf there at your sister''s house
+And you''ve still got it in your drawer, even now
+
+Oh, your sweet disposition and my wide-eyed gaze
+We''re singing in the car, getting lost upstate
+Autumn leaves falling down like pieces into place
+And I can picture it after all these days
+
+And I know it''s long gone and
+That magic''s not here no more
+And I might be okay, but I''m not fine at all
+Oh, oh, oh
+
+''Cause there we are again on that little town street
+You almost ran the red ''cause you were lookin'' over at me
+Wind in my hair, I was there
+I remember it all too well
+
+Photo album on the counter, your cheeks were turning red
+You used to be a little kid with glasses in a twin-sized bed
+And your mother''s telling stories ''bout you on the tee-ball team
+You told me ''bout your past, thinking your future was me
+And you were tossing me the car keys, "Fuck the patriarchy"
+Key chain on the ground, we were always skipping town
+And I was thinking on the drive down, any time now
+He''s gonna say it''s love, you never called it what it was
+''Til we were dead and gone and buried
+Check the pulse and come back swearing it''s the same
+After three months in the grave
+And then you wondered where it went to as I reached for you
+But all I felt was shame and you held my lifeless frame
+See Taylor Swift LiveGet tickets as low as $334You might also like
+And I know it''s long gone and
+There was nothing else I could do
+And I forget about you long enough
+To forget why I needed to
+
+''Cause there we are again in the middle of the night
+We''re dancing ''round the kitchen in the refrigerator light
+Down the stairs, I was there
+I remember it all too well
+And there we are again when nobody had to know
+You kept me like a secret, but I kept you like an oath
+Sacred prayer and we''d swear
+To remember it all too well, yeah
+
+Well, maybe we got lost in translation
+Maybe I asked for too much
+But maybe this thing was a masterpiece
+''Til you tore it all up
+Running scared, I was there
+I remember it all too well
+And you call me up again just to break me like a promise
+So casually cruel in the name of being honest
+I''m a crumpled up piece of paper lying here
+''Cause I remember it all, all, all
+They say all''s well that ends well, but I''m in a new Hell
+Every time you double-cross my mind
+You said if we had been closer in age maybe it would have been fine
+And that made me want to die
+The idea you had of me, who was she?
+A never-needy, ever-lovely jewel whose shine reflects on you
+Not weeping in a party bathroom
+Some actress asking me what happened, you
+That''s what happened, you
+You who charmed my dad with self-effacing jokes
+Sipping coffee like you''re on a late-night show
+But then he watched me watch the front door all night, willing you to come
+And he said, "It''s supposed to be fun turning twenty-one"
+
+Time won''t fly, it''s like I''m paralyzed by it
+I''d like to be my old self again, but I''m still trying to find it
+After plaid shirt days and nights when you made me your own
+Now you mail back my things and I walk home alone
+But you keep my old scarf from that very first week
+''Cause it reminds you of innocence and it smells like me
+You can''t get rid of it
+''Cause you remember it all too well, yeah
+
+''Cause there we are again when I loved you so
+Back before you lost the one real thing you''ve ever known
+It was rare, I was there
+I remember it all too well
+Wind in my hair, you were there
+You remember it all
+Down the stairs, you were there
+You remember it all
+It was rare, I was there
+I remember it all too well
+And I was never good at telling jokes, but the punch line goes
+"I''ll get older, but your lovers stay my age"
+From when your Brooklyn broke my skin and bones
+I''m a soldier who''s returning half her weight
+And did the twin flame bruise paint you blue?
+Just between us, did the love affair maim you, too?
+''Cause in this city''s barren cold
+I still remember the first fall of snow
+And how it glistened as it fell
+I remember it all too well
+
+Just between us, did the love affair maim you all too well?
+Just between us, do you remember it all too well?
+Just between us, I remember it (Just between us), all too well
+Wind in my hair, I was there, I was there
+Down the stairs, I was there, I was there
+Sacred prayer, I was there, I was there
+It was rare, you remember it all too well
+Wind in my hair, I was there, I was there
+Down the stairs, I was there, I was there
+Sacred prayer, I was there, I was there
+It was rare, you remember it
+Wind in my hair, I was there, I was there
+Down the stairs, I was there, I was there
+Sacred prayer, I was there, I was there
+It was rare, you remember it
+Wind in my hair, I was there, I was there
+Down the stairs, I was there, I was there
+Sacred prayer, I was there, I was there
+It was rare, you remember it all too well
+
+I love you guys so much', 1177);
+INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (10024009, 'Fortnight', '
+I was supposed to be sent away
+But they forgot to come and get me
+I was a functioning alcoholic
+''Til nobody noticed my new aesthetic
+All of this to say I hope you''re okay
+But you''re the reason
+And no one here''s to blame
+But what about your quiet treason?
+
+And for a fortnight there, we were forever
+Run into you sometimes, ask about the weather
+Now you''re in my backyard, turned into good neighbors
+Your wife waters flowers, I wanna kill her
+
+All my mornings are Mondays stuck in an endless February
+I took the miracle move-on drug, the effects were temporary
+And I love you, it''s ruining my life
+I love you, it''s ruining my life
+I touched you for only a fortnight
+I touched you, but I touched you
+
+And for a fortnight there, we were forever
+Run into you sometimes, ask about the weather
+Now you''re in my backyard, turned into good neighbors
+Your wife waters flowers, I wanna kill her
+And for a fortnight there, we were together
+Run into you sometimes, comment on my sweater
+Now you''re at the mailbox, turned into good neighbors
+My husband is cheating, I wanna kill him
+See Taylor Swift LiveGet tickets as low as $334You might also like
+I love you, it''s ruining my life
+I love you, it''s ruining my life
+I touched you for only a fortnight
+I touched you, I touched you
+I love you, it''s ruining my life
+I love you, it''s ruining my life
+I touched you for only a fortnight
+I touched you, I touched you
+
+Thought of callin'' ya, but you won''t pick up
+''Nother fortnight lost in America
+Move to Florida, buy the car you want
+But it won''t start up ''til you touch, touch, touch me
+Thought of calling ya, but you won''t pick up
+''Nother fortnight lost in America
+Move to Florida, buy the car you want
+But it won''t start up ''til I touch, touch, touch you', 1177);
+INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (5793984, '​cardigan', '
+Vintage tee, brand new phone
+High heels on cobblestones
+When you are young, they assume you know nothing
+Sequin smile, black lipstick
+Sensual politics
+When you are young, they assume you know nothing
+
+But I knew you
+Dancin'' in your Levi''s
+Drunk under a streetlight, I
+I knew you
+Hand under my sweatshirt
+Baby, kiss it better, I
+
+And when I felt like I was an old cardigan
+Under someone''s bed
+You put me on and said I was your favorite
+
+A friend to all is a friend to none
+Chase two girls, lose the one
+When you are young, they assume you know nothing
+See Taylor Swift LiveGet tickets as low as $334You might also like
+But I knew you
+Playing hide-and-seek and
+Giving me your weekends, I
+I knew you
+Your heartbeat on the High Line
+Once in twenty lifetimes, I
+
+And when I felt like I was an old cardigan
+Under someone''s bed
+You put me on and said I was your favorite
+
+To kiss in cars and downtown bars
+Was all we needed
+You drew stars around my scars
+But now I''m bleedin''
+
+''Cause I knew you
+Steppin'' on the last train
+Marked me like a bloodstain, I
+I knew you
+Tried to change the ending
+Peter losing Wendy, I
+I knew you
+Leavin'' like a father
+Running like water, I
+And when you are young, they assume you know nothing
+But I knew you''d linger like a tattoo kiss
+I knew you''d haunt all of my what-ifs
+The smell of smoke would hang around this long
+''Cause I knew everything when I was young
+I knew I''d curse you for the longest time
+Chasin'' shadows in the grocery line
+I knew you''d miss me once the thrill expired
+And you''d be standin'' in my front porch light
+And I knew you''d come back to me
+You''d come back to me
+And you''d come back to me
+And you''d come back
+
+And when I felt like I was an old cardigan
+Under someone''s bed
+You put me on and said I was your favorite', 1177);
+INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (10024536, 'So Long, London', '
+So (So) long (Long), London (London)
+So (So) long (Long), London (London)
+So (So) long (Long), London (London)
+I saw in my mind fairy lights through the mist
+I kept calm and carried the weight of the rift
+Pulled him in tighter each time he was driftin'' away
+My spine split from carrying us up the hill
+Wet through my clothes, weary bones caught the chill
+I stopped tryna make him laugh, stopped tryna drill the safe
+
+Thinkin'', "How much sad did you think I had
+Did you think I had in me?"
+Oh, the tragedy
+So long, London
+You''ll find someone
+
+I didn''t opt in to be your odd man out
+I founded the club she''s heard great things about
+I left all I knew, you left me at the house by the Heath
+I stoppеd CPR, after all, it''s no use
+The spirit was gonе, we would never come to
+And I''m pissed off you let me give you all that youth for free
+See Taylor Swift LiveGet tickets as low as $334You might also like
+For so long, London
+Stitches undone
+Two graves, one gun
+I''ll find someone
+
+And you say I abandoned the ship
+But I was going down with it
+My white-knuckle dying grip
+Holding tight to your quiet resentment
+And my friends said it isn''t right to be scared
+Every day of a love affair
+Every breath feels like rarest air
+When you''re not sure if he wants to be there
+
+So how much sad did you think I had
+Did you think I had in me?
+How much tragedy?
+Just how low did you
+Think I''d go ''fore I''d self-implode?
+''Fore I''d have to go be free?
+
+You swore that you loved me, but where were the clues?
+I died on the altar waitin'' for the proof
+You sacrificed us to the gods of your bluest days
+And I''m just getting color back into my face
+I''m just mad as hell ''cause I loved this place for
+So (So) long (Long), London (London)
+Had (Had) a (A) good (Good) run (Run)
+A moment (Moment) of warm sun (Sun)
+But I''m (I''m) not (Not) the (The) one (One)
+So (So) long (Long), London (London)
+Stitches (Stitches) undone (Undone)
+Two (Two) graves (Graves) one gun (Gun)
+You''ll (You''ll) find (Find) someone', 1177);
+INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (5793983, '​exile', '
+I can see you standing, honey
+With his arms around your body
+Laughin'', but the joke''s not funny at all
+And it took you five whole minutes
+To pack us up and leave me with it
+Holdin'' all this love out here in the hall
+
+I think I''ve seen this film before
+And I didn''t like the ending
+You''re not my homeland anymore
+So what am I defending now?
+You were my town, now I''m in exile, seein'' you out
+I think I''ve seen this film before
+
+Ooh, ooh, ooh
+
+I can see you starin'', honey
+Like he''s just your understudy
+Like you''d get your knuckles bloody for me
+Second, third, and hundredth chances
+Balancin'' on breaking branches
+Those eyes add insult to injury
+See Taylor Swift LiveGet tickets as low as $334You might also like
+I think I''ve seen this film before
+And I didn''t like the ending
+I''m not your problem anymore
+So who am I offending now?
+You were my crown, now I''m in exile, seein'' you out
+I think I''ve seen this film before
+So I''m leaving out the side door
+So step right out, there is no amount
+Of crying I can do for you
+All this time
+We always walked a very thin line
+You didn''t even hear me out (You didn''t even hear me out)
+You never gave a warning sign (I gave so many signs)
+All this time
+I never learned to read your mind (Never learned to read my mind)
+I couldn''t turn things around (You never turned things around)
+''Cause you never gave a warning sign (I gave so many signs)
+So many signs, so many signs
+You didn''t even see the signs
+
+I think I''ve seen this film before
+And I didn''t like the ending
+You''re not my homeland anymore
+So what am I defending now?
+You were my town, now I''m in exile, seein'' you out
+I think I''ve seen this film before
+So I''m leavin'' out the side door
+So step right out, there is no amount
+Of crying I can do for you
+All this time
+We always walked a very thin line
+You didn''t even hear me out (Didn''t even hear me out)
+You never gave a warning sign (I gave so many signs)
+All this time
+I never learned to read your mind (Never learned to read my mind)
+I couldn''t turn things around (You never turned things around)
+''Cause you never gave a warning sign (I gave so many signs)
+You never gave a warning sign (All this time)
+(So many times) I never learned to read your mind
+(So many signs) I couldn''t turn things around (I couldn''t turn things around)
+''Cause you never gave a warning sign (You never gave a warning sign)
+You never gave a warning sign
+Ah, ah', 1177);
+INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (10024578, 'The Tortured Poets Department', '
+You left your typewriter at my apartment
+Straight from the tortured poets department
+I think some things I never say
+Like, "Who uses typewriters anyway?"
+But you''re in self-sabotage mode
+Throwing spikes down on the road
+But I''ve seen this episode and still loved the show
+Who else decodes you?
+
+And who''s gonna hold you like me?
+And who''s gonna know you, if not me?
+I laughed in your face and said
+"You''re not Dylan Thomas, I''m not Patti Smith
+This ain''t the Chelsea Hotel, we''rе modern idiots"
+And who''s gonna hold you like me?
+
+Nobody
+No-fucking-body
+Nobody
+
+You smokеd, then ate seven bars of chocolate
+We declared Charlie Puth should be a bigger artist
+I scratch your head, you fall asleep
+Like a tattooed golden retriever
+But you awaken with dread
+Pounding nails in your head
+But I''ve read this one where you come undone
+I chose this cyclone with you
+See Taylor Swift LiveGet tickets as low as $334You might also like
+And who''s gonna hold you like me?
+(Who''s gonna hold you? Who''s gonna hold you?)
+And who''s gonna know you like me?
+(Who''s gonna know you?)
+I laughed in your face and said
+"You''re not Dylan Thomas, I''m not Patti Smith
+This ain''t the Chelsea Hotel, we''re modern idiots"
+And who''s gonna hold you like me?
+(Who''s gonna hold you? Who''s gonna hold you?)
+
+No-fucking-body
+(Who''s gonna hold you? Who''s gonna hold you?)
+Nobody
+(Who''s gonna hold you? Gonna know you? Gonna troll you?)
+Nobody
+
+Sometimes, I wonder if you''re gonna screw this up with me
+But you told Lucy you''d kill yourself if I ever leave
+And I had said that to Jack about you, so I felt seen
+Everyone we know understands why it''s meant to be
+''Cause we''re crazy
+So tell me, who else is gonna know me?
+At dinner, you take my ring off my middle finger
+And put it on the one people put wedding rings on
+And that''s the closest I''ve come to my heart exploding
+Who''s gonna hold you? (Who?)
+Me
+Who''s gonna know you? (Who?)
+Me
+And you''re not Dylan Thomas, I''m not Patti Smith
+This ain''t the Chelsea Hotel, we''re two idiots
+Who''s gonna hold you?
+
+Who''s gonna hold you?
+Who''s gonna hold you?
+Who''s gonna hold you?
+Who''s gonna hold you?
+Who''s gonna hold you?
+Who''s gonna hold you?
+Who''s gonna hold you?
+Gonna know you? Gonna troll you?
+
+You left your typewriter at my apartment
+Straight from the tortured poets department
+Who else decodes you?', 1177);
+INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (4508914, 'Lover', '
+We could leave the Christmas lights up ''til January
+And this is our place, we make the rules
+And there''s a dazzling haze, a mysterious way about you, dear
+Have I known you twenty seconds or twenty years?
+Can I go where you go?
+Can we always be this close?
+Forever and ever, ah
+Take me out and take me home
+You''re my, my, my, my lover
+
+We could let our friends crash in the living room
+This is our place, we make the call
+And I''m highly suspicious that everyone who sees you wants you
+I''ve loved you three summers now, honey, but I want ''em all
+Can I go where you go?
+Can we always be this close?
+Forever and ever, ah
+Take me out and take me home (Forever and ever)
+You''re my, my, my, my lover
+See Taylor Swift LiveGet tickets as low as $334You might also like
+Ladies and gentlemen, will you please stand?
+With every guitar string scar on my hand
+I take this magnetic force of a man to be my lover
+My heart''s been borrowed and yours has been blue
+All''s well that ends well to end up with you
+Swear to be overdramatic and true to my lover
+And you''ll save all your dirtiest jokes for me
+And at every table, I''ll save you a seat, lover
+Can I go where you go?
+Can we always be this close?
+Forever and ever, ah
+Take me out and take me home (Forever and ever)
+You''re my, my, my, my
+Oh, you''re my, my, my, my
+Darling, you''re my, my, my, my lover', 1177);
+INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (10024535, 'Down Bad', '
+Did you really beam me up
+In a cloud of sparkling dust
+Just to do experiments on?
+Tell me I was the chosen one
+Showed me that this world is bigger than us
+Then sent me back where I came from
+
+For a moment, I knew cosmic love
+
+Now I''m down bad, cryin'' at the gym
+Everything comes out teenage petulance
+"Fuck it if I can''t have him"
+"I might just die, it would make no difference"
+Down bad, wakin'' up in blood
+Starin'' at the sky, come back and pick me up
+Fuck it if I can''t have us
+I might just not get up, I might stay
+
+Down bad
+Fuck it if I can''t have him
+Down bad
+Fuck it if I can''t have him
+See Taylor Swift LiveGet tickets as low as $334You might also like
+Did you take all my old clothes
+Just to leave me here, naked and alone
+In a field in my same old town
+That somehow seems so hollow now?
+They''ll say I''m nuts if I talk about
+The existence of you
+
+For a moment, I was heavenstruck
+
+Now I''m down bad, cryin'' at the gym (Cryin'' at the gym)
+Everything comes out teenage petulance
+"Fuck it if I can''t have him" (Fuck it if I can''t have him)
+"I might just die, it would make no difference"
+Down bad, wakin'' up in blood (Wakin'' up in blood)
+Starin'' at the sky, come back and pick me up
+Fuck it if I can''t have us
+I might just not get up, I might stay
+
+Down bad (Like I lost my twin)
+Fuck it if I can''t have him (Down bad)
+Down bad (Wavin'' at the ship)
+Fuck it if I can''t have him
+I loved your hostile takeovers
+Encounters closer and closer
+All your indecent exposures
+How dare you say that it''s—
+I''ll build you a fort on some planet
+Where they can all understand it
+How dare you think it''s romantic
+Leaving me safe and stranded
+''Cause fuck it, I was in love
+So fuck you if I can''t have us
+''Cause fuck it, I was in love
+
+Now I''m down bad, cryin'' at the gym (Cryin'' at the gym)
+Everything comes out teenage petulance
+"Fuck it if I can''t have him" (Can''t have him)
+"I might just die, it would make no difference"
+Down bad, wakin'' up in blood (Wakin'' up in blood)
+Starin'' at the sky, come back and pick me up
+Fuck it if I can''t have us
+I might just not get up, I might stay
+
+Down bad (Like I lost my twin)
+Fuck it if I can''t have him (I''m down bad)
+Down bad (Wavin'' at the ship)
+Fuck it if I can''t have him
+Like I lost my twin
+Fuck it if I can''t have him
+Down bad (Wavin'' at the ship)
+Fuck it if I can''t have him', 1177);
+INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (9538404, 'Is It Over Now? (Taylor’s Version) [From The Vault]', '
+(Is it? Is it? Is it? Is it? Is it?)
+
+Once the flight had flown (Uh-huh)
+With the wilt of the rose (Uh-huh)
+I slept all alone (Uh-huh)
+You still wouldn''t go
+
+Let''s fast forward to three hundred takeout coffees later
+I see your profile and your smile on unsuspecting waiters
+You dream of my mouth before it called you a lying traitor
+You search in every maiden''s bed for somethin'' greater, baby
+
+Was it over when she laid down on your couch?
+Was it over when he unbuttoned my blouse?
+"Come here," I whispered in your ear
+In your dream as you passеd out, baby
+Was it over then? And is it over now?
+
+(Is it? Is it? Is it?)
+
+Whеn you lost control (Uh-huh)
+Red blood, white snow (Uh-huh)
+Blue dress on a boat (Uh-huh)
+Your new girl is my clone
+See Taylor Swift LiveGet tickets as low as $334You might also like
+And did you think I didn''t see you?
+There were flashin'' lights
+At least I had the decency
+To keep my nights out of sight
+Only rumors ''bout my hips and thighs
+And my whispered sighs
+Oh, Lord, I think about jumpin''
+Off of very tall somethings
+Just to see you come runnin''
+And say the one thing I''ve been wanting, but no
+
+Let''s fast forward to three hundred awkward blind dates later (Oh)
+If she''s got blue eyes, I will surmise that you''ll probably date her (Oh, no)
+You dream of my mouth before it called you a lying traitor (Oh)
+You search in every model''s bed for somethin'' greater, baby
+
+Was it over when she laid down on your couch?
+Was it over when he unbuttoned my blouse?
+"Come here," I whispered in your ear
+In your dream as you passed out, baby
+Was it over then? And is it over now?
+Uh-huh
+(Is it? Is it? Is it?)
+Uh-huh
+(Is it? Is it?)
+Think I didn''t see you?
+There were flashin'' lights
+At least I had the decency
+To keep my nights out of sight
+Only rumors ''bout my hips and thighs
+And my whispered sighs
+Oh, Lord, I think about jumpin''
+Off of very tall somethings
+Just to see you come runnin'' (Runnin'')
+And say the one thing I''ve been wanting, but no
+
+(Flashin'' lights; Oh, Lord; Oh)
+Let''s fast forward to three hundred takeout coffees later (Oh)
+(Flashin'' lights) I was hoping you''d be there
+And say the one thing (Oh, Lord)
+I''ve been wanting (Oh, Lord)
+But no
+(Was it? Was it? Was it? Was it? Was it? Was it?)', 1177);
+INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (2342329, 'Love Yourself', '
+
+For all the times that you rained on my parade
+And all the clubs you get in using my name
+You think you broke my heart, oh girl, for goodness'' sake
+You think I''m cryin'' on my own, well, I ain''t
+
+And I didn''t wanna write a song
+''Cause I didn''t want anyone thinking I still care
+I don''t, but you still hit my phone up
+And baby, I''ll be movin'' on
+And I think you should be somethin'' I don''t wanna hold back
+Maybe you should know that
+
+My mama don''t like you and she likes everyone
+And I never like to admit that I was wrong
+And I''ve been so caught up in my job, didn''t see what''s going on
+But now I know, I''m better sleeping on my own
+
+''Cause if you like the way you look that much
+Oh baby, you should go and love yourself
+And if you think that I''m still holdin'' on to somethin''
+You should go and love yourself
 You might also like
-Let me cover your shit in glitter
-I could make it gold, gold
-Heard you tryna sell your soul, baby
-Word on the street, you run it low lately
-I needed you to please give my reflection a break
-From the face it''s seein'' now
-Ooh, darlin'', would you mind givin'' my reflection a break
-From the pain it''s feelin'' now?
+But when you told me that you hated my friends
+The only problem was with you and not them
+And every time you told me my opinion was wrong
+And tried to make me forget where I came from
 
-I got to do things my own way, darlin''
-You should just let me
-Will you ever respect me? No
-Do things my own way, darlin''
-You should just let me
-Why you ain''t ever let me grow?
-When I look outside my window
-I can''t get no peace of mind
-When I look outside my window
-I can''t get no peace of mind, oh
-Get no peace
-Get no peace
-Get, get, gettin'' no peace, oh
-Get no peace
-Get, g-get no peace, oh', 89);
+And I didn''t wanna write a song
+''Cause I didn''t want anyone thinking I still care
+I don''t, but you still hit my phone up
+And baby, I''ll be movin'' on
+And I think you should be somethin'' I don''t wanna hold back
+Maybe you should know that
+
+My mama don''t like you and she likes everyone
+And I never like to admit that I was wrong
+And I''ve been so caught up in my job, didn''t see what''s going on
+But now I know, I''m better sleeping on my own
+
+''Cause if you like the way you look that much
+Oh baby, you should go and love yourself
+And if you think that I''m still holdin'' on to somethin''
+You should go and love yourself
+For all the times that you made me feel small
+I fell in love, now I feel nothin'' at all
+I never felt so low and I was vulnerable
+Was I a fool to let you break down my walls?
+
+''Cause if you like the way you look that much
+Oh baby, you should go and love yourself
+And if you think that I''m still holdin'' on to somethin''
+You should go and love yourself
+''Cause if you like the way you look that much
+Oh baby, you should go and love yourself
+And if you think that I''m still holdin'' on to somethin''
+You should go and love yourself', 357);
+INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (566, 'Baby', '
+
+Oh, woah
+Oh, woah
+Oh, woah
+
+You know you love me (Yo), I know you care (Uh-huh)
+Just shout whenever (Yo), and I''ll be there (Uh-huh)
+You are my love (Yo), you are my heart (Uh-huh)
+And we will never, ever, ever be apart (Yo, uh-huh)
+Are we an item? (Yo) Girl, quit playin'' (Uh-huh)
+We''re just friends (Yo), what are you sayin''? (Uh-huh)
+Said, "There''s another" (Yo), and looked right in my eyes (Uh-huh)
+My first love broke my heart for the first time, and I was like (Yo, uh-huh)
+
+Baby, baby, baby, oh
+Like baby, baby, baby, no
+Like baby, baby, baby, oh
+I thought you''d always be mine, mine
+Baby, baby, baby, oh
+Like baby, baby, baby, no
+Like baby, baby, baby, oh
+I thought you''d always be mine, mine
+You might also like
+Oh, for you, I would''ve done whatever (Uh-huh)
+And I just can''t believe we ain''t together (Yo, uh-huh)
+And I wanna play it cool (Yo), but I''m losin'' you (Uh-huh)
+I''ll buy you anything (Yo), I''ll buy you any ring (Uh-huh)
+And I''m in pieces (Yo), baby, fix me (Uh-huh)
+And just shake me till you wake me from this bad dream (Yo, uh-huh)
+I''m goin'' down (Yo), down, down, down (Uh-huh)
+And I just can''t believe my first love won''t be around, and I''m like
+
+Baby, baby, baby, oh
+Like baby, baby, baby, no
+Like baby, baby, baby, oh
+I thought you''d always be mine, mine
+Baby, baby, baby, oh
+Like baby, baby, baby, no
+Like baby, baby, baby, oh
+I thought you''d always be mine, mine (Luda!)
+
+When I was thirteen, I had my first love
+There was nobody that compared to my baby, and nobody came between us nor could ever come above
+She had me goin'' crazy, oh, I was starstruck
+She woke me up daily, don''t need no Starbucks (Woo)
+She made my heart pound, and skip a beat when I see her in the street and
+At school on the playground, but I really wanna see her on the weekend
+She knows she got me dazing ''cause she was so amazing
+And now my heart is breakin'', but I just keep on sayin''
+Baby, baby, baby, oh
+Like baby, baby, baby, no
+Like baby, baby, baby, oh
+I thought you''d always be mine, mine
+Baby, baby, baby, oh
+Like baby, baby, baby, no
+Like baby, baby, baby, oh
+I thought you''d always be mine, mine
+
+I''m gone (Yeah-yeah-yeah, yeah-yeah-yeah)
+Now I''m all gone (Yeah-yeah-yeah, yeah-yeah-yeah)
+Now I''m all gone (Yeah-yeah-yeah, yeah-yeah-yeah)
+Now I''m all gone (Gone, gone, gone, gone), I''m gone', 357);
+INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (2323822, 'Sorry', '
+
+You gotta go and get angry at all of my honesty
+You know I try, but I don''t do too well with apologies
+I hope I don''t run out of time, could someone call a referee?
+''Cause I just need one more shot at forgiveness
+I know you know that I made those mistakes maybe once or twice
+And by once or twice, I mean maybe a couple of hundred times
+So let me, oh, let me redeem, oh, redeem, oh, myself tonight
+''Cause I just need one more shot at second chances
+
+Yeah, is it too late now to say sorry?
+''Cause I''m missing more than just your body
+Oh, is it too late now to say sorry?
+Yeah, I know that I let you down
+Is it too late to say I''m sorry now?
+
+I''m sorry, yeah
+Sorry, yeah
+Sorry
+Yeah, I know that I let you down
+Is it too late to say I''m sorry now?
+You might also like
+I''ll take every single piece of the blame if you want me to
+But you know that there is no innocent one in this game for two
+I''ll go, I''ll go and then you go, you go out and spill the truth
+Can we both say the words and forget this?
+
+Yeah, is it too late now to say sorry?
+''Cause I''m missing more than just your body
+Oh, is it too late now to say sorry?
+Yeah, I know that I let you down
+Is it too late to say I''m sorry now?
+I''m not just tryna get you back on me (Oh, no, no)
+''Cause I''m missing more than just your body (Your body)
+Oh, is it too late now to say sorry?
+Yeah, I know that I let you down
+Is it too late to say I''m sorry now?
+
+I''m sorry, yeah
+Sorry, oh
+Sorry
+Yeah, I know that I let you down (I know I let you down)
+Is it too late to say I''m sorry now?
+I''m sorry, yeah
+Sorry, oh
+Sorry
+Yeah, I know that I let you down (I know I let you down)
+Is it too late to say I''m sorry now?', 357);
+INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (5124449, 'Yummy', '
+Yeah, you got that yummy-yum
+That yummy-yum, that yummy-yummy
+Yeah, you got that yummy-yum
+That yummy-yum, that yummy-yummy
+Say the word, on my way
+Yeah, babe, yeah, babe, yeah, babe
+Any night, any day
+Say the word, on my way
+Yeah, babe, yeah, babe, yeah, babe
+In the mornin'' or the late
+Say the word, on my way
+
+Bona fide stallion
+Ain''t in no stable, no, you stay on the run
+Ain''t on the side, you''re number one
+Yeah, every time I come around, you get it done
+
+Fifty-fifty, love the way you split it
+Hundred racks, help me spend it, babe
+Light a match, get litty, babe
+That jet set, watch the sunset kinda, yeah, yeah
+Rollin'' eyes back in my head, make my toes curl, yeah, yeah
+You might also like
+Yeah, you got that yummy-yum
+That yummy-yum, that yummy-yummy
+Yeah, you got that yummy-yum
+That yummy-yum, that yummy-yummy
+Say the word, on my way
+Yeah, babe, yeah, babe, yeah, babe
+Any night, any day
+Say the word, on my way
+Yeah, babe, yeah, babe, yeah, babe
+In the mornin'' or the late
+Say the word, on my way
+
+Standin'' up, keep me on the rise
+Lost control of myself, I''m compromised
+You''re incriminating, no disguise
+And you ain''t never runnin'' low on supplies
+
+Fifty-fifty, love the way you split it
+Hundred racks, help me spend it, babe
+Light a match, get litty, babe
+That jet set, watch the sunset kinda, yeah, yeah
+Rollin'' eyes back in my head, make my toes curl, yeah, yeah
+Yeah, you got that yummy-yum
+That yummy-yum, that yummy-yummy (You stay flexin'' on me)
+Yeah, you got that yummy-yum (Yeah, yeah)
+That yummy-yum, that yummy-yummy
+Say the word, on my way
+Yeah, babe, yeah, babe, yeah, babe (Yeah, babe)
+Any night, any day
+Say the word, on my way
+Yeah, babe, yeah, babe, yeah, babe (Yeah, babe)
+In the mornin'' or the late
+Say the word, on my way
+
+Hop in the Lambo'', I''m on my way
+Drew House slippers on with a smile on my face
+I''m elated that you are my lady
+You got the yum, yum, yum, yum
+You got the yum, yum-yum, woah
+Woah-ooh
+
+Yeah, you got that yummy-yum
+That yummy-yum, that yummy-yummy
+Yeah, you got that yummy-yum
+That yummy-yum, that yummy-yummy
+Say the word, on my way
+Yeah, babe, yeah, babe, yeah, babe (Yeah, babe)
+Any night, any day
+Say the word, on my way
+Yeah, babe, yeah, babe, yeah, babe (Yeah, babe)
+In the mornin'' or the late
+Say the word, on my way', 357);
+INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (77547, 'As Long As You Love Me', '
+As long as you love me
+(Love me, love me, love me, love me, love me, love me)
+As long as you love me
+(Love me, love me, love me, love me)
+As long as you love me
+
+We''re under pressure (We''re under pressure)
+Seven billion people in the world tryna fit in (Tryna fit in)
+Keep it together (Keep it together)
+Smile on your face, even though your heart is frowning (Frowning)
+But hey now (Hey now), you know, girl (You know, girl)
+We both know, it''s a cruel world (Cruel world)
+But I will (But I will) take my chances
+
+As long as you love me
+We could be starving, we could be homeless, we could be broke
+As long as you love me
+I''ll be your platinum, I''ll be your silver, I''ll be your gold
+As long as you love me, love me
+As long as you love me, love me
+
+I''ll be your soldier (I''ll be your soldier)
+Fighting every second of the day for your dreams, girl
+(For your dreams, girl)
+I''ll be your Hova (I''ll be your Hova)
+You could be my Destiny''s Child on the scene, girl
+So don''t stress (Don''t stress), and don''t cry (And don''t cry)
+Oh, we don''t need no wings to fly (Wings to fly)
+Just take (Take), my hand
+You might also like
+As long as you love me
+We could be starving, we could be homeless, we could be broke
+As long as you love me
+I''ll be your platinum, I''ll be your silver, I''ll be your gold
+As long as you love me, love me
+As long as you love me, love me
+
+Woah, woah, B-I-G
+I don''t know if this makes sense, but, you''re my hallelujah
+Give me a time and place, I''ll rendezvous it
+I''ll fly you to it, I''ll beat you there
+Girl, you know I got you
+Us, trust, a couple things I can''t spell without ''U''
+Now we on top of the world (World) ''cause that''s just how we do
+Used to tell me sky''s the limit, now the sky''s our point of view
+Man, we stepping out, like woah (Oh God)
+Cameras point and shoot (Shoot)
+Ask me, "What''s my best side?"
+I stand back and point at you, you, you
+The one that I argue with, feel like I need a new girl to be bothered with
+But the grass ain''t always greener on the other side
+It''s green where you water it
+So I know, we got issues baby, true, true, true
+But I''d rather work on this with you
+Than to go ahead and start with someone new
+As long as you love me
+As long as you love me (Yeah, yeah, baby)
+We could be starving, we could be homeless, we could be broke
+As long as you love me
+I''ll be your platinum (Platinum), I''ll be your silver, I''ll be your gold
+
+As long as you love me
+As long as you love me
+As long as you love me (I''ll be your silver, I''ll be your gold)
+As long as you love me, you love me, you love me, yeah
+(It''s all I want, baby)
+As long as you love me, you love me (Please don''t go)
+As long as you love me, as long as you love me
+As long as you love me, yeah
+As long as you love me (Love me, love me, love me, love me)', 357);
+INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (2286779, 'What Do You Mean?', '
+
+What do you mean?  Oh, oh
+When you nod your head yes, but you wanna  say no
+What do you mean?  Hey, yeah
+When you don''t want me to move, but you tell me to go
+What do  you mean? Oh,  what do you mean?
+Said you''re runnin'' outta time,  what do you mean?
+Oh, oh, oh, what do you mean?
+Better make up your mind, what do you mean?
+
+You''re so indecisive of what I''m sayin''
+Tryna catch the beat, make up your heart
+Don''t know if you''re happy or complainin''
+Don''t want for us to end, where do I start?
+
+First you wanna go to the left, then you wanna turn right (Right)
+Wanna argue all day, makin'' love all night (All night)
+First you''re up, then you’re down, and then  between (''Tween)
+Oh, I really wanna know
+
+What do you mean? Oh, oh
+When you nod your head yes, but you wanna say no
+What do you mean? Hey, yeah
+When you don''t want me to move, but you tell me to go
+What do you mean? Oh, what do you mean?
+Said you''re runnin'' outta time, what do you mean?
+Oh, oh, oh, what do you mean? Better make up your mind
+What do you mean?
+You might also like
+You''re overprotective when I''m leavin''
+Tryna compromise, but I can’t win
+You wanna make a point, but you keep preachin''
+You had me from the start, won''t let this end
+
+First you wanna go to the left, then you wanna turn right
+(Turn right)
+Wanna argue all day, makin'' love all night (All night)
+First you''re up, then you’re down, and then between (''Tween)
+Oh, I really wanna know
+
+What do you mean? Oh, oh (Yeah, yeah, yeah, yeah)
+When you nod your head yes, but you wanna say no
+What do you mean? (Oh, what do you mean?) Hey, yeah
+When you don''t want me to move, but you tell me to go
+What do you mean? (I wanna know, ooh)
+Oh, what do you mean? (Ooh)
+Said you''re runnin'' outta time, what do you mean? (Oh, baby)
+Oh, oh, oh, what do you mean? Better make up your mind
+What do you mean? (Don''t be so selfish, baby, yeah, yeah) Oh, oh
+When you nod your head yes, but you wanna say no
+What do you mean? (You''re so confusin'', baby) Hey, yeah
+When you don''t want me to move (Hey), but you tell me to go
+What do you mean? (Be more straightforward)
+Oh, what do you mean? (Hey, ah, ah, ah)
+Said you''re runnin'' outta time, what do you mean? (Hey, ah, ah, ah)
+Oh, oh, oh, what do you mean?
+Better make up your mind, what do you mean?', 357);
+INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (6326342, 'Peaches', '
+I got my peaches out in Georgia (Oh, yeah, shit)
+I get my weed from California (That''s that shit)
+I took my chick up to the North, yeah (Badass bitch)
+I get my light right from the source, yeah (Yeah, that’s it)
+
+And I say, oh (Oh)
+The way I breathe you in (In)
+It''s the texture of your skin
+I wanna wrap my arms around you, baby
+Never let you go, oh
+And I say, oh
+There''s nothing like your touch
+It’s the way you lift me up, yeah
+And I''ll be right here with you ''til the end of time
+
+I got my peaches out in Georgia (Oh, yeah, shit)
+I get my weed from California (That''s that shit)
+I took my chick up to the North, yeah (Badass bitch)
+I get my light right from the source, yeah (Yeah, that''s it)
+
+You ain''t sure yet
+But I''m for ya
+All I can want, all I can wish for
+Nights alone that we miss more
+And days we save as souvenirs
+There''s no time, I wanna make more time
+And give you my whole life
+I left my girl, I’m in Mallorca
+Hate to leave her, call it torture
+Remember when I couldn’t hold her
+Left her baggage for Rimowa
+You might also like
+I got my peaches out in Georgia (Oh, yeah, shit)
+I get my weed from California (That''s that shit)
+I took my chick up to the North, yeah (Badass bitch)
+I get my light right from the source, yeah (Yeah, that’s it)
+
+I get the feeling, so I''m sure (Sure)
+Hand in my hand because I''m yours, I can''t
+I can’t pretend, I can''t ignore, you''re right for me
+Don''t think you wanna know just where I''ve been, oh
+Done bein'' distracted
+The one I need is right in my arms (Oh)
+Your kisses taste the sweetest with mine
+And I''ll be right here with you ''til the end of time
+
+I got my peaches out in Georgia (Oh, yeah, shit)
+I get my weed from California (That''s that shit)
+I took my chick up to the North, yeah (Badass bitch)
+I get my light right from the source, yeah (Yeah, that''s it)
+I got my peaches out in Georgia (Oh, yeah, shit)
+I get my weed from California (That''s that shit)
+I took my chick up to the North, yeah (Badass bitch)
+(I get my light right from the source, yeah, yeah, that''s it)
+I got my peaches out in Georgia (Oh, yeah, shit)
+I get my weed from California (That''s that shit)
+I took my chick up to the North, yeah (Badass bitch)
+I get my light right from the source, yeah (Yeah, that''s it)
+I got my peaches out in Georgia (Oh, yeah, shit)
+I get my weed from California (That''s that shit)
+I took my chick up to the North, yeah (Badass bitch)
+I get my light right from the source, yeah (Yeah, that''s it)', 357);
+INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (5956102, 'Holy', '
+I hear a lot about sinners
+Don''t think that I''ll be a saint
+But I might go down to the river
+''Cause the way that the sky opens up when we touch
+Yeah, it''s makin'' me say
+
+That the way you hold me, hold me, hold me, hold me, hold me
+Feels so holy, holy, holy, holy, holy
+On God
+Runnin'' to the altar like a track star
+Can''t wait another second
+''Cause the way you hold me, hold me, hold me, hold me, hold me
+Feels so holy
+
+I don''t do well with the drama
+And, no, I can''t stand it being fake
+(No, no, no, no, no, no, no, no)
+I don''t believe in nirvana
+But the way that we love in the night gave me life
+Baby, I can''t explain
+
+That the way you hold me, hold me, hold me, hold me, hold me
+Feels so holy, holy, holy, holy, holy
+On God
+Runnin'' to the altar like a track star
+Can''t wait another second
+''Cause the way you hold me, hold me, hold me, hold me, hold me
+Feels so holy
+You might also like
+They say we''re too young and
+The pimps and the players say, "Don''t go crushin''"
+Wise men say fools rush in
+But I don''t know (Ah-ah-ah-ah)
+They say we''re too young and
+The pimps and the players say, "Don''t go crushin''"
+Wise men say fools rush in
+But I don''t know (Chance the Rapper)
+
+The first step pleases the Father
+Might be the hardest to take
+But when you come out of the water
+I''m a believer, my heart is fleshy
+Life is short with a temper like Joe Pesci
+They always come and sing your praises, your name is catchy
+But they don''t see you how I see you, Parlay and Desi
+Cross, Tween, Tween, Hesi'' hit the jet speed
+When they get messy, go lefty like Lionel Messi
+Let''s take a trip and get the Vespas or rent a Jet Ski
+I know the spots that got the best weed, we goin'' next week
+I wanna honor, wanna honor you, bride''s groom, I''m my father''s child
+I know when the son takes the first steps, the Father''s proud (Yes)
+If you make it to the water, He''ll part the clouds (Uh)
+I know He made you a snack like Oscar Proud (Mwah)
+Suffer it to be so now gotta clean it up (Ooh)
+Formalize the union in communion, He can trust (Woo)
+I know I ain''t leavin'' you like I know He ain''t leavin'' us (Ah)
+I know we believe in God, and I know God believes in us
+''Cause the way you hold me, hold me, hold me, hold me, hold me
+Feels so holy, holy, holy, holy, holy
+On God
+Runnin'' to the altar like a track star
+Can''t wait another second, on God
+Runnin'' to the altar like a track star
+Can''t wait another second, on God
+Runnin'' to the altar like a track star
+Can''t wait another second
+''Cause the way you hold me, hold me, hold me, hold me
+Feels so ho-ho-ho-holy', 357);
+INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (5168488, 'Intentions', '
+Picture perfect, you don''t need no filter
+Gorgeous, make ''em drop dead, you a killer
+Shower you with all my attention
+Yeah, these are my only intentions
+Stay in the kitchen cookin'' up, got your own bread
+Heart full of equity, you''re an asset
+Make sure that you don''t need no mentions
+Yeah, these are my only intentions
+
+Shout-out to your mom and dad for makin'' you
+Standin'' ovation, they did a great job raisin'' you
+When I create, you''re my muse
+That kind of smile that makes the news
+Can''t nobody throw shade on your name in these streets
+Triple threat, you a boss, you a bae, you a beast
+You make it easy to choose
+You got a mean touch, I can''t refuse (No, I can''t refuse it)
+
+Picture perfect, you don''t need no filter
+Gorgeous, make ''em drop dead, you a killer
+Shower you with all my attention
+Yeah, these are my only intentions
+Stay in the kitchen cookin'' up, got your own bread
+Heart full of equity, you''re an asset
+Make sure that you don''t need no mentions
+Yeah, these are my only intentions
+You might also like
+Already passed, you don''t need no approval
+Good everywhere, don''t worry ''bout no refusal
+Second to none, you got the upper hand now
+Don''t need a sponsor, nope, you''re the brand now
+You''re my rock, my Colorado
+Got that ring, just like Toronto
+Love you now, a little more tomorrow
+This how I feel, act like you know that you are
+
+Picture perfect, you don''t need no filter
+Gorgeous, make ''em drop dead, you a killer
+Shower you with all my attention
+Yeah, these are my only intentions
+Stay in the kitchen cookin'' up, got your own bread (Whip it)
+Heart full of equity, you''re an asset (Asset)
+Make sure that you don''t need no mentions (Yeah, yeah)
+Yeah, these are my only intentions (Quavo)
+
+No cap, no pretendin'', you don''t need mentions (No cap)
+Got ''em sayin'' "goals," they don''t wanna be independent (''Pendent)
+Tell them to mind your business (Woo), we in our feelings
+It''s fifty-fifty percentage (Fifty), attention, we need commitment (Oh)
+We gotta both admit it (Both), it''s funny, we both listen (Both)
+It''s a blessing (Blessing) ''cause we both get it (Both)
+You the best thing (Woo), and I don''t need a witness (Best thing)
+I''ma find me a ring and pray it''s perfect fitted (Perfect, perfect, perfect)
+Picture perfect, you don''t need no filter (No filter)
+Gorgeous, make ''em drop dead, you a killer (Oh-oh)
+Shower you with all my attention (I will)
+Yeah, these are my only intentions (Yeah)
+Stay in the kitchen cookin'' up, got your own bread (You do)
+Heart full of equity, you''re an asset (Uh-huh)
+Make sure that you don''t need no mentions (No mentions)
+Yeah, these are my only intentions
+
+Only intentions
+That''s all I plan to do', 357);
+INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (77735, 'Beauty and a Beat', '
+Yeah
+Young Money
+Nicki Minaj
+Justin, rrr
+
+Show you off
+Tonight, I wanna show you off (Ayy-ayy-ayy)
+What you got
+A billion could''ve never bought (Ayy-ayy-ayy)
+
+We gonna party like it''s 3012 tonight
+I wanna show you all the finer things in life
+So just forget about the world, we young tonight
+I''m coming for ya, I''m coming for ya
+
+''Cause all I need
+Is a beauty and a beat
+Who can make my life complete
+It''s all ''bout you
+When the music makes you move
+Baby, do it like you do
+Cause all-
+You might also like
+
+Body rock
+Girl, I can feel your body rock (Ayy-ayy-ayy)
+Take a bow
+You''re on the hottest ticket now, ooh (Ayy-ayy-ayy)
+
+We gonna party like it''s 3012 tonight
+I want to show you all the finer things in life
+So just forget about the world, we young tonight
+I''m coming for ya, I''m coming for ya
+
+''Cause all I need
+Is a beauty and a beat
+Who can make my life complete
+It''s all ''bout you
+When the music makes you move
+Baby, do it like you do (Uh, uh)
+Cause all-
+
+I-I-I-I-In time, ink lines
+B-B-Bitches couldn''t get on my incline
+World tours, i-i-it''s mine
+Ten little letters on a big sign
+Justin Bieber
+You know I''ma hit ''em with the ether
+Buns out, wiener
+But I gotta keep an eye out for Selener
+B-B-Beauty, beauty and the beast
+Beauty from the East
+Beautiful confessions of the priest
+Beast, beauty from the streets
+Beat will get deceased
+Every time Beauty on the beat eats
+Body rock (Yeah, yeah)
+Oh (Yeah, yeah)
+I wanna feel your body rock (Let''s go, let''s go)
+(Frrrrr, yeah)
+''Cause all I need (All I need is love)
+Is a beauty and a beat (A beat)
+Who can make my life complete (Complete, oh-oh-oh, oh woah)
+It''s all ''bout you (All I need is you)
+When the music makes you move
+Baby, do it like you do (Do)
+Cause all-
+', 357);
+INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (387508, 'A Sky Full of Stars', '
+''Cause you''re a sky, ''cause you''re a sky full of stars
+I''m gonna give you my heart
+''Cause you''re a sky, ''cause you''re a sky full of stars
+''Cause you light up the path
+
+I don''t care, go on and tear me apart
+I don''t care if you do, ooh-ooh, ooh
+''Cause in a sky, ''cause in a sky full of stars
+I think I saw you ooh-ooh-ooh, ooh-ooh-ooh
+
+''Cause you''re a sky, ''cause you''re a sky full of stars
+I wanna die in your arms, oh-oh-oh, oh-oh
+''Cause you get lighter the more it gets dark
+I''m gonna give you my heart, oh
+
+I don''t care, go on and tear me apart
+I don''t care if you do, ooh-ooh, ooh
+''Cause in a sky, ''cause in a sky full of stars
+I think I see you ooh-ooh-ooh, ooh-ooh-ooh
+I think I see you ooh-ooh-ooh, ooh-ooh-ooh
+
+''Cause you''re a sky, you''re a sky full of stars
+Such a heavenly view
+You''re such a heavenly view
+(Yeah, yeah, yeah, ooh)See Coldplay LiveGet tickets as low as $68You might also like', 8351);
+INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (49192, 'Viva La Vida', '
+I used to rule the world
+Seas would rise when I gave the word
+Now in the morning, I sleep alone
+Sweep the streets I used to own
+
+
+I used to roll the dice
+Feel the fear in my enemy''s eyes
+Listen as the crowd would sing
+"Now the old king is dead, long live the king"
+One minute, I held the key
+Next, the walls were closed on me
+And I discovered that my castles stand
+Upon pillars of salt and pillars of sand
+
+I hear Jerusalem bells a-ringin''
+Roman cavalry choirs are singin''
+Be my mirror, my sword and shield
+My missionaries in a foreign field
+For some reason, I can''t explain
+Once you''d gone, there was never
+Never an honest word
+And that was when I ruled the world
+See Coldplay LiveGet tickets as low as $68You might also like
+
+It was a wicked and wild wind
+Blew down the doors to let me in
+Shattered windows and the sound of drums
+People couldn''t believe what I''d become
+Revolutionaries wait
+For my head on a silver plate
+Just a puppet on a lonely string (Mmm, mmm)
+Aw, who would ever wanna be king?
+
+I hear Jerusalem bells a-ringin''
+Roman cavalry choirs are singin''
+Be my mirror, my sword and shield
+My missionaries in a foreign field
+For some reason, I can''t explain
+I know Saint Peter won''t call my name
+Never an honest word
+But that was when I ruled the world
+
+Oh-oh-oh, oh-oh, oh
+Oh-oh-oh, oh-oh, oh
+Oh-oh-oh, oh-oh, oh
+Oh-oh-oh, oh-oh, oh
+(Oh-oh-oh, oh-oh, oh)
+Hear Jerusalem bells a-ringin''
+(Oh-oh-oh, oh-oh, oh)
+Roman cavalry choirs are singin''
+(Oh-oh-oh, oh-oh, oh)
+Be my mirror, my sword and shield
+(Oh-oh-oh, oh-oh, oh)
+My missionaries in a foreign field
+(Oh-oh-oh, oh-oh, oh)
+For some reason, I can''t explain
+(Oh-oh-oh, oh-oh, oh)
+I know Saint Peter won''t call my name
+Never an honest word
+But that was when I ruled the world
+
+Mmm, mmm, mmm, mmm
+Mmm, mmm, mmm, mmm
+Mmm, mmm', 8351);
+INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (77594, 'The Scientist', '
+Come up to meet you, tell you I''m sorry
+You don''t know how lovely you are
+I had to find you, tell you I need you
+And tell you I set you apart
+Tell me your secrets and ask me your questions
+No, let''s go back to the start
+Runnin'' in circles, comin'' up tails
+Heads on a science apart
+
+Nobody said it was easy
+It''s such a shame for us to part
+Nobody said it was easy
+No one ever said it would be this hard
+Oh, take me back to the start
+I was just guessin'' at numbers and figures
+Pullin'' your puzzles apart
+Questions of science, science and progress
+Do not speak as loud as my heart
+And tell me you love me, come back and haunt me
+Oh, and I rush to the start
+Runnin'' in circles, chasin'' our tails
+Comin'' back as we are
+See Coldplay LiveGet tickets as low as $68You might also like
+Nobody said it was easy
+Oh, it''s such a shame for us to part
+Nobody said it was easy
+No one ever said it would be so hard
+I''m goin'' back to the start
+
+
+Oh-ooh, ooh-ooh-ooh-ooh
+Ah-ooh, ooh-ooh-ooh-ooh
+Oh-ooh, ooh-ooh-ooh-ooh
+Oh-ooh, ooh-ooh-ooh-ooh', 8351);
+INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (77782, 'Yellow', '
+Look at the stars
+Look how they shine for you
+And everything you do
+Yeah, they were all yellow
+I came along
+I wrote a song for you
+And all the things you do
+And it was called "Yellow"
+So then I took my turn
+Oh, what a thing to have done
+And it was all yellow
+
+(Aah) Your skin, oh, yeah, your skin and bones
+(Ooh) Turn into something beautiful
+(Aah) And you know, you know I love you so
+You know I love you so
+
+I swam across
+I jumped across for you
+Oh, what a thing to do
+''Cause you were all yellow
+I drew a line
+I drew a line for you
+Oh, what a thing to do
+And it was all yellow
+See Coldplay LiveGet tickets as low as $68You might also like
+(Aah) And your skin, oh, yeah, your skin and bones
+(Ooh) Turn into something beautiful
+(Aah) And you know, for you, I''d bleed myself dry
+For you, I''d bleed myself dry
+
+It''s true
+Look how they shine for you
+Look how they shine for you
+Look how they shine for
+Look how they shine for you
+Look how they shine for you
+Look how they shine
+
+Look at the stars
+Look how they shine for you
+And all the things that you do', 8351);
+INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (79647, 'Fix You', '
+When you try your best, but you don''t succeed
+When you get what you want, but not what you need
+When you feel so tired, but you can''t sleep
+Stuck in reverse
+And the tears come streamin'' down your face
+When you lose somethin'' you can''t replace
+When you love someone, but it goes to waste
+Could it be worse?
+
+Lights will guide you home
+And ignite your bones
+And I will try to fix you
+
+And high up above or down below
+When you''re too in love to let it go
+But if you never try, you''ll never know
+Just what you''re worth
+
+Lights will guide you home
+And ignite your bones
+And I will try to fix you
+See Coldplay LiveGet tickets as low as $68You might also like
+
+Tears stream down your face
+When you lose somethin'' you cannot replace
+Tears stream down your face, and I...
+Tears stream down your face
+I promise you I will learn from my mistakes
+Tears stream down your face, and I...
+
+Lights will guide you home
+And ignite your bones
+And I will try to fix you', 8351);
+INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (2353271, 'Hymn for the Weekend', '
+And said drink from me, drink from me
+(I, oh, I, oh, I)
+That we shoot across the sky
+Got me feeling drunk and high
+Poured on a symphony
+So high, so high
+That we shoot across the sky
+Poured on a symphony
+Drink from me, drink from me
+(I, oh, I, oh, I)
+That we shoot across the sky
+Got me feelin'' drunk and high
+Poured on a symphony
+So high, so high
+That we shoot across the sky
+
+Oh, angel sent from up above
+You know you make my world light up
+When I was down, when I was hurt
+You came to lift me up
+Life is a drink and love''s a drug
+Oh, now I think I must be miles up
+When I was a river dried up
+You came to rain a flood
+See Coldplay LiveGet tickets as low as $68You might also like
+I said, drink from me, drink from me
+When I was so thirsty
+Poured on a symphony
+Now I just can''t get enough
+Put your wings on me, wings on me
+When I was so heavy
+Poured on a symphony
+When I''m low, low, low, low
+
+I, oh, I, oh, I
+Got me feeling drunk and high, so high, so high
+Oh, I, oh, I, oh, I
+Now I''m feeling drunk and high, so high, so high (Woo)
+(Ooh, ooh, ooh)
+
+Oh, angel sent from up above
+I feel you coursing through my blood
+Life is a drink and your love''s about
+To make the stars (Stars) come out
+
+Put your wings on me, wings on me
+When I was so heavy
+Poured on a symphony
+When I''m low, low, low, low
+I, oh, I, oh, I
+Got me feeling drunk and high, so high, so high
+Oh, I, oh, I, oh, I
+Now I''m feeling drunk and high, so high, so high
+
+I, oh, I, oh, I
+La, la, la, la, la, la, la, so high, so high
+I, oh, I, oh, I
+Now I''m feeling drunk and high, so high, so high
+That we shoot across the sky
+That we shoot across the
+That we shoot across the sky
+That we shoot across the (That we shoot)
+That we shoot across the sky
+That we shoot across the
+That we shoot across the sky
+That we shoot across the', 8351);
+INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (77781, 'Sparks', '
+Did I drive you away?
+I know what you''ll say
+You say, "Oh, sing one we know"
+But I promise you this
+I''ll always look out for you
+Yeah, that''s what I''ll do
+
+I say, oh
+I say, oh
+
+My heart is yours
+It''s you that I hold onto
+Yeah, that''s what I do
+And I know I was wrong
+But I won''t let you down
+Oh yeah I will, yeah I will, yes I will
+
+I said, oh
+I cry, oh
+
+Yeah, I saw sparks
+Yeah, I saw sparks
+And I saw sparks
+Yeah, I saw sparks
+See Coldplay LiveGet tickets as low as $68You might also like
+Sing it out
+La-la-la-la, oh-oh
+La-la-la-la, oh-oh
+La-la-la-la, oh-oh
+La-la-la-la, oh-oh', 8351);
+INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (2349494, 'Adventure of a Lifetime', '
+
+"Turn your magic on," Umi, she''d say
+"Everythin'' you want''s a dream away
+We are legends, every day"
+That''s what she told me
+"Turn your magic on," to me, she''d say
+"Everythin'' you want''s a dream away
+Under this pressure, under this weight
+We are diamonds"
+
+Now, I feel my heart beatin''
+I feel my heart underneath my skin
+Now, I feel my heart beatin''
+Oh, you make me feel
+
+Like I''m alive again
+(Alive again)
+Oh, you make me feel
+Like I''m alive again
+
+Said, "I can''t go on, not in this way
+I''m a dream that died by light of day
+Gonna hold up half the sky and say
+Only I own me"
+See Coldplay LiveGet tickets as low as $68You might also like
+Now, I feel my heart beatin''
+I feel my heart underneath my skin
+Oh, I can I feel my heart beatin''
+''Cause you make me feel
+
+Like I''m alive again
+(Alive again)
+Oh, you make me feel
+Like I''m alive again
+
+"Turn your magic on," Umi, she''d say
+"Everythin'' you want''s a dream away
+Under this pressure, under this weight
+We are diamonds takin'' shape
+We are diamonds takin'' shape"
+
+(Woo, woo-hoo)
+(Woo, woo-hoo)
+If we''ve only got this life, this adventure, oh, then I
+And if we''ve only got this life, you''ll get me through alive
+And if we''ve only got this life, in this adventure, oh, then I
+Want to share it with you, with you, with you
+Oh, see, yeah, see, yeah, I
+Do-hoo (Woo-hoo)
+Woo-hoo (Woo-hoo)
+Woo-hoo (Woo-hoo)
+Woo-hoo (Woo-hoo)
+Woo-hoo (Woo-hoo)
+Woo-hoo (Woo-hoo)
+Woo-hoo (woo-hoo)
+Woo-hoo (Woo-hoo)
+Woo-hoo (Woo-hoo)
+Woo-hoo (Woo-hoo)
+Woo-hoo (Woo-hoo)
+Woo-hoo (Woo-hoo)', 8351);
+INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (2378782, 'Everglow', '
+Oh, they say people come, say people go
+This particular diamond was extra special
+And though you might be gone, and the world may not know
+Still I see you celestial
+
+Like a lion you ran, a goddess you rolled
+Like an eagle you circled in perfect purple
+So how come things move on? How come cars don''t slow?
+When it feels like the end of my world
+When I should but I can''t let you go
+
+But when I''m cold, cold
+Yeah, when I''m cold, cold
+There''s a light that you give me when I''m in shadow
+There''s a feelin'' within me, everglow
+
+Like brothers in blood, sisters who ride
+And we swore on that night we''d be friends ''til we die
+But the changin'' of winds and the way waters flow
+Life is short as the fallin'' of snow
+And now I''m gonna miss you, I know
+See Coldplay LiveGet tickets as low as $68You might also like
+But when I''m cold, cold
+In water rolled, salt
+And I know that you''re with me and the way you will show
+And you''re with me wherever I go
+And you give me this feelin'', this everglow
+
+Oh, what I wouldn''t give for just a moment to hold
+Yeah, I live for this feelin'', this everglow
+
+So if you love someone, you should let them know
+Oh, the light that you left me will everglow', 8351);
+INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (53753, 'Clocks', '
+The lights go out, and I can''t be saved
+Tides that I tried to swim against
+Have brought me down upon my knees
+Oh, I beg, I beg and plead, singin''
+Come out of things unsaid
+Shoot an apple off my head, and a
+Trouble that can''t be named
+A tiger''s waitin'' to be tamed, singin''
+
+You are
+You are
+
+Confusion never stops
+Closin'' walls and tickin'' clocks, gonna
+Come back and take you home
+I could not stop, that you now know, singin''
+Come out upon my seas
+Cursed missed opportunities, am I
+A part of the cure?
+Or am I part of the disease? Singin''
+
+You are
+You are
+You are
+You are
+See Coldplay LiveGet tickets as low as $68You might also like
+You are
+You are
+
+And nothin'' else compares
+Oh, nothin'' else compares
+And nothin'' else compares
+
+You are
+You are
+
+Home, home, where I wanted to go
+Home, home, where I wanted to go
+Home (You are) home, where I wanted to go
+Home (You are) home, where I wanted to go', 8351);
+INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (2332455, 'Hello', '
+Hello, it''s me
+I was wondering if, after all these years, you''d like to meet
+To go over everything
+They say that time''s supposed to heal ya
+But I ain''t done much healin''
+Hello, can you hear me?
+I''m in California dreaming about who we used to be
+When we were younger and free
+I''ve forgotten how it felt before the world fell at our feet
+
+There''s such a difference between us
+And a million miles
+Hello from the other side
+I must''ve called a thousand times
+To tell you I''m sorry for everything that I''ve done
+But when I call, you never seem to be home
+Hello from the outside
+At least, I can say that I''ve tried
+To tell you I''m sorry for breaking your heart
+But it don''t matter, it clearly doesn''t tear you apart anymore
+
+Hello, how are you?
+It''s so typical of me to talk about myself, I''m sorry
+I hope that you''re well
+Did you ever make it out of that town
+Where nothing ever happened?
+See Adele LiveGet tickets as low as $96You might also like
+It''s no secret that the both of us
+Are running out of time
+So hello from the other side (Other side)
+I must''ve called a thousand times (Thousand times)
+To tell you I''m sorry for everything that I''ve done
+But when I call, you never seem to be home
+Hello from the outside (Outside)
+At least, I can say that I''ve tried (I''ve tried)
+To tell you I''m sorry for breaking your heart
+But it don''t matter, it clearly doesn''t tear you apart anymore
+
+(Highs, highs, highs, highs, lows, lows, lows, lows) Ooh, anymore
+(Highs, highs, highs, highs, lows, lows, lows, lows) Ooh, anymore
+(Highs, highs, highs, highs, lows, lows, lows, lows) Ooh, anymore
+(Highs, highs, highs, highs, lows, lows, lows, lows) Anymore
+Hello from the other side (Other side)
+I must''ve called a thousand times (Thousand times)
+To tell you I''m sorry for everything that I''ve done
+But when I call, you never seem to be home
+Hello from the outside (Outside)
+At least, I can say that I''ve tried (I''ve tried)
+To tell you I''m sorry for breaking your heart
+But it don''t matter, it clearly doesn''t tear you apart anymore
+', 2300);
+INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (7260084, 'Easy On Me', '
+There ain''t no gold in this river
+That I''ve been washin'' my hands in forever
+I know there is hope in these waters
+But I can''t bring myself to swim
+When I am drowning in this silence
+Baby, let me in
+Go easy on me, baby
+I was still a child
+Didn''t get the chance to
+Feel the world around me
+I had no time to choose what I chose to do
+So go easy on me
+
+There ain''t no room for things to change
+When we are both so deeply stuck in our ways
+You can''t deny how hard I''ve tried
+I changed who I was to put you both first
+But now I give up
+Go easy on mе, baby
+I was still a child
+Didn''t get the chance to
+Feel thе world around me
+Had no time to choose what I chose to do
+So go easy on me
+See Adele LiveGet tickets as low as $96You might also like
+I had good intentions
+And the highest hopes
+But I know right now
+It probably doesn''t even show
+Go easy on me, baby
+I was still a child
+I didn''t get the chance to
+Feel the world around me
+I had no time to choose what I chose to do
+So go easy on me', 2300);
+INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (51294, 'Someone Like You', '
+I heard that you''re settled down
+That you found a girl and you''re married now
+I heard that your dreams came true
+Guess she gave you things I didn''t give to you
+Old friend, why are you so shy?
+Ain''t like you to hold back or hide from the light
+
+I hate to turn up out of the blue, uninvited
+But I couldn''t stay away, I couldn''t fight it
+I had hoped you''d see my face
+And that you''d be reminded that for me, it isn''t over
+
+Never mind, I''ll find someone like you
+I wish nothing but the best for you, too
+Don''t forget me, I beg
+I remember you said
+Sometimes it lasts in love, but sometimes it hurts instead
+Sometimes it lasts in love, but sometimes it hurts instead
+
+You know how the time flies
+Only yesterday was the time of our lives
+We were born and raised in a summer haze
+Bound by the surprise of our glory days
+See Adele LiveGet tickets as low as $96You might also like
+I hate to turn up out of the blue, uninvited
+But I couldn''t stay away, I couldn''t fight it
+I had hoped you''d see my face
+And that you''d be reminded that for me, it isn''t over
+
+Never mind, I''ll find someone like you
+I wish nothing but the best for you, too
+Don''t forget me, I beg
+I remember you said
+Sometimes it lasts in love, but sometimes it hurts instead
+
+Nothing compares, no worries or cares
+Regrets and mistakes, they''re memories made
+Who would have known how bittersweet this would taste?
+
+Never mind, I''ll find someone like you
+I wish nothing but the best for you
+Don''t forget me, I beg
+I remember you said
+Sometimes it lasts in love, but sometimes it hurts instead
+Never mind, I''ll find someone like you
+I wish nothing but the best for you, too
+Don''t forget me, I beg
+I remember you said
+Sometimes it lasts in love, but sometimes it hurts instead
+Sometimes it lasts in love, but sometimes it hurts instead', 2300);
+INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (62493, 'Set Fire to the Rain', '
+
+I let it fall, my heart
+And as it fell, you rose to claim it
+It was dark, and I was over
+Until you kissed my lips and you saved me
+My hands, they were strong
+But my knees were far too weak
+To stand in your arms
+Without falling to your feet
+
+But there''s a side to you
+That I never knew, never knew
+All the things you''d say
+They were never true, never true
+And the games you''d play
+You would always win, always win
+
+But I set fire to the rain
+Watched it pour as I touched your face
+Well, it burned while I cried
+''Cause I heard it screamin'' out your name
+Your name
+See Adele LiveGet tickets as low as $96You might also like
+When I lay with you
+I could stay there, close my eyes
+Feel you here forever
+You and me together, nothing is better
+
+''Cause there''s a side to you
+That I never knew, never knew
+All the things you''d say
+They were never true, never true
+And the games you''d play
+You would always win, always win
+
+But I set fire to the rain
+Watched it pour as I touched your face
+Well, it burned while I cried
+''Cause I heard it screamin'' out your name
+Your name
+I set fire to the rain
+And I threw us into the flames
+When we fell, somethin'' died
+''Cause I knew that that was the last time
+The last time
+Sometimes, I wake up by the door
+That heart you caught must be waitin'' for you
+Even now, when we''re already over
+I can''t help myself from lookin'' for you
+
+I set fire to the rain
+Watched it pour as I touched your face
+Well, it burned while I cried
+''Cause I heard it screamin'' out your name
+Your name
+I set fire to the rain
+And I threw us into the flames
+When we fell, somethin'' died
+''Cause I knew that that was the last time
+The last time
+
+Oh
+Oh, no
+Let it burn
+Oh
+Let it burn
+Let it burn', 2300);
+INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (61289, 'Rolling in the Deep', '
+There''s a fire starting in my heart
+Reaching a fever pitch and it''s bringing me out the dark
+Finally, I can see you crystal clear
+Go ahead and sell me out and I''ll lay your shit bare
+See how I''ll leave with every piece of you
+Don''t underestimate the things that I will do
+There''s a fire starting in my heart
+Reaching a fever pitch, and it''s bringing me out the dark
+
+The scars of your love remind me of us
+They keep me thinkin'' that we almost had it all
+The scars of your love, they leave me breathless
+I can''t help feeling
+
+We could''ve had it all (You''re gonna wish you never had met me)
+Rolling in the deep (Tears are gonna fall, rolling in the deep)
+You had my heart inside of your hand (You''re gonna wish you never had met me)
+And you played it to the beat (Tears are gonna fall, rolling in the deep)
+
+Baby, I have no story to be told
+But I''ve heard one on you, now I''m gonna make your head burn
+Think of me in the depths of your despair
+Make a home down there, as mine sure won''t be shared
+See Adele LiveGet tickets as low as $96You might also like
+(You''re gonna wish you never had met me) The scars of your love remind me of us
+(Tears are gonna fall, rolling in the deep) They keep me thinkin'' that we almost had it all
+(You''re gonna wish you never had met me) The scars of your love, they leave me breathless
+(Tears are gonna fall, rolling in the deep) I can''t help feeling
+
+We could''ve had it all (You''re gonna wish you never had met me)
+Rolling in the deep (Tears are gonna fall, rolling in the deep)
+You had my heart inside of your hand (You''re gonna wish you never had met me)
+And you played it to the beat (Tears are gonna fall, rolling in the deep)
+Could''ve had it all
+Rolling in the deep
+You had my heart inside of your hand
+But you played it with a beating
+
+Throw your soul through every open door (Ooh woah, oh)
+Count your blessings to find what you look for (Woah)
+Turn my sorrow into treasured gold (Ooh woah, oh)
+You''ll pay me back in kind and reap just what you sow
+
+(You''re gonna wish you never had met me)
+We could''ve had it all (Tears are gonna fall, rolling in the deep)
+We could''ve had it all, yeah (You''re gonna wish you never had met me)
+It all, it all, it all (Tears are gonna fall, rolling in the deep)
+We could''ve had it all (You''re gonna wish you never had met me)
+Rolling in the deep (Tears are gonna fall, rolling in the deep)
+You had my heart inside of your hand (You''re gonna wish you never had met me)
+And you played it to the beat (Tears are gonna fall, rolling in the deep)
+Could''ve had it all (You''re gonna wish you never had met me)
+Rolling in the deep (Tears are gonna fall, rolling in the deep)
+You had my heart inside of your hand (You''re gonna wish you never had met me)
+But you played it, you played it, you played it
+You played it to the beat', 2300);
+INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (2336628, 'When We Were Young', '
+Everybody loves the things you do
+From the way you talk to the way you move
+Everybody here is watching you
+''Cause you feel like home, you''re like a dream come true
+But, if by chance, you''re here alone
+Can I have a moment before I go?
+''Cause I''ve been by myself all night long
+Hoping you''re someone I used to know
+
+You look like a movie, you sound like a song
+My God, this reminds me of when we were young
+
+Let me photograph you in this light in case it is the last time
+That we might be exactly like we were before we realised
+We were sad of getting old, it made us restless
+It was just like a movie, it was just like a song
+
+I was so scared to face my fears
+Nobody told me that you''d be here
+And I swear you''d moved overseas
+That''s what you said when you left me
+See Adele LiveGet tickets as low as $96You might also like
+You still look like a movie, you still sound like a song
+My God, this reminds me of when we were young
+
+Let me photograph you in this light in case it is the last time
+That we might be exactly like we were before we realised
+We were sad of getting old, it made us restless
+It was just like a movie, it was just like a song
+
+(When we were young)
+(When we were young)
+(When we were young)
+(When we were young)
+
+It''s hard to admit that (When we were young)
+Everything just takes me back (When we were young)
+To when you were there (When we were young)
+To when you were there
+And a part of me keeps holding on (When we were young)
+Just in case it hasn''t gone (When we were young)
+I guess I still care (When we were young)
+Do you still care?
+It was just like a movie, it was just like a song
+My God, this reminds me of when we were young
+(When we were young)
+(When we were young)
+(When we were young)
+(When we were young)
+
+Let me photograph you in this light in case it is the last time
+(When we were young, when we were young)
+That we might be exactly like we were before we realised
+(When we were young, when we were young)
+We were sad of getting old, it made us restless
+(When we were young, when we were young)
+Oh, I''m so mad I''m getting old, it makes me reckless
+(When we were young, when we were young)
+It was just like a movie, it was just like a song
+When we were young', 2300);
+INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (2336647, 'All I Ask', '
+I will leave my heart at the door
+I won''t say a word
+They''ve all been said before, you know
+So why don''t we just play pretend
+Like we''re not scared of what is coming next
+Or scared of having nothing left?
+
+Look, don''t get me wrong
+I know there is no tomorrow
+All I ask is
+
+If this is my last night with you
+Hold me like I''m more than just a friend
+Give me a memory I can use
+Take me by the hand while we do
+What lovers do
+It matters how this ends
+''Cause what if I never love again?
+
+I don''t need your honesty
+It''s already in your eyes
+And I''m sure my eyes, they speak for me
+No one knows me like you do
+And since you''re the only one that mattered
+Tell me, who do I run to?
+See Adele LiveGet tickets as low as $96You might also like
+Look, don''t get me wrong
+I know there is no tomorrow
+All I ask is
+
+If this is my last night with you
+Hold me like I''m more than just a friend
+Give me a memory I can use
+Take me by the hand while we do
+What lovers do
+It matters how this ends
+''Cause what if I never love again?
+
+Let this be our lesson in love
+Let this be the way we remember us
+I don''t want to be cruel or vicious
+And I ain''t asking for forgiveness
+All I ask is
+
+If this is my last night with you
+Hold me like I''m more than just a friend
+Give me a memory I can use
+Take me by the hand while we do
+What lovers do
+It matters how this ends
+''Cause what if I never love again?', 2300);
+INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (2336620, 'Send My Love (To Your New Lover)', '
+Just the guitar
+Okay, cool
+
+This was all you, none of it me
+You put your hands on, on my body and told me, mmm
+You told me you were ready
+For the big one, for the big jump
+I''d be your last love, everlasting, you and me, mmm
+That was what you told me
+
+I''m giving you up
+I''ve forgiven it all
+You set me free
+
+Send my love to your new lover
+Treat her better
+We''ve gotta let go of all of our ghosts
+We both know we ain''t kids no more
+Send my love to your new lover
+Treat her better
+We''ve gotta let go of all of our ghosts
+We both know we ain''t kids no more
+See Adele LiveGet tickets as low as $96You might also like
+I was too strong, you were trembling
+You couldn''t handle the hot heat rising (Rising), mmm
+Baby, I''m still rising
+I was running, you were walking
+You couldn''t keep up, you were falling down (Down), mmm
+There''s only one way down
+
+I''m giving you up
+I''ve forgiven it all
+You set me free, oh
+
+Send my love to your new lover
+Treat her better
+We''ve gotta let go of all of our ghosts
+We both know we ain''t kids no more
+Send my love to your new lover
+Treat her better
+We''ve gotta let go of all of our ghosts
+We both know we ain''t kids no more
+
+If you''re ready, if you''re ready
+If you''re ready, I am ready
+If you''re ready, if you''re ready
+We both know we ain''t kids no more
+No, we ain''t kids no more
+I''m giving you up
+I''ve forgiven it all
+You set me free
+
+Send my love to your new lover
+Treat her better
+We''ve gotta let go of all of our ghosts
+We both know we ain''t kids no more
+Send my love to your new lover
+Treat her better
+We''ve gotta let go of all of our ghosts
+We both know we ain''t kids no more
+
+If you''re ready, if you''re ready
+(Send my love to your new lover)
+If you''re ready, are you ready?
+(Treat her better)
+We''ve gotta let go of all of our ghosts
+We both know we ain''t kids no more
+If you''re ready, if you''re ready
+(Send my love to your new lover)
+If you''re ready, are you ready?
+(Treat her better)
+We''ve gotta let go of all of our ghosts
+We both know we ain''t kids no more', 2300);
+INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (7392788, 'To Be Loved', '
+I built a house for a love to grow
+I was so young that it was hard to know
+I''m as lost now as I was back then
+Always make a mess of everything
+It''s about time that I face myself
+All I do is bleed into someone else
+Painting walls with all my secret tears
+Filling rooms with all my hopes and fears
+
+But, oh, my
+Oh, my
+I''ll never learn if I never leap
+I''ll always yearn if I never speak
+
+To be loved and love at the highest count
+Means to lose all the things I can''t live without
+Let it be known that I will choose to lose
+It''s a sacrifice, but I can''t live a lie
+Let it be known, let it be known that I tried
+
+I''m so afraid, but I''m open wide
+I''ll be the one to catch myself this time
+Tryna learn to lean into it all
+Ain''t it funny how the mighty fall?
+Looking back, I don''t regret a thing
+Yeah, I took some bad turns that I am owning
+I''ll stand still and let the storm pass by
+Keep my heart safe till the time feels right
+See Adele LiveGet tickets as low as $96You might also like
+But, oh, my
+Oh, my
+I''ll never learn if I never leap
+I''ll always yearn if I never speak
+
+To be loved and love at the highest count
+Means to lose all the things I can''t live without
+Let it be known that I will choose to lose
+It''s a sacrifice, but I can''t live a lie
+Let it be known
+
+Let it be known that I cried for you
+Even started lying to you
+What a thing to do
+All because I wanted
+
+To be loved and love at the highest count
+Means to lose all the things I can''t live without
+Let it be known, known, known
+That I will choose, I will lose
+It''s a sacrifice, but I can''t live a lie
+Let it be known
+Let it be known that I tried, that I tried
+Let it be known that I tried', 2300);
+INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (90986, 'Skyfall', '
+This is the end
+Hold your breath and count to ten
+Feel the Earth move, and then
+Hear my heart burst again
+For this is the end
+I''ve drowned and dreamt this moment
+So overdue, I owe them
+Swept away, I''m stolen
+
+Let the sky fall
+When it crumbles
+We will stand tall
+Face it all together
+Let the sky fall
+When it crumbles
+We will stand tall
+Face it all together at Skyfall
+At Skyfall
+
+Skyfall is where we start
+A thousand miles and poles apart
+Where worlds collide and days are dark
+You may have my number, you can take my name
+But you''ll never have my heart
+See Adele LiveGet tickets as low as $96You might also like
+Let the sky fall (Let the sky fall)
+When it crumbles (When it crumbles)
+We will stand tall (We will stand tall)
+Face it all together
+Let the sky fall (Let the sky fall)
+When it crumbles (When it crumbles)
+We will stand tall (We will stand tall)
+Face it all together at Skyfall
+
+Let the sky fall
+When it crumbles
+We will stand tall
+Let the sky fall
+When it crumbles
+We will stand tall
+
+Where you go I go
+What you see I see
+I know I''d never be me without the security
+Of your loving arms keeping me from harm
+Put your hand in my hand and we''ll stand
+
+Let the sky fall (Let the sky fall)
+When it crumbles (When it crumbles)
+We will stand tall (We will stand tall)
+Face it all together
+Let the sky fall (Let the sky fall)
+When it crumbles (When it crumbles)
+We will stand tall (We will stand tall)
+Face it all together at Skyfall
+Let the sky fall
+We will stand tall
+At Skyfall
+Ooh', 2300);
 
 
 --

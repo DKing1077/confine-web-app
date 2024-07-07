@@ -14,6 +14,7 @@ def collect_data(session, genius, search, start):
         if len(data) < 10:
             data = search_by_artist(genius, search)
             relational_mapping(session, genius, data, start)
+            data = collect_data(session, genius, search, start)
 
     elif start == 2:
         data = session.query(Songs).filter(
@@ -25,6 +26,7 @@ def collect_data(session, genius, search, start):
         if len(data) < 1:
             data = search_by_song(genius, search)
             relational_mapping(session, genius, data, start)
+            data = collect_data(session, genius, search, start)
 
     else:
         data = session.query(Albums).filter(
@@ -34,11 +36,11 @@ def collect_data(session, genius, search, start):
         if len(data) < 1:
             data = search_by_album(genius, search)
             relational_mapping(session, genius, data, start)
+            data = collect_data(session, genius, search, start)
     return data
 
 
 def relational_mapping(session, genius, data, start):
-
     if start == 1:
         for index in data.index:
             artist_id = int(data['artist_id'][index])

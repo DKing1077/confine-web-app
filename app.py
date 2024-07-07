@@ -1,7 +1,7 @@
 import configargparse
 from utils import *
 from backend import *
-from lyrics_api import *
+from models import *
 
 
 def main(config):
@@ -17,8 +17,7 @@ def main(config):
 
     # collect data
     data = collect_data(session, genius, search, start)
-
-    # commit session, save db, close session
+    sentiment_analysis(data)
     session.commit(), save_db(config), session.close()
 
 
