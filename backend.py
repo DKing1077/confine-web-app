@@ -1,23 +1,23 @@
 import os
 import subprocess
-from sqlalchemy import text
+from sqlalchemy import text, func
 from lyrics_api import *
 from tables import Artists, Albums, Songs, reg
 
 
 def collect_data(session, genius, search, start):
     if start == 1:
-        data = session.query(Artists).filter(Artists.name == search).limit(10).all()
+        data = session.query(Songs).join(Artists).filter(func.lower(Artists.name) == search.lower()).limit(10).all()
         if len(data) < 10:
             data = search_by_artist(genius, search)
             relational_mapping(session, genius, data, start)
     elif start == 2:
-        data = session.query(Songs).filter(Songs.name == search).limit(1).all()
+        data = session.query(Songs).filter(func.lower(Songs.name) == search.lower()).limit(1).all()
         if len(data) < 1:
             data = search_by_song(genius, search)
             relational_mapping(session, genius, data, start)
     else:
-        data = session.query(Albums).filter(Albums.name == search).limit(1).all()
+        data = session.query(Albums).filter(func.lower(Albums.name) == search.lower()).limit(1).all()
         if len(data) < 1:
             data = search_by_album(genius, search)
             relational_mapping(session, genius, data, start)
