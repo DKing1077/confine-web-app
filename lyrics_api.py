@@ -49,7 +49,7 @@ def clean_lyrics(df):
         '[0-9]+.*?Lyrics',
         '[0-9]+Embed.*?Lyrics',
         '[0-9][.][0-9]KEmbed', '[0-9]+Embed',
-        'like.*?Embed', 'likeEmbed'
+        'like.*?Embed', 'likeEmbed',
     ]
 
     for index in df.index:
@@ -58,5 +58,6 @@ def clean_lyrics(df):
             df[column][index].encode("ascii", "ignore").decode()
         for regex in regexlist:
             df.loc[index, 'lyrics'] = re.sub(regex, '', df['lyrics'][index])
+        df.loc[index, 'lyrics'].replace('\n\n', '\n')
     return df
 
