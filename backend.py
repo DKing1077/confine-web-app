@@ -7,17 +7,21 @@ from tables import Artists, Albums, Songs, reg
 
 def collect_data(session, genius, search, start):
     if start == 1:
-        data = session.query(Songs).join(Artists).filter(func.lower(Artists.name) == search.lower()).limit(10).all()
+        search = f'%{search}%'
+        data = session.query(Songs).join(Artists).filter(func.replace(Artists.name, "’", "'").ilike(search)).limit(10).all()
         if len(data) < 10:
             data = search_by_artist(genius, search)
             relational_mapping(session, genius, data, start)
     elif start == 2:
-        data = session.query(Songs).filter(func.lower(Songs.name) == search.lower()).limit(1).all()
+        search = f"%{search}%"
+        data = session.query(Songs).filter(func.replace(Songs.name, "’", "'").ilike(search)).limit(1).all()
+        print(data)
         if len(data) < 1:
             data = search_by_song(genius, search)
             relational_mapping(session, genius, data, start)
     else:
-        data = session.query(Albums).filter(func.lower(Albums.name) == search.lower()).limit(1).all()
+        search = f'%{search}%'
+        data = session.query(Albums).filter(func.replace(Albums.name, "’", "'").ilike(search)).limit(1).all()
         if len(data) < 1:
             data = search_by_album(genius, search)
             relational_mapping(session, genius, data, start)
