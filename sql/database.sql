@@ -165,6 +165,11 @@ INSERT INTO public.artists (id, name) VALUES (1177, 'Taylor Swift');
 INSERT INTO public.artists (id, name) VALUES (357, 'Justin Bieber');
 INSERT INTO public.artists (id, name) VALUES (8351, 'Coldplay');
 INSERT INTO public.artists (id, name) VALUES (2300, 'Adele');
+INSERT INTO public.artists (id, name) VALUES (72, 'Kanye West');
+INSERT INTO public.artists (id, name) VALUES (1167, 'Johnny Cash');
+INSERT INTO public.artists (id, name) VALUES (110, 'Pharrell Williams');
+INSERT INTO public.artists (id, name) VALUES (32137, 'Bring Me The Horizon');
+INSERT INTO public.artists (id, name) VALUES (615550, 'Billie Eilish');
 
 
 --
@@ -6111,6 +6116,702 @@ Let the sky fall
 We will stand tall
 At Skyfall
 Ooh', 2300);
+INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (70324, 'Mercy', '
+Well, it is a weepin'' and a moanin'' and a gnashin'' of teeth
+It is a weepin'' and a moanin'' and a gnashin'' of teeth
+It is a—when it comes to my sound which is the champion sound
+Believe, believe
+O-o-o-o-o-okay, Lamborghini Mercy
+Your chick, she so thirsty
+I-I-I-I-I''m in that two-seat Lambo
+With your girl, she tryna jerk me (Believe)
+O-o-o-o-o-okay, Lamborghini Mercy
+Your chick, she so thirsty
+I-I-I-I-I''m in that two-seat Lambo
+With your girl, she tryna jerk me
+O-o-o-o-o-okay, Lamborghini Mercy (Swerve)
+Your chick, she so thirsty (Swerve)
+I-I-I-I-I''m in that two-seat Lambo
+With your girl, she tryna jerk me (Woah, believe)
+O-o-o-o-o-okay, Lamborghini Mercy
+Your chick, she so thirsty (Boy)
+I-I-I-I-I''m in that two-seat Lambo (Boy)
+With your girl, she tryna jerk me
+
+Okay, drop it to the floor, make that ass shake (Shake, shake)
+Woah, make the ground move: that''s an ass quake
+Built a house up on that ass: that''s an ass-state
+Roll–roll–roll my weed on it: that''s an ass tray
+Say, Ye, say, Ye, don''t we do this every day–day? (Huh?)
+I work them long nights, long nights to get a payday (Huh?)
+Finally got paid, now I need shade and a vacay
+And niggas still hatin''
+So much hate, I need a AK (AK)
+Now we out in Paris, yeah, I''m Perrierin''
+White girls politickin'' and that''s that Sarah Palin
+Get–get–get–get–get–gettin'' hot, Californicatin''
+I give her that D, ''cause that''s where I was born and raised in
+You might also like
+O-o-o-o-o-okay, Lamborghini Mercy (Swerve)
+Your chick, she so thirsty (Swerve)
+I-I-I-I-I''m in that two-seat Lambo (Swerve)
+With your girl, she tryna jerk me (Swerve, believe)
+O-o-o-o-o-okay, Lamborghini Mercy (Swerve)
+Your chick, she so thirsty (Swerve)
+I-I-I-I-I''m in that two-seat Lambo (Swerve)
+With your girl, she tryna jerk me (Swerve)
+Well, it is a weepin'' and a moanin'' (Swerve)
+And a gnashin'' of teeth (Swerve)
+It is a weepin'' and a mournin'' (Swerve)
+And a gnashin'' of teeth (Swerve)
+It is a—when it comes to my sound (Swerve)
+Which is the champion sound (Swerve)
+Believe, believe (Swerve)
+Believe, believe (Swerve)
+Yuugh! It''s prime time, my top back, this pimp game, ho
+I''m red leather, this cocaine, I''m Rick James, ho
+I''m bill-droppin'', Ms. Pac-Man, this pill-poppin'' ass ho
+I''m poppin'' too, these blue dolphins need two coffins
+All she want is some heel money
+All she need is some bill money
+He take his time, he counts it out
+I weighs it up, that''s real money
+Check the neck, check the wrist
+Them heads turnin'': that''s exorcist
+My Audemars like Mardi Gras
+That''s Swiss time, and that''s excellence
+Two-door preference
+Roof gone, George Jefferson
+That white frost on that pound cake
+So your Duncan Hines is irrelevant, woo
+Lambo Murciélago
+She go wherever I go
+Wherever we go, we do it pronto, it''s like—
+O-o-o-o-o-okay, Lamborghini Mercy (Swerve)
+Your chick, she so thirsty (Swerve)
+I-I-I-I-I''m in that two-seat Lambo (Swerve)
+With your girl, she tryna jerk me (Swerve, believe)
+O-o-o-o-o-okay, Lamborghini Mercy (Swerve)
+Your chick, she so thirsty (Swerve)
+I-I-I-I-I''m in that two-seat Lambo (Swerve)
+With your girl, she tryna jerk me (Swerve)
+Well, it is a weepin'' and a moanin'' (Swerve)
+And a gnashin'' of teeth (Swerve)
+It is a weepin'' and a mournin'' (Swerve)
+And a gnashin'' of teeth (Swerve)
+It is a—when it comes to my sound (Swerve)
+Which is the champion sound (Swerve)
+Believe, believe (Swerve)
+Believe (Swerve)
+
+Well, it is a weepin'' and a moanin''
+And a gnashin'' of teeth in the dancehall
+And who no have teeth gwan rub pon dem gums
+Cuh when time it comes to my sound
+Which is the champion sound
+The bugle has blown fi many times
+And it still have one more time left
+Cuh the amount of stripe weh deh pon our shoulder
+Let the suicide doors up
+I threw suicides on the tour bus
+I threw suicides on the private jet
+You know what that mean, I''m fly to death
+I step in Def Jam buildin'' like I''m the shit
+Tell ''em gimme fifty million or I''ma quit
+Most rappers'' taste level ain''t at my waist level
+Turn up the bass ''til it''s up-in-yo-face level
+Don''t do no press but I get the most press, kid
+Plus, yo, my bitch make your bitch look like Precious
+Somethin'' ''bout Mary, she gone off that molly
+Now the whole party is melting like Dalí
+Now everybody is movin'' they body
+Don''t sell me apartment, I''ll move in the lobby (Yah)
+Niggas is loiterin'' just to feel important
+You gon'' see lawyers and niggas in Jordans (2 Chainz)
+Okay, now catch up to my campaign
+Coupe the color of mayonnaise
+I''m drunk and high at the same time
+Drinkin'' champagne on the airplane (Tell ''em)
+Spit rounds like a gun range (Baow)
+Beat it up like Rampage
+Hundred bands, cut your girl
+Now your girl need a Band-Aid (Damn)
+Grade A, A1
+Chain the color of Akon
+Black diamonds, backpack rhymin''
+Co-signed by Louis Vuitton (Yep)
+Horsepower, horsepower
+All this Polo on, I got horsepower
+Pound of this cost four thousand
+Now I make it rain, she want more showers
+Rain (Rain) pourin'' (Pourin'')
+All my cars is foreign (Foreign)
+All my broads is foreign (Foreign)
+Money tall like Jordan
+O-o-o-o-o-okay, Lamborghini Mercy (Swerve)
+Your chick, she so thirsty (Swerve)
+I-I-I-I-I''m in that two-seat Lambo (Swerve)
+With your girl, she tryna jerk me (Swerve)
+O-o-o-o-o-okay, Lamborghini Mercy (Swerve)
+Your chick, she so thirsty (Swerve)
+I-I-I-I-I''m in that two-seat Lambo (Swerve, believe)
+With your girl, she tryna jerk me (Swerve, believe)
+Well, it is a weepin'' and a moanin'' (Swerve)
+And a gnashin'' of teeth (Swerve)
+It is a weepin'' and a moanin'' (Swerve)
+And a gnashin'' of teeth (Swerve)
+It is a—when it comes to my sound (Swerve)
+Which is the champion sound (Swerve)
+Believe, believe (Swerve)
+Believe, believe (Swerve)
+Well, it is a weepin'' and a moanin'' and a gnashin'' of teeth
+It is a weepin'' and a moanin'' and a gnashin'' of teeth
+It is a—when it comes to my sound which is the champion sound
+Believe, believe, believe, believe', 72);
+INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (525, 'Stronger', '
+
+Work it, make it, do it, makes us
+Harder, better, faster, stronger
+N-Now-Now that, that don''t kill me
+Can only make me stronger
+I need you to hurry up now
+''Cause I can''t wait much longer
+I know I got to be right now
+''Cause I can''t get much wronger
+Man, I''ve been waitin'' all night now
+That''s how long I been on ya
+Work it harder, make it better
+Do it faster, makes us stronger
+(I need you right now, right now)
+More than ever, hour after hour
+Work—
+(I need you right now, right now)
+
+Let''s get lost tonight
+You could be my black Kate Moss tonight
+Play secretary, I''m the boss tonight
+And you don''t give a fuck what they all say, right?
+Awesome, the Christian in Christian Dior
+Damn, they don''t make ''em like this anymore
+I ask, ''cause I''m not sure
+Do anybody make real shit anymore?
+Bow in the presence of greatness
+''Cause right now, thou hast forsaken us
+You should be honored by my lateness
+That I would even show up to this fake shit
+So go ahead, go nuts, go apeshit
+''Specially in my Pastellé, on my Bape shit
+Act like you can''t tell who made this
+New Gospel, homie, take six
+And take this, haters
+You might also like
+N-Now-Now that, that don''t kill me
+Can only make me stronger
+I need you to hurry up now
+''Cause I can''t wait much longer
+I know I got to be right now
+''Cause I can''t get much wronger
+Man, I''ve been waitin'' all night now
+That''s how long I been on ya
+Work it harder, make it better
+Do it faster, makes us stronger
+(I need you right now, now)
+More than ever, hour after hour
+Work—
+(I need you right now, right now)
+Me likey
+
+I don''t know if you got a man or not
+If you made plans or not
+If God put me in your plans or not
+I''m trippin'', this drink got me sayin'' a lot
+But I know that God put you in front of me
+So how the hell could you front on me?
+There''s a thousand you''s, there''s only one of me
+I''m trippin'', I''m caught up in the moment, right?
+''Cause it''s Louis Vuitton Don night
+So we gon'' do everything that Kan'' like
+Heard they''d do anything for a Klondike
+Well, I''d do anything for a blonde dyke
+And she''ll do anything for the limelight
+And we''ll do anything when the time''s right
+Uh, baby, you''re makin'' it
+Harder, better, faster, stronger (Oh)
+N-Now th-that, that don''t kill me (Oh)
+Can only make me stronger (Oh)
+I need you to hurry up now (Oh)
+''Cause I can''t wait much longer (Oh)
+I know I got to be right now (Oh)
+''Cause I can''t get much wronger (Oh)
+Man, I''ve been waitin'' all night now
+That''s how long I been on ya
+Work it harder, make it better
+Do it faster, makes us stronger
+(I need you right now, now)
+More than ever, hour after hour
+Work is never over
+(I need you right now, right now)
+
+You know how long I''ve been on ya
+Since Prince was on Apollonia
+Since O.J. had Isotoners
+Don''t act like I never told ya
+Work it, work is never over
+Don''t act like I never told ya
+Harder, work is never over
+Uh, don''t act like I never told ya
+Don''t act like I never told ya
+Don''t act like I never told ya
+Uh, baby, you''re makin'' it
+Harder, better, faster, stronger
+N-Now-Now that, that don''t kill me
+Can only make me stronger
+I need you to hurry up now
+''Cause I can''t wait much longer
+I know I got to be right now
+''Cause I can''t get much wronger
+Man, I''ve been waitin'' all night now
+That''s how long I been on ya
+Work it harder, make it better
+Do it faster, makes us stronger
+(I need you right now, now)
+More than ever, hour after hour
+Work is never over
+(I need you right now, right now)
+Work it harder, make it better
+Do it faster, makes us stronger
+(I need you right now, now)
+More than ever, hour after hour
+Work is never over
+(I need you right now, right now)
+
+You know how long I''ve been on ya
+Since Prince was on Apollonia
+Since O.J. had Isotoners
+Don''t act like I never told ya
+You know how long I''ve been on ya
+Since Prince was on Apollonia
+Since O.J. had Isotoners
+Don''t act like I never told ya
+
+Told ya, told ya
+Never told ya, told ya, told ya
+Never told ya, told ya, told ya
+Never told ya, told ya, told ya
+Never told ya
+Never over (W—), never over (Ha—)
+Never over (Fa—), never over (St—)
+Never over, never over
+Never over
+Harder, better, faster, stronger
+Work it harder, make it better
+Do it faster, makes us stronger
+More than ever, hour after hour
+Work is never over
+Work it harder, make it better
+Do it faster, makes us stronger
+More than ever, hour after hour
+Work is never over
+Work it harder, make it better
+Do it faster, makes us stronger
+More than ever, hour after hour
+Work is never over
+Work it harder, make it better
+Do it faster, makes us stronger
+More than ever, hour after hour
+Work is never over', 72);
+INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (1139320, 'You Are My Sunshine', '
+The other night dear, as I lay sleeping
+I dreamed I held you in my arms
+When I awoke, dear, I was mistaken
+So I bowed my head and I cried
+
+You are my sunshine, my only sunshine
+You make me happy when skies are gray
+You''ll never know, dear, how much I love you
+Please don''t take my sunshine away
+
+
+I''ve always loved you and made you happy
+And nothing else could come between
+But now you''ve left me to love another
+You have shattered all of my dreams
+
+You are my sunshine, my only sunshine
+You make me happy when skies are gray
+You''ll never know, dear, how much I love you
+Please don''t take my sunshine away
+You might also like
+(I always hated that third verse)
+*Laughter*
+It was a nice short version
+Do you wanna- uh, pick it up?
+I''t''s alright (It''s good)
+(We got a short version)
+It might have that other verse on it in another take
+Well, I''ll tell you what... Let''s... uhm...
+Well, if I feel like my song''s a song... *Laughter*
+It don''t care... (There you go!)
+I don''t care if it''s short
+And I feel like my song''s a song
+A pleasure! Two minutes... I''ve recorded songs two minutes
+(They were huge hits!)
+Have you got, uh, time on that?', 1167);
+INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (85072, 'Hurt', '
+
+I hurt myself today
+To see if I still feel
+I focus on the pain
+The only thing that''s real
+The needle tears a hole
+The old familiar sting
+Try to kill it all away
+But I remember everything
+
+What have I become
+My sweetest friend?
+Everyone I know
+Goes away in the end
+And you could have it all
+My empire of dirt
+I will let you down
+I will make you hurt
+
+I wear this crown of thorns
+Upon my liar''s chair
+Full of broken thoughts
+I cannot repair
+Beneath the stains of time
+The feelings disappear
+You are someone else
+I am still right here
+You might also like
+What have I become
+My sweetest friend?
+Everyone I know
+Goes away in the end
+And you could have it all
+My empire of dirt
+I will let you down
+I will make you hurt
+
+If I could start again
+A million miles away
+I would keep myself
+I would find a way', 1167);
+INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (154031, 'Happy', '
+
+It might seem crazy what I''m ''bout to say
+Sunshine she''s here, you can take a break
+I''m a hot air balloon that could go to space
+With the air, like I don''t care, baby, by the way, huh
+
+(Because I''m happy)
+Clap along if you feel like a room without a roof
+(Because I''m happy)
+Clap along if you feel like happiness is the truth
+(Because I''m happy)
+Clap along if you know what happiness is to you
+(Because I''m happy)
+Clap along if you feel like that''s what you wanna do
+
+Here come bad news, talking this and that (Yeah!)
+Well, give me all you got, don''t hold it back (Yeah!)
+Well, I should probably warn ya, I''ll be just fine (Yeah!)
+No offense to you, don’t waste your time, here''s why
+
+(Because I''m happy)
+Clap along if you feel like a room without a roof
+(Because I''m happy)
+Clap along if you feel like happiness is the truth
+(Because I''m happy)
+Clap along if you know what happiness is to you
+(Because I''m happy)
+Clap along if you feel like that''s what you wanna do (Hey Come On Uh,)
+You might also like
+(Happy), Bring me down
+Can''t nothing (Happy), bring me down
+My level''s too high to (Happy), bring me down
+Can''t nothing (Happy), bring me down, I said
+(Let me tell you now)
+(Happy, Happy, Happy, Happy,) Bring me down
+Can''t nothing (Happy, Happy, Happy, Happy,) bring me down
+My level''s too high to (Happy, Happy, Happy, Happy,) bring me down
+Can''t nothing (Happy, Happy, Happy,) bring me down, I said
+
+(Because I''m happy)
+Clap along if you feel like a room without a roof
+(Because I''m happy)
+Clap along if you feel like happiness is the truth
+(Because I''m happy)
+Clap along if you know what happiness is to you
+(Because I''m happy)
+Clap along if you feel like that''s what you wanna do
+(Because I''m happy)
+Clap along if you feel like a room without a roof
+(Because I''m happy)
+Clap along if you feel like happiness is the truth
+(Because I''m happy)
+Clap along if you know what happiness is to you
+(Because I''m happy)
+Clap along if you feel like that''s what you wanna do (Hey Come On Uh,)
+(Happy, Happy, Happy, Happy,) Bring me down
+Can''t nothing (Happy, Happy, Happy, Happy,) bring me down
+My level''s too high to (Happy, Happy, Happy, Happy,) bring me down
+Can''t nothing (Happy, Happy, Happy,) bring me down, I said...
+(Because I''m happy)
+Clap along if you feel like a room without a roof
+(Because I''m happy)
+Clap along if you feel like happiness is the truth
+(Because I''m happy)
+Clap along if you know what happiness is to you
+(Because I''m happy)
+Clap along if you feel like that''s what you wanna do
+(Because I''m happy)
+Clap along if you feel like a room without a roof
+(Because I''m happy)
+Clap along if you feel like happiness is the truth
+(Because I''m happy)
+Clap along if you know what happiness is to you
+(Because I''m happy)
+Clap along if you feel like that''s what you wanna do (Come on)', 110);
+INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (548384, 'Drown', '
+What doesn''t kill you makes you wish you were dead
+Got a hole in my soul growing deeper and deeper, and I can''t take
+One more moment of this silence, the loneliness is haunting me
+And the weight of the world''s getting harder to hold up
+
+It comes in waves, I close my eyes
+Hold my breath and let it bury me
+I''m not okay and it''s not alright
+Won''t you drag the lake and bring me home again?
+
+Who will fix me now? Dive in when I''m down?
+Save me from myself, don''t let me drown
+Who will make me fight? Drag me out alive?
+Save me from myself, don''t let me drown
+
+What doesn''t destroy you, leaves you broken instead
+Got a hole in my soul growing deeper and deeper, and I can''t take
+One more moment of this silence, the loneliness is haunting me
+And the weight of the world''s getting harder to hold up
+
+It comes in waves, I close my eyes
+Hold my breath and let it bury me
+I''m not okay and it''s not alright
+Won''t you drag the lake and bring me home again?
+You might also like
+Who will fix me now? Dive in when I''m down?
+Save me from myself, don''t let me drown
+Who will make me fight? Drag me out alive?
+Save me from myself, don''t let me drown
+
+''Cause you know that I can''t do this on my own
+''Cause you know that I can''t do this on my own
+''Cause you know that I can''t do this on my own
+(''Cause you know that I can''t do this on my)
+
+Who will fix me now?
+Who will fix me now?
+Who will fix me now? Dive in when I''m down?
+Save me from myself, don''t let me drown', 32137);
+INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (123830, 'The House of Wolves', '
+Show me a sign, show me a reason to give
+A solitary fuck about your goddamn beliefs
+I''m going blind, but one thing''s clear
+Death is the only salvation you''ll feel
+Brick by brick, by brick
+Brick by brick, by brick
+
+What you call faith, I call a sorry excuse
+Cloak and daggers murder the truth
+The bitter taste, there''s nothing else
+I''ll bow for your king when he shows himself
+
+Brick by brick, by brick
+These walls begin to cave in
+The house of wolves you built
+Whispers in a thousand tongues
+
+Show me your face, show me a reason to think
+My soul can be saved if I sell you my sins
+I''m going blind, but one thing''s clear
+Death is the only salvation for me
+You might also like
+Brick by brick, by brick
+These walls begin to cave in
+The house of wolves you built
+Whispers in a thousand tongues
+
+The house of wolves you built
+The house of wolves you built
+The house of wolves you built
+Will burn just like a thousand suns
+
+Yeah
+And when you die, the only kingdom you''ll see
+Is two foot wide and six foot deep
+Yeah
+And when you die, the only kingdom you''ll see
+Is two foot wide and six foot deep
+Oh, when you die, the only kingdom you''ll see
+Is two foot wide and six foot deep
+Oh
+
+Brick by brick, by brick
+Brick by brick, by brick
+Brick by brick, by brick
+These walls begin to cave in
+The house of wolves you built
+Whispers in a thousand tongues
+Brick by brick, by brick
+These walls begin to cave in
+The house of wolves you built
+Will burn just like a thousand suns
+
+You said you want me
+Now I''m here, now I''m here, now I''m here
+You said you want me
+Now I''m here, now I''m here, now I''m here', 32137);
+INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (98867, 'Love Story', '
+We were both young when I first saw you
+I close my eyes and the flashback starts
+I''m standing there
+On a balcony in summer air
+See the lights, see the party, the ball gowns
+See you make your way through the crowd
+And say, "Hello"
+Little did I know
+
+That you were Romeo, you were throwing pebbles
+And my daddy said, "Stay away from Juliet"
+And I was crying on the staircase
+Begging you, "Please don''t go," and I said
+
+Romeo, take me somewhere we can be alone
+I''ll be waiting, all there''s left to do is run
+You''ll be the prince and I''ll be the princess
+It''s a love story, baby, just say, "Yes"
+
+So I sneak out to the garden to see you
+We keep quiet ''cause we''re dead if they knew
+So close your eyes
+Escape this town for a little while, oh, oh
+See Taylor Swift LiveGet tickets as low as $206You might also like
+''Cause you were Romeo, I was a scarlet letter
+And my daddy said, "Stay away from Juliet"
+But you were everything to me
+I was begging you, "Please don''t go," and I said
+
+Romeo, take me somewhere we can be alone
+I''ll be waiting, all there''s left to do is run
+You''ll be the prince and I''ll be the princess
+It''s a love story, baby, just say, "Yes"
+Romeo, save me, they''re trying to tell me how to feel
+This love is difficult, but it''s real
+Don''t be afraid, we''ll make it out of this mess
+It''s a love story, baby, just say, "Yes"
+
+Oh, oh
+
+But I got tired of waiting
+Wondering if you were ever coming around
+My faith in you was fading
+When I met you on the outskirts of town and I said
+
+"Romeo, save me, I''ve been feeling so alone
+I keep waiting for you, but you never come
+Is this in my head? I don''t know what to think"
+He knelt to the ground and pulled out a ring, and said
+"Marry me, Juliet, you''ll never have to be alone
+I love you and that''s all I really know
+I talked to your dad, go pick out a white dress
+It''s a love story, baby, just say ''Yes''"
+Oh, oh, oh
+Oh, oh, oh
+''Cause we were both young when I first saw you', 1177);
+INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (3484874, '​when the party’s over', '
+Don''t you know I''m no good for you?
+I''ve learned to lose you, can''t afford to
+Tore my shirt to stop you bleedin''
+But nothin'' ever stops you leavin''
+
+Quiet when I''m coming home and I''m on my own
+I could lie, say I like it like that, like it like that
+I could lie, say I like it like that, like it like that
+
+Don''t you know too much already?
+I''ll only hurt you if you let me
+Call me friend, but keep me closer (Call me back)
+And I''ll call you when the party''s over
+
+Quiet when I''m coming home and I''m on my own
+And I could lie, say I like it like that, like it like that
+Yeah, I could lie, say I like it like that, like it like that
+
+But nothin'' is better sometimes
+Once we''ve both said our goodbyes
+Let''s just let it go
+Let me let you go
+See Billie Eilish LiveGet tickets as low as $120You might also like
+Quiet when I''m coming home and I''m on my own
+I could lie, say I like it like that, like it like that
+I could lie, say I like it like that, like it like that', 615550);
+INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (4271772, '​bad guy', '
+White shirt now red, my bloody nose
+Sleepin'', you''re on your tippy toes
+Creepin'' around like no one knows
+Think you''re so criminal
+Bruises on both my knees for you
+Don''t say thank you or please
+I do what I want when I''m wanting to
+My soul? So cynical
+
+So you''re a tough guy
+Like it really rough guy
+Just can''t get enough guy
+Chest always so puffed guy
+I''m that bad type
+Make your mama sad type
+Make your girlfriend mad tight
+Might seduce your dad type
+I''m the bad guy
+Duh
+
+I''m the bad guy
+
+I like it when you take control
+Even if you know that you don''t
+Own me, I''ll let you play the role
+I''ll be your animal
+My mommy likes to sing along with me
+But she won''t sing this song
+If she reads all the lyrics
+She''ll pity the men I know
+See Billie Eilish LiveGet tickets as low as $120You might also like
+So you''re a tough guy
+Like it really rough guy
+Just can''t get enough guy
+Chest always so puffed guy
+I''m that bad type
+Make your mama sad type
+Make your girlfriend mad tight
+Might seduce your dad type
+I''m the bad guy
+Duh
+
+I''m the bad guy, duh
+I''m only good at bein'' bad, bad
+I like when you get mad
+I guess I''m pretty glad that you''re alone
+You said she''s scared of me?
+I mean, I don''t see what she sees
+But maybe it''s ''cause I''m wearing your cologne
+
+I''m a bad guy
+I''m, I''m a bad guy
+Bad guy, bad guy
+I''m a bad', 615550);
 
 
 --

@@ -1,24 +1,33 @@
 from textblob import TextBlob
-from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
+import string
+from transformers import pipeline
+
+
+def analyze(df):
+    # sentiment_analysis(df)
+    text_summary(df)
 
 
 def sentiment_analysis(df):
     sentiment_scores_tb = []
-    sentiment_scores_vadr = []
-
     for song in df:
-        lyrics = song.lyrics
+        lyrics = song.lyrics.lower()
+        lyrics = lyrics.translate(str.maketrans('', '', string.punctuation))
 
         analysis = TextBlob(lyrics)
         sentiment_value = analysis.sentiment.polarity
+
         sentiment_percentage = (sentiment_value + 1) * 50
         sentiment_scores_tb.append(sentiment_percentage)
-
-        analyzer = SentimentIntensityAnalyzer()
-        sentiment = analyzer.polarity_scores(lyrics)
-        sentiment_percentage = (sentiment['compound'] + 1) * 50
-        sentiment_scores_vadr.append(sentiment_percentage)
-
     print(sentiment_scores_tb)
-    print(sentiment_scores_vadr)
+
+
+def text_summary(df):
+    for song in df:
+        lyrics = song.lyrics
+        summarizer = pipeline("summarization")
+
+        summary = summarizer(lyrics, max_length=150, min_length=50, do_sample=False)
+        print(summary)
+
 

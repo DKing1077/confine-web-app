@@ -17,7 +17,7 @@ def main(config):
 
     # collect data
     data = collect_data(session, genius, search, start)
-    sentiment_analysis(data)
+    analyze(data)
     session.commit(), save_db(config), session.close()
 
 
