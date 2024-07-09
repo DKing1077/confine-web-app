@@ -170,6 +170,9 @@ INSERT INTO public.artists (id, name) VALUES (1167, 'Johnny Cash');
 INSERT INTO public.artists (id, name) VALUES (110, 'Pharrell Williams');
 INSERT INTO public.artists (id, name) VALUES (32137, 'Bring Me The Horizon');
 INSERT INTO public.artists (id, name) VALUES (615550, 'Billie Eilish');
+INSERT INTO public.artists (id, name) VALUES (396565, 'XXXTENTACION');
+INSERT INTO public.artists (id, name) VALUES (1581, 'Linkin Park');
+INSERT INTO public.artists (id, name) VALUES (569922, 'Lil Peep');
 
 
 --
@@ -6812,6 +6815,384 @@ I''m a bad guy
 I''m, I''m a bad guy
 Bad guy, bad guy
 I''m a bad', 615550);
+INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (3430186, 'SAD!', '
+Yeah
+
+Who am I? Someone that''s afraid to let go, uh
+You decide if you''re ever gonna let me know (Yeah)
+Suicide if you ever try to let go, uh
+I''m sad, I know, yeah, I''m sad, I know, yeah
+Who am I? Someone that''s afraid to let go, uh
+You decide if you''re ever gonna let me know (Yeah)
+Suicide if you ever try to let go, uh
+I''m sad, I know, yeah, I''m sad, I know, yeah
+
+I gave her everything
+She took my heart and left me lonely
+I think broken heart''s contagious
+I won''t fix, I''d rather weep
+I''m lost then I''m found
+But it''s torture bein'' in love
+I love when you''re around
+But I fuckin'' hate when you leave
+
+Who am I? Someone that''s afraid to let go, uh
+You decide if you''re ever gonna let me know (Yeah)
+Suicide if you ever try to let go, uh
+I''m sad, I know, yeah, I''m sad, I know, yeah
+Who am I? Someone that''s afraid to let go, uh
+You decide if you''re ever gonna let me know (Yeah)
+Suicide if you ever try to let go, uh
+I''m sad, I know, yeah, I''m sad, I know, yeah
+You might also like
+
+Who am I? Someone that''s afraid to let go, uh
+You decide if you''re ever gonna let me know (Yeah)
+Suicide if you ever try to let go, uh
+I''m sad, I know, yeah, I''m sad, I know, yeah
+Who am I? Someone that''s afraid to let go, uh
+You decide if you''re ever gonna let me know (Yeah)
+Suicide if you ever try to let go, uh
+I''m sad, I know, yeah, I''m sad, I know, yeah', 396565);
+INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (3453573, 'Moonlight', '
+Yeah
+
+Spotlight, uh, moonlight, uh
+Nigga, why you trippin''? Get your mood right, uh
+Shawty look good in the moonlight
+All these pussy niggas so bad mind
+Spotlight, moonlight
+Nigga, why you trippin''? Get your mood right
+Shawty look good in the moonlight
+All these pussy niggas so bad mind
+Spotlight, uh, moonlight
+Nigga, why you trippin''? Get your mood right, uh
+Shawty look good in the moonlight
+All these pussy niggas so bad mind
+Spotlight, moonlight
+Nigga, why you trippin''? Get your mood right
+Shawty look good in the moonlight
+All these pussy niggas so bad mind
+
+Feel like I''m destined
+I don''t need no Smith & Wesson, no
+Boy, who you testin''?
+Fuck a Scantron, here''s your lesson, oh
+Knife in intestine
+Takin'' shots at all your brethren, no
+Feel like I''m damaged
+Girl I know you fucking planned this
+You might also like
+All alone, call my phone, make me feel right
+Girl you know when you call, make me feel right
+All alone, call my phone, make me feel right
+Girl you know when you call, make me feel right
+
+Spotlight, uh, moonlight, uh
+Nigga, why you trippin''? Get your mood right, uh
+Shawty look good in the moonlight
+All these pussy niggas so bad mind
+Spotlight, moonlight
+Nigga, why you trippin''? Get your mood right
+Shawty look good in the moonlight
+All these pussy niggas so bad mind
+Spotlight, uh, moonlight
+Nigga, why you trippin''? Get your mood right, uh
+Shawty look good in the moonlight
+All these pussy niggas so bad mind
+Spotlight, moonlight
+Nigga, why you trippin''? Get your mood right
+Shawty look good in the moonlight
+All these pussy niggas so bad mind', 396565);
+INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (3206881, 'Everybody Dies in Their Nightmares', '
+Ooh, ahh, ahh, ahh
+Don''t go, don''t go to sleep
+Don''t go, stay up and
+Don''t—
+
+Tired of feelin'' like I''m trapped in my damn mind
+Tired of feelin'' like I''m wrapped in a damn lie
+Tired of feelin'' like my life is a damn game
+Nigga really wanna die in the nighttime
+
+Only time I feel pain, when I''m feelin'' love
+That''s why it''s tatted on my face that I''m damn numb
+Only tell you ''bout my mind when I''m all alone
+That''s why I''m never really ''lone in the nighttime
+Change hoes like clothes, I can''t get attached
+''Cause these hoes fire starters like lit matches
+I''ve been feelin'' really lost, duckin'' all attachments
+I don''t really go outside ''cause I hate traffic
+I don''t wanna go outside, get caught in traffic, traffic
+
+Ooh, ahh, ahh, ahh
+Don''t go, don''t go to sleep
+Don''t go, stay up and
+You might also like
+Tired of feelin'' like I''m trapped in my damn mind
+Tired of feelin'' like I''m wrapped in a damn lie
+Tired of feelin'' like my life is a damn game
+Nigga really wanna die in the nighttime
+Tired of feelin'' like I''m trapped in my damn mind
+Tired of feelin'' like I''m wrapped in a damn lie
+Tired of feelin'' like my life is a damn game
+Nigga really wanna die in the nighttime
+Tired of feelin'' like I''m trapped in my damn mind
+Tired of feelin'' like I''m wrapped in a damn lie
+Tired of feelin'' like my life is a damn game
+Nigga really wanna die in the nighttime
+Nigga really wanna die in the nighttime
+Nigga really wanna die in the nighttime
+Nigga really wanna die in the nighttime, uh
+Nigga really wanna die in the nighttime, uh
+Nigga really wanna die in the nighttime
+
+Don''t go to sleep
+Don''t go, stay up and
+Don''t go, don''t go to sleep
+Don''t go, stay up and don''t
+Ooh, ahh, ahh, ahh
+Don''t go, don''t go to sleep
+Don''t go, stay up and
+Don''t', 396565);
+INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (3539284, 'Hope', '
+Yeah
+Rest in peace to all the kids that lost their lives in the Parkland shooting, this song is dedicated to you
+
+Okay, she keep cryin'', she keep cryin'' every single night
+Day and night, on my mind, please don''t kill the vibe
+Oh no, I swear to God, I be in my mind
+Swear I wanna die, yeah, when you cross my—
+Said I wanna die, yuh, no, I''m not alright, yuh
+I might start a riot, yuh, I''m so fuckin'' tired, yuh
+So what''s up? What you say? Feelin'' good, I''m feelin'' great
+Tired of the fuckin'' hate, stackin'' cheese all on my plate
+
+So outside my misery, I think I''ll find
+A way of envisioning a better life
+For the rest of us, the rest of us
+There''s hope for the rest of us, the rest of us
+
+Okay, she keep cryin'', she keep cryin'' every single night
+Day and night, on my mind, please don''t kill the vibe
+Oh no, I swear to God, I be in my mind
+Swear I wanna die, yeah, when you cross my—
+Said I wanna die, yuh, no, I''m not alright, yuh
+I might start a riot, yuh, I''m so fuckin'' tired, yuh
+So what''s up? What you say? Feelin'' good, I''m feelin'' great
+Tired of the fuckin'' hate, stackin'' cheese all on my plateYou might also like', 396565);
+INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (3577656, 'ALONE, PART 3', '
+I can''t seem to find someone''s shoulder
+Who will I rely on when it''s over?
+Took a chance with you, it made me colder
+Better on my own when it''s all over
+
+So when I''m weak, who do I call?
+My God, it hurts, I can''t be calm
+What do I do? Where do I run?
+I''m tired of hate, I''m tired of love
+I dug my nails into my arms
+She turned and laughed at all my scars
+What is my worth?
+What is my worth?
+
+Gave my love a piece of me
+She put my heart beneath her feet
+She turned and left I question, "What''s my worth?"
+Gave my love a piece of me
+She put my heart beneath her feet
+She turned and left I question, "What''s my worth?"
+My worth, my worthYou might also like', 396565);
+INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (49719, 'In the End', '
+It starts with one
+
+One thing, I don''t know why
+It doesn''t even matter how hard you try
+Keep that in mind, I designed this rhyme
+To explain in due time, all I know
+Time is a valuable thing
+Watch it fly by as the pendulum swings
+Watch it count down to the end of the day
+The clock ticks life away, it''s so unreal
+Didn''t look out below
+Watch the time go right out the window
+Tryin'' to hold on, d-didn''t even know
+I wasted it all just to watch you go
+
+I kept everything inside
+And even though I tried, it all fell apart
+What it meant to me will eventually be
+A memory of a time when I tried so hard
+
+I tried so hard and got so far
+But in the end, it doesn''t even matter
+I had to fall to lose it all
+But in the end, it doesn''t even matter
+You might also like
+One thing, I don''t know why
+It doesn''t even matter how hard you try
+Keep that in mind, I designed this rhyme
+To remind myself how I tried so hard
+In spite of the way you were mockin'' me
+Actin'' like I was part of your property
+Remembering all the times you fought with me
+I''m surprised it got so far
+Things aren''t the way they were before
+You wouldn''t even recognize me anymore
+Not that you knew me back then
+But it all comes back to me in the end
+
+You kept everything inside
+And even though I tried, it all fell apart
+What it meant to me will eventually be
+A memory of a time when I tried so hard
+
+I tried so hard and got so far
+But in the end, it doesn''t even matter
+I had to fall to lose it all
+But in the end, it doesn''t even matter
+I''ve put my trust in you
+Pushed as far as I can go
+For all this, there''s only one thing you should know
+I''ve put my trust in you
+Pushed as far as I can go
+For all this, there''s only one thing you should know
+
+I tried so hard and got so far
+But in the end, it doesn''t even matter
+I had to fall to lose it all
+But in the end, it doesn''t even matter', 1581);
+INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (74998, 'Numb', '
+I''m tired of being what you want me to be
+Feeling so faithless, lost under the surface
+I don''t know what you''re expecting of me
+Put under the pressure of walking in your shoes
+
+Caught in the undertow, just caught in the undertow
+Every step that I take is another mistake to you
+Caught in the undertow, just caught in the undertow
+
+I''ve become so numb, I can''t feel you there
+Become so tired, so much more aware
+I''m becoming this, all I want to do
+Is be more like me and be less like you
+
+Can''t you see that you''re smothering me?
+Holding too tightly, afraid to lose control
+''Cause everything that you thought I would be
+Has fallen apart, right in front of you
+
+Caught in the undertow, just caught in the undertow
+Every step that I take is another mistake to you
+Caught in the undertow, just caught in the undertow
+And every second I waste is more than I can take
+You might also like
+I''ve become so numb, I can''t feel you there
+Become so tired, so much more aware
+I''m becoming this, all I want to do
+Is be more like me and be less like you
+
+And I know
+I may end up failing too
+But I know
+You were just like me with someone disappointed in you
+
+I''ve become so numb, I can''t feel you there
+Become so tired, so much more aware
+I''m becoming this, all I want to do
+Is be more like me and be less like you
+
+I''ve become so numb, I can''t feel you there
+I''m tired of being what you want me to be
+I''ve become so numb, I can''t feel you there
+I''m tired of being what you want me to be', 1581);
+INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (2353006, 'Star Shopping', '
+Wait right here
+I''ll be back in the mornin''
+I know that I''m not that important to you
+But to me, girl, you''re so much more than gorgeous (Yeah)
+So much more than perfect (Yeah)
+Right now I know that I''m not really worth it
+If you give me time, I could work on it
+Give me some time while I work on it
+Losin'' your patience, and, girl, I don''t blame you
+The Earth''s in rotation, you''re waitin'' for me (Yeah)
+Look at my face when I fuck on your waist
+''Cause we only have one conversation a week
+That''s why your friends always hatin'' on me
+Fuck ''em though, I did this all by myself
+Matter fact, I ain''t never asked no one for help
+And that''s why I don''t pick up my phone when it rings
+None of my exes is over Lil Peep
+Nobody flexin'' as much as I be
+That''s why she text me and tell me she love me
+She know that someday I''ll be over the sea
+Makin'' my money and smokin'' my weed
+I think it''s funny, she open up to me, get comfortable with me
+Once I got it comin'', I love her, she love me
+I know that I''m nothing like someone her family want me to be
+If I find a way, would you walk it with me?
+Look at my face while you talkin'' to me
+''Cause we only have one conversation a week
+Can I get one conversation at least?
+Shout out to everyone makin'' my beats, you helpin'' me preach
+This music''s the only thing keepin'' the peace when I''m fallin'' to pieces
+You might also like
+Look at the sky tonight, all of the stars have a reason
+A reason to shine, a reason like mine and I''m fallin'' to pieces
+Look at the sky tonight, all of the stars have a reason', 569922);
+INSERT INTO public.songs (id, name, lyrics, artist_id) VALUES (3175124, 'Save That Shit', '
+(Yeah)
+
+Fuck my life, can''t save that, girl
+Don''t tell me you could save that shit
+All she want is payback for the way I always play that shit
+You ain''t gettin'' nothin'' that I''m sayin''
+Don''t tell me you is
+Nothin'' like them other motherfuckers
+I can make you rich (I can make you rich)
+I can make you this, baby, I can make you that
+I can take you there, but baby, you won''t make it back
+Growin'' sick of this and I don''t wanna make you sad
+Do I make you scared? Baby, won''t you take me back?
+
+Nothin'' like them other motherfuckers
+I can make you rich (I can make you rich)
+Nothin'' like them other motherfuckers
+I can make you rich
+
+Fuck my life, can''t save that, girl
+Don''t tell me you could save that shit
+All she want is payback for the way I always play that shit
+You ain''t gettin'' nothin'' that I''m sayin''
+Don''t tell me you is
+Nothin'' like them other motherfuckers
+I can (Make you rich), make you rich
+I can make you this, baby, I can make you that
+I can take you there, but baby, you won''t make it back
+Growin'' sick of this and I don''t wanna make you sad
+Do I make you scared? Baby, won''t you take me back?
+You might also like
+Down another lonely road, I go
+Just another lonely road to home
+I just wanna know, I just gotta know
+Do you wanna glo? Baby, we could glo
+
+Fuck my life, can''t save that, girl
+Don''t tell me you could save that shit
+All she want is payback for the way I always play that shit
+You ain''t gettin'' nothin'' that I''m sayin''
+Don''t tell me you is
+Nothin'' like them other motherfuckers
+I can make you rich (I can make you rich)
+I can make you this, baby, I can make you that
+I can take you there, but baby, you won''t make it back
+Growin'' sick of this and I don''t wanna make you sad
+Do I make you scared? Baby, won''t you take me back?
+
+Do I make you scared? Baby, won''t you take me back?
+Nothin'' like them other motherfuckers
+I can make you rich (I can make you rich)', 569922);
 
 
 --
