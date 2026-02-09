@@ -7,7 +7,9 @@ from models import *
 def main(config):
 
     # make db connection, make api connection, configure db
+    db_create(config)
     session, engine = db_connection(config)
+
     genius = api_connection(config)
     configure_db(session, engine, config)
 
