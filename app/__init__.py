@@ -33,7 +33,8 @@ def create_app(config=None):
     configure_db(db_session, engine, config)
 
     # attach api connection
-    app.api_client = api_connection(config)
+    api_conn = api_connection(config)
+    app.api_client = api_conn
 
     # remove session after request
     @app.teardown_appcontext
