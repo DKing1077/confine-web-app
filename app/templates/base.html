@@ -1,0 +1,21 @@
+<!-- base.html -->
+<html>
+
+<head>
+<title>{% block title %}{% endblock %}</title>
+</head>
+
+<body>
+{% block body %}
+{% endblock %}
+</body>
+
+</html>
+
+<!-- form.html -->
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block body %}
+<h1>Welcome to the Home Page</h1>
+<p>Hello, {{name}}</p>
+{% endblock %}

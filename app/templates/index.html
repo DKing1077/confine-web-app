@@ -1,1 +1,25 @@
-<h1>Hello {{ name }}!</h1>
+<html>
+
+<head>
+<title>{{title}}</title>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', file-name='css/style.c.ss')}}">
+<script src="{{url_for('static', filename='js/script.js')}}"></script>
+</head>
+
+<body>
+<img src="{{ url_for('static', filename='images/logo.png')}}" alt="-Company Logo">
+<h1>Hello {{name}}!</h1>
+{% if messages %}
+
+<ul>
+{% for message in messages %}
+<li>{{message}}</li>
+{% endfor %}
+</ul>
+
+{% else %}
+<p> No messages</p>
+{% endif %}
+</body>
+
+</html>
