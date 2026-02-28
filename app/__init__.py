@@ -1,7 +1,8 @@
 from flask import Flask
 from app import routes
-from database import db_create, db_connection, api_connection, configure_db
-from routes import bp as main_bp
+from .database import db_create, create_tables
+from .routes import bp as main_bp
+from extensions import init_db, init_api_client, db_session
 
 
 def create_app(config=None):
@@ -16,30 +17,23 @@ def create_app(config=None):
         the applications run configurations defined in config.py
     """
 
-    # configure database
+    # init db_session, engine, api_client
+    init_db(config)
+    init_api_client(config)
+
+    # create database, tables
     db_create(config)
-    db_session, engine = db_connection(config)
+    create_tables(config)
 
     # flask instance
     app = Flask(__name__)
     if config:
         app.config.from_object(config)
 
-    # attach session
-    app.engine = engine
-    app.db_session = db_session
-
-    # configure database
-    configure_db(db_session, engine, config)
-
-    # attach api connection
-    api_conn = api_connection(config)
-    app.api_client = api_conn
-
     # remove session after request
     @app.teardown_appcontext
     def remove_session(exception=None):
-        app.db_session.remove()
+        db_session.remove()
 
     # register routes
     app.register_blueprint(main_bp)
