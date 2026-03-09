@@ -6,6 +6,7 @@ engine = None
 db_session = None
 api_conn = None
 
+
 def init_db(config):
     global engine, db_session
     db_uri = f'postgresql://{config.db_user}:{config.db_pass}@{config.db_host}:{config.db_port}/{config.db_name}'
@@ -18,11 +19,11 @@ def init_db(config):
         result = db_session.execute(query)
 
         db_version = result.fetchone()[0]
-        print(f"Connected to PostgreSQL! Server version: {db_version}")
+        print(f"connected to PostgreSQL! Server version: {db_version}")
         return db_session, engine
 
     except Exception as e:
-        print(f"Error connecting to PostgreSQL database: {e}")
+        print(f"error connecting to PostgreSQL database: {e}")
 
 
 def init_api_client(config):
@@ -32,4 +33,4 @@ def init_api_client(config):
         api_conn = lg_conn
 
     except Exception as e:
-        print(f"Error connecting to lyrics genius api: {e}")
+        print(f"error connecting to lyrics genius api: {e}")

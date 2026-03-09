@@ -1,8 +1,4 @@
-from flask import render_template, Blueprint
-
-# from flask import request, redirect, url_for, Blueprint, jsonify, current_app)
-# from werkzeug.utils import secure_filename
-# import os
+from flask import render_template, Blueprint, request
 
 bp = Blueprint("main", __name__)
 
@@ -10,6 +6,19 @@ bp = Blueprint("main", __name__)
 @bp.route('/')
 def index():
     return render_template('template.html')
+
+# search route
+@bp.route("/search")
+def search():
+    search_type = request.args.get("search_type")
+    search_input = request.args.get("search_input")
+    print(f'running service layer for : {search_type} - {search_input}')
+    return f"Searching {search_type} for {search_input}"
+
+
+# from flask import request, redirect, url_for, Blueprint, jsonify, current_app)
+# from werkzeug.utils import secure_filename
+# import os
 
 # # form examples
 # @bp.route('/contact')

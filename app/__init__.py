@@ -2,7 +2,7 @@ from flask import Flask
 from app import routes
 from .database import db_create, create_tables
 from .routes import bp as main_bp
-from extensions import init_db, init_api_client, db_session
+from .extensions import init_db, init_api_client
 
 
 def create_app(config=None):
@@ -33,7 +33,7 @@ def create_app(config=None):
     # remove session after request
     @app.teardown_appcontext
     def remove_session(exception=None):
-        db_session.remove()
+        extensions.db_session.remove()
 
     # register routes
     app.register_blueprint(main_bp)
