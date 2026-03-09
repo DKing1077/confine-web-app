@@ -1,5 +1,5 @@
 from sqlalchemy import create_engine, text
-from extensions import db_session, engine
+from . import extensions
 from app.models import reg
 import subprocess
 import os
@@ -26,9 +26,9 @@ def db_create(config):
                            CONNECTION LIMIT -1
                            PASSWORD '{config.db_pass}';""")
             conn.execute(sql)
-            print(f"Super User '{config.db_user}' created successfully!")
+            print(f"super user '{config.db_user}' created successfully!")
         else:
-            print(f"Super user '{config.db_user}' already exists.")
+            print(f"super user '{config.db_user}' already exists.")
 
         # create database
         db_exists = conn.execute(
@@ -40,9 +40,9 @@ def db_create(config):
                            OWNER = {config.db_user}
                            CONNECTION LIMIT = -1; """)
             conn.execute(sql)
-            print(f"Database '{config.db_name}' created successfully!")
+            print(f"database '{config.db_name}' created successfully!")
         else:
-            print(f"Database '{config.db_name}' already exists.")
+            print(f"database '{config.db_name}' already exists.")
 
 
 def create_tables(config):
@@ -51,7 +51,7 @@ def create_tables(config):
                   SELECT 1
                   FROM information_schema.tables
                   WHERE table_name IN ('artists', 'albums', 'songs'));""")
-    table_exists = db_session.execute(sql).fetchone()
+    table_exists = extensions.db_session.execute(sql).fetchone()
     if not table_exists:
         sql_file = 'data/database.sql'
         if os.path.exists(sql_file):
@@ -64,7 +64,7 @@ def create_tables(config):
             os.environ['PGPASSWORD'] = str(config.db_pass)
             subprocess.run(command, check=True)
         else:
-            reg.metadata.create_all(engine)
+            reg.metadata.create_all(extensions.engine)
 
 
 def save_db(config):
