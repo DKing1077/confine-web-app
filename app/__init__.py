@@ -2,7 +2,7 @@ from flask import Flask
 from app import routes
 from .database import db_create, create_tables
 from .routes import bp as main_bp
-from .extensions import init_db, init_api_client
+from . import extensions
 
 
 def create_app(config=None):
@@ -15,15 +15,18 @@ def create_app(config=None):
     end of request - flask teardown calls session remove - connection closed returned to the pool
     :param config:
         the applications run configurations defined in config.py
+    database.py is used here so need to import the module, in services we can import the variables
     """
 
-    # init db_session, engine, api_client
-    init_db(config)
-    init_api_client(config)
-
-    # create database, tables
+    # create database, init database
     db_create(config)
-    create_tables(config)
+
+    # init globals
+    extensions.init_db(config)
+    extensions.init_api_client(config)
+
+    # create tables
+    create_tables(config, extensions.db_session, extensions.engine)
 
     # flask instance
     app = Flask(__name__)

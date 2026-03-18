@@ -1,3 +1,3 @@
-from api_sync import collect_data
-from process import analyze
+from .api_sync import api_request
+from .process import analyze
 
