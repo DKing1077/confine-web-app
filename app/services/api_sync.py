@@ -1,100 +1,99 @@
 from sqlalchemy import func
 from app.models import Artists, Albums, Songs
-from app.extensions import db_session, api_conn
 import pandas as pd
 import re
 
 
-def collect_data(search, start):
-    if start == 1:
+def api_request(db_session, api_conn, search_type, search_input):
+    if search_type == 'artist':
         data = db_session.query(Songs).join(Artists).filter(
-            Artists.name.ilike(f'%{search}%')
+            Artists.name.ilike(f'%{search_input}%')
         ).limit(10).all()
 
         if len(data) < 10:
-            data = search_by_artist(api_conn, search)
-            relational_mapping(data, start)
-            data = collect_data(search, start)
+            data = search_by_artist(api_conn, search_input, 10)
+            relational_mapping(db_session, api_conn, data, search_type)
+            data = api_request(db_session, api_conn, search_type, search_input)
 
-    elif start == 2:
+    elif search_type == 'song':
         data = db_session.query(Songs).filter(
             func.replace(
                 func.replace(Songs.name, '’', ''), ',', ''
-            ).ilike(f'%{search}%')
+            ).ilike(f'%{search_input}%')
         ).limit(1).all()
 
         if len(data) < 1:
-            data = search_by_song(search)
-            relational_mapping(data, start)
-            data = collect_data(search, start)
+            data = search_by_song(api_conn, search_input)
+            relational_mapping(db_session, api_conn, data, search_type)
+            data = api_request(db_session, api_conn, search_type, search_input)
 
     else:
         data = db_session.query(Albums).filter(
-            Albums.name.ilike(f'%{search}%')
+            Albums.name.ilike(f'%{search_input}%')
         ).limit(1).all()
 
         if len(data) < 1:
-            data = search_by_album(search)
-            relational_mapping(data, start)
-            data = collect_data(search, start)
+            data = search_by_album(api_conn, search_input)
+            relational_mapping(db_session, api_conn, data, search_type)
+            data = api_request(db_session, api_conn, search_type, search_input)
     return data
 
 
-def relational_mapping(data, start):
-    if start == 1:
+def relational_mapping(db_session, api_conn, data, search_type):
+    if search_type == 'artist':
         for index in data.index:
             artist_id = int(data['artist_id'][index])
             song_id = int(data['song_id'][index])
 
-            artist_rec = check_if_exists(Artists, 'id', artist_id)
+            artist_rec = check_if_exists(db_session, Artists, 'id', artist_id)
             if not artist_rec:
-                artist_rec = add_artist(data, index)
+                artist_rec = add_artist(db_session, data, index)
 
-            song_rec = check_if_exists(Songs, 'id', song_id)
+            song_rec = check_if_exists(db_session, Songs, 'id', song_id)
             if not song_rec:
-                add_song(data, index, artist_rec)
+                add_song(db_session, data, index, artist_rec)
 
-    elif start == 2:
+    elif search_type == 'song':
         artist_name = data['artist'][0]
         song_id = int(data['song_id'][0])
 
-        song_rec = check_if_exists(Songs, 'id', song_id)
+        song_rec = check_if_exists(db_session, Songs, 'id', song_id)
         if not song_rec:
-            artist_rec = check_if_exists(Artists, 'name', artist_name)
-
-            if not artist_rec:
-                artist_data = search_by_artist(artist_name, max_songs=1)
-                artist_rec = add_artist(artist_data, 0)
-
-                if song_id != int(artist_data['song_id'][0]):
-                    song_rec = check_if_exists(Songs, 'id', int(artist_data['song_id'][0]))
-                    if not song_rec:
-                        add_song(artist_data, 0, artist_rec)
-
-            data['artist_id'] = artist_rec.id
-            add_song(data, 0, artist_rec)
-
-    elif start == 3:
-        artist_name = data['artist'][0]
-        album_id = int(data['album_id'][0])
-
-        album_rec = check_if_exists(Albums, 'id', album_id)
-        if not album_rec:
-            artist_rec = check_if_exists(Artists, 'name', artist_name)
+            artist_rec = check_if_exists(db_session, Artists, 'name', artist_name)
 
             if not artist_rec:
                 artist_data = search_by_artist(api_conn, artist_name, max_songs=1)
                 artist_rec = add_artist(db_session, artist_data, 0)
 
-                song_rec = check_if_exists(Songs, 'id', int(artist_data['song_id'][0]))
-                if not song_rec:
-                    add_song(artist_data, 0, artist_rec)
+                if song_id != int(artist_data['song_id'][0]):
+                    song_rec = check_if_exists(db_session, Songs, 'id', int(artist_data['song_id'][0]))
+                    if not song_rec:
+                        add_song(db_session, artist_data, 0, artist_rec)
 
             data['artist_id'] = artist_rec.id
-            add_album(data, 0, artist_rec)
+            add_song(db_session, data, 0, artist_rec)
+
+    elif search_type == 'album':
+        artist_name = data['artist'][0]
+        album_id = int(data['album_id'][0])
+
+        album_rec = check_if_exists(db_session, Albums, 'id', album_id)
+        if not album_rec:
+            artist_rec = check_if_exists(db_session, Artists, 'name', artist_name)
+
+            if not artist_rec:
+                artist_data = search_by_artist(api_conn, artist_name, max_songs=1)
+                artist_rec = add_artist(db_session, artist_data, 0)
+
+                song_rec = check_if_exists(db_session, Songs, 'id', int(artist_data['song_id'][0]))
+                if not song_rec:
+                    add_song(db_session, artist_data, 0, artist_rec)
+
+            data['artist_id'] = artist_rec.id
+            add_album(db_session, data,0, artist_rec)
 
 
-def add_artist(data, index):
+def add_artist(db_session, data, index):
     artist = Artists(
         id=int(data['artist_id'][index]), name=data['artist'][index], albums=[], songs=[]
     )
@@ -102,7 +101,7 @@ def add_artist(data, index):
     return artist
 
 
-def add_song(data, index, artist):
+def add_song(db_session, data, index, artist):
     song = Songs(
         id=int(data['song_id'][index]), name=data['title'][index],
         lyrics=data['lyrics'][index], artist_id=int(data['artist_id'][index]), artist=artist
@@ -110,7 +109,7 @@ def add_song(data, index, artist):
     db_session.add(song)
 
 
-def add_album(data, index, artist):
+def add_album(db_session, data, index, artist):
     album = Albums(
         id=int(data['album_id'][index]), name=data['title'][index],
         lyrics=data['lyrics'][index], artist_id=int(data['artist_id'][index]), artist=artist
@@ -118,13 +117,13 @@ def add_album(data, index, artist):
     db_session.add(album)
 
 
-def check_if_exists(table, column, value):
+def check_if_exists(db_session, table, column, value):
     column_attr = getattr(table, column)
     record = db_session.query(table).filter(column_attr == value).first()
     return record
 
 
-def search_by_artist(artist_name, max_songs=10):
+def search_by_artist(api_conn, artist_name, max_songs=10):
     df = pd.DataFrame(columns=['artist_id', 'artist', 'song_id', 'title', 'lyrics'])
     artist = api_conn.search_artist(artist_name, max_songs=max_songs, sort='popularity')
 
@@ -141,7 +140,7 @@ def search_by_artist(artist_name, max_songs=10):
     return df
 
 
-def search_by_song(song):
+def search_by_song(api_conn, song):
     df = pd.DataFrame(columns=['artist', 'song_id', 'title', 'lyrics'])
 
     song = api_conn.search_song(song)
@@ -152,7 +151,7 @@ def search_by_song(song):
     return df
 
 
-def search_by_album(album):
+def search_by_album(api_conn, album):
     df = pd.DataFrame(columns=['album_id', 'artist', 'title', 'lyrics'])
 
     album = api_conn.search_album(album)

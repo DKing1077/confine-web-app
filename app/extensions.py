@@ -20,8 +20,6 @@ def init_db(config):
 
         db_version = result.fetchone()[0]
         print(f"connected to PostgreSQL! Server version: {db_version}")
-        return db_session, engine
-
     except Exception as e:
         print(f"error connecting to PostgreSQL database: {e}")
 

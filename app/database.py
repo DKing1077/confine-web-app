@@ -1,5 +1,4 @@
 from sqlalchemy import create_engine, text
-from . import extensions
 from app.models import reg
 import subprocess
 import os
@@ -10,6 +9,7 @@ def db_create(config):
         f'postgresql://{config.postgres_user}:{config.postgres_pass}@{config.postgres_host}:{config.postgres_port}/postgres', isolation_level = "AUTOCOMMIT")
 
     with default_engine.connect() as conn:
+
         # create superuser role
         role_exists = conn.execute(
             text(f"SELECT 1 FROM pg_roles WHERE rolname = '{config.db_user}'"),
@@ -45,13 +45,13 @@ def db_create(config):
             print(f"database '{config.db_name}' already exists.")
 
 
-def create_tables(config):
+def create_tables(config, db_session, engine):
     sql = text("""SELECT
                   EXISTS (
                   SELECT 1
                   FROM information_schema.tables
                   WHERE table_name IN ('artists', 'albums', 'songs'));""")
-    table_exists = extensions.db_session.execute(sql).fetchone()
+    table_exists = db_session.execute(sql).fetchone()
     if not table_exists:
         sql_file = 'data/database.sql'
         if os.path.exists(sql_file):
@@ -64,7 +64,7 @@ def create_tables(config):
             os.environ['PGPASSWORD'] = str(config.db_pass)
             subprocess.run(command, check=True)
         else:
-            reg.metadata.create_all(extensions.engine)
+            reg.metadata.create_all(engine)
 
 
 def save_db(config):

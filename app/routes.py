@@ -1,6 +1,10 @@
 from flask import render_template, Blueprint, request
+from .services import api_request
+from . import extensions
 
 bp = Blueprint("main", __name__)
+db_session = extensions.db_session
+api_conn = extensions.api_conn
 
 # default root
 @bp.route('/')
@@ -13,7 +17,8 @@ def search():
     search_type = request.args.get("search_type")
     search_input = request.args.get("search_input")
     print(f'running service layer for : {search_type} - {search_input}')
-    return f"Searching {search_type} for {search_input}"
+    data = api_request(db_session, api_conn, search_type, search_input)
+    return 'data store succeed'
 
 
 # from flask import request, redirect, url_for, Blueprint, jsonify, current_app)
