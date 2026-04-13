@@ -95,25 +95,28 @@ def relational_mapping(db_session, api_conn, data, search_type):
 
 def add_artist(db_session, data, index):
     artist = Artists(
-        id=int(data['artist_id'][index]), name=data['artist'][index], albums=[], songs=[]
+        id=int(data['artist_id'][index]), name=data['artist'][index],
     )
     db_session.add(artist)
+    db_session.commit()
     return artist
 
 
 def add_song(db_session, data, index, artist):
     song = Songs(
         id=int(data['song_id'][index]), name=data['title'][index],
-        lyrics=data['lyrics'][index], artist_id=int(data['artist_id'][index]), artist=artist
+        lyrics=data['lyrics'][index], artist_id=int(data['artist_id'][index])
     )
+    song.artist = artist
     db_session.add(song)
 
 
 def add_album(db_session, data, index, artist):
     album = Albums(
         id=int(data['album_id'][index]), name=data['title'][index],
-        lyrics=data['lyrics'][index], artist_id=int(data['artist_id'][index]), artist=artist
+        lyrics=data['lyrics'][index], artist_id=int(data['artist_id'][index])
     )
+    album.artist = artist
     db_session.add(album)
 
 
