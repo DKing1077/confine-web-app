@@ -1,10 +1,8 @@
 from sqlalchemy import create_engine, text
 from sqlalchemy.orm import scoped_session, sessionmaker
-import lyricsgenius
 
 engine = None
 db_session = None
-api_conn = None
 
 
 def init_db(config):
@@ -23,12 +21,3 @@ def init_db(config):
     except Exception as e:
         print(f"error connecting to PostgreSQL database: {e}")
 
-
-def init_api_client(config):
-    global api_conn
-    try:
-        lg_conn = lyricsgenius.Genius(config.access_token, remove_section_headers=True, timeout=None)
-        api_conn = lg_conn
-
-    except Exception as e:
-        print(f"error connecting to lyrics genius api: {e}")

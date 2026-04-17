@@ -1,13 +1,13 @@
 from sqlalchemy import func
-from app.models import Artists, Albums, Songs
+from app.models import Artists, Albums, Tracks
 import pandas as pd
 import re
 
 
 def api_request(db_session, api_conn, search_type, search_input):
     if search_type == 'artist':
-        data = db_session.query(Songs).join(Artists).filter(
-            Artists.name.ilike(f'%{search_input}%')
+        data = db_session.query(Tracks).join(Artists).filter(
+            Artists.artist_name.ilike(f'%{search_input}%')
         ).limit(10).all()
 
         if len(data) < 10:
@@ -16,9 +16,9 @@ def api_request(db_session, api_conn, search_type, search_input):
             data = api_request(db_session, api_conn, search_type, search_input)
 
     elif search_type == 'song':
-        data = db_session.query(Songs).filter(
+        data = db_session.query(Tracks).filter(
             func.replace(
-                func.replace(Songs.name, '’', ''), ',', ''
+                func.replace(Tracks.title, '’', ''), ',', ''
             ).ilike(f'%{search_input}%')
         ).limit(1).all()
 
@@ -29,7 +29,7 @@ def api_request(db_session, api_conn, search_type, search_input):
 
     else:
         data = db_session.query(Albums).filter(
-            Albums.name.ilike(f'%{search_input}%')
+            Albums.title.ilike(f'%{search_input}%')
         ).limit(1).all()
 
         if len(data) < 1:
@@ -49,7 +49,7 @@ def relational_mapping(db_session, api_conn, data, search_type):
             if not artist_rec:
                 artist_rec = add_artist(db_session, data, index)
 
-            song_rec = check_if_exists(db_session, Songs, 'id', song_id)
+            song_rec = check_if_exists(db_session, Tracks, 'id', song_id)
             if not song_rec:
                 add_song(db_session, data, index, artist_rec)
 
@@ -57,7 +57,7 @@ def relational_mapping(db_session, api_conn, data, search_type):
         artist_name = data['artist'][0]
         song_id = int(data['song_id'][0])
 
-        song_rec = check_if_exists(db_session, Songs, 'id', song_id)
+        song_rec = check_if_exists(db_session, Tracks, 'id', song_id)
         if not song_rec:
             artist_rec = check_if_exists(db_session, Artists, 'name', artist_name)
 
@@ -66,7 +66,7 @@ def relational_mapping(db_session, api_conn, data, search_type):
                 artist_rec = add_artist(db_session, artist_data, 0)
 
                 if song_id != int(artist_data['song_id'][0]):
-                    song_rec = check_if_exists(db_session, Songs, 'id', int(artist_data['song_id'][0]))
+                    song_rec = check_if_exists(db_session, Tracks, 'id', int(artist_data['song_id'][0]))
                     if not song_rec:
                         add_song(db_session, artist_data, 0, artist_rec)
 
@@ -85,7 +85,7 @@ def relational_mapping(db_session, api_conn, data, search_type):
                 artist_data = search_by_artist(api_conn, artist_name, max_songs=1)
                 artist_rec = add_artist(db_session, artist_data, 0)
 
-                song_rec = check_if_exists(db_session, Songs, 'id', int(artist_data['song_id'][0]))
+                song_rec = check_if_exists(db_session, Tracks, 'id', int(artist_data['song_id'][0]))
                 if not song_rec:
                     add_song(db_session, artist_data, 0, artist_rec)
 
@@ -103,7 +103,7 @@ def add_artist(db_session, data, index):
 
 
 def add_song(db_session, data, index, artist):
-    song = Songs(
+    song = Tracks(
         id=int(data['song_id'][index]), name=data['title'][index],
         lyrics=data['lyrics'][index], artist_id=int(data['artist_id'][index])
     )

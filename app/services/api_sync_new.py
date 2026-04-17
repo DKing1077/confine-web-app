@@ -1,6 +1,6 @@
 from sqlalchemy import func
-from app.models import Artists, Albums, Songs
-from app.schemas.data_transfer_objects import AlbumRecord, SongRecord, ArtistRecord
+from app.models import Artists, Albums, Tracks
+from app.schemas.transfers import AlbumRecord, SongRecord, ArtistRecord
 import re
 
 
@@ -16,16 +16,16 @@ def api_request(db_session, api_conn, search_type, search_input):
 def db_lookup(db_session, search_type, search_input):
     api_flag = False
     if search_type == 'artist':
-        records = db_session.query(Songs).join(Artists).filter(
+        records = db_session.query(Tracks).join(Artists).filter(
             Artists.name.ilike(f'%{search_input}%')
         ).limit(10).all()
         if len(records) < 10:
             api_flag = True
 
     elif search_type == 'song':
-        records = db_session.query(Songs).filter(
+        records = db_session.query(Tracks).filter(
             func.replace(
-                func.replace(Songs.title, '’', ''), ',', ''
+                func.replace(Tracks.title, '’', ''), ',', ''
             ).ilike(f'%{search_input}%')
         ).limit(1).all()
         if len(records) < 1:
@@ -104,9 +104,9 @@ def relational_mapping(db_session, classes, search_type):
                 add_album(db_session, obj, artist_rec)
 
 
-def add_artist(db_session, value):
+def add_artist(db_session, artist_name):
     artist = Artists(
-        name=value,
+        name=artist_name,
     )
     db_session.add(artist)
     db_session.flush()
