@@ -9,7 +9,7 @@ class ArtistRecord:
     lyrics: str
 
 @dataclass
-class SongRecord:
+class TrackRecord:
     artist: str
     song_id: int
     title: str

@@ -9,7 +9,6 @@ def db_create(config):
         f'postgresql://{config.postgres_user}:{config.postgres_pass}@{config.postgres_host}:{config.postgres_port}/postgres', isolation_level = "AUTOCOMMIT")
 
     with default_engine.connect() as conn:
-
         # create superuser role
         role_exists = conn.execute(
             text(f"SELECT 1 FROM pg_roles WHERE rolname = '{config.db_user}'"),
