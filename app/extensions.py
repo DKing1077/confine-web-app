@@ -10,7 +10,7 @@ def init_db(config):
     db_uri = f'postgresql://{config.db_user}:{config.db_pass}@{config.db_host}:{config.db_port}/{config.db_name}'
     engine = create_engine(db_uri)
     try:
-        session = sessionmaker(bind=engine, autoflush=False, autocommit=False, future=True)
+        session = sessionmaker(bind=engine, autoflush=False)
         db_session = scoped_session(session)
 
         query = text('SELECT version();')

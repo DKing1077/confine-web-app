@@ -1,3 +1,3 @@
-from .api_sync import api_request
+from .data_retrieval import api_request
 from .process import analyze
 

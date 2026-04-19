@@ -1,5 +1,42 @@
-import requests
-import json
+from app.services.musixmatch import MusixMatch
+
+artist = 'Drake'
+track = 'Yebbas Heartbreak'
+
+api = MusixMatch(api_key='a94199af41b2cbfb54d3516a97658701')
+
+# search artist, track
+params_search_1 = {
+    "q_artist": artist.title(),
+    "q_track": track.title(),
+    "f_has_lyrics": 1,
+    "s_track_rating": "desc",
+    "page_size": 10,
+    "page": 1,
+}
+
+# search artist
+params_search_2 = {
+    "q_artist": artist.title(),
+    "f_has_lyrics": 1,
+    "s_track_rating": "desc",
+    "page_size": 10,
+    "page": 1,
+}
+
+# search track
+params_search_3 = {
+    "q_track": track.title(),
+    "f_has_lyrics": 1,
+    "s_track_rating": "desc",
+    "page_size": 10,
+    "page": 1,
+}
+
+result = api.track_search(params_search_1)
+print(result)
+
+
 
 # api_key = 'a94199af41b2cbfb54d3516a97658701'
 

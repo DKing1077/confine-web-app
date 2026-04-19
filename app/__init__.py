@@ -11,19 +11,18 @@ def create_app(config=None):
     configures the local postgres database
     configures a scoped db session to be used - one per request
     closes each session automatically when the request ends
-    first sql execution within request - connection opened - taken from pool
+    first SQL execution within request - connection opened - taken from pool
     end of request - flask teardown calls session remove - connection closed returned to the pool
     :param config:
         the applications run configurations defined in config.py
     database.py is used here so need to import the module, in services we can import the variables
     """
 
-    # create database, init database
+    # create database
     db_create(config)
 
-    # init globals
+    # init database
     extensions.init_db(config)
-    extensions.init_api_client(config)
 
     # create tables
     create_tables(config, extensions.db_session, extensions.engine)

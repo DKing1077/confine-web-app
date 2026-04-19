@@ -4,7 +4,6 @@ from . import extensions
 
 bp = Blueprint("main", __name__)
 db_session = extensions.db_session
-api_conn = extensions.api_conn
 
 # default root
 @bp.route('/')
@@ -14,10 +13,10 @@ def index():
 # search route
 @bp.route("/search")
 def search():
-    search_type = request.args.get("search_type")
     search_input = request.args.get("search_input")
-    print(f'running service layer for : {search_type} - {search_input}')
-    data = api_request(db_session, api_conn, search_type, search_input)
+    print(f'running service layer for : {search_input}')
+
+    data = api_request(db_session, artist=search_input)
     return 'data store succeed'
 
 
