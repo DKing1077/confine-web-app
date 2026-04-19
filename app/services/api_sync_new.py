@@ -1,6 +1,6 @@
 from sqlalchemy import func
 from app.models import Artists, Albums, Tracks
-from app.schemas.transfers import AlbumRecord, SongRecord, ArtistRecord
+from app.schemas.transfers import AlbumRecord, TrackRecord, ArtistRecord
 import re
 
 
@@ -17,7 +17,7 @@ def db_lookup(db_session, search_type, search_input):
     api_flag = False
     if search_type == 'artist':
         records = db_session.query(Tracks).join(Artists).filter(
-            Artists.name.ilike(f'%{search_input}%')
+            Artists.artist_name.ilike(f'%{search_input}%')
         ).limit(10).all()
         if len(records) < 10:
             api_flag = True
@@ -57,7 +57,7 @@ def api_fetch(api_conn, search_type, search_input):
     elif search_type == 'song':
         song = api_conn.search_song(search_input)
         classes.append(
-            SongRecord(
+            TrackRecord(
                 artist=song.artist,
                 song_id=song.id,
                 title=song.title,
@@ -84,7 +84,7 @@ def relational_mapping(db_session, classes, search_type):
             song_ex_id = obj.song_id
 
             artist_rec = check_if_exists(db_session, Artists, 'name', artist_name)
-            song_rec = check_if_exists(db_session, Songs, 'external_id', song_ex_id)
+            song_rec = check_if_exists(db_session, Tracks, 'external_id', song_ex_id)
 
             if not artist_rec:
                 artist_rec = add_artist(db_session, artist_name)
@@ -114,7 +114,7 @@ def add_artist(db_session, artist_name):
 
 
 def add_song(db_session, obj, artist):
-    song = Songs(
+    song = Tracks(
         external_id=int(obj.song_id), title=obj.title,
         lyrics=obj.lyrics, artist=artist
     )
