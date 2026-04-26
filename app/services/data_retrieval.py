@@ -1,15 +1,20 @@
 from sqlalchemy import select
 from app.models import Artists, Albums, Tracks
 from app.services.musixmatch import MusixMatch
+from flask import current_app
+from dataclasses import asdict
 
 
 def api_request(db_session, artist=None, track=None):
     # classes, api_flag = db_lookup(db_session, artist_input, track_input)
     # if api_flag:
 
-    api = MusixMatch(api_key='a94199af41b2cbfb54d3516a97658701')
+    api = MusixMatch(api_key=current_app.config["ACCESS_TOKEN"])
     classes = api.track_search(artist=artist, track=track)
-    print('classes : \n', classes, '\n')
+    print('\nclasses : \n', classes, '\n')
+    for obj in classes:
+        print(obj.artist_name, obj.track_name, '\n')
+        print(asdict(obj))
 
     # db_insert(db_session, classes)
     # db_session.commit()

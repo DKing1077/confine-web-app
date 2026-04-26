@@ -14,7 +14,7 @@ def index():
 @bp.route("/search")
 def search():
     search_input = request.args.get("search_input")
-    print(f'running service layer for : {search_input}')
+    print(f'running service layer for : {search_input}\n')
 
     data = api_request(db_session, artist=search_input)
     return 'data store succeed'

@@ -1,39 +1,39 @@
 import os
 
 class Config(object):
-    access_token = 'vhNbgaGaEMcKPsC1TW8IrulQjdvXzOUWQLRq9u5CUoWvH3g1F-GeHjS2_9qJaMZH'
-    postgres_name = 'PostgreSQL18'
-    postgres_user = 'postgres'
-    postgres_pass = 'postgres'
-    postgres_host = 'localhost'
-    postgres_port = 5432
+    ACCESS_TOKEN = 'a94199af41b2cbfb54d3516a97658701'
+    POSTGRES_NAME = 'PostgreSQL18'
+    POSTGRES_USER = 'postgres'
+    POSTGRES_PASS = 'postgres'
+    POSTGRES_HOST = 'localhost'
+    POSTGRES_PORT = 5432
 
-    secret_key = os.environ.get('SECRET_KEY')
-    debug = False
-    Test = False
+    SECRET_KEY = os.environ.get('SECRET_KEY')
+    DEBUG = False
+    TEST = False
 
 class Production(Config):
-    access_token = 'vhNbgaGaEMcKPsC1TW8IrulQjdvXzOUWQLRq9u5CUoWvH3g1F-GeHjS2_9qJaMZH'
-    db_name = 'genius_prod_db'
-    db_user = 'genius_prod_user'
-    db_pass = 'genius_pass'
-    db_host = 'localhost'
-    db_port = 5432
+    ACCESS_TOKEN = 'a94199af41b2cbfb54d3516a97658701'
+    DB_NAME = 'genius_prod_db'
+    DB_USER = 'genius_prod_user'
+    DB_PASS = 'genius_pass'
+    DB_HOST = 'localhost'
+    DB_PORT = 5432
 
 class Development(Config):
-    access_token = 'vhNbgaGaEMcKPsC1TW8IrulQjdvXzOUWQLRq9u5CUoWvH3g1F-GeHjS2_9qJaMZH'
-    db_name = 'genius_dev_db'
-    db_user = 'genius_dev_user'
-    db_pass = 'genius_dev_pass'
-    db_host = 'localhost'
-    db_port = 5432
+    ACCESS_TOKEN = 'a94199af41b2cbfb54d3516a97658701'
+    DB_NAME = 'genius_dev_db'
+    DB_USER = 'genius_dev_user'
+    DB_PASS = 'genius_dev_pass'
+    DB_HOST = 'localhost'
+    DB_PORT = 5432
 
 class Test(Config):
-    access_token = 'vhNbgaGaEMcKPsC1TW8IrulQjdvXzOUWQLRq9u5CUoWvH3g1F-GeHjS2_9qJaMZH'
-    db_name = 'genius_test_db'
-    db_user = 'genius_test_user'
-    db_pass = 'genius_test_pass'
-    db_host = 'localhost'
-    db_port = 5432
-    test = True
+    ACCESS_TOKEN = 'a94199af41b2cbfb54d3516a97658701'
+    DB_NAME = 'genius_test_db'
+    DB_USER = 'genius_test_user'
+    DB_PASS = 'genius_test_pass'
+    DB_HOST = 'localhost'
+    DB_PORT = 5432
+    TEST = True
 
