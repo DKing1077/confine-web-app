@@ -1,9 +1,10 @@
 import requests
 from dataclasses import dataclass
+import json
 
 @dataclass
 class ApiData:
-    ex_artist_id_ex: int
+    ex_artist_id: int
     artist_name: str
     ex_album_id: int
     album_name: str
@@ -40,18 +41,24 @@ class MusixMatch:
         for track in tracks:
             item = track.get("track", {})
             lyrics = self.get_lyrics(item.get("commontrack_id"))
-            classes.append(
-                ApiData(
-                    ex_artist_id=item.get("artist_id"),
-                    artist_name=item.get("artist_name"),
-                    ex_album_id=item.get("album_id"),
-                    album_name=item.get("album_name"),
-                    ex_track_id=item.get("commontrack_id"),
-                    track_name=item.get("track_name"),
-                    lyrics=lyrics,
+            if lyrics == "blank":
+                print(f'return status 202 blank response - lyrics_body : {item.get("artist_name")} - {item.get("track_name")}')
+            if lyrics:
+                classes.append(
+                    ApiData(
+                        ex_artist_id=item.get("artist_id"),
+                        artist_name=item.get("artist_name"),
+                        ex_album_id=item.get("album_id"),
+                        album_name=item.get("album_name"),
+                        ex_track_id=item.get("commontrack_id"),
+                        track_name=item.get("track_name"),
+                        lyrics=lyrics,
+                    )
                 )
-            )
+            else:
+                print(f'error status 404 : {item.get("artist_name")} - {item.get("track_name")}')
         return classes
+
 
     def get_lyrics(self, track_id):
         search_url = f"{self.base_url}/track.lyrics.get"
@@ -60,12 +67,21 @@ class MusixMatch:
             "commontrack_id": track_id,
         }
         res = requests.get(search_url, params=params_search, timeout=10).json()
-        tracks = (
+        status_code = (
+            res.get("message", {})
+            .get("header", {})
+            .get("status_code")
+        )
+        if status_code == 404:
+            return False
+        lyrics = (
             res.get("message", {})
             .get("body", {})
             .get("lyrics", {})
+            .get('lyrics_body')
         )
-        lyrics = tracks.get('lyrics_body')
+        if lyrics == "":
+            return "blank"
         return lyrics
 
 

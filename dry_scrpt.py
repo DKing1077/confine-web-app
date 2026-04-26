@@ -1,4 +1,5 @@
 from app.services.musixmatch import MusixMatch
+import json
 
 artist = 'Drake'
 track = 'Yebbas Heartbreak'
@@ -39,7 +40,7 @@ print(result)
 
 
 # api_key = 'a94199af41b2cbfb54d3516a97658701'
-
+#
 # # search by artist / track
 # track_search_url = 'https://api.musixmatch.com/ws/1.1/track.search'
 # params_track_search = {
@@ -82,10 +83,7 @@ print(result)
 # }
 # res = requests.get(track_search_url, params=params_track_search, timeout=10).json()
 # print(json.dumps(res, indent=4))
-
-
 # 'album_id': 46749165, 'album_name': 'Certified Lover Boy', 'artist_id': 28438104, 'artist_name': 'Drake feat. Travis Scott'
-
 # get lyrics
 # track_lyrics_url = 'https://api.musixmatch.com/ws/1.1/track.lyrics.get'
 # params_track_lyrics = {

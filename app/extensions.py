@@ -7,7 +7,7 @@ db_session = None
 
 def init_db(config):
     global engine, db_session
-    db_uri = f'postgresql://{config.db_user}:{config.db_pass}@{config.db_host}:{config.db_port}/{config.db_name}'
+    db_uri = f'postgresql://{config.DB_USER}:{config.DB_PASS}@{config.DB_HOST}:{config.DB_PORT}/{config.DB_NAME}'
     engine = create_engine(db_uri)
     try:
         session = sessionmaker(bind=engine, autoflush=False)
