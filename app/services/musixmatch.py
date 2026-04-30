@@ -1,6 +1,5 @@
 import requests
 from dataclasses import dataclass
-import json
 
 @dataclass
 class ApiData:
