@@ -1,41 +1,106 @@
 from app.services.musixmatch import MusixMatch
 import json
 
-artist = 'Drake'
-track = 'Yebbas Heartbreak'
 
-api = MusixMatch(api_key='a94199af41b2cbfb54d3516a97658701')
+artist_names = [
+    "Drake feat. Travis Scott",
+    "Drake",
+    "Rihanna feat. Drake",
+    "Future feat. Drake",
+    "Drake feat. 21 Savage & Project Pat",
+    "Drake",
+    "Drake",
+    "Drake",
+    "Drake feat. Lil Baby",
+    "Drake feat. Future & Young Thug"
+]
 
-# search artist, track
-params_search_1 = {
-    "q_artist": artist.title(),
-    "q_track": track.title(),
-    "f_has_lyrics": 1,
-    "s_track_rating": "desc",
-    "page_size": 10,
-    "page": 1,
-}
+track_names = [
+    "Fair Trade",
+    "Hotline Bling",
+    "Work",
+    "Life Is Good (feat. Drake)",
+    "Knife Talk",
+    "NOKIA",
+    "One Dance (feat. Wizkid & Kyla)",
+    "God's Plan",
+    "Girls Want Girls",
+    "Way 2 Sexy"
+]
 
-# search artist
-params_search_2 = {
-    "q_artist": artist.title(),
-    "f_has_lyrics": 1,
-    "s_track_rating": "desc",
-    "page_size": 10,
-    "page": 1,
-}
 
-# search track
-params_search_3 = {
-    "q_track": track.title(),
-    "f_has_lyrics": 1,
-    "s_track_rating": "desc",
-    "page_size": 10,
-    "page": 1,
-}
+for name in artist_names:
+    parse = name.split('feat')
+    artist = parse[0].rstrip(' ')
+    if len(parse) > 1:
+        features_parse = parse[1].lstrip('. ').split('&')
+        features = {}
+        for i in range(len(features_parse)):
+            feature = features[i].lstrip(' ').rstrip(' ')
+            features[i] = feature
 
-result = api.track_search(params_search_1)
-print(result)
+    name = track.split('feat')[0].rstrip(' (')
+    if len(parse) > 1:
+        features_parse = parse[1].lstrip('. ').split('&')
+        features = {}
+        for i in range(len(features_parse)):
+            feature = features[i].lstrip(' ').rstrip(' ')
+            features[i] = feature
+
+
+for track in track_names:
+    name = track.split('feat')[0].rstrip(' (')
+    print(name)
+
+
+
+# print('\n')
+#
+# for name in track_names:
+#
+#     track = name.split('feat')
+#     print(track)
+
+
+
+
+
+
+# artist = 'Drake'
+# track = 'Yebbas Heartbreak'
+#
+# api = MusixMatch(api_key='a94199af41b2cbfb54d3516a97658701')
+#
+# # search artist, track
+# params_search_1 = {
+#     "q_artist": artist.title(),
+#     "q_track": track.title(),
+#     "f_has_lyrics": 1,
+#     "s_track_rating": "desc",
+#     "page_size": 10,
+#     "page": 1,
+# }
+#
+# # search artist
+# params_search_2 = {
+#     "q_artist": artist.title(),
+#     "f_has_lyrics": 1,
+#     "s_track_rating": "desc",
+#     "page_size": 10,
+#     "page": 1,
+# }
+#
+# # search track
+# params_search_3 = {
+#     "q_track": track.title(),
+#     "f_has_lyrics": 1,
+#     "s_track_rating": "desc",
+#     "page_size": 10,
+#     "page": 1,
+# }
+#
+# result = api.track_search(params_search_1)
+# print(result)
 
 
 

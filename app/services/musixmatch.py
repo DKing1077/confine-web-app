@@ -10,6 +10,7 @@ class ApiData:
     ex_track_id: int
     track_name: str
     lyrics: str
+    features: dict
 
 
 class MusixMatch:
