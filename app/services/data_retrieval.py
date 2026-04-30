@@ -1,5 +1,5 @@
 from sqlalchemy import select
-from app.models import Artists, Albums, Tracks
+from app.models import Artists, Albums, Tracks, Features
 from app.services.musixmatch import MusixMatch
 from flask import current_app
 from dataclasses import asdict
@@ -11,14 +11,48 @@ def api_request(db_session, artist=None, track=None):
 
     api = MusixMatch(api_key=current_app.config["ACCESS_TOKEN"])
     classes = api.track_search(artist=artist, track=track)
-    print('\nclasses : \n', classes, '\n')
-    for obj in classes:
-        print(obj.artist_name, obj.track_name, '\n')
-        print(asdict(obj))
+    classes_parsed = parse_classes(classes)
+    # print('\nclasses : \n', classes, '\n')
+    # for obj in classes:
+    #     print('artist name : ', obj.artist_name)
+    #     print('ex artist id : ', obj.ex_artist_id)
+    #     print('track name : ', obj.track_name, '\n')
+    #     # print(asdict(obj))
 
     # db_insert(db_session, classes)
     # db_session.commit()
     # return classes
+
+
+def parse_classes(classes):
+    for obj in classes:
+        parse = obj.artist_name.split('feat')
+        artist = parse[0].rstrip(' ')
+        obj.artist_name = artist
+
+        if len(parse) > 1:
+            features_parse = parse[1].lstrip('. ').split('&')
+            features_1 = {}
+            for i in range(len(features_parse)):
+                feature = features_1[i].lstrip(' ').rstrip(' ')
+                features_1[i] = feature
+
+        parse = obj.track_name.split('feat')
+        track = parse[0].split(' (')
+        obj.track_name = track
+
+        if len(parse) > 1:
+            features_parse = parse[1].lstrip('. ').split('&')
+            features_2 = {}
+            for i in range(len(features_parse)):
+                feature = features_2[i].lstrip(' ').rstrip(' ')
+                features_2[i] = feature
+
+        print('artist name : ', obj.artist_name)
+        print('artist name features : ', features_1)
+
+        print('track name : ', obj.track_name)
+        print('track name features : ', features_2)
 
 
 def db_lookup(db_session, artist_input=None, track_input=None):
@@ -70,9 +104,9 @@ def db_insert(db_session, classes):
         if not artist_rec:
             artist_rec = add_artist(db_session, obj)
         if not album_rec:
-            add_album(db_session, obj, artist_rec)
+            album_rec = add_album(db_session, obj, artist_rec)
         if not track_rec:
-            add_track(db_session, obj, artist_rec)
+            track_rec = add_track(db_session, obj, artist_rec, album_rec)
 
 
 def add_artist(db_session, obj):
@@ -86,19 +120,28 @@ def add_artist(db_session, obj):
 
 def add_album(db_session, obj, artist):
     album = Albums(
-        ex_album_id=obj.ex_album_id, title=obj.album_name,
-        lyrics=obj.lyrics, artist=artist
+        ex_album_id=obj.ex_album_id, title=obj.album_name, artist=artist
     )
     db_session.add(album)
     db_session.flush()
+    return album
 
 
-def add_track(db_session, obj, artist):
+def add_track(db_session, obj, artist, album=None):
     track = Tracks(
         ex_track_id=obj.ex_track_id, title=obj.track_name,
-        lyrics=obj.lyrics, artist=artist
+        lyrics=obj.lyrics, artist=artist, album=album
     )
     db_session.add(track)
+    db_session.flush()
+    return track
+
+
+def add_features(db_session, track=None, artist=None):
+    features = Features(
+        track=track, artist=artist
+    )
+    db_session.add(features)
     db_session.flush()
 
 
