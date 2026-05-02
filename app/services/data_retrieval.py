@@ -3,6 +3,7 @@ from app.models import Artists, Albums, Tracks, Features
 from app.services.musixmatch import MusixMatch
 from flask import current_app
 from dataclasses import asdict
+import re
 
 
 def api_request(db_session, artist=None, track=None):
@@ -12,12 +13,13 @@ def api_request(db_session, artist=None, track=None):
     api = MusixMatch(api_key=current_app.config["ACCESS_TOKEN"])
     classes = api.track_search(artist=artist, track=track)
     classes_parsed = parse_classes(classes)
-    # print('\nclasses : \n', classes, '\n')
-    # for obj in classes:
-    #     print('artist name : ', obj.artist_name)
-    #     print('ex artist id : ', obj.ex_artist_id)
-    #     print('track name : ', obj.track_name, '\n')
-    #     # print(asdict(obj))
+
+    print('\nclasses : \n', classes, '\n')
+    for obj in classes_parsed:
+        print('artist name : ', obj.artist_name)
+        print('ex artist id : ', obj.ex_artist_id)
+        print('track name : ', obj.track_name, '\n')
+        print(asdict(obj))
 
     # db_insert(db_session, classes)
     # db_session.commit()
@@ -27,32 +29,21 @@ def api_request(db_session, artist=None, track=None):
 def parse_classes(classes):
     for obj in classes:
         parse = obj.artist_name.split('feat')
-        artist = parse[0].rstrip(' ')
-        obj.artist_name = artist
-
-        if len(parse) > 1:
-            features_parse = parse[1].lstrip('. ').split('&')
-            features_1 = {}
-            for i in range(len(features_parse)):
-                feature = features_1[i].lstrip(' ').rstrip(' ')
-                features_1[i] = feature
+        obj.artist_name = normalize(parse[0].rstrip(' '))
+        artist_features = parse_features(parse)
 
         parse = obj.track_name.split('feat')
-        track = parse[0].split(' (')
-        obj.track_name = track
+        obj.track_name = normalize(parse[0].split(' (')[0])
+        track_features = parse_features(parse)
 
-        if len(parse) > 1:
-            features_parse = parse[1].lstrip('. ').split('&')
-            features_2 = {}
-            for i in range(len(features_parse)):
-                feature = features_2[i].lstrip(' ').rstrip(' ')
-                features_2[i] = feature
-
-        print('artist name : ', obj.artist_name)
-        print('artist name features : ', features_1)
-
-        print('track name : ', obj.track_name)
-        print('track name features : ', features_2)
+        all_features = artist_features + track_features
+        features = []
+        for name in all_features:
+            feat = normalize(name)
+            if feat not in features:
+                features.append(feat)
+        obj.features = features
+    return classes
 
 
 def db_lookup(db_session, artist_input=None, track_input=None):
@@ -151,5 +142,23 @@ def check_if_exists(db_session, table, column, value):
     return record
 
 
-def normalize(value: str) -> str:
-    return value.strip().lower()
+def parse_features(parse):
+    features = []
+    if len(parse) > 1:
+        features_parse = re.split(r'&|,| and ', parse[1].lstrip('. '))
+        for i in range(len(features_parse)):
+            feature = features_parse[i].lstrip(' ').rstrip(' ').rstrip(')')
+            features.append(feature)
+    features = [f for f in features if f != '']
+    return features
+
+
+def normalize(name: str) -> str:
+    name = name.lower().strip()
+    prefixes = ["dj "]
+    for prefix in prefixes:
+        if name.startswith(prefix):
+            name = name[len(prefix):]
+            break
+    return name
+

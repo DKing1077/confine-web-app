@@ -10,7 +10,7 @@ class ApiData:
     ex_track_id: int
     track_name: str
     lyrics: str
-    features: dict
+    features: list
 
 
 class MusixMatch:
@@ -53,6 +53,7 @@ class MusixMatch:
                         ex_track_id=item.get("commontrack_id"),
                         track_name=item.get("track_name"),
                         lyrics=lyrics,
+                        features={},
                     )
                 )
             else:
