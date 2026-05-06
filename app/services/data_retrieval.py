@@ -8,25 +8,29 @@ import re
 
 
 def api_request(db_session, search_input):
-    ai_client = AIService(
-        api_key=current_app.config["OPENROUTER_APIKEY"], model=current_app.config["OPENROUTER_MODEL"]
-    )
+
+    # parse search input
+    ai_client = AIService(api_key=current_app.config["OPENROUTER_APIKEY"],model=current_app.config["OPENROUTER_MODEL"])
     search_params = ai_client.parse_search(search_input)
     artist_input = search_params['artist']
     track_input = search_params['track']
 
-    print('search params:', search_params)
-    print('artist input:', artist_input)
-    print('track input:', track_input,'\n')
+    # db lookup
+    # # classes, api_flag = db_lookup(db_session, artist_input, track_input)
+    # # if api_flag:
 
-    # classes, api_flag = db_lookup(db_session, artist_input, track_input)
-    # if api_flag:
-
+    # api call
     api_client = MusixMatch(api_key=current_app.config["MUSIXMATCH_APIKEY"])
     classes = api_client.track_search(artist=artist_input, track=track_input)
     classes_parsed = parse_classes(classes)
+    print('\nclasses : \n', classes_parsed, '\n')
 
-    print('\nclasses : \n', classes, '\n')
+    # get correct track
+    if artist_input and search_input:
+        classes_parsed = verify_track(classes_parsed, artist_input, track_input)
+
+    # test print
+    print('\nclasses : \n', classes_parsed, '\n')
     for obj in classes_parsed:
         print('artist name : ', obj.artist_name)
         print('album name : ', obj.album_name)
@@ -37,6 +41,15 @@ def api_request(db_session, search_input):
     # db_insert(db_session, classes)
     # db_session.commit()
     # return classes
+
+
+def verify_track(classes, artist_input, track_input):
+    artist_input = normalize(artist_input)
+    track_input = normalize(track_input)
+    for obj in classes:
+        if obj.artist_name == artist_input and obj.track_name == track_input:
+            return obj
+    return None
 
 
 def parse_classes(classes):
