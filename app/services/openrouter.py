@@ -20,25 +20,24 @@ class AIService:
                 {
                     "role": "system",
                     "content": (
-                        "Classify the search input into the correct search type and values:\n\n"
-                        ""
+                        "Classify the search input into the correct artist and track names:\n\n"
                         "Schema:\n"
                         "{\n"
-                        '  "type": "artist_only" | "song_only" | "artist_track",\n'
-                        '  "artist": string or null,\n'
-                        '  "track": string or null\n'
+                        '  "artist": string\n'
+                        '  "track": string\n'
                         "}\n\n"
                         "Rules:\n"
-                        "- If only an artist is present, type = artist_only\n"
-                        "- If only a track is present, type = track_only\n"
-                        "- If both artist and track are present, type = artist_track\n"
-                        "- If unknown, set missing fields to null\n"
+                        "- Return the artist and track name exactly the same as its stored on spotify, search and check its the same\n"
                         "- Return JSON ONLY, no explanation, no extra text\n"
-                        "Make sure your carefully check and search for an artists name in the input"
-                        "E.G Logic - Everyday should not be return as track : logic everyday"
-                        "Do NOT include markdown.\n"
-                        "Do NOT wrap output in ``` or ```json.\n"
-                        "Output must be a single JSON object.\n\n"
+                        "- Do NOT include markdown.\n"
+                        "- Do NOT wrap output in ``` or ```json.\n"
+                        "- Output must be a single JSON object.\n\n"
+                        "Make sure your carefully check and search for an artists name in the input\n"
+                        "E.G logic - everyday should not be returned as track : logic everyday\n"
+                        "Make sure to place apostrophes exactly the same as its stored on spotify, search and check its the same\n"
+                        "E.G drake - gods plan should return the track name : God's Plan\n"
+                        "Make sure to capitalize the letters exactly the same as its stored on spotify, search and check its the same\n"
+                        "E.G \"NOKIA\" not \"nokia\" \"thank u, next\" not \"Thank you next\"\n"
                     )
                 },
                 {"role": "user", "content": search},
@@ -53,6 +52,7 @@ class AIService:
             return json.loads(res)
         except json.JSONDecodeError:
             return None
+
 
 
 
