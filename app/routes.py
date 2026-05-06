@@ -16,7 +16,7 @@ def search():
     search_input = request.args.get("search_input")
     print(f'running service layer for : {search_input}\n')
 
-    data = api_request(db_session, artist=search_input)
+    data = api_request(db_session, search_input)
     return 'data store succeed'
 
 

@@ -1,24 +1,33 @@
 from sqlalchemy import select
 from app.models import Artists, Albums, Tracks, Features
 from app.services.musixmatch import MusixMatch
+from app.services.openrouter import AIService
 from flask import current_app
 from dataclasses import asdict
 import re
 
 
-def api_request(db_session, artist=None, track=None):
+def api_request(db_session, search_input):
+    ai_client = AIService(
+        api_key=current_app.config["OPENROUTER_APIKEY"], model=current_app.config["OPENROUTER_MODEL"]
+    )
+    search_params = ai_client.parse_search(search_input)
+    artist_input = search_params['artist']
+    track_input = search_params['track']
+
     # classes, api_flag = db_lookup(db_session, artist_input, track_input)
     # if api_flag:
 
-    api = MusixMatch(api_key=current_app.config["ACCESS_TOKEN"])
-    classes = api.track_search(artist=artist, track=track)
+    api_client = MusixMatch(api_key=current_app.config["MUSIXMATCH_APIKEY"])
+    classes = api_client.track_search(artist=artist_input, track=track_input)
     classes_parsed = parse_classes(classes)
 
     print('\nclasses : \n', classes, '\n')
     for obj in classes_parsed:
         print('artist name : ', obj.artist_name)
-        print('ex artist id : ', obj.ex_artist_id)
-        print('track name : ', obj.track_name, '\n')
+        print('album name : ', obj.album_name)
+        print('track name : ', obj.track_name)
+        print('track features :', obj.features, '\n')
         print(asdict(obj))
 
     # db_insert(db_session, classes)
@@ -52,9 +61,8 @@ def db_lookup(db_session, artist_input=None, track_input=None):
         qry = (
             select(Tracks)
             .join(Tracks.artist)
-            .where(
-                Tracks.title.ilike(f"%{track_input}%"),
-                Artists.artist_name.ilike(f"%{artist_input}%"))
+            .where(Tracks.track_name.ilike(f"%{track_input}%"),
+                   Artists.artist_name.ilike(f"%{artist_input}%"))
             .limit(1)
         )
         classes = db_session.execute(qry).scalars().all()
@@ -73,7 +81,7 @@ def db_lookup(db_session, artist_input=None, track_input=None):
     else:
         qry = (
             select(Tracks)
-            .where(Tracks.title.ilike(f"%{track_input}%"))
+            .where(Tracks.track_name.ilike(f"%{track_input}%"))
             .limit(1)
         )
         classes = db_session.execute(qry).scalars().all()
@@ -84,25 +92,31 @@ def db_lookup(db_session, artist_input=None, track_input=None):
 
 def db_insert(db_session, classes):
     for obj in classes:
-        ex_artist_id = classes.ex_artist_id
-        ex_album_id = classes.ex_album_id
-        ex_track_id = classes.ex_track_id
+        artist_name = classes.artist_name
+        album_name = classes.album_name
+        track_name = classes.track_name
 
-        artist_rec = check_if_exists(db_session, Artists, 'ex_artist_id', ex_artist_id)
-        album_rec = check_if_exists(db_session, Albums, 'ex_album_id', ex_album_id)
-        track_rec = check_if_exists(db_session, Tracks, 'ex_track_id', ex_track_id)
+        artist_rec = check_if_exists(db_session, Artists, 'artist_name', artist_name)
+        album_rec = check_if_exists(db_session, Albums, 'album_name', album_name)
+        track_rec = check_if_exists(db_session, Tracks, 'track_name', track_name)
 
         if not artist_rec:
-            artist_rec = add_artist(db_session, obj)
+            artist_rec = add_artist(db_session, artist_name)
         if not album_rec:
             album_rec = add_album(db_session, obj, artist_rec)
         if not track_rec:
             track_rec = add_track(db_session, obj, artist_rec, album_rec)
 
+        for feat_name in obj.features:
+            feat_rec = check_if_exists(db_session, Artists, 'artist_name', feat_name)
+            if not feat_rec:
+                feat_rec = add_artist(db_session, artist_name=feat_name)
+                add_feature(db_session, track=track_rec, artist=feat_rec)
 
-def add_artist(db_session, obj):
+
+def add_artist(db_session, artist_name=None):
     artist = Artists(
-        ex_artist_id=obj.ex_artist_id, artist_name=obj.artist_name,
+        artist_name=artist_name,
     )
     db_session.add(artist)
     db_session.flush()
@@ -111,7 +125,7 @@ def add_artist(db_session, obj):
 
 def add_album(db_session, obj, artist):
     album = Albums(
-        ex_album_id=obj.ex_album_id, title=obj.album_name, artist=artist
+        album_name=obj.album_name, artist=artist
     )
     db_session.add(album)
     db_session.flush()
@@ -120,7 +134,7 @@ def add_album(db_session, obj, artist):
 
 def add_track(db_session, obj, artist, album=None):
     track = Tracks(
-        ex_track_id=obj.ex_track_id, title=obj.track_name,
+        track_name=obj.track_name,
         lyrics=obj.lyrics, artist=artist, album=album
     )
     db_session.add(track)
@@ -128,7 +142,7 @@ def add_track(db_session, obj, artist, album=None):
     return track
 
 
-def add_features(db_session, track=None, artist=None):
+def add_feature(db_session, track=None, artist=None):
     features = Features(
         track=track, artist=artist
     )
