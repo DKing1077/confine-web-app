@@ -9,7 +9,6 @@ class Artists:
 
     # ids
     artist_id: Mapped[int] = mapped_column(Integer, primary_key=True)
-    ex_artist_id: Mapped[int] = mapped_column(Integer, nullable=False, unique=True)
 
     # content
     artist_name: Mapped[str] = mapped_column(String, nullable=False, unique=True)
@@ -26,10 +25,9 @@ class Albums:
 
     # ids
     album_id: Mapped[int] = mapped_column(Integer, primary_key=True)
-    ex_album_id: Mapped[int] = mapped_column(Integer, nullable=False, unique=True)
 
     # content
-    title: Mapped[str] = mapped_column(String, nullable=False)
+    album_name: Mapped[str] = mapped_column(String, nullable=False)
 
     # belongs to an artist
     artist_id: int = mapped_column(Integer, ForeignKey('artists.artist_id'), nullable=False)
@@ -45,10 +43,9 @@ class Tracks:
 
     # ids
     track_id: Mapped[int] = mapped_column(Integer, primary_key=True)
-    ex_track_id: Mapped[int] = mapped_column(Integer, nullable=False, unique=True)
 
     # content
-    title: Mapped[str] = mapped_column(String, nullable=False)
+    track_name: Mapped[str] = mapped_column(String, nullable=False)
     lyrics: Mapped[str] = mapped_column(Text, nullable=True)
 
     # belongs to artist

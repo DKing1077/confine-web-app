@@ -3,12 +3,10 @@ from dataclasses import dataclass
 
 @dataclass
 class ApiData:
-    ex_artist_id: int
     artist_name: str
-    ex_album_id: int
     album_name: str
-    ex_track_id: int
     track_name: str
+    ex_track_id: int
     lyrics: str
     features: list
 
@@ -46,14 +44,12 @@ class MusixMatch:
             if lyrics:
                 classes.append(
                     ApiData(
-                        ex_artist_id=item.get("artist_id"),
                         artist_name=item.get("artist_name"),
-                        ex_album_id=item.get("album_id"),
                         album_name=item.get("album_name"),
                         ex_track_id=item.get("commontrack_id"),
                         track_name=item.get("track_name"),
                         lyrics=lyrics,
-                        features={},
+                        features=[],
                     )
                 )
             else:
