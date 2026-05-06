@@ -15,6 +15,10 @@ def api_request(db_session, search_input):
     artist_input = search_params['artist']
     track_input = search_params['track']
 
+    print('search params:', search_params)
+    print('artist input:', artist_input)
+    print('track input:', track_input,'\n')
+
     # classes, api_flag = db_lookup(db_session, artist_input, track_input)
     # if api_flag:
 
