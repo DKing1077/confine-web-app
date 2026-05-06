@@ -24,14 +24,13 @@ class AIService:
                         "Schema:\n"
                         "{\n"
                         '  "artist": string\n'
-                        '  "track": string\n'
+                        '  "track": string, None\n'
                         "}\n\n"
                         "Rules:\n"
                         "- Return the artist and track name exactly the same as its stored on spotify, search and check its the same\n"
-                        "- Return JSON ONLY, no explanation, no extra text\n"
+                        "- Return JSON ONLY\n"
                         "- Do NOT include markdown.\n"
-                        "- Do NOT wrap output in ``` or ```json.\n"
-                        "- Output must be a single JSON object.\n\n"
+                        "- Do NOT wrap output in ``` or ```json.\n\n"
                         "Make sure your carefully check and search for an artists name in the input\n"
                         "E.G logic - everyday should not be returned as track : logic everyday\n"
                         "Make sure to place apostrophes exactly the same as its stored on spotify, search and check its the same\n"
