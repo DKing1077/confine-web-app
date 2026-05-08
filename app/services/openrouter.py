@@ -48,12 +48,14 @@ class AIService:
         res = re.sub(r"\s*```$", "", res.strip())
 
         try:
-            return json.loads(res)
+            search_params = json.loads(res)
         except json.JSONDecodeError:
             return None
 
+        artist_input = search_params['artist']
+        track_input = search_params['track']
 
-
+        return artist_input, track_input
 
 
 

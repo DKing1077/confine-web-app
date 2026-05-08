@@ -11,9 +11,7 @@ def api_request(db_session, search_input):
 
     # parse search input
     ai_client = AIService(api_key=current_app.config["OPENROUTER_APIKEY"],model=current_app.config["OPENROUTER_MODEL"])
-    search_params = ai_client.parse_search(search_input)
-    artist_input = search_params['artist']
-    track_input = search_params['track']
+    artist_input, track_input = ai_client.parse_search(search_input)
 
     # db lookup
     # # classes, api_flag = db_lookup(db_session, artist_input, track_input)
@@ -23,24 +21,23 @@ def api_request(db_session, search_input):
     api_client = MusixMatch(api_key=current_app.config["MUSIXMATCH_APIKEY"])
     classes = api_client.track_search(artist=artist_input, track=track_input)
     classes_parsed = parse_classes(classes)
-    print('\nclasses : \n', classes_parsed, '\n')
 
     # get correct track
-    if artist_input and search_input:
+    if artist_input and track_input:
         classes_parsed = verify_track(classes_parsed, artist_input, track_input)
 
-    # test print
-    print('\nclasses : \n', classes_parsed, '\n')
     for obj in classes_parsed:
         print('artist name : ', obj.artist_name)
         print('album name : ', obj.album_name)
         print('track name : ', obj.track_name)
-        print('track features :', obj.features, '\n')
-        print(asdict(obj))
+        print('track features :', obj.features)
+        print('artist id:', obj.ex_artist_id, '\n')
+        # print(asdict(obj), '\n')
 
-    # db_insert(db_session, classes)
-    # db_session.commit()
-    # return classes
+    # db insert
+    db_insert(db_session, classes)
+    db_session.commit()
+    return classes
 
 
 def verify_track(classes, artist_input, track_input):
@@ -48,7 +45,8 @@ def verify_track(classes, artist_input, track_input):
     track_input = normalize(track_input)
     for obj in classes:
         if obj.artist_name == artist_input and obj.track_name == track_input:
-            return obj
+            classes = [obj]
+            return classes
     return None
 
 
@@ -109,9 +107,9 @@ def db_lookup(db_session, artist_input=None, track_input=None):
 
 def db_insert(db_session, classes):
     for obj in classes:
-        artist_name = classes.artist_name
-        album_name = classes.album_name
-        track_name = classes.track_name
+        artist_name = obj.artist_name
+        album_name = obj.album_name
+        track_name = obj.track_name
 
         artist_rec = check_if_exists(db_session, Artists, 'artist_name', artist_name)
         album_rec = check_if_exists(db_session, Albums, 'album_name', album_name)

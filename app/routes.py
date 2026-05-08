@@ -3,7 +3,6 @@ from .services import api_request
 from . import extensions
 
 bp = Blueprint("main", __name__)
-db_session = extensions.db_session
 
 # default root
 @bp.route('/')
@@ -16,7 +15,7 @@ def search():
     search_input = request.args.get("search_input")
     print(f'running service layer for : {search_input}\n')
 
-    data = api_request(db_session, search_input)
+    data = api_request(extensions.db_session, search_input)
     return 'data store succeed'
 
 

@@ -1,5 +1,5 @@
 from sqlalchemy import create_engine, text
-from app.models import reg
+from app.models import Base
 import subprocess
 import os
 
@@ -50,7 +50,7 @@ def create_tables(config, db_session, engine):
                   SELECT 1
                   FROM information_schema.tables
                   WHERE table_name IN ('artists', 'albums', 'tracks'));""")
-    table_exists = db_session.execute(sql).fetchone()
+    table_exists = db_session.execute(sql).fetchone()[0]
     if not table_exists:
         sql_file = 'data/database.sql'
         if os.path.exists(sql_file):
@@ -58,12 +58,14 @@ def create_tables(config, db_session, engine):
                 'psql',
                 '-U', str(config.DB_USER),
                 '-d', str(config.DB_NAME),
+                '-h', str(config.DB_HOST),
+                '-p', str(config.DB_PORT),
                 '-f', sql_file,
             ]
             os.environ['PGPASSWORD'] = str(config.DB_PASS)
             subprocess.run(command, check=True)
         else:
-            reg.metadata.create_all(engine)
+            Base.metadata.create_all(engine)
 
 
 def save_db(config):

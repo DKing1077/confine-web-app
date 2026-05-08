@@ -4,6 +4,7 @@ from dataclasses import dataclass
 @dataclass
 class ApiData:
     artist_name: str
+    ex_artist_id: str
     album_name: str
     track_name: str
     ex_track_id: int
@@ -24,13 +25,18 @@ class MusixMatch:
             "f_has_lyrics": 1,
             "s_track_rating": "desc",
             "page_size": 10, "page": 1,
+            "s_track_language": "en",
+            "f_lyrics_language": "en"
         }
         if artist:
             search_params["q_artist"] = artist
         if track:
             search_params["q_track"] = track
+        headers = {
+            "Accept-Language": "en-US,en;q=0.9"
+        }
         search_url = f"{self.base_url}/track.search"
-        res = requests.get(search_url, params=search_params, timeout=10).json()
+        res = requests.get(search_url, params=search_params, timeout=10, headers=headers).json()
         tracks = (
             res.get("message", {})
             .get("body", {})
@@ -45,6 +51,7 @@ class MusixMatch:
                 classes.append(
                     ApiData(
                         artist_name=item.get("artist_name"),
+                        ex_artist_id=item.get("artist_id"),
                         album_name=item.get("album_name"),
                         ex_track_id=item.get("commontrack_id"),
                         track_name=item.get("track_name"),
