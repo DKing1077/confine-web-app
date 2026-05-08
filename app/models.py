@@ -1,10 +1,11 @@
 from sqlalchemy import Integer, String, ForeignKey, Text, UniqueConstraint
 from sqlalchemy.orm import Mapped, mapped_column, relationship, registry
+from sqlalchemy.ext.declarative import declarative_base
 
-reg = registry()
+Base = declarative_base()
 
-@reg.mapped_as_dataclass
-class Artists:
+
+class Artists(Base):
     __tablename__ = 'artists'
 
     # ids
@@ -14,13 +15,13 @@ class Artists:
     artist_name: Mapped[str] = mapped_column(String, nullable=False, unique=True)
 
     # has many tracks, albums, features
-    albums: list['Albums'] = relationship('Albums', back_populates='artist', init=False)
-    tracks: list['Tracks'] = relationship('Tracks', back_populates='artist', init=False)
-    features_on: list["Features"] = relationship("Features", back_populates="artist", init=False)
+    albums: Mapped[list['Albums']] = relationship('Albums', back_populates='artist')
+    tracks: Mapped[list['Tracks']] = relationship('Tracks', back_populates='artist')
+    features_on: Mapped[list["Features"]] = relationship("Features", back_populates="artist")
 
 
-@reg.mapped_as_dataclass
-class Albums:
+
+class Albums(Base):
     __tablename__ = 'albums'
 
     # ids
@@ -30,15 +31,15 @@ class Albums:
     album_name: Mapped[str] = mapped_column(String, nullable=False)
 
     # belongs to an artist
-    artist_id: int = mapped_column(Integer, ForeignKey('artists.artist_id'), nullable=False)
-    artist: Artists = relationship('Artists', back_populates='albums', init=False)
+    artist_id: Mapped[int] = mapped_column(ForeignKey('artists.artist_id'), nullable=False)
+    artist: Mapped['Artists'] = relationship('Artists', back_populates='albums')
 
     # has many tracks
-    tracks: list['Tracks'] = relationship('Tracks', back_populates='album', init=False)
+    tracks: Mapped[list['Tracks']] = relationship('Tracks', back_populates='album')
 
 
-@reg.mapped_as_dataclass
-class Tracks:
+
+class Tracks(Base):
     __tablename__ = 'tracks'
 
     # ids
@@ -46,34 +47,31 @@ class Tracks:
 
     # content
     track_name: Mapped[str] = mapped_column(String, nullable=False)
-    lyrics: Mapped[str] = mapped_column(Text, nullable=True)
+    lyrics: Mapped[str] = mapped_column(Text, nullable=False)
 
     # belongs to artist
-    artist_id: int = mapped_column(Integer, ForeignKey('artists.artist_id'), nullable=False)
-    artist: Artists = relationship('Artists', back_populates='tracks', init=False)
+    artist_id: Mapped[int] = mapped_column(ForeignKey('artists.artist_id'), nullable=False)
+    artist: Mapped['Artists'] = relationship('Artists', back_populates='tracks')
 
     # can belong to album
     album_id: Mapped[int | None] = mapped_column(ForeignKey("albums.album_id"), nullable=True)
-    album: Albums = relationship('Albums', back_populates="tracks", init=False)
+    album: Mapped['Albums | None'] = relationship('Albums', back_populates="tracks")
 
     # has features
-    features: list["Features"] = relationship("Features", back_populates="track", init=False)
+    features: Mapped[list["Features"]] = relationship("Features", back_populates="track")
 
 
-@reg.mapped_as_dataclass
-class Features:
+class Features(Base):
     __tablename__ = 'features'
 
     # belongs to a track
-    track_id: int = mapped_column(Integer, ForeignKey('tracks.track_id'), primary_key=True)
-    track: Tracks = relationship('Tracks', back_populates="features", init=False)
+    track_id: Mapped[int] = mapped_column(ForeignKey('tracks.track_id'), primary_key=True)
+    track: Mapped['Tracks'] = relationship('Tracks', back_populates="features")
 
     # belongs to an artist
-    artist_id: int = mapped_column(Integer, ForeignKey('artists.artist_id'), primary_key=True)
-    artist: Artists = relationship('Artists', back_populates="features_on", init=False)
+    artist_id: Mapped[int] = mapped_column(ForeignKey('artists.artist_id'), primary_key=True)
+    artist: Mapped['Artists'] = relationship('Artists', back_populates="features_on")
 
-    # one single feature
-    UniqueConstraint(track_id, artist_id)
 
 
 

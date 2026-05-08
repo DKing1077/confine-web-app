@@ -1,18 +1,16 @@
 # from app.services.openrouter import AIService
 # import requests
+# from dataclasses import asdict
 #
 # search_params = {
 #     "apikey": 'a94199af41b2cbfb54d3516a97658701',
-#     "f_has_lyrics": 1,
-#     "s_track_rating": "desc",
 #     "page_size": 10, "page": 1,
+#     "q_artist": 'Drake',
 # }
-#
-# search_params["q_artist"] = 'Drake'
-# search_params["q_track"] = 'God\'s Plan'
-# search_url = f"https://api.musixmatch.com/ws/1.1/track.search"
-#
+# search_url = f"https://api.musixmatch.com/ws/1.1/artist.search"
 # res = requests.get(search_url, params=search_params, timeout=10).json()
+# print(res)
+#
 # print(res)
 #
 # # DeepSeek — best price/performance, fast, good for classification tasks
