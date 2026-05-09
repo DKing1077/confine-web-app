@@ -14,29 +14,23 @@ def api_request(db_session, search_input):
     artist_input, track_input = ai_client.parse_search(search_input)
 
     # db lookup
-    # # classes, api_flag = db_lookup(db_session, artist_input, track_input)
-    # # if api_flag:
+    classes, api_flag = db_lookup(db_session, artist_input, track_input)
+    if api_flag:
 
-    # api call
-    api_client = MusixMatch(api_key=current_app.config["MUSIXMATCH_APIKEY"])
-    classes = api_client.track_search(artist=artist_input, track=track_input)
-    classes_parsed = parse_classes(classes)
+        # api call
+        api_client = MusixMatch(api_key=current_app.config["MUSIXMATCH_APIKEY"])
+        classes = api_client.track_search(artist=artist_input, track=track_input)
+        classes_parsed = parse_classes(classes)
 
-    # get correct track
-    if artist_input and track_input:
-        classes_parsed = verify_track(classes_parsed, artist_input, track_input)
+        # get correct track
+        if artist_input and track_input:
+            classes_parsed = verify_track(classes_parsed, artist_input, track_input)
 
-    for obj in classes_parsed:
-        print('artist name : ', obj.artist_name)
-        print('album name : ', obj.album_name)
-        print('track name : ', obj.track_name)
-        print('track features :', obj.features)
-        print('artist id:', obj.ex_artist_id, '\n')
-        # print(asdict(obj), '\n')
+        # db insert
+        db_insert(db_session, classes_parsed)
+        db_session.commit()
+        return classes_parsed
 
-    # db insert
-    db_insert(db_session, classes)
-    db_session.commit()
     return classes
 
 
@@ -72,7 +66,7 @@ def parse_classes(classes):
 
 def db_lookup(db_session, artist_input=None, track_input=None):
     api_flag = False
-    if artist_input and track_input:
+    if track_input:
         qry = (
             select(Tracks)
             .join(Tracks.artist)
@@ -83,7 +77,7 @@ def db_lookup(db_session, artist_input=None, track_input=None):
         classes = db_session.execute(qry).scalars().all()
         if len(classes) < 1:
             api_flag = True
-    elif artist_input:
+    else:
         qry = (
             select(Tracks)
             .join(Tracks.artist)
@@ -92,15 +86,6 @@ def db_lookup(db_session, artist_input=None, track_input=None):
         )
         classes = db_session.execute(qry).scalars().all()
         if len(classes) < 10:
-            api_flag = True
-    else:
-        qry = (
-            select(Tracks)
-            .where(Tracks.track_name.ilike(f"%{track_input}%"))
-            .limit(1)
-        )
-        classes = db_session.execute(qry).scalars().all()
-        if len(classes) < 1:
             api_flag = True
     return classes, api_flag
 
