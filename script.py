@@ -1,7 +1,22 @@
-# from app.services.openrouter import AIService
-# import requests
-# from dataclasses import asdict
-#
+from sqlalchemy import select
+from app.models import Artists, Albums, Tracks, Features
+from dataclasses import asdict
+from app import extensions
+
+
+def read_db_test(db_session, artist_input):
+    qry = (
+        select(Tracks)
+        .join(Tracks.artist)
+        .limit(30)
+    )
+    classes = db_session.execute(qry).scalars().all()
+    for obj in classes:
+        print(asdict(obj))
+
+read_db_test(extensions.db_session, "Drake")
+
+
 # search_params = {
 #     "apikey": 'a94199af41b2cbfb54d3516a97658701',
 #     "page_size": 10, "page": 1,

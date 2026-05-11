@@ -3,11 +3,10 @@ from app.models import Artists, Albums, Tracks, Features
 from app.services.musixmatch import MusixMatch
 from app.services.openrouter import AIService
 from flask import current_app
-from dataclasses import asdict
 import re
 
 
-def api_request(db_session, search_input):
+def process_search(db_session, search_input):
 
     # parse search input
     ai_client = AIService(api_key=current_app.config["OPENROUTER_APIKEY"],model=current_app.config["OPENROUTER_MODEL"])
@@ -28,7 +27,6 @@ def api_request(db_session, search_input):
 
         # db insert
         db_insert(db_session, classes_parsed)
-        db_session.commit()
         return classes_parsed
 
     return classes
