@@ -1,8 +1,10 @@
 from sqlalchemy import create_engine, text
 from sqlalchemy.orm import scoped_session, sessionmaker
+from celery import Celery
 
 engine = None
 db_session = None
+celery = Celery(__name__)
 
 
 def init_db(config):
@@ -20,4 +22,20 @@ def init_db(config):
         print(f"connected to PostgreSQL! Server version: {db_version}")
     except Exception as e:
         print(f"error connecting to PostgreSQL database: {e}")
+
+
+def init_celery(app):
+    celery.conf.update(
+        broker_url=app.config["CELERY_BROKER_URL"],
+        result_backend=app.config["CELERY_RESULT_BACKEND"]
+    )
+
+    class ContextTask(celery.Task):
+        def __call__(self, *args, **kwargs):
+            with app.app_context():
+                return self.run(*args, **kwargs)
+    celery.Task = ContextTask
+
+
+
 

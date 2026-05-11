@@ -1,6 +1,5 @@
 from flask import render_template, Blueprint, request
-from .services import api_request
-from . import extensions
+from app.tasks import process_search_task
 
 bp = Blueprint("main", __name__)
 
@@ -13,10 +12,11 @@ def index():
 @bp.route("/search")
 def search():
     search_input = request.args.get("search_input")
-    print(f'running service layer for : {search_input}\n')
-
-    data = api_request(extensions.db_session, search_input)
-    return 'data store succeed'
+    job = process_search_task.delay(search_input)
+    return {
+        "job_id": job.id,
+        "status": "queued"
+    }
 
 
 # from flask import request, redirect, url_for, Blueprint, jsonify, current_app)

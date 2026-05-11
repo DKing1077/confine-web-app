@@ -3,6 +3,7 @@ from app import routes
 from .database import db_create, create_tables
 from .routes import bp as main_bp
 from . import extensions
+from app.extensions import celery
 
 
 def create_app(config=None):
@@ -39,5 +40,11 @@ def create_app(config=None):
 
     # register routes
     app.register_blueprint(main_bp)
+
+    # init celery
+    extensions.init_celery(app)
     return app
+
+
+
 

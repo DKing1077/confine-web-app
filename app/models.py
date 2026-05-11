@@ -20,7 +20,6 @@ class Artists(Base):
     features_on: Mapped[list["Features"]] = relationship("Features", back_populates="artist")
 
 
-
 class Albums(Base):
     __tablename__ = 'albums'
 
@@ -36,7 +35,6 @@ class Albums(Base):
 
     # has many tracks
     tracks: Mapped[list['Tracks']] = relationship('Tracks', back_populates='album')
-
 
 
 class Tracks(Base):
