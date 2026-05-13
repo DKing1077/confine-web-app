@@ -27,7 +27,11 @@ def init_db(config):
 def init_celery(app):
     celery.conf.update(
         broker_url=app.config["CELERY_BROKER_URL"],
-        result_backend=app.config["CELERY_RESULT_BACKEND"]
+        result_backend=app.config["CELERY_RESULT_BACKEND"],
+        task_track_started=True,
+        task_serializer="json",
+        result_serializer="json",
+        accept_content=["json"],
     )
 
     class ContextTask(celery.Task):
