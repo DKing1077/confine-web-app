@@ -1,5 +1,7 @@
 from flask import render_template, Blueprint, request
-from app.tasks import process_search_task
+from app.Async.tasks import process_search_task
+from celery.result import AsyncResult
+from app.extensions import celery
 
 bp = Blueprint("main", __name__)
 
@@ -7,6 +9,7 @@ bp = Blueprint("main", __name__)
 @bp.route('/')
 def index():
     return render_template('template.html')
+
 
 # search route
 @bp.route("/search")
@@ -16,6 +19,17 @@ def search():
     return {
         "job_id": job.id,
         "status": "queued"
+    }
+
+
+# job status route
+@bp.route("/job/<job_id>")
+def job_status(job_id):
+    job = AsyncResult(job_id, app=celery)
+    return {
+        "job_id": job.id,
+        "status": job.status,
+        "result": job.result if job.ready() else None
     }
 
 

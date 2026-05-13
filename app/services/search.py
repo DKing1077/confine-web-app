@@ -7,6 +7,7 @@ import re
 
 
 def process_search(db_session, search_input):
+    print('here')
 
     # parse search input
     ai_client = AIService(api_key=current_app.config["OPENROUTER_APIKEY"],model=current_app.config["OPENROUTER_MODEL"])
@@ -27,8 +28,10 @@ def process_search(db_session, search_input):
 
         # db insert
         db_insert(db_session, classes_parsed)
+        print(classes_parsed)
         return classes_parsed
 
+    print(classes)
     return classes
 
 
