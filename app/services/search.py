@@ -16,17 +16,14 @@ def process_search(db_session, search_input):
     artist_input, track_input = ai_client.parse_search(search_input)
 
     # db lookup
-    classes, api_flag = db_lookup(db_session, artist_input, track_input)
+    db_classes, api_flag = db_lookup(db_session, artist_input, track_input)
     if api_flag:
 
         # api call
         api_client = MusixMatch(api_key=current_app.config["MUSIXMATCH_APIKEY"])
-        logger.info(str(classes))
 
+        # parse classes
         classes = api_client.track_search(artist=artist_input, track=track_input)
-        for obj in classes:
-            print('number of tracks : ', len(classes))
-            logger.info('objects schema : ', obj.__table__.columns.keys())
         classes_parsed = parse_classes(classes)
 
         # get correct track
@@ -35,26 +32,46 @@ def process_search(db_session, search_input):
 
         # db insert
         db_insert(db_session, classes_parsed)
-        return serialize_tracks(classes)
+        api_classes = serialize_tracks(classes_parsed, 'api')
 
-    for obj in classes:
-        print('number of tracks : ', len(classes))
-        logger.info('objects schema : ', obj.__table__.columns.keys())
-    return serialize_tracks(classes)
+        logger_message(api_classes, True)
+        return api_classes
+
+    logger_message(db_classes, False)
+    return db_classes
 
 
-def serialize_tracks(classes):
+def logger_message(return_var, flag):
+    if flag:
+        method = 'musixmatch api'
+    else:
+        method = 'postgres lookup'
+    sample = return_var[0]
+    logger.info('the work flow used : ', method)
+    logger.info('number of tracks : ', len(return_var))
+    logger.info("schema keys:", list(sample.keys()), '\n')
+
+
+def serialize_tracks(classes, method):
     serialized = []
-    for obj in classes:
-        serialized.append({
-            'artist_name': obj.artist_name,
-            'ex_artist_id': obj.artist_id,
-            'album_name': obj.album_name,
-            'track_name': obj.track_name,
-            'ex_track_id': obj.track_id,
-            'lyrics': obj.lyrics,
-            'features': obj.features,
-        })
+    if method == 'api':
+        for obj in classes:
+            serialized.append({
+                'artist_name': obj.artist_name,
+                'album_name': obj.album_name,
+                'track_name': obj.track_name,
+                'lyrics': obj.lyrics,
+                'features': obj.features,
+            })
+    elif method == 'postgres':
+        for obj in classes:
+            serialized.append({
+                "artist_name": obj.artist.artist_name,
+                "album_name": obj.album.album_name,
+                "track_name": obj.track_name,
+                "lyrics": obj.lyrics,
+                "features": obj.features,
+            })
     return serialized
 
 
@@ -90,28 +107,29 @@ def parse_classes(classes):
 
 def db_lookup(db_session, artist_input=None, track_input=None):
     api_flag = False
+    qry = select(Tracks).join(Tracks.artist).join(Tracks.album)
+
     if track_input:
-        qry = (
-            select(Tracks)
-            .join(Tracks.artist)
-            .where(Tracks.track_name.ilike(f"%{track_input}%"),
-                   Artists.artist_name.ilike(f"%{artist_input}%"))
-            .limit(1)
-        )
+        qry = qry.where(
+                Tracks.track_name.ilike(f"%{track_input}%"),
+                Artists.artist_name.ilike(f"%{artist_input}%")
+            ).limit(1)
+
         classes = db_session.execute(qry).scalars().all()
         if len(classes) < 1:
             api_flag = True
+
     else:
-        qry = (
-            select(Tracks)
-            .join(Tracks.artist)
-            .where(Artists.artist_name.ilike(f"%{artist_input}%"))
-            .limit(10)
-        )
+        qry = qry.where(
+                Artists.artist_name.ilike(f"%{artist_input}%")
+            ).limit(10)
+
         classes = db_session.execute(qry).scalars().all()
         if len(classes) < 10:
             api_flag = True
-    return classes, api_flag
+
+    serialize_classes = serialize_tracks(classes, 'postgres')
+    return serialize_classes, api_flag
 
 
 def db_insert(db_session, classes):
