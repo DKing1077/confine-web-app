@@ -1,5 +1,5 @@
 from flask import render_template, Blueprint, request
-from app.Async.tasks import process_search_task
+from app.celery.tasks import process_search_task
 from celery.result import AsyncResult
 from app.extensions import celery
 

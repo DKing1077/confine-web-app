@@ -3,11 +3,13 @@ from app.models import Artists, Albums, Tracks, Features
 from app.services.musixmatch import MusixMatch
 from app.services.openrouter import AIService
 from flask import current_app
+from celery.utils.log import get_task_logger
 import re
+
+logger = get_task_logger(__name__)
 
 
 def process_search(db_session, search_input):
-    print('here')
 
     # parse search input
     ai_client = AIService(api_key=current_app.config["OPENROUTER_APIKEY"],model=current_app.config["OPENROUTER_MODEL"])
@@ -19,7 +21,12 @@ def process_search(db_session, search_input):
 
         # api call
         api_client = MusixMatch(api_key=current_app.config["MUSIXMATCH_APIKEY"])
+        logger.info(str(classes))
+
         classes = api_client.track_search(artist=artist_input, track=track_input)
+        for obj in classes:
+            print('number of tracks : ', len(classes))
+            logger.info('objects schema : ', obj.__table__.columns.keys())
         classes_parsed = parse_classes(classes)
 
         # get correct track
@@ -28,11 +35,27 @@ def process_search(db_session, search_input):
 
         # db insert
         db_insert(db_session, classes_parsed)
-        print(classes_parsed)
-        return classes_parsed
+        return serialize_tracks(classes)
 
-    print(classes)
-    return classes
+    for obj in classes:
+        print('number of tracks : ', len(classes))
+        logger.info('objects schema : ', obj.__table__.columns.keys())
+    return serialize_tracks(classes)
+
+
+def serialize_tracks(classes):
+    serialized = []
+    for obj in classes:
+        serialized.append({
+            'artist_name': obj.artist_name,
+            'ex_artist_id': obj.artist_id,
+            'album_name': obj.album_name,
+            'track_name': obj.track_name,
+            'ex_track_id': obj.track_id,
+            'lyrics': obj.lyrics,
+            'features': obj.features,
+        })
+    return serialized
 
 
 def verify_track(classes, artist_input, track_input):
