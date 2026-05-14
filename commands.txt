@@ -1,0 +1,5 @@
+docker start redis
+docker run -d --name redis -p 6379:6379 redis
+PYTHONUNBUFFERED=1 celery -A app.celery.celeryworker:celery worker -l info
+
+
