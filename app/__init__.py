@@ -19,6 +19,11 @@ def create_app(config=None):
     database.py is used here so need to import the module, in services we can import the variables
     """
 
+    # flask instance
+    app = Flask(__name__)
+    if config:
+        app.config.from_object(config)
+
     # create database
     db_create(config)
 
@@ -28,21 +33,17 @@ def create_app(config=None):
     # create tables
     create_tables(config, extensions.db_session, extensions.engine)
 
-    # flask instance
-    app = Flask(__name__)
-    if config:
-        app.config.from_object(config)
+    # register routes
+    app.register_blueprint(main_bp)
+
+    # init celery
+    extensions.init_celery(app)
 
     # remove session after request
     @app.teardown_appcontext
     def remove_session(exception=None):
         extensions.db_session.remove()
 
-    # register routes
-    app.register_blueprint(main_bp)
-
-    # init celery
-    extensions.init_celery(app)
     return app
 
 
