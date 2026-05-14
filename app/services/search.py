@@ -34,20 +34,31 @@ def process_search(db_session, search_input):
         db_insert(db_session, classes_parsed)
         api_classes = serialize_tracks(classes_parsed, 'api')
 
-        logger_message(api_classes, True)
+        logger_message(api_classes, True, artist_input, track_input)
         return api_classes
 
-    logger_message(db_classes, False)
+    logger_message(db_classes, False, artist_input, track_input)
     return db_classes
 
 
-def logger_message(return_var, flag):
+def logger_message(return_var, flag, artist_input=None, track_input=None):
+    if artist_input and track_input:
+        search_type = 'artist search'
+        search_values = f'{artist_input} - {track_input}'
+    else:
+        search_type = 'track search'
+        search_values = f'{track_input}'
+
     if flag:
         method = 'musixmatch api'
     else:
         method = 'postgres lookup'
     sample = return_var[0]
+
     logger.info('the work flow used : ', method)
+    logger.info('search type : ', search_type)
+    logger.info('search value : ', search_values)
+
     logger.info('number of tracks : ', len(return_var))
     logger.info("schema keys:", list(sample.keys()), '\n')
 
