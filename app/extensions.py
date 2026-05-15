@@ -34,7 +34,8 @@ def init_celery(app):
         accept_content=["json"],
         worker_hijack_root_logger=False,
         worker_redirect_stdouts=True,
-        worker_redirect_stdouts_level="INFO"
+        worker_redirect_stdouts_level="INFO",
+        result_expires=3600
     )
 
     class ContextTask(celery.Task):
