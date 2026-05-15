@@ -16,21 +16,23 @@ def index():
 def search():
     search_input = request.args.get("search_input")
     job = process_search_task.delay(search_input)
-    return {
-        "job_id": job.id,
-        "status": "queued"
-    }
+    return job
 
 
 # job status route
 @bp.route("/job/<job_id>")
 def job_status(job_id):
     job = AsyncResult(job_id, app=celery)
-    return {
+    response = {
         "job_id": job.id,
         "status": job.status,
-        "result": job.result if job.ready() else None
+        "result": job.result
     }
+    if job.successful():
+        response["result"] = job.result
+    elif job.failed():
+        response["result"] = str(job.result)
+    return response
 
 
 # from flask import request, redirect, url_for, Blueprint, jsonify, current_app)

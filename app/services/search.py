@@ -21,9 +21,9 @@ def process_search(db_session, search_input):
 
         # api call
         api_client = MusixMatch(api_key=current_app.config["MUSIXMATCH_APIKEY"])
+        classes = api_client.track_search(artist=artist_input, track=track_input)
 
         # parse classes
-        classes = api_client.track_search(artist=artist_input, track=track_input)
         classes_parsed = parse_classes(classes)
 
         # get correct track
@@ -43,11 +43,11 @@ def process_search(db_session, search_input):
 
 def logger_message(return_var, flag, artist_input=None, track_input=None):
     if artist_input and track_input:
-        search_type = 'artist search'
+        search_type = 'track search'
         search_values = f'{artist_input} - {track_input}'
     else:
-        search_type = 'track search'
-        search_values = f'{track_input}'
+        search_type = 'artist search'
+        search_values = f'{artist_input}'
 
     if flag:
         method = 'musixmatch api'
@@ -55,12 +55,14 @@ def logger_message(return_var, flag, artist_input=None, track_input=None):
         method = 'postgres lookup'
     sample = return_var[0]
 
-    logger.info('the work flow used : ', method)
-    logger.info('search type : ', search_type)
-    logger.info('search value : ', search_values)
+    logger.info('the work flow used : %s', method)
+    logger.info('search type : %s', search_type)
+    logger.info('search value : %s', search_values)
+    logger.info("features: %s", sample["features"])
 
-    logger.info('number of tracks : ', len(return_var))
-    logger.info("schema keys:", list(sample.keys()), '\n')
+    logger.info('number of tracks %s: ', len(return_var))
+    logger.info("schema keys: %s", list(sample.keys()))
+    logger.info("features: %s\n", sample["features"])
 
 
 def serialize_tracks(classes, method):
@@ -165,6 +167,9 @@ def db_insert(db_session, classes):
             if not feat_rec:
                 feat_rec = add_artist(db_session, artist_name=feat_name)
                 add_feature(db_session, track=track_rec, artist=feat_rec)
+            else:
+                artist = Artists(artist_name=artist_name,)
+                add_feature(db_session, track=track_rec, artist=artist)
 
 
 def add_artist(db_session, artist_name=None):
