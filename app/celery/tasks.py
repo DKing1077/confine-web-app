@@ -9,13 +9,14 @@ logger = logging.getLogger(__name__)
 def process_search_task(self, search_input):
     try:
         logger.info(f"[{self.request.id}] started")
-        result = process_search(extensions.db_session, search_input)
+        result = process_search(extensions.db_session, search_input, self.request.id)
 
         extensions.db_session.commit()
         logger.info(f"[{self.request.id}] success")
         return result
 
     except Exception:
+        logger.info(f"[{self.request.id}] failed")
         extensions.db_session.rollback()
         raise
 
