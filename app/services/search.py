@@ -9,7 +9,7 @@ import re
 logger = get_task_logger(__name__)
 
 
-def process_search(db_session, search_input):
+def process_search(db_session, search_input, job_id):
 
     # parse search input
     ai_client = AIService(api_key=current_app.config["OPENROUTER_APIKEY"],model=current_app.config["OPENROUTER_MODEL"])
