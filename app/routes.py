@@ -1,7 +1,7 @@
 from flask import render_template, Blueprint, request
 from app.celery.tasks import process_search_task
+from app.extensions import celery, limiter
 from celery.result import AsyncResult
-from app.extensions import celery
 
 bp = Blueprint("main", __name__)
 
@@ -13,10 +13,11 @@ def index():
 
 # search route
 @bp.route("/search")
+@limiter.limit("10/minute")
 def search():
     search_input = request.args.get("search_input")
     job = process_search_task.delay(search_input)
-    return None
+    return '{"job_id": "%s"}' % job.id
 
 
 # # job status route
