@@ -1,7 +1,6 @@
 from sqlalchemy import select
 from app.models import Artists, Albums, Tracks, Features
 from app.services.musixmatch import MusixMatch
-from app.services.openrouter import AIService
 from flask import current_app
 from celery.utils.log import get_task_logger
 import re
@@ -9,11 +8,7 @@ import re
 logger = get_task_logger(__name__)
 
 
-def process_search(db_session, search_input):
-
-    # parse search input
-    ai_client = AIService(api_key=current_app.config["OPENROUTER_APIKEY"],model=current_app.config["OPENROUTER_MODEL"])
-    artist_input, track_input = ai_client.parse_search(search_input)
+def process_search(db_session, artist_input, track_input):
 
     # db lookup
     db_classes, api_flag = db_lookup(db_session, artist_input, track_input)
