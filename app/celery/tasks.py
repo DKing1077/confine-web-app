@@ -2,20 +2,23 @@ from app.extensions import celery
 from app.services import process_search
 from app import extensions
 import logging
+from app.cache import cached_key, cached_get, cached_set
 logger = logging.getLogger(__name__)
 
 
 @celery.task(
-    bind=True,
     autoretry_for=(Exception,),
     retry_backoff=True,
     retry_kwargs={"max_retries": 3},
 )
-def process_search_task(self, search_input):
+def process_search_task(artist_input, track_input, cache_key):
     try:
-        result = process_search(extensions.db_session, search_input, self.request.id)
+        result = process_search(extensions.db_session, artist_input, track_input)
+        cached_set(cache_key, result)
+
+        logger.info("cache set for key: %s", cache_key)
         extensions.db_session.commit()
-        return result
+        return True
 
     except Exception:
         extensions.db_session.rollback()

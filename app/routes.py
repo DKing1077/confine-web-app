@@ -3,9 +3,11 @@ from app.celery.tasks import process_search_task
 from app.extensions import celery, limiter
 from app.services.openrouter import AIService
 from flask import current_app
-from app.cache import cached_key, cached_get, cached_set
+from app.cache import cached_key, cached_get
+import logging
 from celery.result import AsyncResult
 
+logger = logging.getLogger(__name__)
 bp = Blueprint("main", __name__)
 
 # default root
@@ -24,13 +26,18 @@ def search():
     artist_input, track_input = ai_client.parse_search(search_input)
 
     cache_key = cached_key(artist_input, track_input)
-    cached = cached_get(cache_key)
-    if cached:
-        return cached
+    cached_data = cached_get(cache_key)
+    if cached_data:
+        logger.info("cache hit for key: %s returning", cache_key)
+        return cached_data
 
-    result = process_search_task.delay(search_input)
-    cached_set(cache_key, result)
-    return result
+    logger.info("cache miss for key: %s", cache_key)
+    job = process_search_task.delay(artist_input, track_input, cache_key)
+
+    return {
+        "job_id": job.id,
+        "status": "queued"
+    }
 
 
 # # job status route
