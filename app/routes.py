@@ -1,6 +1,9 @@
 from flask import render_template, Blueprint, request
 from app.celery.tasks import process_search_task
 from app.extensions import celery, limiter
+from app.services.openrouter import AIService
+from flask import current_app
+from app.cache import cached_key, cached_get, cached_set
 from celery.result import AsyncResult
 
 bp = Blueprint("main", __name__)
@@ -16,8 +19,18 @@ def index():
 @limiter.limit("10/minute")
 def search():
     search_input = request.args.get("search_input")
-    job = process_search_task.delay(search_input)
-    return '{"job_id": "%s"}' % job.id
+
+    ai_client = AIService(api_key=current_app.config["OPENROUTER_APIKEY"], model=current_app.config["OPENROUTER_MODEL"])
+    artist_input, track_input = ai_client.parse_search(search_input)
+
+    cache_key = cached_key(artist_input, track_input)
+    cached = cached_get(cache_key)
+    if cached:
+        return cached
+
+    result = process_search_task.delay(search_input)
+    cached_set(cache_key, result)
+    return result
 
 
 # # job status route
