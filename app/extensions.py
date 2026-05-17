@@ -1,13 +1,12 @@
 from sqlalchemy import create_engine, text
 from sqlalchemy.orm import scoped_session, sessionmaker
 from celery import Celery
-import redis
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
 
-redis_client = redis.Redis(
-    host="localhost",
-    port=6379,
-    db=0,
-    decode_responses=True
+limiter = Limiter(
+    key_func=get_remote_address,
+    storage_uri="redis://localhost:6379/1"
 )
 
 engine = None

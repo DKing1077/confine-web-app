@@ -9,7 +9,7 @@ import re
 logger = get_task_logger(__name__)
 
 
-def process_search(db_session, search_input, job_id):
+def process_search(db_session, search_input):
 
     # parse search input
     ai_client = AIService(api_key=current_app.config["OPENROUTER_APIKEY"],model=current_app.config["OPENROUTER_MODEL"])
@@ -62,7 +62,7 @@ def logger_message(return_var, flag, artist_input=None, track_input=None):
 
     logger.info('number of tracks %s: ', len(return_var))
     logger.info("schema keys: %s", list(sample.keys()))
-    logger.info("features: %s\n", sample["features"])
+    logger.info("features: %s", sample["features"])
 
 
 def serialize_tracks(classes, method):
