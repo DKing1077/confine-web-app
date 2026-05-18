@@ -9,10 +9,12 @@ def add_user(db_session, email, password):
         password_hash=password_hash
     )
     db_session.add(user)
+
     db_session.flush()
+    db_session.commit()
     return {
         "status": "success",
-        "user_id": user.id
+        "user_id": user.user_id
     }
 
 
@@ -25,7 +27,7 @@ def login_user(db_session, email, password):
         return {"ok": False, "error": "invalid_password"}
     return {
         "ok": True,
-        "user_id": user.id
+        "user_id": user.user_id
     }
 
 

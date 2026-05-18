@@ -45,6 +45,10 @@ def register():
     email = request.json["email"]
     password = request.json["password"]
     add_user(extensions.db_session, email, password)
+    return {
+        "status": "registered",
+        "email": email
+    }, 201
 
 
 # login route
