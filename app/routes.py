@@ -1,14 +1,13 @@
 from flask import render_template, Blueprint, request
+from flask import current_app, session
 from app.celery.tasks import process_search_task
-from app.extensions import celery, limiter
 from app.services.openrouter import AIService
-from flask import current_app
 from app.cache import cached_key, cached_get
-import logging
-from celery.result import AsyncResult
+from app.services.user import add_user, login_user
+from app import extensions
 
-logger = logging.getLogger(__name__)
 bp = Blueprint("main", __name__)
+limiter = extensions.limiter
 
 # default root
 @bp.route('/')
@@ -16,7 +15,7 @@ def index():
     return render_template('template.html')
 
 
-# search route
+# search route - defaults - methods=["GET"]
 @bp.route("/search")
 @limiter.limit("10/minute")
 def search():
@@ -28,17 +27,49 @@ def search():
     cache_key = cached_key(artist_input, track_input)
     cached_data = cached_get(cache_key)
     if cached_data:
-        logger.info("cache hit for key: %s returning", cache_key)
+        current_app.logger.info("cache hit for key: %s - returning", cache_key)
         return cached_data
 
-    logger.info("cache miss for key: %s", cache_key)
+    current_app.logger.info("cache miss for key: %s", cache_key)
     job = process_search_task.delay(artist_input, track_input, cache_key)
-
     return {
         "job_id": job.id,
         "status": "queued"
     }
 
+
+# register route
+@limiter.limit("3/minute")
+@bp.route("/register", methods=["POST"])
+def register():
+    email = request.json["email"]
+    password = request.json["password"]
+    add_user(extensions.db_session, email, password)
+
+
+# login route
+@limiter.limit("5/minute")
+@bp.route("/login", methods=["POST"])
+def login():
+    email = request.json["email"]
+    password = request.json["password"]
+
+    result = login_user(extensions.db_session, email, password)
+    if not result["ok"]:
+        return result, 401
+
+    session["user_id"] = result["user_id"]
+    return {
+        "status": "logged_in",
+        "user_id": result["user_id"]
+    }
+
+
+# Flask API	Reads from
+# request.args URL query string
+# request.jsonJSON request body
+# request.form HTML form body
+# request.headers	HTTP headers
 
 # # job status route
 # @bp.route("/job/<job_id>")
@@ -54,7 +85,6 @@ def search():
 #     elif job.failed():
 #         response["result"] = str(job.result)
 #     return response
-
 
 # from flask import request, redirect, url_for, Blueprint, jsonify, current_app)
 # from werkzeug.utils import secure_filename

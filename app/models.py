@@ -71,6 +71,17 @@ class Features(Base):
     artist: Mapped['Artists'] = relationship('Artists', back_populates="features_on")
 
 
+class Users(Base):
+    __tablename__ = 'users'
+
+    # ids
+    user_id: Mapped[int] = mapped_column(Integer, primary_key=True)
+
+    # content
+    email: Mapped[str] = mapped_column(String, nullable=False, unique=True)
+    password_hash: Mapped[str] = mapped_column(String, nullable=False)
+
+
 
 
 

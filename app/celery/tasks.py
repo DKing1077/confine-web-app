@@ -1,9 +1,8 @@
 from app.extensions import celery
 from app.services import process_search
 from app import extensions
-import logging
 from app.cache import cached_key, cached_get, cached_set
-logger = logging.getLogger(__name__)
+from flask import current_app
 
 
 @celery.task(
@@ -16,7 +15,7 @@ def process_search_task(artist_input, track_input, cache_key):
         result = process_search(extensions.db_session, artist_input, track_input)
         cached_set(cache_key, result)
 
-        logger.info("cache set for key: %s", cache_key)
+        current_app.logger.info("cache set for key: %s", cache_key)
         extensions.db_session.commit()
         return True
 
