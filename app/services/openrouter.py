@@ -24,7 +24,7 @@ class AIService:
                         "Schema:\n"
                         "{\n"
                         '  "artist": string\n'
-                        '  "track": string, None\n'
+                        '  "track": string, Unknown\n'
                         "}\n\n"
                         "Rules:\n"
                         "- Return the artist and track name exactly the same as its stored on spotify, search and check its the same\n"

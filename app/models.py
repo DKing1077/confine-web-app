@@ -1,6 +1,8 @@
 from sqlalchemy import Integer, String, ForeignKey, Text, UniqueConstraint
 from sqlalchemy.orm import Mapped, mapped_column, relationship, registry
 from sqlalchemy.ext.declarative import declarative_base
+from datetime import datetime
+from sqlalchemy import DateTime, func
 
 Base = declarative_base()
 
@@ -80,6 +82,26 @@ class Users(Base):
     # content
     email: Mapped[str] = mapped_column(String, nullable=False, unique=True)
     password_hash: Mapped[str] = mapped_column(String, nullable=False)
+
+
+class SearchResults(Base):
+    __tablename__ = 'search_results'
+
+    # ids
+    search_id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey('users.user_id'))
+
+    # content
+    search_text: Mapped[str] = mapped_column(Text, nullable=False)
+    search_result: Mapped[str] = mapped_column(Text, nullable=False)
+
+    # # artist* -> not implemented
+    # # track* -> not implemented
+
+    # metadata
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now(), nullable=False
+    )
 
 
 

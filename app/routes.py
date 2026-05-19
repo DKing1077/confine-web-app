@@ -5,6 +5,9 @@ from app.services.openrouter import AIService
 from app.cache import cached_key, cached_get
 from app.services.user import add_user, login_user
 from app import extensions
+from celery.utils.log import get_task_logger
+
+logger = get_task_logger(__name__)
 
 bp = Blueprint("main", __name__)
 limiter = extensions.limiter
@@ -19,19 +22,14 @@ def index():
 @bp.route("/search")
 @limiter.limit("10/minute")
 def search():
+    if "user_id" not in session:
+        return {"error": "unauthorized"}, 401
+    user_id = session["user_id"]
+
     search_input = request.args.get("search_input")
+    current_app.logger.info("search input: %s", search_input)
 
-    ai_client = AIService(api_key=current_app.config["OPENROUTER_APIKEY"], model=current_app.config["OPENROUTER_MODEL"])
-    artist_input, track_input = ai_client.parse_search(search_input)
-
-    cache_key = cached_key(artist_input, track_input)
-    cached_data = cached_get(cache_key)
-    if cached_data:
-        current_app.logger.info("cache hit for key: %s - returning", cache_key)
-        return cached_data
-
-    current_app.logger.info("cache miss for key: %s", cache_key)
-    job = process_search_task.delay(artist_input, track_input, cache_key)
+    job = process_search_task.delay(search_input, user_id)
     return {
         "job_id": job.id,
         "status": "queued"
