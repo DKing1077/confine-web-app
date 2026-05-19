@@ -229,3 +229,14 @@ def normalize(name: str) -> str:
             break
     return name
 
+
+def add_search_result(db_session, user_id, search_text, search_result):
+    search_result = search_result(
+        user_id=user_id,
+        search_text=search_text,
+        search_result=search_result
+    )
+    db_session.add(search_result)
+    db_session.flush()
+
+
