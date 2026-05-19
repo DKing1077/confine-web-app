@@ -1,8 +1,6 @@
 from flask import render_template, Blueprint, request
 from flask import current_app, session
 from app.celery.tasks import process_search_task
-from app.services.openrouter import AIService
-from app.cache import cached_key, cached_get
 from app.services.user import add_user, login_user
 from app import extensions
 from celery.utils.log import get_task_logger
