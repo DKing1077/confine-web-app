@@ -8,20 +8,29 @@ from app.services.search import normalize
 # ttl=43200 # 12 hours in seconds
 # make key -> check get cache - > miss set cache or api return
 
-redis_cache = redis.Redis(
+redis_search_cache = redis.Redis(
     host="localhost",
     port=6379,
     db=2,
     decode_responses=True
 )
 
-def cached_key(artist_input, track_input):
+redis_workflow_cache = redis.Redis(
+    host="localhost",
+    port=6379,
+    db=3,
+    decode_responses=True
+)
+
+
+# search cache key, get, set, delete
+def search_cache_key(artist_input, track_input):
     key = f'{normalize(artist_input)}:{normalize(track_input)}'
     return key
 
 
-def cached_get(key):
-    cached = redis_cache.get(key)
+def search_cache_get(key):
+    cached = redis_search_cache.get(key)
     if not cached:
         return None
     try:
@@ -30,11 +39,34 @@ def cached_get(key):
         return None
 
 
-def cached_set(key, value, ttl=43200):
-    redis_cache.setex(key, ttl, json.dumps(value))
+def search_cache_set(key, value, ttl=43200):
+    redis_search_cache.setex(key, ttl, json.dumps(value))
 
 
-def cached_delete(key):
-    redis_cache.delete(key)
+def search_cache_delete(key):
+    redis_search_cache.delete(key)
+
+
+# workflow cache key, get, set, delete
+def workflow_cache_key(user_id, workflow_id):
+    key = f"workflow:{user_id}:{workflow_id}"
+
+
+def workflow_cache_get(key):
+    cached = redis_workflow_cache.get(key)
+    if not cached:
+        return None
+    try:
+        return json.loads(cached)
+    except json.JSONDecodeError:
+        return None
+
+
+def workflow_cache_set(key, value, ttl=43200):
+    redis_workflow_cache.setex(key, ttl, json.dumps(value))
+
+
+def workflow_cache_delete(key):
+    redis_workflow_cache.delete(key)
 
 
