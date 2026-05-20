@@ -1,6 +1,6 @@
 from flask import render_template, Blueprint, request
 from flask import current_app, session
-from app.celery.tasks import process_search_task
+from app.celery.tasks import process_search_task, add_to_workflow_task
 from app.services.user import add_user, login_user
 from app import extensions
 from celery.utils.log import get_task_logger
@@ -63,6 +63,23 @@ def login():
         "status": "logged_in",
         "user_id": result["user_id"]
     }
+
+
+# add workflow route
+@bp.route("/add_workflow")
+@limiter.limit("30/minute")
+def add_workflow():
+    if "user_id" not in session:
+        return {"error": "unauthorized"}, 401
+    user_id = session["user_id"]
+
+    search_input = request.args.get("search_input")
+    current_app.logger.info("request to add to workflow: %s", search_input)
+
+    job = add_to_workflow_task.delay(search_input, user_id)
+
+
+
 
 
 # Flask API	Reads from
