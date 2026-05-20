@@ -45,22 +45,22 @@ class MusixMatch:
         for track in tracks:
             item = track.get("track", {})
             lyrics = self.get_lyrics(item.get("commontrack_id"))
-            if lyrics == "blank":
-                print(f'return status 202 blank response - lyrics_body : {item.get("artist_name")} - {item.get("track_name")}')
-            if lyrics:
-                classes.append(
-                    ApiData(
-                        artist_name=item.get("artist_name"),
-                        ex_artist_id=item.get("artist_id"),
-                        album_name=item.get("album_name"),
-                        ex_track_id=item.get("commontrack_id"),
-                        track_name=item.get("track_name"),
-                        lyrics=lyrics,
-                        features=[],
-                    )
+            # if lyrics == "blank":
+            #     print(f'return status 202 blank response - lyrics_body : {item.get("artist_name")} - {item.get("track_name")}')
+            # if lyrics:
+            # else:
+            #     print(f'error status 404 : {item.get("artist_name")} - {item.get("track_name")}')
+            classes.append(
+                ApiData(
+                    artist_name=item.get("artist_name"),
+                    ex_artist_id=item.get("artist_id"),
+                    album_name=item.get("album_name"),
+                    ex_track_id=item.get("commontrack_id"),
+                    track_name=item.get("track_name"),
+                    lyrics='pending',
+                    features=[],
                 )
-            else:
-                print(f'error status 404 : {item.get("artist_name")} - {item.get("track_name")}')
+            )
         return classes
 
 
