@@ -44,7 +44,7 @@ class MusixMatch:
         )
         for track in tracks:
             item = track.get("track", {})
-            lyrics = self.get_lyrics(item.get("commontrack_id"))
+            # lyrics = self.get_lyrics(item.get("commontrack_id"))
             # if lyrics == "blank":
             #     print(f'return status 202 blank response - lyrics_body : {item.get("artist_name")} - {item.get("track_name")}')
             # if lyrics:

@@ -3,28 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <title>Generative Writing Tool</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <body>
 
-<h3>This is the default page!</h3>
-
 <form id="search_form">
-    <label for="search_type">Search By:</label>
+    <label for="search_input">Search By:</label>
 
-    <select name="search_type" id="search_type">
-        <option value="song">Song</option>
-        <option value="artist">Artist</option>
-        <option value="album">Album</option>
-    </select>
+    <div class="search-row">
+        <input type="text" id="search_input" name="search_input" placeholder="search ..." required>
+        <button type="submit">Search</button>
+    </div>
 
-    <br><br>
-
-    <input type="text" id="search_input" name="search_input" placeholder="enter your search ..." required>
-    <button type="submit">Search</button>
+    <div class="action-row">
+        <button type="button">Add</button>
+        <button type="button">Remove</button>
+        <button type="button">Process</button>
+    </div>
 </form>
 
 <div id="results"></div>
+
 <script src="{{ url_for('static', filename='search.js') }}"></script>
 
 </body>

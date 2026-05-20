@@ -1,0 +1,210 @@
+# CSS File Explanation — Flask Search UI
+
+## Overview
+This CSS file styles a minimal search interface for a Flask web application. It includes:
+- A centered layout
+- A search label
+- A search input + search button (same row)
+- Three action buttons (Add / Remove / Process)
+- Dark blue theme
+- Monospace font (Source Code Pro)
+
+The layout is built primarily using Flexbox.
+
+---
+
+## 1. Font Import
+
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600&display=swap');
+
+- Imports the Source Code Pro font from Google Fonts
+- Provides a monospace, developer-style appearance
+
+---
+
+## 2. Page Reset
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+- Removes default browser margins
+- Ensures full viewport height is available for centering
+
+---
+
+## 3. Main Layout (Centering System)
+
+body {
+    min-height: 100vh;
+    background-color: #2F578A;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: 'Source Code Pro', monospace;
+
+    transform: translateY(-60px);
+}
+
+### Explanation
+- `background-color`: sets dark blue theme
+- `display: flex`: enables Flexbox layout
+- `justify-content: center`: centers horizontally
+- `align-items: center`: centers vertically
+- `font-family`: applies monospace font globally
+- `transform: translateY(-60px)`: moves UI slightly upward for better visual balance
+
+---
+
+## 4. Form Layout (Vertical Stack)
+
+#search_form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+### Explanation
+- Stacks elements vertically:
+  1. Label
+  2. Search row
+  3. Action buttons row
+- Centers everything horizontally inside the form
+
+---
+
+## 5. Label Styling
+
+#search_form label {
+    margin-bottom: 8px;
+    color: white;
+    font-size: 16px;
+    text-align: center;
+}
+
+- Adds spacing below label
+- White text for contrast
+- Center aligned
+
+---
+
+## 6. Search Row (Input + Button)
+
+.search-row {
+    display: flex;
+}
+
+### Result Layout
+[ search input ] [ search button ]
+
+- Places input and button on same row using Flexbox
+
+---
+
+## 7. Search Input
+
+#search_input {
+    width: 210px;
+    padding: 8px;
+    border: none;
+    outline: none;
+    border-radius: 10px 0 0 10px;
+    font-size: 13px;
+    font-family: inherit;
+}
+
+- Fixed width input
+- No border or outline for clean UI
+- Rounded left corners only
+- Inherits global font
+
+---
+
+## 8. Search Button
+
+.search-row button {
+    padding: 8px 12px;
+    border: none;
+    cursor: pointer;
+    background: #1f3f66;
+    color: white;
+    border-radius: 0 10px 10px 0;
+    font-size: 13px;
+    font-family: inherit;
+}
+
+.search-row button:hover {
+    background: #16314f;
+}
+
+- Dark blue button matching theme
+- Rounded right corners to complete search bar shape
+- Hover effect darkens button for feedback
+
+---
+
+## 9. Action Buttons Row
+
+.action-row {
+    display: flex;
+    margin-top: 10px;
+    width: 100%;
+    gap: 8px;
+}
+
+- Creates horizontal row for Add / Remove / Process buttons
+- `gap` adds spacing between buttons
+- `margin-top` separates from search bar
+
+---
+
+## 10. Action Buttons
+
+.action-row button {
+    flex: 1;
+    padding: 7px;
+    border: none;
+    cursor: pointer;
+
+    background: #1f3f66;
+    color: white;
+
+    font-size: 12px;
+    font-family: inherit;
+
+    border-radius: 8px;
+}
+
+.action-row button:hover {
+    background: #16314f;
+}
+
+### Explanation
+- `flex: 1` → makes all buttons equal width
+- Compact padding for smaller UI
+- Rounded corners for modern look
+- Same color system as search button
+- Hover effect improves interactivity
+
+---
+
+## Final UI Structure
+
+           Search By
+
+      [ search input ][ search ]
+
+   [ Add ] [ Remove ] [ Process ]
+
+---
+
+## Key Concepts Used
+- Flexbox centering (page layout)
+- Column stacking (form structure)
+- Row layouts (input + buttons)
+- Equal width buttons (`flex: 1`)
+- Visual adjustment (`translateY`)
+- Consistent design system (color, font, spacing)
