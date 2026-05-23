@@ -5,7 +5,7 @@ from app.services.search import add_search_result
 from app import extensions
 from app.cache import search_cache_set, search_cache_get, search_cache_key
 from app.cache import workflow_cache_key, workflow_cache_get, workflow_cache_set
-from flask import current_app, request
+from flask import current_app
 from celery.utils.log import get_task_logger
 from app.cache import redis_workflow_cache
 import uuid
