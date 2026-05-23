@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
 
 html, body {
     height: 100%;
@@ -7,15 +7,46 @@ html, body {
 
 body {
     min-height: 100vh;
-    background-color: #2F578A;
+    background-color: #3B82F6;
 
     display: flex;
     justify-content: center;
     align-items: center;
 
-    font-family: 'Source Code Pro', monospace;
+    font-family: 'Share Tech Mono', monospace;
 
-    transform: translateY(-60px);
+    padding-top: 0;
+}
+
+/* top-left auth links (replaces header bar) */
+.nav-links {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+
+    display: flex;
+    gap: 18px;
+
+    z-index: 1000;
+}
+
+/* login / register links */
+.nav-links a {
+    text-decoration: none;
+
+    color: rgba(255, 255, 255, 0.85);
+
+    font-size: 14px;
+    font-family: inherit;
+
+    letter-spacing: 0.5px;
+
+    transition: opacity 0.2s ease;
+}
+
+/* hover effect */
+.nav-links a:hover {
+    opacity: 0.6;
 }
 
 /* form layout */
@@ -23,6 +54,8 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    transform: translateY(-40px);
 }
 
 /* label */
@@ -41,7 +74,7 @@ body {
 /* input */
 #search_input {
     width: 210px;
-    padding: 8px;
+    padding: 6px 8px;
     border: none;
     outline: none;
     border-radius: 10px 0 0 10px;
@@ -51,18 +84,25 @@ body {
 
 /* search button */
 .search-row button {
-    padding: 8px 12px;
+    padding: 6px 12px;
     border: none;
     cursor: pointer;
-    background: #1f3f66;
-    color: white;
+
+    background: rgba(255, 255, 255, 0.9);
+    color: #1e3a8a;
+
     border-radius: 0 10px 10px 0;
     font-size: 13px;
     font-family: inherit;
+
+    backdrop-filter: blur(6px);
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
 .search-row button:hover {
-    background: #16314f;
+    background: white;
+    transform: translateY(-1px);
 }
 
 /* action buttons row */
@@ -80,15 +120,30 @@ body {
     border: none;
     cursor: pointer;
 
-    background: #1f3f66;
-    color: white;
+    background: rgba(255, 255, 255, 0.85);
+    color: #1e3a8a;
 
     font-size: 12px;
     font-family: inherit;
 
     border-radius: 8px;
+
+    backdrop-filter: blur(6px);
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
 }
 
 .action-row button:hover {
-    background: #16314f;
+    background: white;
+    transform: translateY(-1px);
+}
+
+/* results */
+#results {
+    position: absolute;
+    bottom: 30px;
+
+    color: rgba(255, 255, 255, 0.85);
+
+    font-size: 12px;
 }

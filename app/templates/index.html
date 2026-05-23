@@ -8,11 +8,25 @@
 
 <body>
 
+<!-- top-left auth links (no header bar) -->
+<div class="nav-links top-left">
+    <a href="/login">Login</a>
+    <a href="/register">Register</a>
+</div>
+
+<!-- main form -->
 <form id="search_form">
-    <label for="search_input">Search By:</label>
+    <label for="search_input">writing engine</label>
 
     <div class="search-row">
-        <input type="text" id="search_input" name="search_input" placeholder="search ..." required>
+        <input
+            type="text"
+            id="search_input"
+            name="search_input"
+            placeholder="search ..."
+            required
+        >
+
         <button type="submit">Search</button>
     </div>
 

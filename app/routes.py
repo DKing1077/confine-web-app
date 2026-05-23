@@ -13,7 +13,7 @@ limiter = extensions.limiter
 # default root
 @bp.route('/')
 def index():
-    return render_template('template.html')
+    return render_template('index.html')
 
 
 # search route - defaults - methods=["GET"]
@@ -77,6 +77,7 @@ def add_workflow():
     current_app.logger.info("request to add to workflow: %s", search_input)
 
     job = add_to_workflow_task.delay(search_input, user_id)
+    return None
 
 
 
