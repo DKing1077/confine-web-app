@@ -23,7 +23,7 @@ def session():
     return render_template('session.html')
 
 
-# search route - defaults - methods=["GET"]
+# search route
 @bp.route("/search")
 @limiter.limit("10/minute")
 def search():
@@ -47,6 +47,7 @@ def search():
 def registration():
     email = request.json["email"]
     password = request.json["password"]
+
     add_user(extensions.db_session, email, password)
     return {
         "status": "registered",
@@ -69,10 +70,10 @@ def loginuser():
     return {
         "status": "logged_in",
         "user_id": result["user_id"]
-    }
+    }, 200
 
 
-# add workflow route
+# workflow add route
 @bp.route("/add_workflow")
 @limiter.limit("30/minute")
 def add_workflow():

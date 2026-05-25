@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Session</title>
+
     <link rel="stylesheet" href="{{ url_for('static', filename='session.css') }}">
 </head>
 
@@ -41,27 +42,25 @@
 
         <!-- MODE TOGGLES -->
         <div class="mode-toggle">
-            <button type="button" class="mode-btn active" data-mode="login">login</button>
-            <button type="button" class="mode-btn" data-mode="register">register</button>
+            <button type="button" class="mode-btn active" data-mode="login">
+                login
+            </button>
+
+            <button type="button" class="mode-btn" data-mode="register">
+                register
+            </button>
         </div>
 
         <!-- SUBMIT -->
-        <button type="submit" class="submit-btn">submit</button>
+        <button type="submit" class="submit-btn">
+            submit
+        </button>
 
     </form>
 
 </div>
 
-<script>
-const buttons = document.querySelectorAll('.mode-btn');
-
-buttons.forEach(btn => {
-    btn.addEventListener('click', () => {
-        buttons.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-    });
-});
-</script>
+<script src="{{ url_for('static', filename='session.js') }}"></script>
 
 </body>
 </html>
