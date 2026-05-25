@@ -8,15 +8,14 @@
 
 <body>
 
-<!-- top-left auth links (no header bar) -->
-<div class="nav-links top-left">
-    <a href="/login">Login</a>
-    <a href="/register">Register</a>
+<!-- NAV -->
+<div class="nav-links">
+    <a href="/session" class="auth-button">login / register</a>
 </div>
 
-<!-- main form -->
+<div class="confine-label">confine</div>
+
 <form id="search_form">
-    <label for="search_input">writing engine</label>
 
     <div class="search-row">
         <input
@@ -26,15 +25,67 @@
             placeholder="search ..."
             required
         >
-
         <button type="submit">Search</button>
     </div>
 
     <div class="action-row">
         <button type="button">Add</button>
         <button type="button">Remove</button>
+
+        <select id="mode_select" name="mode_select" class="mode-select">
+            <option value="Transform">Transform</option>
+            <option value="Analyze">Analyze</option>
+            <option value="Combine">Combine</option>
+        </select>
+
         <button type="button">Process</button>
     </div>
+
+    <!-- DASHBOARD -->
+    <div class="dashboard">
+
+        <div class="tab-bar">
+            <button type="button" class="tab active" data-tab="search">SEARCH</button>
+            <button type="button" class="tab" data-tab="workspace">WORKSPACE</button>
+            <button type="button" class="tab" data-tab="concepts">CONCEPTS</button>
+            <button type="button" class="tab" data-tab="semantics">SEMANTICS</button>
+            <button type="button" class="tab" data-tab="instructions">INSTRUCTIONS</button>
+            <button type="button" class="tab" data-tab="input">INPUT</button>
+            <button type="button" class="tab" data-tab="output">OUTPUT</button>
+        </div>
+
+        <div class="tab-content">
+            <div class="panel active" id="search">
+                SEARCH PANEL
+            </div>
+
+            <div class="panel" id="workspace">
+                WORKSPACE PANEL
+            </div>
+
+            <div class="panel" id="concepts">
+                CONCEPTS PANEL
+            </div>
+
+            <div class="panel" id="semantics">
+                SEMANTICS PANEL
+            </div>
+
+            <div class="panel" id="instructions">
+                INSTRUCTIONS PANEL
+            </div>
+
+            <div class="panel" id="input">
+                INPUT PANEL
+            </div>
+
+            <div class="panel" id="output">
+                OUTPUT PANEL
+            </div>
+        </div>
+
+    </div>
+
 </form>
 
 <div id="results"></div>

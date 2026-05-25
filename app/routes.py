@@ -10,10 +10,17 @@ logger = get_task_logger(__name__)
 bp = Blueprint("main", __name__)
 limiter = extensions.limiter
 
-# default root
+
+# index root
 @bp.route('/')
 def index():
     return render_template('index.html')
+
+
+# session root
+@bp.route('/session')
+def session():
+    return render_template('session.html')
 
 
 # search route - defaults - methods=["GET"]
@@ -37,7 +44,7 @@ def search():
 # register route
 @limiter.limit("3/minute")
 @bp.route("/register", methods=["POST"])
-def register():
+def registration():
     email = request.json["email"]
     password = request.json["password"]
     add_user(extensions.db_session, email, password)
@@ -50,7 +57,7 @@ def register():
 # login route
 @limiter.limit("5/minute")
 @bp.route("/login", methods=["POST"])
-def login():
+def loginuser():
     email = request.json["email"]
     password = request.json["password"]
 
