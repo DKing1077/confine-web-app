@@ -1,0 +1,200 @@
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+html {
+    background: #0f172a;
+}
+
+body {
+    min-height: 100vh;
+
+    background: linear-gradient(
+        180deg,
+        #0f172a 0%,
+        #1e3a8a 40%,
+        #2563eb 100%
+    );
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: 'Share Tech Mono', monospace;
+
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* background layers */
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+
+    background: radial-gradient(
+        circle at 50% 20%,
+        rgba(255, 255, 255, 0.08),
+        transparent 55%
+    );
+
+    pointer-events: none;
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.15'/%3E%3C/svg%3E");
+
+    opacity: 0.04;
+    mix-blend-mode: overlay;
+
+    pointer-events: none;
+}
+
+/* NAV */
+
+.nav-left,
+.nav-right {
+    position: absolute;
+    top: 10px;
+
+    display: flex;
+}
+
+.nav-left {
+    left: 10px;
+}
+
+.nav-right {
+    right: 10px;
+}
+
+.nav-link {
+    color: rgba(255,255,255,0.75);
+    font-size: 14px;
+
+    padding: 6px 10px;
+    border-radius: 6px;
+
+    text-decoration: none;
+
+    transition: all 0.2s ease;
+}
+
+.nav-link:hover {
+    background: rgba(255,255,255,0.15);
+    color: white;
+    transform: translateY(-1px);
+}
+
+/* WRAPPER */
+
+.session-wrapper {
+    width: 320px;
+    transform: translateY(-60px);
+}
+
+/* FORM */
+
+#session_form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* INPUTS (email + password) */
+
+#email_input,
+#password_input {
+    padding: 6px 10px;
+    font-size: 12px;
+
+    border: none;
+    outline: none;
+
+    border-radius: 8px;
+
+    font-family: inherit;
+
+    background: rgba(255,255,255,0.95);
+    color: #1e3a8a;
+
+    transition: all 0.2s ease;
+}
+
+#email_input:focus,
+#password_input:focus {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* MODE TOGGLE */
+
+.mode-toggle {
+    display: flex;
+    gap: 8px;
+}
+
+.mode-btn {
+    flex: 1;
+
+    padding: 6px 8px;
+    font-size: 12px;
+
+    border: none;
+    border-radius: 6px;
+
+    cursor: pointer;
+
+    background: rgba(255,255,255,0.85);
+    color: #1e3a8a;
+
+    font-family: inherit;
+
+    transition: all 0.2s ease;
+}
+
+.mode-btn:hover {
+    background: white;
+    transform: translateY(-1px);
+}
+
+.mode-btn.active {
+    background: rgba(255,255,255,0.35);
+    color: white;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+
+/* SUBMIT */
+
+.submit-btn {
+    padding: 6px 10px;
+    font-size: 12px;
+
+    border: none;
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    background: rgba(255,255,255,0.9);
+    color: #1e3a8a;
+
+    font-family: inherit;
+
+    transition: all 0.2s ease;
+}
+
+.submit-btn:hover {
+    background: white;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Session</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='session.css') }}">
+</head>
+
+<body>
+
+<!-- NAV -->
+<div class="nav-left">
+    <a href="/" class="nav-link">home</a>
+</div>
+
+<div class="nav-right">
+    <a href="/confine" class="nav-link">confine</a>
+</div>
+
+<!-- CENTER WRAPPER -->
+<div class="session-wrapper">
+
+    <form id="session_form">
+
+        <!-- INPUTS -->
+        <input
+            type="email"
+            id="email_input"
+            name="email"
+            placeholder="email ..."
+            required
+        >
+
+        <input
+            type="password"
+            id="password_input"
+            name="password"
+            placeholder="password ..."
+            required
+        >
+
+        <!-- MODE TOGGLES -->
+        <div class="mode-toggle">
+            <button type="button" class="mode-btn active" data-mode="login">login</button>
+            <button type="button" class="mode-btn" data-mode="register">register</button>
+        </div>
+
+        <!-- SUBMIT -->
+        <button type="submit" class="submit-btn">submit</button>
+
+    </form>
+
+</div>
+
+<script>
+const buttons = document.querySelectorAll('.mode-btn');
+
+buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+        buttons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+    });
+});
+</script>
+
+</body>
+</html>
