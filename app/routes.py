@@ -48,7 +48,9 @@ def registration():
     email = request.json["email"]
     password = request.json["password"]
 
-    add_user(extensions.db_session, email, password)
+    result = add_user(extensions.db_session, email, password)
+    current_app.logger.info("user registered: %s - %s", email, password)
+    current_app.logger.info("user id: %s", result["user_id"])
     return {
         "status": "registered",
         "email": email
@@ -63,6 +65,8 @@ def loginuser():
     password = request.json["password"]
 
     result = login_user(extensions.db_session, email, password)
+    current_app.logger.info("user logged in: %s - %s", email, password)
+    current_app.logger.info("user id: %s", result["user_id"])
     if not result["ok"]:
         return result, 401
 
