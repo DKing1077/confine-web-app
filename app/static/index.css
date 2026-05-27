@@ -122,6 +122,37 @@ body::after {
     transform: translateY(-1px);
 }
 
+/* USER STATUS (top center indicator) */
+
+.user-status {
+    position: fixed;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 14px;
+
+    z-index: 9999;
+    pointer-events: none;
+}
+
+.user-status .label {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.user-status .username.logged-in {
+    color: #22c55e;
+}
+
+.user-status .username.logged-out {
+    color: #ef4444;
+}
+
 /* form wrapper */
 
 #search_form {

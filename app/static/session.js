@@ -3,15 +3,6 @@ const form = document.getElementById('session_form');
 
 let currentMode = "login";
 
-// MODE SWITCHING
-buttons.forEach(btn => {
-    btn.addEventListener('click', () => {
-        buttons.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        currentMode = btn.dataset.mode;
-    });
-});
-
 // FORM SUBMIT
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -29,6 +20,22 @@ form.addEventListener('submit', async (e) => {
         });
 
         if (response.ok) {
+
+            // EXPECTED: backend returns JSON like { username: "David" }
+            let data = null;
+
+            try {
+                data = await response.json();
+            } catch (e) {
+                data = null;
+            }
+
+            if (data && data.username) {
+                setUserStatus(data.username, true);
+            } else {
+                setUserStatus("user", true);
+            }
+
             form.reset();
         }
 
@@ -36,3 +43,23 @@ form.addEventListener('submit', async (e) => {
         // silent fail
     }
 });
+
+// MODE SWITCHING
+buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+        buttons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentMode = btn.dataset.mode;
+    });
+});
+
+// USER STATUS UPDATE (shared with other pages if loaded)
+window.setUserStatus = function(username, loggedIn) {
+    const statusEl = document.querySelector(".user-status .username");
+    if (!statusEl) return;
+
+    statusEl.textContent = loggedIn ? username : "unknown";
+
+    statusEl.classList.remove("logged-in", "logged-out");
+    statusEl.classList.add(loggedIn ? "logged-in" : "logged-out");
+};
