@@ -1,7 +1,30 @@
 const buttons = document.querySelectorAll('.mode-btn');
 const form = document.getElementById('session_form');
 
+const emailInput = document.getElementById('email_input');
+const passwordInput = document.getElementById('password_input');
+
 let currentMode = "login";
+
+/* ---------------- MODE HANDLER ---------------- */
+
+function setAuthMode(mode) {
+    currentMode = mode;
+
+    if (mode === "logout") {
+        emailInput.required = false;
+        passwordInput.required = false;
+
+        emailInput.style.display = "none";
+        passwordInput.style.display = "none";
+    } else {
+        emailInput.required = true;
+        passwordInput.required = true;
+
+        emailInput.style.display = "block";
+        passwordInput.style.display = "block";
+    }
+}
 
 /* ---------------- FORM SUBMIT ---------------- */
 
@@ -9,33 +32,31 @@ form.addEventListener('submit', async (e) => {
 
     e.preventDefault();
 
-    const email = document.getElementById('email_input').value;
-    const password = document.getElementById('password_input').value;
+    const email = emailInput.value;
+    const password = passwordInput.value;
 
     try {
 
-        const response = await fetch(`/${currentMode}`, {
+        const options = {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
-            credentials: "include",
-            body: JSON.stringify({ email, password })
-        });
+            credentials: "include"
+        };
+
+        if (currentMode !== "logout") {
+            options.body = JSON.stringify({ email, password });
+        }
+
+        const response = await fetch(`/${currentMode}`, options);
 
         if (!response.ok) {
             return;
         }
 
-        /*
-            IMPORTANT RULE:
-            - register → no session change
-            - login → server sets session
-            - UI updates ONLY via auth.js
-        */
-
-        if (currentMode === "login") {
-            await loadSessionStatus(); // from auth.js
+        if (currentMode === "login" || currentMode === "logout") {
+            await loadSessionStatus();
         }
 
         form.reset();
@@ -55,9 +76,11 @@ buttons.forEach(btn => {
 
         btn.classList.add('active');
 
-        currentMode = btn.dataset.mode;
+        setAuthMode(btn.dataset.mode);
+
     });
 });
 
+/* ---------------- INITIAL STATE ---------------- */
 
-
+setAuthMode(currentMode);

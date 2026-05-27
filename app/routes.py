@@ -1,9 +1,9 @@
 from flask import render_template, Blueprint, request, current_app, session
 from app.celery.tasks import process_search_task, add_to_workflow_task
 from app.services.user import add_user, login_user
+from app.models import Users
 from app import extensions
 from celery.utils.log import get_task_logger
-from models import Users
 
 logger = get_task_logger(__name__)
 bp = Blueprint("main", __name__)
@@ -83,10 +83,21 @@ def loginuser():
     }, 200
 
 
+@bp.route("/logout", methods=["POST"])
+def logout():
+    # clear the user_id
+    session.clear()
+
+    # 200 ok
+    return {
+        "success": True
+    }, 200
+
+
 # session status route
 @bp.route("/session-status", methods=["GET"])
 def session_status():
-    # is session useri_id set
+    # is user_id set in session
     user_id = session.get("user_id")
     if not user_id:
         return {
@@ -100,7 +111,7 @@ def session_status():
             "logged_in": False
         }, 200
 
-    # return logged in
+    # return logged in, 200 ok
     current_app.logger.info("session status: %s user_id in session/db - returned logged in", user_id)
     return {
         "logged_in": True,
