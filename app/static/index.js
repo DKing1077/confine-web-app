@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    // SEARCH
+    /* ---------------- SEARCH ---------------- */
+
     const form = document.getElementById("search_form");
     const resultsDiv = document.getElementById("results");
 
@@ -11,8 +12,10 @@ document.addEventListener("DOMContentLoaded", () => {
         const input = document.getElementById("search_input").value;
 
         try {
+
             const response = await fetch(
-                `/search?search_type=${type}&search_input=${encodeURIComponent(input)}`
+                `/search?search_type=${type}&search_input=${encodeURIComponent(input)}`,
+                { credentials: "include" }
             );
 
             const text = await response.text();
@@ -23,7 +26,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // TAB SWITCHING
+    /* ---------------- TABS ---------------- */
+
     const tabs = document.querySelectorAll(".tab");
     const panels = document.querySelectorAll(".panel");
 
@@ -37,26 +41,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
             panels.forEach(panel => {
                 panel.classList.remove("active");
-
                 if (panel.id === target) {
                     panel.classList.add("active");
                 }
             });
-
         });
     });
-
-    // USER STATUS (optional updater)
-    // Call this after login/register response or page load hydration
-    window.setUserStatus = function(username, loggedIn) {
-        const statusEl = document.querySelector(".user-status .username");
-
-        if (!statusEl) return;
-
-        statusEl.textContent = loggedIn ? username : "unknown";
-
-        statusEl.classList.remove("logged-in", "logged-out");
-        statusEl.classList.add(loggedIn ? "logged-in" : "logged-out");
-    };
-
 });

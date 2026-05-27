@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Generative Writing Tool</title>
+
     <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
 </head>
 
@@ -11,9 +12,7 @@
 <!-- USER STATUS -->
 <div class="user-status">
     <span class="label">user:</span>
-    <span class="username logged-out">
-        unknown
-    </span>
+    <span class="username logged-out">unknown</span>
 </div>
 
 <!-- NAV -->
@@ -63,33 +62,13 @@
         </div>
 
         <div class="tab-content">
-            <div class="panel active" id="search">
-                SEARCH PANEL
-            </div>
-
-            <div class="panel" id="workspace">
-                WORKSPACE PANEL
-            </div>
-
-            <div class="panel" id="concepts">
-                CONCEPTS PANEL
-            </div>
-
-            <div class="panel" id="semantics">
-                SEMANTICS PANEL
-            </div>
-
-            <div class="panel" id="instructions">
-                INSTRUCTIONS PANEL
-            </div>
-
-            <div class="panel" id="input">
-                INPUT PANEL
-            </div>
-
-            <div class="panel" id="output">
-                OUTPUT PANEL
-            </div>
+            <div class="panel active" id="search">SEARCH PANEL</div>
+            <div class="panel" id="workspace">WORKSPACE PANEL</div>
+            <div class="panel" id="concepts">CONCEPTS PANEL</div>
+            <div class="panel" id="semantics">SEMANTICS PANEL</div>
+            <div class="panel" id="instructions">INSTRUCTIONS PANEL</div>
+            <div class="panel" id="input">INPUT PANEL</div>
+            <div class="panel" id="output">OUTPUT PANEL</div>
         </div>
 
     </div>
@@ -98,6 +77,8 @@
 
 <div id="results"></div>
 
+<!-- IMPORTANT ORDER -->
+<script src="{{ url_for('static', filename='auth.js') }}"></script>
 <script src="{{ url_for('static', filename='index.js') }}"></script>
 
 </body>

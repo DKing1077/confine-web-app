@@ -12,9 +12,7 @@
 <!-- USER STATUS -->
 <div class="user-status">
     <span class="label">user:</span>
-    <span class="username logged-out">
-        unknown
-    </span>
+    <span class="username logged-out">unknown</span>
 </div>
 
 <!-- NAV -->
@@ -31,7 +29,6 @@
 
     <form id="session_form">
 
-        <!-- INPUTS -->
         <input
             type="email"
             id="email_input"
@@ -48,7 +45,6 @@
             required
         >
 
-        <!-- MODE TOGGLES -->
         <div class="mode-toggle">
             <button type="button" class="mode-btn active" data-mode="login">
                 login
@@ -59,7 +55,6 @@
             </button>
         </div>
 
-        <!-- SUBMIT -->
         <button type="submit" class="submit-btn">
             submit
         </button>
@@ -68,6 +63,8 @@
 
 </div>
 
+<!-- IMPORTANT ORDER -->
+<script src="{{ url_for('static', filename='auth.js') }}"></script>
 <script src="{{ url_for('static', filename='session.js') }}"></script>
 
 </body>
