@@ -1,12 +1,11 @@
-from flask import render_template, Blueprint, request
-from flask import current_app, session
+from flask import render_template, Blueprint, request, current_app, session
 from app.celery.tasks import process_search_task, add_to_workflow_task
 from app.services.user import add_user, login_user
 from app import extensions
 from celery.utils.log import get_task_logger
+from models import Users
 
 logger = get_task_logger(__name__)
-
 bp = Blueprint("main", __name__)
 limiter = extensions.limiter
 
@@ -19,7 +18,7 @@ def index():
 
 # session root
 @bp.route('/session')
-def session():
+def session_pg():
     return render_template('session.html')
 
 
@@ -37,7 +36,7 @@ def search():
     job = process_search_task.delay(search_input, user_id)
     return {
         "job_id": job.id,
-        "status": "queued"
+        "status": "started"
     }
 
 
@@ -48,12 +47,17 @@ def registration():
     email = request.json["email"]
     password = request.json["password"]
 
+    # 400 bad request
     result = add_user(extensions.db_session, email, password)
+    if not result["ok"]:
+        return result, 400
     current_app.logger.info("user registered: %s - %s", email, password)
     current_app.logger.info("user id: %s", result["user_id"])
+
+    # 201 created
     return {
         "status": "registered",
-        "email": email
+        "email": result["email"]
     }, 201
 
 
@@ -64,16 +68,43 @@ def loginuser():
     email = request.json["email"]
     password = request.json["password"]
 
+    # 401 unauthorized
     result = login_user(extensions.db_session, email, password)
-    current_app.logger.info("user logged in: %s - %s", email, password)
-    current_app.logger.info("user id: %s", result["user_id"])
     if not result["ok"]:
         return result, 401
+    current_app.logger.info("user logged in: %s - %s", email, password)
+    current_app.logger.info("user id: %s", result["user_id"])
 
+    # 200 ok
     session["user_id"] = result["user_id"]
     return {
         "status": "logged_in",
-        "user_id": result["user_id"]
+        "email": result["email"]
+    }, 200
+
+
+# session status route
+@bp.route("/session-status", methods=["GET"])
+def session_status():
+    # is session useri_id set
+    user_id = session.get("user_id")
+    if not user_id:
+        return {
+            "logged_in": False
+        }, 200
+
+    # if user is in db
+    user = extensions.db_session.query(Users).filter_by(user_id=user_id).first()
+    if not user:
+        return {
+            "logged_in": False
+        }, 200
+
+    # return logged in
+    current_app.logger.info("session status: %s user_id in session/db - returned logged in", user_id)
+    return {
+        "logged_in": True,
+        "email": user.email
     }, 200
 
 
@@ -90,9 +121,6 @@ def add_workflow():
 
     job = add_to_workflow_task.delay(search_input, user_id)
     return None
-
-
-
 
 
 # Flask API	Reads from
