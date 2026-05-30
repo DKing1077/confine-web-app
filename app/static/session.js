@@ -11,19 +11,8 @@ let currentMode = "login";
 function setAuthMode(mode) {
     currentMode = mode;
 
-    if (mode === "logout") {
-        emailInput.required = false;
-        passwordInput.required = false;
-
-        emailInput.style.display = "none";
-        passwordInput.style.display = "none";
-    } else {
-        emailInput.required = true;
-        passwordInput.required = true;
-
-        emailInput.style.display = "block";
-        passwordInput.style.display = "block";
-    }
+    emailInput.required = mode !== "logout";
+    passwordInput.required = mode !== "logout";
 }
 
 /* ---------------- FORM SUBMIT ---------------- */

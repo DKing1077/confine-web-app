@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const text = await response.text();
             resultsDiv.innerHTML = text;
 
+            form.reset();
         } catch (err) {
             resultsDiv.innerHTML = `<p style="color:red;">Error: ${err}</p>`;
         }
