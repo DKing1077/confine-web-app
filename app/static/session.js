@@ -45,8 +45,7 @@ form.addEventListener('submit', async (e) => {
 
         authResults.innerHTML = text;
 
-        if (response.ok &&
-            (currentMode === "login" || currentMode === "logout")) {
+        if (response.ok) {
             await loadSessionStatus();
         }
 

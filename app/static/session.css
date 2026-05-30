@@ -66,7 +66,6 @@ body::after {
 .nav-right {
     position: absolute;
     top: 10px;
-
     display: flex;
 }
 
@@ -131,7 +130,6 @@ body::after {
 
 .session-wrapper {
     width: 320px;
-    transform: translateY(-60px);
 }
 
 /* FORM */
@@ -228,4 +226,40 @@ body::after {
     background: white;
     transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* AUTH RESULTS (BOTTOM STATUS BAR - FIXED) */
+
+#auth_results {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: auto;
+    max-width: 600px;
+
+    text-align: center;
+
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 12px;
+
+    pointer-events: none;
+
+    z-index: 9999;
+}
+
+/* message styling */
+
+#auth_results p {
+    margin: 0;
+    color: white;
+}
+
+#auth_results .success {
+    color: #22c55e;
+}
+
+#auth_results .error {
+    color: #ef4444;
 }
