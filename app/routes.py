@@ -96,21 +96,12 @@ def loginuser():
 @bp.route("/logout", methods=["POST"])
 def logout():
     email = session.get("email")
-    if not email:
-        return {
-            "route": "logout",
-            "status": "failed",
-            "email": "unknown"
-        }, 200
-
-    # clear the user_id
     session.clear()
 
-    # 200 ok
     return {
         "route": "logout",
         "status": "success",
-        "email": email
+        "email": email or "unknown"
     }, 200
 
 
