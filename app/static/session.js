@@ -1,5 +1,6 @@
 const buttons = document.querySelectorAll('.mode-btn');
 const form = document.getElementById('session_form');
+const authResults = document.getElementById('auth_results');
 
 const emailInput = document.getElementById('email_input');
 const passwordInput = document.getElementById('password_input');
@@ -40,18 +41,21 @@ form.addEventListener('submit', async (e) => {
 
         const response = await fetch(`/${currentMode}`, options);
 
-        if (!response.ok) {
-            return;
-        }
+        const text = await response.text();
 
-        if (currentMode === "login" || currentMode === "logout") {
+        authResults.innerHTML = text;
+
+        if (response.ok &&
+            (currentMode === "login" || currentMode === "logout")) {
             await loadSessionStatus();
         }
 
         form.reset();
 
-    } catch {
-        // silent fail
+    } catch (err) {
+
+        authResults.innerHTML =
+            `<p style="color:red;">Error: ${err}</p>`;
     }
 });
 
