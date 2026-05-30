@@ -50,14 +50,19 @@ def registration():
     # 400 bad request
     result = add_user(extensions.db_session, email, password)
     if not result["ok"]:
-        return result, 400
+        return {
+            "route": "register",
+            "status": "failed",
+            "email": email
+        }, 400
     current_app.logger.info("user registered: %s", email)
     current_app.logger.info("user id: %s", result["user_id"])
 
     # 201 created
     return {
-        "status": "registered",
-        "email": result["email"]
+        "route": "register",
+        "status": "success",
+        "email": email
     }, 201
 
 
@@ -71,26 +76,41 @@ def loginuser():
     # 401 unauthorized
     result = login_user(extensions.db_session, email, password)
     if not result["ok"]:
-        return result, 401
+        return {
+            "route": "login",
+            "status": "failed",
+            "email": email
+        }, 401
     current_app.logger.info("user logged in: %s", email)
     current_app.logger.info("user id: %s", result["user_id"])
 
     # 200 ok
     session["user_id"] = result["user_id"]
     return {
-        "status": "logged_in",
-        "email": result["email"]
+        "route": "login",
+        "status": "success",
+        "email": email
     }, 200
 
 
 @bp.route("/logout", methods=["POST"])
 def logout():
+    email = session.get("email")
+    if not email:
+        return {
+            "route": "logout",
+            "status": "failed",
+            "email": "unknown"
+        }, 200
+
     # clear the user_id
     session.clear()
 
     # 200 ok
     return {
-        "success": True
+        "route": "logout",
+        "status": "success",
+        "email": email
     }, 200
 
 
