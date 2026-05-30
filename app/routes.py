@@ -51,7 +51,7 @@ def registration():
     result = add_user(extensions.db_session, email, password)
     if not result["ok"]:
         return result, 400
-    current_app.logger.info("user registered: %s - %s", email, password)
+    current_app.logger.info("user registered: %s", email)
     current_app.logger.info("user id: %s", result["user_id"])
 
     # 201 created
@@ -72,7 +72,7 @@ def loginuser():
     result = login_user(extensions.db_session, email, password)
     if not result["ok"]:
         return result, 401
-    current_app.logger.info("user logged in: %s - %s", email, password)
+    current_app.logger.info("user logged in: %s", email)
     current_app.logger.info("user id: %s", result["user_id"])
 
     # 200 ok
