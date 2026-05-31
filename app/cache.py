@@ -50,6 +50,7 @@ def search_cache_delete(key):
 # workflow cache key, get, set, delete
 def workflow_cache_key(user_id, workflow_id):
     key = f"workflow:{user_id}:{workflow_id}"
+    return key
 
 
 def workflow_cache_get(key):

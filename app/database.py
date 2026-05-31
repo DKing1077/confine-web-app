@@ -74,6 +74,8 @@ def save_db(config):
         '--column-inserts',
         '-U', str(config.DB_USER),
         '-d', str(config.DB_NAME),
+        '-h', str(config.DB_HOST),
+        '-p', str(config.DB_PORT),
         '-f', 'data/database.data'
     ]
     os.environ['PGPASSWORD'] = str(config.DB_PASS)

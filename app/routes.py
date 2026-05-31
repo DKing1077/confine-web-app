@@ -27,7 +27,11 @@ def session_pg():
 @limiter.limit("10/minute")
 def search():
     if "user_id" not in session:
-        return {"error": "unauthorized"}, 401
+        return {
+        "route": "search",
+        "status": "failed",
+        "reason": "user login required"
+    }, 401
     user_id = session["user_id"]
 
     search_input = request.args.get("search_input")
@@ -35,9 +39,10 @@ def search():
 
     job = process_search_task.delay(search_input, user_id)
     return {
-        "job_id": job.id,
-        "status": "started"
-    }
+        "route": "search",
+        "status": "success",
+        "job_id": job.id
+    }, 200
 
 
 # register route
@@ -93,11 +98,11 @@ def loginuser():
     }, 200
 
 
+# logout route
 @bp.route("/logout", methods=["POST"])
 def logout():
     email = session.get("email")
     session.clear()
-
     return {
         "route": "logout",
         "status": "success",
@@ -123,7 +128,7 @@ def session_status():
         }, 200
 
     # return logged in, 200 ok
-    current_app.logger.info("session status: %s user_id in session/db - returned logged in", user_id)
+    current_app.logger.info("session status: %s logged in", user_id)
     return {
         "logged_in": True,
         "email": user.email
@@ -135,14 +140,20 @@ def session_status():
 @limiter.limit("30/minute")
 def add_workflow():
     if "user_id" not in session:
-        return {"error": "unauthorized"}, 401
-    user_id = session["user_id"]
+        return {
+        "route": "workflow add",
+        "status": "failed"
+    }, 401
 
+    user_id = session["user_id"]
     search_input = request.args.get("search_input")
     current_app.logger.info("request to add to workflow: %s", search_input)
 
     job = add_to_workflow_task.delay(search_input, user_id)
-    return None
+    return {
+        "route": "workflow add",
+        "status": "success"
+    }, 200
 
 
 # Flask API	Reads from
