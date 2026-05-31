@@ -3,10 +3,11 @@ from sqlalchemy.orm import scoped_session, sessionmaker
 from celery import Celery
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
+import os
 
 limiter = Limiter(
     key_func=get_remote_address,
-    storage_uri="redis://localhost:6379/1"
+    storage_uri=os.getenv("REDIS_URL", "redis://localhost:6379/1")
 )
 
 engine = None
@@ -33,8 +34,8 @@ def init_db(config):
 
 def init_celery(app):
     celery.conf.update(
-        broker_url=app.config["CELERY_BROKER_URL"],
-        result_backend=app.config["CELERY_RESULT_BACKEND"],
+        broker_url=os.getenv("CELERY_BROKER_URL", "redis://localhost:6379/0"),
+        result_backend=os.getenv("CELERY_RESULT_BACKEND", "redis://localhost:6379/0"),
         task_track_started=True,
         task_serializer="json",
         result_serializer="json",
@@ -50,7 +51,3 @@ def init_celery(app):
             with app.app_context():
                 return self.run(*args, **kwargs)
     celery.Task = ContextTask
-
-
-
-

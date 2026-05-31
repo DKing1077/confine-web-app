@@ -19,3 +19,11 @@ curl -c cookies.txt -X POST http://127.0.0.1:5000/login \
     "password": "123456"
   }'
 curl -b cookies.txt "http://127.0.0.1:5000/search?search_input=drakegodsplan"
+
+docker compose up --build -d
+
+# fresh docker build
+docker-compose down -v
+docker builder prune -a
+docker-compose build --no-cache
+docker-compose up

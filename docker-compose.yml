@@ -1,0 +1,69 @@
+services:
+  redis:
+    image: redis:7
+    expose:
+      - "6379"
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:15
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=test_db
+    expose:
+      - "5432"
+    restart: unless-stopped
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  web:
+    build: .
+    command: python run.py
+    ports:
+      - "5001:5000"
+    environment:
+      - PYTHONUNBUFFERED=1
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=test_db
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_NAME=test_db
+      - DB_USER=test_user
+      - DB_PASS=test_pass
+      - REDIS_URL=redis://redis:6379/0
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+    depends_on:
+      - redis
+      - postgres
+    restart: unless-stopped
+
+  celery:
+    build: .
+    command: python -m celery -A app.extensions:celery worker -l info
+    environment:
+      - PYTHONUNBUFFERED=1
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=test_db
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_NAME=test_db
+      - DB_USER=test_user
+      - DB_PASS=test_pass
+      - REDIS_URL=redis://redis:6379/0
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+    depends_on:
+      - redis
+      - postgres
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
