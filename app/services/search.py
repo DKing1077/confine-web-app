@@ -1,5 +1,5 @@
 from sqlalchemy import select
-from app.models import Artists, Albums, Tracks, Features
+from app.models import Artists, Albums, Tracks, Features, SearchResults
 from app.services.musixmatch import MusixMatch
 from flask import current_app
 from celery.utils.log import get_task_logger
@@ -231,12 +231,14 @@ def normalize(name: str) -> str:
 
 
 def add_search_result(db_session, user_id, search_text, search_result):
-    search_result = search_result(
+    search_record = SearchResults(
         user_id=user_id,
         search_text=search_text,
         search_result=search_result
     )
-    db_session.add(search_result)
+    db_session.add(search_record)
     db_session.flush()
+
+    
 
 

@@ -3,4 +3,5 @@ from app.celery import signals
 from app import create_app
 from config import Test
 
-create_app(Test)
+# Create and initialize the app with Celery
+app = create_app(Test)

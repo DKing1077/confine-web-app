@@ -8,9 +8,9 @@ services:
   postgres:
     image: postgres:15
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=test_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: test_db
     expose:
       - "5432"
     restart: unless-stopped
@@ -23,47 +23,65 @@ services:
     ports:
       - "5001:5000"
     environment:
-      - PYTHONUNBUFFERED=1
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=test_db
-      - POSTGRES_HOST=postgres
-      - POSTGRES_PORT=5432
-      - DB_HOST=postgres
-      - DB_PORT=5432
-      - DB_NAME=test_db
-      - DB_USER=test_user
-      - DB_PASS=test_pass
-      - REDIS_URL=redis://redis:6379/0
-      - CELERY_BROKER_URL=redis://redis:6379/0
-      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+      PYTHONUNBUFFERED: "1"
+
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: test_db
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: "5432"
+
+      DB_HOST: postgres
+      DB_PORT: "5432"
+      DB_NAME: test_db
+      DB_USER: test_user
+      DB_PASS: test_pass
+
+      REDIS_URL: redis://redis:6379/0
+      CELERY_BROKER_URL: redis://redis:6379/0
+      CELERY_RESULT_BACKEND: redis://redis:6379/0
+
+      MUSIXMATCH_APIKEY: 'a94199af41b2cbfb54d3516a97658701'
+      OPENROUTER_APIKEY: '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'
+      OPENROUTER_MODEL: 'deepseek/deepseek-chat'
     depends_on:
       - redis
       - postgres
     restart: unless-stopped
+    volumes:
+      - .:/app
 
   celery:
     build: .
-    command: python -m celery -A app.extensions:celery worker -l info
+    command: celery -A app.celery.worker:celery worker -l info
     environment:
-      - PYTHONUNBUFFERED=1
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=test_db
-      - POSTGRES_HOST=postgres
-      - POSTGRES_PORT=5432
-      - DB_HOST=postgres
-      - DB_PORT=5432
-      - DB_NAME=test_db
-      - DB_USER=test_user
-      - DB_PASS=test_pass
-      - REDIS_URL=redis://redis:6379/0
-      - CELERY_BROKER_URL=redis://redis:6379/0
-      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+      PYTHONUNBUFFERED: "1"
+
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: test_db
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: "5432"
+
+      DB_HOST: postgres
+      DB_PORT: "5432"
+      DB_NAME: test_db
+      DB_USER: test_user
+      DB_PASS: test_pass
+
+      REDIS_URL: redis://redis:6379/0
+      CELERY_BROKER_URL: redis://redis:6379/0
+      CELERY_RESULT_BACKEND: redis://redis:6379/0
+
+      MUSIXMATCH_APIKEY: 'a94199af41b2cbfb54d3516a97658701'
+      OPENROUTER_APIKEY: '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'
+      OPENROUTER_MODEL: 'deepseek/deepseek-chat'
     depends_on:
       - redis
       - postgres
     restart: unless-stopped
+    volumes:
+      - .:/app
 
 volumes:
   postgres_data:
