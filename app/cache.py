@@ -9,14 +9,14 @@ from app.services.search import normalize
 # make key -> check get cache - > miss set cache or api return
 
 redis_search_cache = redis.Redis(
-    host="localhost",
+    host="redis",
     port=6379,
     db=2,
     decode_responses=True
 )
 
 redis_workflow_cache = redis.Redis(
-    host="localhost",
+    host="redis",
     port=6379,
     db=3,
     decode_responses=True

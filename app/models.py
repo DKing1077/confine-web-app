@@ -1,8 +1,9 @@
-from sqlalchemy import Integer, String, ForeignKey, Text, UniqueConstraint
-from sqlalchemy.orm import Mapped, mapped_column, relationship, registry
+from sqlalchemy import Integer, String, ForeignKey, Text, JSON
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.ext.declarative import declarative_base
 from datetime import datetime
 from sqlalchemy import DateTime, func
+
 
 Base = declarative_base()
 
@@ -93,7 +94,7 @@ class SearchResults(Base):
 
     # content
     search_text: Mapped[str] = mapped_column(Text, nullable=False)
-    search_result: Mapped[str] = mapped_column(Text, nullable=False)
+    search_result: Mapped[list] = mapped_column(JSON, nullable=False)
 
     # # artist* -> not implemented
     # # track* -> not implemented

@@ -22,8 +22,31 @@ curl -b cookies.txt "http://127.0.0.1:5000/search?search_input=drakegodsplan"
 
 docker compose up --build -d
 
-# fresh docker build
-docker-compose down -v
+# fresh docker build, deletes all images and containers, clears cache, and rebuilds everything from scratch
 docker builder prune -a
+docker-compose down -v
 docker-compose build --no-cache
 docker-compose up
+
+# quick restart, down -> remove containers, up -> start the services in docker-compose file
+docker-compose down
+docker-compose up
+
+# resets postgres database
+docker-compose down -v
+docker-compose up
+
+# running containers
+docker compose ps
+
+# access postgres in docker container
+docker-compose exec postgres psql -U postgres -d test_db
+
+# tables
+\dt
+
+# select records
+SELECT * FROM users;
+
+# quit
+\q

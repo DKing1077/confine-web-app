@@ -9,6 +9,7 @@ from flask import current_app
 from celery.utils.log import get_task_logger
 from app.cache import redis_workflow_cache
 import uuid
+import json
 
 
 logger = get_task_logger(__name__)
@@ -28,14 +29,19 @@ def process_search_task(search_input, user_id):
         # search cache
         cached_data, cache_key = search_cache(artist_input, track_input)
         if cached_data:
+            logger.info(
+                "Cache hit",
+                extra={
+                    "cached_data_type": type(cached_data).__name__,
+                    "cached_data": json.dumps(cached_data, default=str, indent=2),
+                    "cache_key": cache_key,
+                }
+            )
             add_search_result(extensions.db_session, user_id, search_text, cached_data)
             return cached_data
 
         # search pipeline
         search_result = search_pipeline(extensions.db_session, user_id, artist_input, track_input, search_text, cache_key)
-
-        logger.info("cached data: %s", cached_data)
-        logger.info("search result: %s", search_result)
 
         extensions.db_session.commit()
         return search_result
@@ -87,6 +93,13 @@ def search_cache(artist_input, track_input):
 
 def search_pipeline(db_session, user_id, artist_input, track_input, search_text, cache_key):
     search_result = process_search(db_session, artist_input, track_input)
+    logger.info(
+        "Search result",
+        extra={
+            "search_result_type": type(search_result).__name__,
+            "search_result_data": json.dumps(search_result, default=str, indent=2),
+        }
+    )
     add_search_result(db_session, user_id, search_text, search_result)
 
     search_cache_set(cache_key, search_result)
