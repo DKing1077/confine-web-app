@@ -50,3 +50,9 @@ SELECT * FROM users;
 
 # quit
 \q
+
+# alembic generate migration
+alembic revision --autogenerate -m "change description"
+
+# alembic apply migration
+alembic upgrade head
