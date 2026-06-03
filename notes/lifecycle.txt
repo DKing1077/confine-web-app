@@ -1,0 +1,78 @@
+User
+ ↓
+Types search term into HTML input
+ ↓
+Clicks Search Button
+ ↓
+DOM click event fires
+ ↓
+JavaScript reads input value from DOM
+ ↓
+JavaScript sends fetch() POST request to /search
+ ↓
+Flask Route (/search)
+ ↓
+Marshmallow validates request JSON
+ ↓
+Celery task created
+ ↓
+Task ID returned to browser
+ ↓
+JavaScript starts polling /status/<task_id>
+
+────────────────────────────────────
+
+Celery Worker receives task
+ ↓
+Generate cache key from search term
+ ↓
+Redis cache lookup
+ ↓
+Cache Hit?
+ ├─ Yes
+ │    ↓
+ │    Return cached result
+ │
+ └─ No
+      ↓
+      PostgreSQL lookup
+      ↓
+      Result exists in database?
+      ├─ Yes
+      │    ↓
+      │    Store result in Redis cache
+      │    ↓
+      │    Return result
+      │
+      └─ No
+           ↓
+           Call external API(s)
+           ↓
+           Process/format response
+           ↓
+           Store result in PostgreSQL
+           ↓
+           Store result in Redis cache
+           ↓
+           Return result
+
+────────────────────────────────────
+
+Celery task completes
+ ↓
+Result stored by Celery
+ ↓
+Browser polls /status/<task_id>
+ ↓
+Flask retrieves task state/result
+ ↓
+JSON response returned
+ ↓
+JavaScript receives result
+ ↓
+DOM updated dynamically
+ ↓
+Search results rendered on page
+ ↓
+User sees results
+

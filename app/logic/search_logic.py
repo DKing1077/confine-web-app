@@ -5,34 +5,6 @@ from db.search_db import *
 import json
 
 
-def process_search(db_session, artist_input, track_input):
-
-    # db lookup
-    db_classes, api_flag = db_lookup(db_session, artist_input, track_input)
-    if api_flag:
-
-        # api call
-        api_client = MusixMatch(api_key=current_app.loggerconfig["MUSIXMATCH_APIKEY"])
-        classes = api_client.track_search(artist=artist_input, track=track_input)
-
-        # parse classes
-        classes_parsed = parse_classes(classes)
-
-        # get correct track
-        if artist_input and track_input:
-            classes_parsed = verify_track(classes_parsed, artist_input, track_input)
-
-        # db insert
-        db_insert(db_session, classes_parsed)
-        api_classes = serialize_tracks(classes_parsed, 'api')
-
-        current_app.logger_message(api_classes, True, artist_input, track_input)
-        return api_classes
-
-    current_app.logger_message(db_classes, False, artist_input, track_input)
-    return db_classes
-
-
 def search_pipeline(db_session, user_id, artist_input, track_input, search_text, cache_key):
     search_result = process_search(db_session, artist_input, track_input)
     current_app.logger.info(
@@ -41,10 +13,30 @@ def search_pipeline(db_session, user_id, artist_input, track_input, search_text,
         json.dumps(search_result, default=str)
     )
     add_search_result(db_session, user_id, search_text, search_result)
-
     search_cache_set(cache_key, search_result)
+
     current_app.logger.info("cache set for key: %s", cache_key)
     return search_result
+
+
+def process_search(db_session, artist_input, track_input):
+    db_classes, api_flag = db_lookup(db_session, artist_input, track_input)
+    if api_flag:
+        api_client = MusixMatch(api_key=current_app["MUSIXMATCH_APIKEY"])
+        classes = api_client.track_search(artist=artist_input, track=track_input)
+
+        classes_parsed = parse_classes(classes)
+        if artist_input and track_input:
+            classes_parsed = verify_track(classes_parsed, artist_input, track_input)
+
+        db_insert(db_session, classes_parsed)
+        api_classes = serialize_tracks(classes_parsed, 'api')
+
+        logger_message(api_classes, True, artist_input, track_input)
+        return api_classes
+
+    logger_message(db_classes, False, artist_input, track_input)
+    return db_classes
 
 
 def search_cache(artist_input, track_input):
