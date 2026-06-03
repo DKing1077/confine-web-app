@@ -1,11 +1,10 @@
 from flask import render_template, Blueprint, request, current_app, session
-from app.celery.tasks import process_search_task, add_to_workflow_task
-from app.services.user import add_user, login_user
+from app.celery.tasks import process_search_task, parse_search_task, add_to_workflow_task
+from app.db.user import add_user, login_user
 from app.models import Users
 from app import extensions
-from celery.utils.log import get_task_logger
+from celery import chain
 
-logger = get_task_logger(__name__)
 bp = Blueprint("main", __name__)
 limiter = extensions.limiter
 
@@ -37,7 +36,12 @@ def search():
     search_input = request.args.get("search_input")
     current_app.logger.info("search input: %s", search_input)
 
-    job = process_search_task.delay(search_input, user_id)
+    # Chain: parse first, then search
+    job = chain(
+        parse_search_task.s(search_input),
+        process_search_task.s(user_id)
+    ).apply_async()
+
     return {
         "route": "search",
         "status": "success",
