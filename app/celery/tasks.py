@@ -1,7 +1,7 @@
 from app.extensions import celery
 from app import extensions
 from app.services.openrouter import AIService
-from db.search import add_search_result
+from db.search_db import add_search_result
 from flask import current_app
 from app.logic import search_pipeline, search_cache, get_workflow
 

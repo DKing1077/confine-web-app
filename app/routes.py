@@ -1,12 +1,19 @@
-from flask import render_template, Blueprint, request, current_app, session
+from flask import render_template, Blueprint, request, current_app, session, jsonify
 from app.celery.tasks import process_search_task, parse_search_task, add_to_workflow_task
 from app.db.user import add_user, login_user
 from app.models import Users
 from app import extensions
+from app.schemas import RegisterSchema, LoginSchema, SearchSchema
+from marshmallow import ValidationError
 from celery import chain
+
 
 bp = Blueprint("main", __name__)
 limiter = extensions.limiter
+
+register_schema = RegisterSchema()
+login_schema = LoginSchema()
+search_schema = SearchSchema()
 
 
 # index root
@@ -25,6 +32,11 @@ def session_pg():
 @bp.route("/search")
 @limiter.limit("10/minute")
 def search():
+    try:
+        data = search_schema.load(request.get_json())
+    except ValidationError as err:
+        return {"errors": err.messages}, 400
+
     if "user_id" not in session:
         return {
         "route": "search",
@@ -53,6 +65,11 @@ def search():
 @limiter.limit("3/minute")
 @bp.route("/register", methods=["POST"])
 def registration():
+    try:
+        data = register_schema.load(request.get_json())
+    except ValidationError as err:
+        return {"errors": err.messages}, 400
+
     email = request.json["email"]
     password = request.json["password"]
 
@@ -79,6 +96,11 @@ def registration():
 @limiter.limit("5/minute")
 @bp.route("/login", methods=["POST"])
 def loginuser():
+    try:
+        data = login_schema.load(request.get_json())
+    except ValidationError as err:
+        return {"errors": err.messages}, 400
+
     email = request.json["email"]
     password = request.json["password"]
 
