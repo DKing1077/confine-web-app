@@ -7,7 +7,6 @@ from app.schemas import RegisterSchema, LoginSchema, SearchSchema
 from marshmallow import ValidationError
 from celery import chain
 
-
 bp = Blueprint("main", __name__)
 limiter = extensions.limiter
 
@@ -32,6 +31,7 @@ def session_pg():
 @bp.route("/search")
 @limiter.limit("10/minute")
 def search():
+    # validate
     try:
         data = search_schema.load(request.get_json())
     except ValidationError as err:
@@ -45,10 +45,10 @@ def search():
     }, 401
     user_id = session["user_id"]
 
-    search_input = request.args.get("search_input")
+    search_input = data["search_input"]
     current_app.logger.info("search input: %s", search_input)
 
-    # Chain: parse first, then search
+    # async tasks
     job = chain(
         parse_search_task.s(search_input),
         process_search_task.s(user_id)
@@ -65,13 +65,13 @@ def search():
 @limiter.limit("3/minute")
 @bp.route("/register", methods=["POST"])
 def registration():
+    # validate
     try:
         data = register_schema.load(request.get_json())
     except ValidationError as err:
         return {"errors": err.messages}, 400
-
-    email = request.json["email"]
-    password = request.json["password"]
+    email = data["email"]
+    password = data["password"]
 
     # 400 bad request
     result = add_user(extensions.db_session, email, password)
@@ -96,13 +96,13 @@ def registration():
 @limiter.limit("5/minute")
 @bp.route("/login", methods=["POST"])
 def loginuser():
+    # validate
     try:
         data = login_schema.load(request.get_json())
     except ValidationError as err:
         return {"errors": err.messages}, 400
-
-    email = request.json["email"]
-    password = request.json["password"]
+    email = data["email"]
+    password = data["password"]
 
     # 401 unauthorized
     result = login_user(extensions.db_session, email, password)

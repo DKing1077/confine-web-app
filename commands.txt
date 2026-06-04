@@ -56,3 +56,10 @@ alembic revision --autogenerate -m "change description"
 
 # alembic apply migration
 alembic upgrade head
+
+# albemic generate migration in docker container
+docker compose exec web alembic revision --autogenerate -m "message"
+
+# to run the migration
+docker compose exec web alembic upgrade head
+

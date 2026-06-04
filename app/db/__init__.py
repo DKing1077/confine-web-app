@@ -1,1 +1,1 @@
-from .search_db import normalize
+from .search_db import *

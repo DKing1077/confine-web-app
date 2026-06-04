@@ -1,7 +1,6 @@
 from app.extensions import celery
 from app import extensions
 from app.services.openrouter import AIService
-from db.search_db import add_search_result
 from flask import current_app
 from app.logic import search_pipeline, search_cache, get_workflow
 
@@ -36,9 +35,8 @@ def parse_search_task(search_input):
 def process_search_task(artist_input, track_input, search_text, user_id):
     try:
         # search cache
-        cached_data, cache_key = search_cache(artist_input, track_input)
+        cached_data, cache_key = search_cache(extensions.db_session, user_id, artist_input, track_input, search_text)
         if cached_data:
-            add_search_result(extensions.db_session, user_id, search_text, cached_data)
             return cached_data
 
         # search pipeline
