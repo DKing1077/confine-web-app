@@ -63,3 +63,4 @@ docker compose exec web alembic revision --autogenerate -m "message"
 # to run the migration
 docker compose exec web alembic upgrade head
 
+# ENSURE the varibles in .env, docker yaml, and env.py match up correctly with .env being your the file you comment to change.

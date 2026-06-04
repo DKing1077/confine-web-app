@@ -6,6 +6,7 @@ from app import extensions
 from app.schemas import RegisterSchema, LoginSchema, SearchSchema
 from marshmallow import ValidationError
 from celery import chain
+from flask_jwt_extended import create_access_token, create_refresh_token, jwt_required, get_jwt_identity
 
 bp = Blueprint("main", __name__)
 limiter = extensions.limiter
@@ -116,49 +117,65 @@ def loginuser():
     current_app.logger.info("user id: %s", result["user_id"])
 
     # 200 ok
-    session["user_id"] = result["user_id"]
+    user_id = result["user_id"]
+    access_token = create_access_token(identity=user_id)
+    refresh_token = create_refresh_token(identity=user_id)
     return {
         "route": "login",
         "status": "success",
-        "email": email
+        "email": email,
+        "access_token": access_token,
+        "refresh_token": refresh_token
     }, 200
 
 
-# logout route
+# logout route TODO update JS frontend
 @bp.route("/logout", methods=["POST"])
+@jwt_required()
 def logout():
-    email = session.get("email")
-    session.clear()
+    user_id = get_jwt_identity()
     return {
         "route": "logout",
         "status": "success",
-        "email": email or "unknown"
+        "user_id": user_id,
+        "message": "client should delete tokens"
     }, 200
 
 
 # session status route
 @bp.route("/session-status", methods=["GET"])
+@jwt_required()
 def session_status():
-    # is user_id set in session
-    user_id = session.get("user_id")
-    if not user_id:
-        return {
-            "logged_in": False
-        }, 200
+    user_id = get_jwt_identity()
 
-    # if user is in db
+    # user exist in db, 200 ok
     user = extensions.db_session.query(Users).filter_by(user_id=user_id).first()
     if not user:
         return {
             "logged_in": False
         }, 200
+    current_app.logger.info("jwt status: %s logged in", user_id)
 
-    # return logged in, 200 ok
-    current_app.logger.info("session status: %s logged in", user_id)
+    # js update
     return {
         "logged_in": True,
         "email": user.email
     }, 200
+
+
+# token refresh
+@bp.route("/refresh", methods=["POST"])
+@jwt_required(refresh=True)
+def refresh():
+    user_id = get_jwt_identity()
+    new_access_token = create_access_token(identity=user_id)
+
+    return {
+        "access_token": new_access_token
+    }, 200
+
+
+########################## WORKFLOW AND EXTRAS ##########################
 
 
 # workflow add route

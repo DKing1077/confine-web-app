@@ -29,14 +29,14 @@ target_metadata = Base.metadata
 # BUILD DATABASE URL FROM .env
 # ----------------------------
 POSTGRES_USER = os.getenv("POSTGRES_USER")
-POSTGRES_PASS = os.getenv("POSTGRES_PASS")
+POSTGRES_PASSWORD = os.getenv("POSTGRES_PASSWORD")
 POSTGRES_HOST = os.getenv("POSTGRES_HOST", "localhost")
 POSTGRES_PORT = os.getenv("POSTGRES_PORT", "5432")
 POSTGRES_DB = os.getenv("POSTGRES_DB")
 
 DATABASE_URL = (
     f"postgresql://{POSTGRES_USER}:"
-    f"{POSTGRES_PASS}@"
+    f"{POSTGRES_PASSWORD}@"
     f"{POSTGRES_HOST}:"
     f"{POSTGRES_PORT}/"
     f"{POSTGRES_DB}"

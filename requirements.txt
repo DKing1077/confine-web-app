@@ -12,3 +12,6 @@ celery
 psycopg2-binary
 marshmallow
 alembic
+dotenv
+
+flask-jwt-extended

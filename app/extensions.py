@@ -3,6 +3,7 @@ from sqlalchemy.orm import scoped_session, sessionmaker
 from celery import Celery
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
+from flask_jwt_extended import JWTManager
 import os
 
 limiter = Limiter(
@@ -12,7 +13,9 @@ limiter = Limiter(
 
 engine = None
 db_session = None
+
 celery = Celery(__name__)
+jwt = JWTManager()
 
 
 def init_db(config):
