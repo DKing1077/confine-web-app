@@ -1,10 +1,7 @@
 from flask import Flask
-from app import routes
 from .database import db_create, create_tables
 from .routes import bp as main_bp
 from . import extensions
-from app.extensions import celery
-from app.extensions import limiter
 
 
 def create_app(config=None):
@@ -41,7 +38,10 @@ def create_app(config=None):
     extensions.init_celery(app)
 
     # init rate limiting
-    limiter.init_app(app)
+    extensions.limiter.init_app(app)
+
+    # init jwt
+    extensions.jwt.init_app(app)
 
     # remove session after request
     @app.teardown_appcontext

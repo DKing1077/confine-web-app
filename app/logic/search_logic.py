@@ -19,7 +19,6 @@ def search_cache(db_session, user_id, artist_input, track_input, search_text):
             type(cached_data).__name__,
             json.dumps(cached_data, default=str, indent=2)
         )
-
         add_search_result(db_session, user_id, search_text, cached_data)
         logger_message(cached_data, 'search cache', artist_input, track_input)
         return cached_data, None
@@ -38,7 +37,6 @@ def search_pipeline(db_session, user_id, artist_input, track_input, search_text,
         type(search_result).__name__,
         json.dumps(search_result, default=str)
     )
-
     add_search_result(db_session, user_id, search_text, search_result)
     current_app.logger.info("cache set for key: %s", cache_key)
     return search_result
