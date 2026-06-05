@@ -14,3 +14,4 @@ marshmallow
 alembic
 dotenv
 flask-jwt-extended
+flask-cors

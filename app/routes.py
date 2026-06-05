@@ -10,6 +10,7 @@ from flask_jwt_extended import create_access_token, create_refresh_token, jwt_re
 
 bp = Blueprint("main", __name__)
 limiter = extensions.limiter
+jwt = extensions.jwt
 
 register_schema = RegisterSchema()
 login_schema = LoginSchema()
@@ -113,8 +114,8 @@ def loginuser():
 
     # 200 ok
     user_id = result["user_id"]
-    access_token = create_access_token(identity=user_id)
-    refresh_token = create_refresh_token(identity=user_id)
+    access_token = create_access_token(identity=str(user_id))
+    refresh_token = create_refresh_token(identity=str(user_id))
     return {
         "route": "login",
         "status": "success",
@@ -140,7 +141,9 @@ def logout():
 @bp.route("/session-status", methods=["GET"])
 @jwt_required()
 def session_status():
-    user_id = get_jwt_identity()
+    # validate
+    identity_string = get_jwt_identity()
+    user_id = int(identity_string)
 
     # user exist in db, 200 ok
     user = extensions.db_session.query(Users).filter_by(user_id=user_id).first()
