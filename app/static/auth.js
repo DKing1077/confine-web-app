@@ -1,7 +1,14 @@
 async function loadSessionStatus() {
+    const token = localStorage.getItem("access_token");
+
+    const headers = {};
+    if (token) {
+        headers["Authorization"] = `Bearer ${token}`;
+    }
 
     const response = await fetch("/session-status", {
-        credentials: "include"
+        credentials: "include",
+        headers
     });
 
     const data = await response.json();
@@ -20,5 +27,12 @@ async function loadSessionStatus() {
     }
 }
 
-loadSessionStatus();
+/* ---------------- GLOBAL EXPORT ---------------- */
+window.loadSessionStatus = loadSessionStatus;
 
+/* ---------------- INITIAL CALL (WAIT FOR DOM) ---------------- */
+if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", loadSessionStatus);
+} else {
+    loadSessionStatus();
+}
