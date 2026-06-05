@@ -1,0 +1,125 @@
+JWT AUTH + SESSION FRONTEND INTEGRATION (CONCISE FIX GUIDE)
+============================================================
+
+GOAL:
+Switch fully from Flask sessions → JWT-based authentication using Authorization headers.
+
+------------------------------------------------------------
+BACKEND (FLASK) CHANGES
+------------------------------------------------------------
+
+1. JWT CONFIG (required)
+------------------------------------------------------------
+JWT_TOKEN_LOCATION = ["headers"]
+JWT_HEADER_NAME = "Authorization"
+JWT_HEADER_TYPE = "Bearer"
+JWT_SECRET_KEY = os.getenv("JWT_SECRET_KEY")
+
+IMPORTANT:
+- JWT_TOKEN_LOCATION MUST be a list, not a string
+- Ensure JWTManager(app) is initialized once
+
+------------------------------------------------------------
+2. LOGIN ROUTE
+------------------------------------------------------------
+- Authenticate user
+- Return JWT tokens (frontend stores them)
+
+return {
+    "access_token": create_access_token(identity=user_id),
+    "refresh_token": create_refresh_token(identity=user_id),
+    "route": "login",
+    "status": "success"
+}
+
+------------------------------------------------------------
+3. PROTECTED ROUTES
+------------------------------------------------------------
+Replace session checks:
+
+OLD:
+if "user_id" not in session:
+
+NEW:
+@jwt_required()
+user_id = get_jwt_identity()
+
+------------------------------------------------------------
+4. SESSION STATUS ROUTE
+------------------------------------------------------------
+@jwt_required()
+def session_status():
+    user_id = get_jwt_identity()
+    return {
+        "logged_in": True,
+        "email": user.email
+    }
+
+------------------------------------------------------------
+FRONTEND (session.js)
+------------------------------------------------------------
+
+1. LOGIN FLOW
+------------------------------------------------------------
+Store tokens:
+
+localStorage.setItem("access_token", data.access_token);
+localStorage.setItem("refresh_token", data.refresh_token);
+
+------------------------------------------------------------
+2. LOGOUT FLOW
+------------------------------------------------------------
+Remove tokens locally:
+
+localStorage.removeItem("access_token");
+localStorage.removeItem("refresh_token");
+
+------------------------------------------------------------
+3. AUTHENTICATED REQUESTS
+------------------------------------------------------------
+Always attach JWT:
+
+headers: {
+    "Authorization": `Bearer ${localStorage.getItem("access_token")}`
+}
+
+------------------------------------------------------------
+4. SESSION STATUS CHECK
+------------------------------------------------------------
+const token = localStorage.getItem("access_token");
+
+fetch("/session-status", {
+    headers: {
+        "Authorization": `Bearer ${token}`
+    }
+});
+
+------------------------------------------------------------
+5. UI STATE RULES
+------------------------------------------------------------
+- token missing → user = "unknown"
+- 200 response → show email (logged in)
+- 401/422 → treat as logged out
+
+------------------------------------------------------------
+CRITICAL RULES
+------------------------------------------------------------
+- DO NOT mix Flask session with JWT auth
+- DO NOT use session["user_id"] anywhere in protected routes
+- ALL protected endpoints must use @jwt_required()
+- Frontend is responsible for storing and sending tokens
+
+------------------------------------------------------------
+KNOWN PAST BUG (IMPORTANT)
+------------------------------------------------------------
+If JWT_TOKEN_LOCATION is not ["headers"], you will get:
+- 422 UNPROCESSABLE ENTITY on /session-status
+- even if token exists and is valid
+
+------------------------------------------------------------
+RESULTING FLOW
+------------------------------------------------------------
+Login → receive JWT → store in localStorage
+Every request → send Authorization header
+Backend → validates JWT only
+Session-status → returns user info

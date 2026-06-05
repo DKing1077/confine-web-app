@@ -29,8 +29,9 @@ def session_pg():
 
 
 # search route
-@bp.route("/search")
+@bp.route("/search", methods=["POST"])
 @limiter.limit("10/minute")
+@jwt_required()
 def search():
     # validate
     try:
@@ -38,14 +39,7 @@ def search():
     except ValidationError as err:
         return {"errors": err.messages}, 400
 
-    if "user_id" not in session:
-        return {
-        "route": "search",
-        "status": "failed",
-        "reason": "user login required"
-    }, 401
-    user_id = session["user_id"]
-
+    user_id = get_jwt_identity()
     search_input = data["search_input"]
     current_app.logger.info("search input: %s", search_input)
 
@@ -55,6 +49,7 @@ def search():
         process_search_task.s(user_id)
     ).apply_async()
 
+    # 200 ok
     return {
         "route": "search",
         "status": "success",
@@ -137,8 +132,7 @@ def logout():
     return {
         "route": "logout",
         "status": "success",
-        "user_id": user_id,
-        "message": "client should delete tokens"
+        "user_id": user_id
     }, 200
 
 
@@ -169,7 +163,6 @@ def session_status():
 def refresh():
     user_id = get_jwt_identity()
     new_access_token = create_access_token(identity=user_id)
-
     return {
         "access_token": new_access_token
     }, 200
