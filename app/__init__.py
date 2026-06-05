@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_cors import CORS
 from .database import db_create, create_tables
 from .routes import bp as main_bp
 from . import extensions
@@ -41,7 +42,12 @@ def create_app(config=None):
     extensions.limiter.init_app(app)
 
     # init jwt
-    extensions.jwt.init_app(app)
+    extensions.init_jwt(app)
+
+    # allow browser headers across ports!
+    CORS(app, resources={r"/*": {"origins": "*"}},
+         allow_headers=["Content-Type", "Authorization"],
+         methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"])
 
     # remove session after request
     @app.teardown_appcontext

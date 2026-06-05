@@ -62,17 +62,17 @@ form.addEventListener('submit', async (e) => {
             if (currentMode === "login") {
                 localStorage.setItem("access_token", data.access_token);
                 localStorage.setItem("refresh_token", data.refresh_token);
+                await window.loadSessionStatus(data.access_token);
             }
 
             if (currentMode === "logout") {
                 localStorage.removeItem("access_token");
                 localStorage.removeItem("refresh_token");
+                await window.loadSessionStatus(null);
             }
 
             authResults.innerHTML =
                 `<span class="success">${data.route} | ${data.status}</span>`;
-
-            await window.loadSessionStatus();
 
         } else {
             authResults.innerHTML =
