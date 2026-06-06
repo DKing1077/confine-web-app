@@ -1,6 +1,6 @@
 import json
 import redis
-from app.db import normalize
+from app.search import normalize
 
 # DB 0 → default (Celery broker/backend)
 # DB 1 → rate limiting

@@ -1,7 +1,7 @@
 from app.cache import search_cache_set, search_cache_get, search_cache_key
 from app.services import MusixMatch
+from app.search.db import *
 from flask import current_app
-from app.db import *
 import json
 
 
