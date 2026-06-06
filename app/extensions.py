@@ -4,8 +4,8 @@ from celery import Celery
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 from flask_jwt_extended import JWTManager
-import os
 from flask import jsonify
+import os
 
 celery = Celery(__name__)
 limiter = Limiter(

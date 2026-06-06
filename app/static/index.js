@@ -1,3 +1,5 @@
+let prefix = 'search';
+
 document.addEventListener("DOMContentLoaded", () => {
 
     /* ---------------- SEARCH ---------------- */
@@ -8,20 +10,27 @@ document.addEventListener("DOMContentLoaded", () => {
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
 
-        const type = document.getElementById("mode_select").value;
         const input = document.getElementById("search_input").value;
+        const token = localStorage.getItem("access_token");
 
         try {
-
-            const response = await fetch(
-                `/search?search_type=${type}&search_input=${encodeURIComponent(input)}`,
-                { credentials: "include" }
-            );
+            const response = await fetch(`/${prefix}`, {
+                method: "POST",
+                credentials: "include",
+                headers: {
+                    "Content-Type": "application/json",
+                    ...(token && { "Authorization": `Bearer ${token}` })
+                },
+                body: JSON.stringify({
+                    search_input: input
+                })
+            });
 
             const text = await response.text();
             resultsDiv.innerHTML = text;
 
             form.reset();
+
         } catch (err) {
             resultsDiv.innerHTML = `<p style="color:red;">Error: ${err}</p>`;
         }

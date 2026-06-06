@@ -1,8 +1,11 @@
 from flask import Flask
 from flask_cors import CORS
 from .database import db_create, create_tables
-from .routes import bp as main_bp
 from . import extensions
+from app.routes import bp as main_bp
+from app.auth.routes import bp as auth_bp
+from app.search.routes import bp as search_bp
+from app.tabs.routes import bp as tabs_bp
 
 
 def create_app(config=None):
@@ -32,8 +35,11 @@ def create_app(config=None):
     # create tables
     create_tables(config, extensions.db_session, extensions.engine)
 
-    # register routes
+    # register routes.py
     app.register_blueprint(main_bp)
+    app.register_blueprint(auth_bp)
+    app.register_blueprint(search_bp)
+    app.register_blueprint(tabs_bp)
 
     # init celery
     extensions.init_celery(app)

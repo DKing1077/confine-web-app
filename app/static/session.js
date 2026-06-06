@@ -6,6 +6,7 @@ const emailInput = document.getElementById('email_input');
 const passwordInput = document.getElementById('password_input');
 
 let currentMode = "login";
+let prefix = 'auth';
 
 /* ---------------- MODE HANDLER ---------------- */
 
@@ -46,8 +47,7 @@ form.addEventListener('submit', async (e) => {
             }
         }
 
-        const response = await fetch(`/${currentMode}`, options);
-
+        const response = await fetch(`/${prefix}/${currentMode}`, options);
         const raw = await response.text();
 
         let data;

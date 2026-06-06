@@ -9,6 +9,7 @@ async function loadSessionStatus() {
                 "Authorization": `Bearer ${token}`
             }
         });
+
         console.log("Session status response:", response.status);
 
         if (!response.ok) {
@@ -29,16 +30,19 @@ async function loadSessionStatus() {
             el.textContent = data.email;
             el.classList.add("logged-in");
             el.classList.remove("logged-out");
-            console.log("Status updated to logged in:", data.email);
         } else {
             el.textContent = "unknown";
             el.classList.add("logged-out");
             el.classList.remove("logged-in");
         }
+
     } catch (error) {
         console.error("Error loading session status:", error);
     }
 }
 
-// Bind the function to the global window object so other scripts can access it
 window.loadSessionStatus = loadSessionStatus;
+
+document.addEventListener("DOMContentLoaded", () => {
+    loadSessionStatus();
+});
