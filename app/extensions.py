@@ -59,7 +59,7 @@ def init_jwt(app):
     global jwt
     jwt = JWTManager(app)
 
-    # 1. Print out the key Flask actually has loaded in memory right now
+    # print out the key flask jwt settings loaded in memory
     print("--- JWT STARTUP DEBUGGER ---")
     print(f"Loaded App Config Secret Key: {app.config.get('JWT_SECRET_KEY')}")
     print(f"Loaded Environment OS Key: {os.getenv('JWT_SECRET_KEY')}")

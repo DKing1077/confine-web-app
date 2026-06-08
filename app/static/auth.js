@@ -1,9 +1,10 @@
 async function loadSessionStatus() {
+    let prefix = 'auth';
     const token = localStorage.getItem("access_token");
     console.log("Token exists:", !!token);
 
     try {
-        const response = await fetch("/session-status", {
+        const response = await fetch(`/${prefix}/session-status`, {
             method: "GET",
             headers: {
                 "Authorization": `Bearer ${token}`

@@ -1,5 +1,4 @@
 from app.cache import search_cache_set, search_cache_get, search_cache_key
-from app.services import MusixMatch
 from app.search.db import *
 from flask import current_app
 import json
@@ -28,8 +27,8 @@ def search_cache(db_session, user_id, artist_input, track_input, search_text):
         return None, cache_key
 
 
-def search_pipeline(db_session, user_id, artist_input, track_input, search_text, cache_key):
-    search_result = search_fetch(db_session, artist_input, track_input)
+def search_pipeline(db_session, api_client, user_id, artist_input, track_input, search_text, cache_key):
+    search_result = search_fetch(db_session, api_client, artist_input, track_input)
     search_cache_set(cache_key, search_result)
 
     current_app.logger.info(
@@ -42,13 +41,12 @@ def search_pipeline(db_session, user_id, artist_input, track_input, search_text,
     return search_result
 
 
-def search_fetch(db_session, artist_input, track_input):
+def search_fetch(db_session, api_client, artist_input, track_input):
     db_classes, api_flag = db_lookup(db_session, artist_input, track_input)
     if api_flag:
-        api_client = MusixMatch(api_key=current_app["MUSIXMATCH_APIKEY"])
         classes = api_client.track_search(artist=artist_input, track=track_input)
-
         classes_parsed = parse_classes(classes)
+
         if artist_input and track_input:
             classes_parsed = verify_track(classes_parsed, artist_input, track_input)
 

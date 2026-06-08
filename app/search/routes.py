@@ -29,7 +29,7 @@ def search():
     current_app.logger.info("search input: %s", search_input)
 
     # async tasks
-    job = chain(
+    result = chain(
         parse_search_task.s(search_input),
         process_search_task.s(user_id)
     ).apply_async()
@@ -38,6 +38,7 @@ def search():
     return {
         "route": "search",
         "status": "success",
-        "job_id": job.id
+        "job_id": result.id,
+        "result": result.get()
     }, 200
 

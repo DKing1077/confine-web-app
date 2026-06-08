@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const form = document.getElementById("search_form");
     const resultsDiv = document.getElementById("results");
+    const searchDiv = document.getElementById("search");
 
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
@@ -26,8 +27,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 })
             });
 
-            const text = await response.text();
-            resultsDiv.innerHTML = text;
+            const data = await response.json();
+            resultsDiv.innerHTML = `
+                route: ${data.route}<br>
+                status: ${data.status}<br>
+                job_id: ${data.job_id}`;
+
+            const results = data.result;
+            renderResults(results, searchDiv);
 
             form.reset();
 
@@ -35,6 +42,24 @@ document.addEventListener("DOMContentLoaded", () => {
             resultsDiv.innerHTML = `<p style="color:red;">Error: ${err}</p>`;
         }
     });
+
+    function renderResults(data, container) {
+        container.innerHTML = "";
+        console.log(data);
+        console.log(typeof data);
+        console.log("JSON STRING:\n", JSON.stringify(data, null, 2));
+
+        if (!Array.isArray(data) || data.length === 0) {
+            container.textContent = "No results";
+            return;
+        }
+
+        data.forEach(item => {
+            const div = document.createElement("div");
+            div.textContent = `${item.artist_name} - ${item.track_name}`;
+            container.appendChild(div);
+        });
+    }
 
     /* ---------------- TABS ---------------- */
 
