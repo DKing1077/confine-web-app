@@ -1,6 +1,7 @@
 from app.extensions import celery
 from app import extensions
-from app.services.openrouter import AIService
+from app.services import AIService
+from app.services import MusixMatch
 from flask import current_app
 from app.logic import search_pipeline, search_cache, get_workflow
 
@@ -32,7 +33,8 @@ def parse_search_task(search_input):
     retry_backoff=True,
     retry_kwargs={"max_retries": 3},
 )
-def process_search_task(artist_input, track_input, search_text, user_id):
+def process_search_task(parsed_data, user_id):
+    artist_input, track_input, search_text = parsed_data
     try:
         # search cache
         cached_data, cache_key = search_cache(extensions.db_session, user_id, artist_input, track_input, search_text)
@@ -40,7 +42,8 @@ def process_search_task(artist_input, track_input, search_text, user_id):
             return cached_data
 
         # search pipeline
-        search_result = search_pipeline(extensions.db_session, user_id, artist_input, track_input, search_text, cache_key)
+        api_client = MusixMatch(api_key=current_app.config["MUSIXMATCH_APIKEY"])
+        search_result = search_pipeline(extensions.db_session, api_client, user_id, artist_input, track_input, search_text, cache_key)
 
         extensions.db_session.commit()
         return search_result

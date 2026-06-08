@@ -27,22 +27,25 @@ docker compose up --build -d
 docker builder prune -a -f
 docker-compose down -v
 docker-compose build --no-cache
-docker-compose up -d
+docker-compose up
 
 # NORMAL REBUILD + RESTART (common dev flow)
 # Rebuild images (if needed) + recreate containers
 docker-compose down -v
 docker-compose up -d --build
+docker-compose logs -f
 
 # DATABASE RESET (Postgres / any volume-backed DB reset)
 # Deletes containers + volumes (DB data wiped), then restarts fresh
 docker-compose down -v
 docker-compose up -d
+docker-compose logs -f
 
 # QUICK RESTART (no rebuild, no data loss)
 # Stops and recreates containers using existing images
 docker-compose down
 docker-compose up -d
+docker-compose logs -f
 
 # Follow all service logs live
 docker-compose logs -f
