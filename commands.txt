@@ -20,41 +20,47 @@ curl -c cookies.txt -X POST http://127.0.0.1:5000/login \
   }'
 curl -b cookies.txt "http://127.0.0.1:5000/search?search_input=drakegodsplan"
 
-docker compose up --build -d
+# FULL RESET
+# - wipes build cache (builder prune)
+# - removes containers + networks + volumes (-v) => DATA LOSS
+# - rebuilds images from scratch (no cache)
+# - starts a completely fresh environment
 
-# FULL RESET (hard rebuild from scratch)
-# Deletes containers + volumes, clears build cache, rebuilds everything clean
 docker builder prune -a -f
 docker-compose down -v
 docker-compose build --no-cache
 docker-compose up
 
-# NORMAL REBUILD + RESTART (common dev flow)
-# Rebuild images (if needed) + recreate containers
-docker-compose down -v
-docker-compose up -d --build
-docker-compose logs -f
+# NORMAL REBUILD (clean rebuild)
+# - removes containers + volumes (-v) => DATA LOSS
+# - rebuilds images with no cache (--no-cache)
+# - does NOT wipe global builder cache
+# - fresh rebuild but slightly less aggressive than full reset
 
-# DATABASE RESET (Postgres / any volume-backed DB reset)
-# Deletes containers + volumes (DB data wiped), then restarts fresh
 docker-compose down -v
-docker-compose up -d
-docker-compose logs -f
+docker-compose up --build --no-cache
 
-# QUICK RESTART (no rebuild, no data loss)
-# Stops and recreates containers using existing images
+# NORMAL RESTART (no rebuild, no cache clearing)
+# - stops containers and removes them
+# - preserves volumes (data kept)
+# - starts containers again in fresh state
+# - fastest option for code-only changes
+
 docker-compose down
-docker-compose up -d
-docker-compose logs -f
+docker-compose up
 
-# Follow all service logs live
-docker-compose logs -f
+# stop containers,
+cntrl c
+docker-compose start
 
 # running containers
 docker compose ps
 
 # access postgres in docker container
 docker-compose exec postgres psql -U postgres -d test_db
+
+# run .sh file
+./dev.sh
 
 # tables
 \dt
@@ -77,4 +83,6 @@ docker compose exec web alembic revision --autogenerate -m "message"
 # to run the migration
 docker compose exec web alembic upgrade head
 
-# ENSURE the varibles in .env, docker yaml, and env.py match up correctly with .env being your the file you comment to change.
+# docker compose remove orphans
+docker compose down --remove-orphans
+

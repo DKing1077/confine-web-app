@@ -6,6 +6,7 @@ from app.routes import bp as main_bp
 from app.auth.routes import bp as auth_bp
 from app.search.routes import bp as search_bp
 from app.tabs.routes import bp as tabs_bp
+import logging
 
 
 def create_app(config=None):
@@ -54,6 +55,11 @@ def create_app(config=None):
     CORS(app, resources={r"/*": {"origins": "*"}},
          allow_headers=["Content-Type", "Authorization"],
          methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"])
+
+    # reduce werkzeug noise
+    logging.getLogger('werkzeug').setLevel(logging.ERROR)
+    logging.getLogger("httpx").setLevel(logging.WARNING)
+    logging.getLogger("urllib3").setLevel(logging.WARNING)
 
     # remove session after request
     @app.teardown_appcontext

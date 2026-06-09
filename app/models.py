@@ -2,7 +2,7 @@ from sqlalchemy import Integer, String, ForeignKey, Text, JSON
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.ext.declarative import declarative_base
 from datetime import datetime
-from sqlalchemy import DateTime, func
+from sqlalchemy import DateTime, func, UniqueConstraint
 
 
 Base = declarative_base()
@@ -39,6 +39,10 @@ class Albums(Base):
     # has many tracks
     tracks: Mapped[list['Tracks']] = relationship('Tracks', back_populates='album')
 
+    __table_args__ = (
+        UniqueConstraint("artist_id", "album_name"),
+    )
+
 
 class Tracks(Base):
     __tablename__ = 'tracks'
@@ -60,6 +64,10 @@ class Tracks(Base):
 
     # has features
     features: Mapped[list["Features"]] = relationship("Features", back_populates="track")
+
+    __table_args__ = (
+        UniqueConstraint("artist_id", "album_id", "track_name"),
+    )
 
 
 class Features(Base):

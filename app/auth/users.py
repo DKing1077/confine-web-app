@@ -9,10 +9,12 @@ def add_user(db_session, email, password):
         email=email,
         password_hash=password_hash
     )
-    db_session.add(user)
-
-    db_session.flush()
-    db_session.commit()
+    try:
+        db_session.add(user)
+        db_session.commit()
+    except Exception as e:
+        db_session.rollback()
+        raise e
     return {
         "ok": True,
         "user_id": user.user_id,
@@ -24,7 +26,6 @@ def login_user(db_session, email, password):
     user = db_session.query(Users).filter_by(email=email).first()
     if not user:
         return {"ok": False, "error": "user_not_found"}
-
     if not check_password_hash(user.password_hash, password):
         return {"ok": False, "error": "invalid_password"}
     return {

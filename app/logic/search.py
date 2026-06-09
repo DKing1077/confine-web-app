@@ -42,9 +42,14 @@ def search_pipeline(db_session, api_client, user_id, artist_input, track_input, 
 
 
 def search_fetch(db_session, api_client, artist_input, track_input):
+    current_app.logger.info("artist: %s | track: %s", artist_input, track_input)
     db_classes, api_flag = db_lookup(db_session, artist_input, track_input)
+
     if api_flag:
         classes = api_client.track_search(artist=artist_input, track=track_input)
+        current_app.logger.info(classes)
+
+        logger_message(classes, 'api', artist_input, track_input)
         classes_parsed = parse_classes(classes)
 
         if artist_input and track_input:
