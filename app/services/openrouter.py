@@ -24,19 +24,21 @@ class AIService:
                         "Schema:\n"
                         "{\n"
                         '  "artist": string\n'
-                        '  "track": string, Unknown\n'
+                        '  "track": string, None\n'
                         "}\n\n"
                         "Rules:\n"
                         "- Return the artist and track name exactly the same as its stored on spotify, search and check its the same\n"
                         "- Return JSON ONLY\n"
                         "- Do NOT include markdown.\n"
                         "- Do NOT wrap output in ``` or ```json.\n\n"
-                        "Make sure your carefully check and search for an artists name in the input\n"
+                        "Make sure you carefully check and search for an artists name in the input\n"
                         "E.G logic - everyday should not be returned as track : logic everyday\n"
                         "Make sure to place apostrophes exactly the same as its stored on spotify, search and check its the same\n"
                         "E.G drake - gods plan should return the track name : God's Plan\n"
                         "Make sure to capitalize the letters exactly the same as its stored on spotify, search and check its the same\n"
                         "E.G \"NOKIA\" not \"nokia\" \"thank u, next\" not \"Thank you next\"\n"
+                        "Make sure you carefully check and search for the name of a track in the input\n"
+                        "E.G \"drake\" is just the name of an artist and the track should be returned as None"
                     )
                 },
                 {"role": "user", "content": search},
@@ -54,6 +56,9 @@ class AIService:
 
         artist_input = search_params['artist']
         track_input = search_params['track']
+
+        if track_input == 'None':
+            track_input = None
 
         return artist_input, track_input
 

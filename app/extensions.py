@@ -45,6 +45,7 @@ def init_celery(app):
         worker_hijack_root_logger=False,
         worker_redirect_stdouts=True,
         worker_redirect_stdouts_level="INFO",
+        worker_log_format="[%(asctime)s: %(levelname)s/%(processName)s] %(message)s",
         result_expires=3600
     )
 

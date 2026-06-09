@@ -6,11 +6,12 @@ from flask import current_app
 from app.logic import search_pipeline, search_cache, get_workflow
 
 
-@celery.task(
-    autoretry_for=(Exception,),
-    retry_backoff=True,
-    retry_kwargs={"max_retries": 3},
-)
+# @celery.task(
+#     autoretry_for=(Exception,),
+#     retry_backoff=True,
+#     retry_kwargs={"max_retries": 3},
+# )
+@celery.task
 def parse_search_task(search_input):
     try:
         # ai parsing
@@ -28,11 +29,12 @@ def parse_search_task(search_input):
         extensions.db_session.remove()
 
 
-@celery.task(
-    autoretry_for=(Exception,),
-    retry_backoff=True,
-    retry_kwargs={"max_retries": 3},
-)
+# @celery.task(
+#     autoretry_for=(Exception,),
+#     retry_backoff=False,
+#     retry_kwargs={"max_retries": 3},
+# )
+@celery.task
 def process_search_task(parsed_data, user_id):
     artist_input, track_input, search_text = parsed_data
     try:
@@ -65,8 +67,8 @@ def add_to_workflow_task(search_input, user_id):
     try:
         workflow = get_workflow(user_id)
 
-    except Exception:
-        pass
+    except Exception as e:
+        raise e
 
 
 @celery.task(
@@ -78,8 +80,8 @@ def remove_from_workflow_task(search_input, user_id):
     try:
         workflow = get_workflow(user_id)
 
-    except Exception:
-        pass
+    except Exception as e:
+        raise e
 
 
 
