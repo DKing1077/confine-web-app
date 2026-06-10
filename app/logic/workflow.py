@@ -1,6 +1,9 @@
 from app.cache import workflow_cache_key, workflow_cache_get, workflow_cache_set
 from app.cache import redis_workflow_cache
 import uuid
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 def get_workflow(user_id):

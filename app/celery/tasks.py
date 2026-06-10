@@ -1,9 +1,12 @@
-from app.extensions import celery
-from app import extensions
+from app.extensions import celery, db_session
 from app.services import AIService
 from app.services import MusixMatch
-from flask import current_app
 from app.logic import search_pipeline, search_cache, get_workflow
+from flask import current_app
+from app import extensions
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 # @celery.task(

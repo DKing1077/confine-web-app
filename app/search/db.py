@@ -1,6 +1,9 @@
 from app.models import Artists, Albums, Tracks, Features, SearchResults
 from sqlalchemy import select
 import re
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 def serialize_tracks(classes, method):

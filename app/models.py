@@ -1,9 +1,8 @@
 from sqlalchemy import Integer, String, ForeignKey, Text, JSON
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.ext.declarative import declarative_base
-from datetime import datetime
 from sqlalchemy import DateTime, func, UniqueConstraint
-
+from datetime import datetime
 
 Base = declarative_base()
 

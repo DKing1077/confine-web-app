@@ -1,11 +1,12 @@
 from flask import Flask
 from flask_cors import CORS
 from .database import db_create, create_tables
-from . import extensions
 from app.routes import bp as main_bp
 from app.auth.routes import bp as auth_bp
 from app.search.routes import bp as search_bp
 from app.tabs.routes import bp as tabs_bp
+from app.logging import configure_logging
+from . import extensions
 import logging
 
 
@@ -26,6 +27,9 @@ def create_app(config=None):
     app = Flask(__name__)
     if config:
         app.config.from_object(config)
+
+    # configure logging
+    configure_logging()
 
     # create database
     db_create(config)
