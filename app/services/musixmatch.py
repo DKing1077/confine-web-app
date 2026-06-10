@@ -14,6 +14,18 @@ class ApiData:
     lyrics: str
     features: list
 
+    @classmethod
+    def from_dict(cls, data: dict):
+        return cls(
+            artist_name=data["artist_name"],
+            ex_artist_id=data["ex_artist_id"],
+            album_name=data["album_name"],
+            ex_track_id=data["ex_track_id"],
+            track_name=data["track_name"],
+            lyrics=data.get("lyrics"),
+            features=data.get("features") or [],
+        )
+
 
 class MusixMatch:
     def __init__(self, api_key):

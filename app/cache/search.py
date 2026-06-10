@@ -1,6 +1,9 @@
 import json
 import redis
 from app.search import normalize
+import logging
+
+logger = logging.getLogger(__name__)
 
 # DB 0 → default (Celery broker/backend)
 # DB 1 → rate limiting
@@ -25,15 +28,18 @@ def search_cache_key(artist_input, track_input):
 def search_cache_get(key):
     cached = redis_search_cache.get(key)
     if not cached:
+        logger.info("search cache miss for key: %s", key)
         return None
     try:
+        logger.info("search cache hit for key: %s", key)
         return json.loads(cached)
     except json.JSONDecodeError:
         return None
 
 
 def search_cache_set(key, value, ttl=43200):
-    redis_search_cache.setex(key, ttl, json.dumps(value))
+    redis_search_cache.setex(key, ttl, json.dumps([obj.__dict__ for obj in value]))
+    logger.info("search cache set for key: %s", key)
 
 
 def search_cache_delete(key):
