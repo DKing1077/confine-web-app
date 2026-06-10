@@ -13,6 +13,10 @@ def configure_logging():
     root = logging.getLogger()
     root.setLevel(logging.INFO)
 
+    logging.getLogger('werkzeug').setLevel(logging.ERROR)
+    logging.getLogger("httpx").setLevel(logging.WARNING)
+    logging.getLogger("urllib3").setLevel(logging.WARNING)
+
     # avoid duplicate handlers in reload/dev
     if not root.handlers:
         root.addHandler(handler)

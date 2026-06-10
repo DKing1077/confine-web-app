@@ -22,6 +22,7 @@ def parse_search_task(search_input):
         artist_input, track_input = ai_client.parse_search(search_input)
 
         search_text = f'{artist_input} - {track_input}'
+        logger.info("parsed raw input : artist: %s | track: %s", artist_input, track_input)
         return artist_input, track_input, search_text
 
     except Exception:

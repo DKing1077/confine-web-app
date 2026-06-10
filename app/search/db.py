@@ -1,31 +1,46 @@
 from app.models import Artists, Albums, Tracks, Features, SearchResults
 from sqlalchemy import select
-import re
+from app.services.musixmatch import ApiData
 import logging
+import debugpy
+import re
 
 logger = logging.getLogger(__name__)
 
 
-def serialize_tracks(classes, method):
+def serialize_return(classes, method):
     serialized = []
-    if method == 'api':
+    if method == "api":
         for obj in classes:
-            serialized.append({
-                'artist_name': obj.artist_name,
-                'album_name': obj.album_name,
-                'track_name': obj.track_name,
-                'lyrics': obj.lyrics,
-                'features': obj.features,
-            })
-    elif method == 'postgres':
+            serialized.append(
+                ApiData(
+                    artist_name=obj.artist_name,
+                    ex_artist_id=obj.ex_artist_id,
+                    album_name=obj.album_name,
+                    ex_track_id=obj.ex_track_id,
+                    track_name=obj.track_name,
+                    lyrics=obj.lyrics,
+                    features=obj.features or [],
+                )
+            )
+    elif method == "postgres":
         for obj in classes:
-            serialized.append({
-                "artist_name": obj.artist.artist_name,
-                "album_name": obj.album.album_name,
-                "track_name": obj.track_name,
-                "lyrics": obj.lyrics,
-                "features": obj.features,
-            })
+            serialized.append(
+                ApiData(
+                    artist_name=obj.artist.artist_name,
+                    ex_artist_id=obj.artist.id,
+                    album_name=obj.album.album_name,
+                    ex_track_id=obj.track_id,
+                    track_name=obj.track_name,
+                    lyrics=obj.lyrics,
+                    features=obj.features or [],
+                )
+            )
+    elif method == "cache":
+        for obj in classes:
+            serialized.append(ApiData.from_dict(obj))
+
+    logger.info('serialized data : %s', method)
     return serialized
 
 
@@ -82,7 +97,17 @@ def db_lookup(db_session, artist_input=None, track_input=None):
         if len(classes) < 10:
             api_flag = True
 
-    serialize_classes = serialize_tracks(classes, 'postgres')
+    logger.info('classes : %s', classes)
+    logger.info('type classes %s : ', type(classes))
+
+    if len(classes) > 0:
+        logger.info('\npostgres return sample : %s', str(classes[0]))
+        logger.info('postgres return datatype : %s\n', type(classes[0]))
+
+    # breakpoint
+    debugpy.breakpoint()
+
+    serialize_classes = serialize_return(classes, 'postgres')
     return serialize_classes, api_flag
 
 

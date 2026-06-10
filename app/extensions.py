@@ -63,14 +63,6 @@ def init_jwt(app):
     global jwt
     jwt = JWTManager(app)
 
-    # print out the key flask jwt settings loaded in memory
-    print("--- JWT STARTUP DEBUGGER ---")
-    print(f"Loaded App Config Secret Key: {app.config.get('JWT_SECRET_KEY')}")
-    print(f"Loaded Environment OS Key: {os.getenv('JWT_SECRET_KEY')}")
-    print(f"Loaded JWT_TOKEN_LOCATION: {app.config.get('JWT_TOKEN_LOCATION')}")
-    print(f"Loaded JWT_HEADER_NAME: {app.config.get('JWT_HEADER_NAME')}")
-    print(f"Loaded JWT_HEADER_TYPES: {app.config.get('JWT_HEADER_TYPES')}")
-
     @jwt.expired_token_loader
     def expired_token_callback(jwt_header, jwt_payload):
         return jsonify({

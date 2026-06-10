@@ -1,7 +1,7 @@
 from transformers import pipeline, AutoTokenizer
 from textblob import TextBlob
 import string
-import logging
+import logger
 
 logger = logging.getLogger(__name__)
 

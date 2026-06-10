@@ -1,4 +1,4 @@
-from logging.config import fileConfig
+from logger.config import fileConfig
 import os
 
 from sqlalchemy import engine_from_config

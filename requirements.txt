@@ -15,4 +15,5 @@ alembic
 dotenv
 flask-jwt-extended
 flask-cors
-pytorch
+debugpy
+

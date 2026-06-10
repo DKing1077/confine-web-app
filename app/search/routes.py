@@ -28,7 +28,7 @@ def search():
     user_id = int(identity_string)
 
     search_input = data["search_input"]
-    current_app.logger.info("search input: %s", search_input)
+    logger.info("raw html input: %s", search_input)
 
     # async tasks
     result = chain(
