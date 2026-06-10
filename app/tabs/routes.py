@@ -1,10 +1,12 @@
 from flask import Blueprint, request, current_app, session
 from app.celery.tasks import add_to_workflow_task
-from app import extensions
+from app.extensions import limiter
 from celery import chain
+import logging
+
+logger = logging.getLogger(__name__)
 
 bp = Blueprint("tabs", __name__, url_prefix="/tabs")
-limiter = extensions.limiter
 
 # workflow add route
 @bp.route("/add_workflow")

@@ -27,9 +27,9 @@ curl -b cookies.txt "http://127.0.0.1:5000/search?search_input=drakegodsplan"
 # - starts a completely fresh environment
 
 docker builder prune -a -f
-docker-compose down -v
-docker-compose build --no-cache
-docker-compose up
+docker compose down -v
+docker compose build --no-cache
+docker compose up
 
 # NORMAL REBUILD (clean rebuild)
 # - removes containers + volumes (-v) => DATA LOSS
@@ -37,8 +37,9 @@ docker-compose up
 # - does NOT wipe global builder cache
 # - fresh rebuild but slightly less aggressive than full reset
 
-docker-compose down -v
-docker-compose up --build --no-cache
+docker compose down -v
+docker compose build --no-cache
+docker compose up
 
 # NORMAL RESTART (no rebuild, no cache clearing)
 # - stops containers and removes them
@@ -46,8 +47,8 @@ docker-compose up --build --no-cache
 # - starts containers again in fresh state
 # - fastest option for code-only changes
 
-docker-compose down
-docker-compose up
+docker compose down
+docker compose up
 
 # stop containers,
 cntrl c

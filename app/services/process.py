@@ -1,6 +1,9 @@
 from transformers import pipeline, AutoTokenizer
 from textblob import TextBlob
 import string
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 def analyze(df):

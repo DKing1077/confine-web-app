@@ -2,6 +2,9 @@ from sqlalchemy import create_engine, text
 from app.models import Base
 import subprocess
 import os
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 def db_create(config):

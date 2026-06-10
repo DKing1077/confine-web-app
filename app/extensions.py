@@ -1,11 +1,14 @@
 from sqlalchemy import create_engine, text
 from sqlalchemy.orm import scoped_session, sessionmaker
-from celery import Celery
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 from flask_jwt_extended import JWTManager
 from flask import jsonify
+from celery import Celery
+import logging
 import os
+
+logger = logging.getLogger(__name__)
 
 celery = Celery(__name__)
 limiter = Limiter(

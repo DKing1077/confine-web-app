@@ -1,7 +1,9 @@
 from app.cache import search_cache_set, search_cache_get, search_cache_key
 from app.search.db import *
-from flask import current_app
+import logging
 import json
+
+logger = logging.getLogger(__name__)
 
 
 def search_cache(db_session, user_id, artist_input, track_input, search_text):
@@ -9,7 +11,7 @@ def search_cache(db_session, user_id, artist_input, track_input, search_text):
     cached_data = search_cache_get(cache_key)
 
     if cached_data:
-        current_app.logger.info(
+        logger.info(
             "Cache hit\n"
             "Key: %s\n"
             "Type: %s\n"
@@ -23,31 +25,31 @@ def search_cache(db_session, user_id, artist_input, track_input, search_text):
         return cached_data, None
 
     else:
-        current_app.logger.info("cache miss for key: %s", cache_key)
+        logger.info("cache miss for key: %s", cache_key)
         return None, cache_key
 
 
 def search_pipeline(db_session, api_client, user_id, artist_input, track_input, search_text, cache_key):
+    logger.info("artist: %s | track: %s", artist_input, track_input)
     search_result = search_fetch(db_session, api_client, artist_input, track_input)
     search_cache_set(cache_key, search_result)
 
-    current_app.logger.info(
+    logger.info(
         "Search result (%s): %s",
         type(search_result).__name__,
         json.dumps(search_result, default=str)
     )
     add_search_result(db_session, user_id, search_text, search_result)
-    current_app.logger.info("cache set for key: %s", cache_key)
+    logger.info("cache set for key: %s", cache_key)
     return search_result
 
 
 def search_fetch(db_session, api_client, artist_input, track_input):
-    current_app.logger.info("artist: %s | track: %s", artist_input, track_input)
     db_classes, api_flag = db_lookup(db_session, artist_input, track_input)
-
     if api_flag:
+
         classes = api_client.track_search(artist=artist_input, track=track_input)
-        current_app.logger.info(classes)
+        logger.info(classes)
 
         logger_message(classes, 'api', artist_input, track_input)
         classes_parsed = parse_classes(classes)
@@ -66,6 +68,9 @@ def search_fetch(db_session, api_client, artist_input, track_input):
 
 
 def logger_message(return_var, method, artist_input=None, track_input=None):
+    if not return_var:
+        return
+
     if artist_input and track_input:
         search_type = 'track search'
         search_values = f'{artist_input} - {track_input}'
@@ -75,11 +80,15 @@ def logger_message(return_var, method, artist_input=None, track_input=None):
 
     sample = return_var[0]
 
-    current_app.logger.info('the work flow used : %s', method)
-    current_app.logger.info('search type : %s', search_type)
-    current_app.logger.info('search value : %s', search_values)
-    current_app.logger.info("features: %s", sample["features"])
+    logger.info('return var: %s', return_var)
+    logger.info('sample: %s', sample)
 
-    current_app.logger.info('number of tracks %s: ', len(return_var))
-    current_app.logger.info("schema keys: %s", list(sample.keys()))
-    current_app.logger.info("features: %s", sample["features"])
+    logger.info('the workflow used : %s', method)
+    logger.info('search type : %s', search_type)
+    logger.info('search value : %s', search_values)
+    logger.info('features: %s', sample.features)
+
+    logger.info('number of tracks: %s', len(return_var))
+    logger.info('schema fields: %s', list(sample.__dict__.keys()))
+
+

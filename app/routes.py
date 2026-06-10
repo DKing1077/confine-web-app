@@ -1,5 +1,8 @@
 from flask import render_template, Blueprint
 from celery import chain
+import logging
+
+logger = logging.getLogger(__name__)
 
 bp = Blueprint("app", __name__)
 

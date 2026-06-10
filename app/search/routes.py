@@ -2,12 +2,14 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 from flask import Blueprint, request, current_app
 from app.celery.tasks import process_search_task, parse_search_task
 from app.schemas import SearchSchema
-from app import extensions
+from app.extensions import limiter
 from marshmallow import ValidationError
 from celery import chain
+import logging
+
+logger = logging.getLogger(__name__)
 
 bp = Blueprint("search", __name__, url_prefix="/search")
-limiter = extensions.limiter
 search_schema = SearchSchema()
 
 
