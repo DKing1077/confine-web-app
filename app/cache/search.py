@@ -38,7 +38,7 @@ def search_cache_get(key):
 
 
 def search_cache_set(key, value, ttl=43200):
-    redis_search_cache.setex(key, ttl, json.dumps([obj.__dict__ for obj in value]))
+    redis_search_cache.setex(key, ttl, json.dumps([obj for obj in value]))
     logger.info("search cache set for key: %s", key)
 
 

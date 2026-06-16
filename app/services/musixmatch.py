@@ -7,10 +7,9 @@ logger = logging.getLogger(__name__)
 @dataclass
 class ApiData:
     artist_name: str
-    ex_artist_id: str
     album_name: str
     track_name: str
-    ex_track_id: int
+    commontrack_id: int
     lyrics: str
     features: list
 
@@ -18,13 +17,22 @@ class ApiData:
     def from_dict(cls, data: dict):
         return cls(
             artist_name=data["artist_name"],
-            ex_artist_id=data["ex_artist_id"],
+            commontrack_id=data["commontrack_id"],
             album_name=data["album_name"],
-            ex_track_id=data["ex_track_id"],
             track_name=data["track_name"],
             lyrics=data.get("lyrics"),
             features=data.get("features") or [],
         )
+
+    def to_dict(self):
+        return {
+            "artist_name": self.artist_name,
+            "album_name": self.album_name,
+            "track_name": self.track_name,
+            "commontrack_id": self.commontrack_id,
+            "lyrics": self.lyrics,
+            "features": self.features,
+        }
 
 
 class MusixMatch:
@@ -68,9 +76,8 @@ class MusixMatch:
             classes.append(
                 ApiData(
                     artist_name=item.get("artist_name"),
-                    ex_artist_id=item.get("artist_id"),
+                    commontrack_id=item.get("commontrack_id"),
                     album_name=item.get("album_name"),
-                    ex_track_id=item.get("commontrack_id"),
                     track_name=item.get("track_name"),
                     lyrics='pending',
                     features=[],

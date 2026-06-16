@@ -1,8 +1,8 @@
 from sqlalchemy import create_engine, text
 from app.models import Base
 import subprocess
-import os
 import logging
+import os
 
 logger = logging.getLogger(__name__)
 
