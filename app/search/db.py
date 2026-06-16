@@ -1,6 +1,6 @@
 from app.models import Artists, Albums, Tracks, Features, SearchResults
-from sqlalchemy import select
 from app.services.musixmatch import ApiData
+from sqlalchemy import select
 import logging
 import debugpy
 import re
@@ -15,10 +15,9 @@ def serialize_return(classes, method):
             serialized.append(
                 ApiData(
                     artist_name=obj.artist_name,
-                    ex_artist_id=obj.ex_artist_id,
                     album_name=obj.album_name,
-                    ex_track_id=obj.ex_track_id,
                     track_name=obj.track_name,
+                    commontrack_id=obj.commontrack_id,
                     lyrics=obj.lyrics,
                     features=obj.features or [],
                 )
@@ -28,10 +27,9 @@ def serialize_return(classes, method):
             serialized.append(
                 ApiData(
                     artist_name=obj.artist.artist_name,
-                    ex_artist_id=obj.artist.id,
                     album_name=obj.album.album_name,
-                    ex_track_id=obj.track_id,
                     track_name=obj.track_name,
+                    commontrack_id=obj.commontrack_id,
                     lyrics=obj.lyrics,
                     features=obj.features or [],
                 )
@@ -97,18 +95,13 @@ def db_lookup(db_session, artist_input=None, track_input=None):
         if len(classes) < 10:
             api_flag = True
 
-    logger.info('classes : %s', classes)
-    logger.info('type classes %s : ', type(classes))
-
     if len(classes) > 0:
-        logger.info('\npostgres return sample : %s', str(classes[0]))
+        logger.info('\npostgres return sample : %s', classes[0])
         logger.info('postgres return datatype : %s\n', type(classes[0]))
 
-    # breakpoint
-    debugpy.breakpoint()
-
-    serialize_classes = serialize_return(classes, 'postgres')
-    return serialize_classes, api_flag
+        serialize_classes = serialize_return(classes, 'postgres')
+        return serialize_classes, api_flag
+    return None, api_flag
 
 
 def db_insert(db_session, classes):
@@ -159,6 +152,7 @@ def add_album(db_session, obj, artist):
 def add_track(db_session, obj, artist, album=None):
     track = Tracks(
         track_name=obj.track_name,
+        commontrack_id=obj.commontrack_id,
         lyrics=obj.lyrics, artist=artist, album=album
     )
     db_session.add(track)
@@ -191,7 +185,7 @@ def parse_features(parse):
     return features
 
 
-def normalize(name: str) -> str:
+def normalize(name):
     name = name.lower().strip()
     prefixes = ["dj "]
     for prefix in prefixes:
@@ -209,6 +203,7 @@ def add_search_result(db_session, user_id, search_text, search_result):
     )
     db_session.add(search_record)
     db_session.flush()
+    logger.info('search result added for user_id %s', user_id)
 
 
 

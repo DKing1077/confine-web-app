@@ -51,6 +51,7 @@ class Tracks(Base):
 
     # content
     track_name: Mapped[str] = mapped_column(String, nullable=False)
+    commontrack_id: Mapped[int] = mapped_column(Integer, nullable=False)
     lyrics: Mapped[str] = mapped_column(Text, nullable=False)
 
     # belongs to artist

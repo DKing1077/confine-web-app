@@ -1,8 +1,6 @@
 from app.cache import search_cache_set, search_cache_get, search_cache_key
 from app.search.db import *
-from dataclasses import asdict
 import logging
-import debugpy
 
 logger = logging.getLogger(__name__)
 
@@ -13,11 +11,9 @@ def search_cache(db_session, user_id, artist_input, track_input, search_text):
 
     if cached_data:
         logger.info('\nsearch cache return sample : %s', cached_data[0])
-        logger.info('search cache return datatype : %s\n', type(cached_data[0]))
+        logger.info('search cache return type : %s\n', type(cached_data[0]))
 
-        cached_data_json = serialize_return(cached_data, 'cache')
-        add_search_result(db_session, user_id, search_text, cached_data_json)
-
+        add_search_result(db_session, user_id, search_text, cached_data)
         return_message(cached_data, 'search cache', artist_input, track_input)
         return cached_data, None
     else:
@@ -26,13 +22,13 @@ def search_cache(db_session, user_id, artist_input, track_input, search_text):
 
 def search_pipeline(db_session, api_client, user_id, artist_input, track_input, search_text, cache_key):
     search_result = search_fetch(db_session, api_client, artist_input, track_input)
+    search_result_dicts = [item.to_dict() for item in search_result]
 
-    debugpy.breakpoint()
-    search_cache_set(cache_key, search_result)
+    search_cache_set(cache_key, search_result_dicts)
+    add_search_result(db_session, user_id, search_text, search_result_dicts)
 
-    search_result_json = [asdict(item) for item in search_result]
-    add_search_result(db_session, user_id, search_text, search_result_json)
-    return search_result
+    logger.info('search pipeline return : %s', search_result_dicts[0])
+    return search_result_dicts
 
 
 def search_fetch(db_session, api_client, artist_input, track_input):
@@ -44,9 +40,6 @@ def search_fetch(db_session, api_client, artist_input, track_input):
 
         if artist_input and track_input:
             classes_parsed = verify_track(classes_parsed, artist_input, track_input)
-
-        logger.info('\napi call return sample : %s', classes[0])
-        logger.info('api call return datatype : %s\n', type(classes[0]))
 
         db_insert(db_session, classes_parsed)
         api_classes = serialize_return(classes_parsed, 'api')
@@ -81,7 +74,7 @@ def return_message(return_var, method, artist_input=None, track_input=None):
     logger.info("sample: %s", sample)
     logger.info("return data type: %s", type(sample))
 
-    logger.info("\n####### RETURN LOGS END: #######\n\n")
+    logger.info("\n\n####### RETURN LOGS END: #######\n")
 
 
 
