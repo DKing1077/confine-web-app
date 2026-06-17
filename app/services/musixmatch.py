@@ -42,6 +42,7 @@ class MusixMatch:
         self.base_url = "https://api.musixmatch.com/ws/1.1"
 
     def track_search(self, artist=None, track=None):
+        logger.info(f'musixmatch api call - track search for: {artist} - {track}')
         classes = []
         search_params = {
             "apikey": self.api_key,
@@ -83,6 +84,7 @@ class MusixMatch:
                     features=[],
                 )
             )
+        logger.info('api call succeeded : tracks records returned: %s', len(classes))
         return classes
 
 
