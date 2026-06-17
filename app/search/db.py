@@ -216,7 +216,7 @@ def add_search_result(db_session, user_id, search_text, search_result):
     )
     db_session.add(search_record)
     db_session.flush()
-    logger.info('search record inserted : search_result=%s', search_result.search_text)
+    logger.info('search record inserted : search_text=%s', search_text)
 
 
 

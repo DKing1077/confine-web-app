@@ -6,6 +6,9 @@ from app.models import Users
 from app import extensions
 from marshmallow import ValidationError
 from celery import chain
+import logging
+
+logger = logging.getLogger(__name__)
 
 bp = Blueprint("auth", __name__, url_prefix="/auth")
 limiter = extensions.limiter
@@ -36,8 +39,8 @@ def registration():
             "status": "failed",
             "email": email
         }, 400
-    current_app.logger.info("user registered: %s", email)
-    current_app.logger.info("user id: %s", result["user_id"])
+    logger.info("user registered: %s", email)
+    logger.info("user id: %s", result["user_id"])
 
     # 201 created
     return {
@@ -67,8 +70,8 @@ def loginuser():
             "status": "failed",
             "email": email
         }, 401
-    current_app.logger.info("user logged in: %s", email)
-    current_app.logger.info("user id: %s", result["user_id"])
+    logger.info("user logged in: %s", email)
+    logger.info("user id: %s", result["user_id"])
 
     # 200 ok
     user_id = result["user_id"]
@@ -111,7 +114,6 @@ def session_status():
         return {
             "logged_in": False
         }, 200
-    current_app.logger.info("jwt status: %s logged in", user_id)
 
     # js update
     return {

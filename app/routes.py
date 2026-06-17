@@ -3,7 +3,6 @@ from celery import chain
 import logging
 
 logger = logging.getLogger(__name__)
-
 bp = Blueprint("app", __name__)
 
 # index root

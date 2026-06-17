@@ -7,9 +7,8 @@ from marshmallow import ValidationError
 from celery import chain
 import logging
 
-logger = logging.getLogger(__name__)
-
 bp = Blueprint("search", __name__, url_prefix="/search")
+logger = logging.getLogger(__name__)
 search_schema = SearchSchema()
 
 
