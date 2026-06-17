@@ -7,6 +7,7 @@ from app.search.routes import bp as search_bp
 from app.tabs.routes import bp as tabs_bp
 from app.logger import configure_logging
 from . import extensions
+import logging
 
 
 def create_app(config=None):
@@ -21,14 +22,17 @@ def create_app(config=None):
         the applications run configurations defined in config.py
     database.py is used here so need to import the module, in services we can import the variables
     """
+    # configure logging
+    configure_logging()
+
+    # start logs
+    logger = logging.getLogger(__name__)
+    logger.info('\napplication starting ..')
 
     # flask instance
     app = Flask(__name__)
     if config:
         app.config.from_object(config)
-
-    # configure logging
-    configure_logging()
 
     # create database
     db_create(config)

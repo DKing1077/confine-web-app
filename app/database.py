@@ -28,9 +28,9 @@ def db_create(config):
                            CONNECTION LIMIT -1
                            PASSWORD '{config.DB_PASS}';""")
             conn.execute(sql)
-            print(f"super user '{config.DB_USER}' created successfully!")
+            logger.info(f"super user '{config.DB_USER}' created successfully!")
         else:
-            print(f"super user '{config.DB_USER}' already exists.")
+            logger.info(f"super user '{config.DB_USER}' already exists.")
 
         # create database
         db_exists = conn.execute(
@@ -42,9 +42,9 @@ def db_create(config):
                            OWNER = {config.DB_USER}
                            CONNECTION LIMIT = -1; """)
             conn.execute(sql)
-            print(f"database '{config.DB_NAME}' created successfully!")
+            logger.info(f"database '{config.DB_NAME}' created successfully!")
         else:
-            print(f"database '{config.DB_NAME}' already exists.")
+            logger.info(f"database '{config.DB_NAME}' already exists.")
 
 
 def create_tables(config, db_session, engine):
