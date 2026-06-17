@@ -47,6 +47,8 @@ def verify_track(classes, artist_input, track_input):
     track_input = normalize(track_input)
     for obj in classes:
         if obj.artist_name == artist_input and obj.track_name == track_input:
+            logger.info('track record verified for : artist=%s, track=%s', artist_input, track_input)
+            logger.info('verified record : %s', obj)
             classes = [obj]
             return classes
     return None
@@ -85,6 +87,8 @@ def db_lookup(db_session, artist_input=None, track_input=None):
         classes = db_session.execute(qry).scalars().all()
         if len(classes) < 1:
             api_flag = True
+        else:
+            logger.info('track record found for : artist=%s, track=%s', artist_input, track_input)
 
     else:
         qry = qry.where(
@@ -94,13 +98,16 @@ def db_lookup(db_session, artist_input=None, track_input=None):
         classes = db_session.execute(qry).scalars().all()
         if len(classes) < 10:
             api_flag = True
+        else:
+            logger.info('sufficient track records found for : artist=%s', artist_input)
+
+    if api_flag:
+        logger.info('db lookup search insufficient')
 
     if len(classes) > 0:
-        logger.info('\npostgres return sample : %s', classes[0])
-        logger.info('postgres return datatype : %s\n', type(classes[0]))
-
         serialize_classes = serialize_return(classes, 'postgres')
         return serialize_classes, api_flag
+
     return None, api_flag
 
 
@@ -129,6 +136,7 @@ def db_insert(db_session, classes):
             else:
                 artist = Artists(artist_name=artist_name,)
                 add_feature(db_session, track=track_rec, artist=artist)
+    logger.info('track record(s) inserted')
 
 
 def add_artist(db_session, artist_name=None):
@@ -137,6 +145,7 @@ def add_artist(db_session, artist_name=None):
     )
     db_session.add(artist)
     db_session.flush()
+    logger.info('artist record inserted : artist=%s', artist_name)
     return artist
 
 
@@ -146,6 +155,7 @@ def add_album(db_session, obj, artist):
     )
     db_session.add(album)
     db_session.flush()
+    logger.info('album record inserted : album=%s', obj.album_name)
     return album
 
 
@@ -157,6 +167,7 @@ def add_track(db_session, obj, artist, album=None):
     )
     db_session.add(track)
     db_session.flush()
+    logger.info('track record inserted : track=%s', obj.track_name)
     return track
 
 
@@ -166,6 +177,7 @@ def add_feature(db_session, track=None, artist=None):
     )
     db_session.add(features)
     db_session.flush()
+    logger.info('feature record inserted : features=%s', features.track_name)
 
 
 def check_if_exists(db_session, table, column, value):
@@ -182,6 +194,7 @@ def parse_features(parse):
             feature = features_parse[i].lstrip(' ').rstrip(' ').rstrip(')')
             features.append(feature)
     features = [f for f in features if f != '']
+    logger.info('features parsed : features=%s', features)
     return features
 
 
@@ -203,7 +216,7 @@ def add_search_result(db_session, user_id, search_text, search_result):
     )
     db_session.add(search_record)
     db_session.flush()
-    logger.info('search result added for user_id %s', user_id)
+    logger.info('search record inserted : search_result=%s', search_result.search_text)
 
 
 
