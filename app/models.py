@@ -101,7 +101,7 @@ class SearchResults(Base):
     user_id: Mapped[int] = mapped_column(ForeignKey('users.user_id'))
 
     # content
-    search_text: Mapped[str] = mapped_column(Text, nullable=False)
+    search_input: Mapped[str] = mapped_column(Text, nullable=False)
     search_result: Mapped[list] = mapped_column(JSON, nullable=False)
 
     # # artist* -> not implemented

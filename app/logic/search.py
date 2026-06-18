@@ -5,13 +5,15 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-def search_cache(db_session, user_id, artist_input, track_input, search_text):
-    cache_key = search_cache_key(artist_input, track_input)
+def search_cache(db_session, user_id, artist_input, track_input, search_input):
+    artist_input_n, track_input_n = normalize(artist_input), normalize(track_input)
+    cache_key = search_cache_key(artist_input_n, track_input_n)
+
     cached_data = search_cache_get(cache_key)
     if cached_data:
-        add_search_result(db_session, user_id, search_text, cached_data)
+        add_search_result(db_session, user_id, search_input, cached_data)
 
-        return_message(cached_data, 'search cache', artist_input, track_input)
+        return_message(cached_data, 'search cache', artist_input_n, track_input_n)
         return cached_data, None
     else:
         return None, cache_key
@@ -29,15 +31,17 @@ def search_pipeline(db_session, api_client, user_id, artist_input, track_input, 
 
 
 def search_fetch(db_session, api_client, artist_input, track_input):
-    db_classes, api_flag = db_lookup(db_session, artist_input, track_input)
-    return_message(db_classes, 'postgres', artist_input, track_input)
+    artist_input_n, track_input_n = normalize(artist_input), normalize(track_input)
+
+    db_classes, api_flag = db_lookup(db_session, artist_input_n, track_input_n)
+    return_message(db_classes, 'postgres', artist_input_n, track_input_n)
 
     if api_flag:
         api_classes = api_client.track_search(artist=artist_input, track=track_input)
         api_classes_parsed = parse_classes(api_classes)
 
         if artist_input and track_input:
-            api_classes_parsed = verify_track(api_classes_parsed, artist_input, track_input)
+            api_classes_parsed = verify_track(api_classes_parsed, artist_input_n, track_input_n)
 
         db_insert(db_session, api_classes_parsed)
         return_message(api_classes_parsed, 'api call', artist_input, track_input)
