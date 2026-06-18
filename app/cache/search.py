@@ -21,7 +21,7 @@ redis_search_cache = redis.Redis(
 
 # search cache key, get, set, delete
 def search_cache_key(artist_input, track_input):
-    key = f'{normalize(artist_input)}:{normalize(track_input)}'
+    key = f'{artist_input}:{track_input}'
     return key
 
 

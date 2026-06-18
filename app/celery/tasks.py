@@ -1,12 +1,10 @@
-from app.extensions import celery, db_session
+from app.extensions import celery
 from app.services import AIService
 from app.services import MusixMatch
 from app.logic import search_pipeline, search_cache, get_workflow
 from flask import current_app
 from app import extensions
 import logging
-
-from search.db import add_search_result
 
 logger = logging.getLogger(__name__)
 
@@ -23,9 +21,8 @@ def parse_search_task(search_input):
         ai_client = AIService(api_key=current_app.config["OPENROUTER_APIKEY"], model=current_app.config["OPENROUTER_MODEL"])
         artist_input, track_input = ai_client.parse_search(search_input)
 
-        search_text = f'{artist_input} - {track_input}'
         logger.info("parsed raw input: artist=%s, track=%s", artist_input, track_input)
-        return artist_input, track_input, search_input, search_text
+        return artist_input, track_input, search_input
 
     except Exception:
         extensions.db_session.rollback()
@@ -42,10 +39,10 @@ def parse_search_task(search_input):
 # )
 @celery.task
 def process_search_task(parsed_data, user_id):
-    artist_input, track_input, search_input, search_text = parsed_data
+    artist_input, track_input, search_input = parsed_data
     try:
         # search cache
-        cached_data, cache_key = search_cache(extensions.db_session, user_id, artist_input, track_input, search_text)
+        cached_data, cache_key = search_cache(extensions.db_session, user_id, artist_input, track_input, search_input)
         if cached_data:
             return cached_data
 

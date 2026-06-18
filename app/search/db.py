@@ -38,16 +38,14 @@ def serialize_return(classes, method):
         for obj in classes:
             serialized.append(ApiData.from_dict(obj))
 
-    logger.info('serialized data: %s', method)
+    logger.info('serialized return: %s', method)
     return serialized
 
 
-def verify_track(classes, artist_input, track_input):
-    artist_input = normalize(artist_input)
-    track_input = normalize(track_input)
+def verify_track(classes, artist_input_norm, track_input_norm):
     for obj in classes:
-        if obj.artist_name == artist_input and obj.track_name == track_input:
-            logger.info('track record verified for: artist=%s, track=%s', artist_input, track_input)
+        if obj.artist_name == artist_input_norm and obj.track_name == track_input_norm:
+            logger.info('track record verified for: artist=%s, track=%s', artist_input_norm, track_input_norm)
             logger.info('verified record : %s', obj)
             classes = [obj]
             return classes
@@ -71,6 +69,7 @@ def parse_classes(classes):
             if feat not in features:
                 features.append(feat)
         obj.features = features
+    logger.info('parsed classes: %s', len(classes))
     return classes
 
 
@@ -190,7 +189,8 @@ def parse_features(parse):
             feature = features_parse[i].lstrip(' ').rstrip(' ').rstrip(')')
             features.append(feature)
     features = [f for f in features if f != '']
-    logger.info('features parsed: features=%s', features)
+    if len(features) > 1:
+        logger.info('features parsed: features=%s', features)
     return features
 
 
