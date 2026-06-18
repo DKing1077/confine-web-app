@@ -17,13 +17,14 @@ def search_cache(db_session, user_id, artist_input, track_input, search_text):
         return None, cache_key
 
 
-def search_pipeline(db_session, api_client, user_id, artist_input, track_input, search_text, cache_key):
+def search_pipeline(db_session, api_client, user_id, artist_input, track_input, search_input, cache_key):
     search_result = search_fetch(db_session, api_client, artist_input, track_input)
 
     search_result_dicts = [item.to_dict() for item in search_result]
     search_cache_set(cache_key, search_result_dicts)
 
-    add_search_result(db_session, user_id, search_text, search_result_dicts)
+    add_search_result(db_session, user_id, search_input, search_result_dicts)
+    logger.info('serialized data: converted - return type=%s', type(search_result_dicts[0]))
     return search_result_dicts
 
 
