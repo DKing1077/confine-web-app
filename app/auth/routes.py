@@ -1,10 +1,10 @@
 from flask_jwt_extended import create_access_token, create_refresh_token, jwt_required, get_jwt_identity
-from flask import Blueprint, request, current_app
+from marshmallow import ValidationError
+from flask import Blueprint, request
 from app.schemas import RegisterSchema, LoginSchema, SearchSchema
 from app.auth import add_user, login_user
 from app.models import Users
 from app import extensions
-from marshmallow import ValidationError
 from celery import chain
 import logging
 
