@@ -1,15 +1,15 @@
-from app.cache import search_cache_set, search_cache_get, search_cache_key
+from app.cache import cache_set, cache_get, cache_keys
 from app.search.db import *
 import logging
 
 logger = logging.getLogger(__name__)
 
 
-def search_cache(db_session, user_id, artist_input, track_input, search_input):
+def cache_pipeline(db_session, user_id, artist_input, track_input, search_input):
     artist_input_n, track_input_n = normalize(artist_input), normalize(track_input)
-    cache_key = search_cache_key(artist_input_n, track_input_n)
+    cache_key = cache_keys(artist_input_n, track_input_n)
 
-    cached_data = search_cache_get(cache_key)
+    cached_data = cache_get(cache_key)
     if cached_data:
         add_search_result(db_session, user_id, search_input, cached_data)
 
@@ -23,7 +23,7 @@ def search_pipeline(db_session, api_client, user_id, artist_input, track_input, 
     search_result = search_fetch(db_session, api_client, artist_input, track_input)
 
     search_result_dicts = [item.to_dict() for item in search_result]
-    search_cache_set(cache_key, search_result_dicts)
+    cache_set(cache_key, search_result_dicts)
 
     add_search_result(db_session, user_id, search_input, search_result_dicts)
     logger.info('serialized data: converted - return type=%s', type(search_result_dicts[0]))
