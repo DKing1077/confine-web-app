@@ -8,27 +8,42 @@ def task_name(sender):
     return sender.name.split(".")[-1]
 
 
+def get_request_id(task):
+    if not task:
+        return None
+    request = getattr(task, "request", None)
+    if not request:
+        return None
+    headers = getattr(request, "headers", None)
+    if not headers:
+        return None
+    return headers.get("request_id")
+
+
 @signals.worker_ready.connect
 def celery_started(**kwargs):
-    logger.info("\n=== CELERY STARTED ===\n")
+    logger.info("===== CELERY STARTED =====")
 
 
 @signals.task_prerun.connect
-def task_started(sender=None, **kwargs):
-    logger.info("\n[%s] start", task_name(sender))
+def task_started(sender=None, task=None, **kwargs):
+    request_id = get_request_id(task)
+    logger.info("\n[%s] START request_id=%s",task_name(sender),request_id)
 
 
-@signals.task_postrun.connect
-def task_success(sender=None, **kwargs):
-    logger.info("[%s] success", task_name(sender))
+@signals.task_success.connect
+def task_success(sender=None, result=None, task=None, **kwargs):
+    request_id = get_request_id(task)
+    logger.info("[%s] SUCCESS request_id=%s", task_name(sender), request_id)
 
 
 @signals.task_failure.connect
-def task_failed(sender=None, exception=None, **kwargs):
-    logger.error("[%s] failed: %s", task_name(sender), exception)
+def task_failed(sender=None, exception=None, task=None, **kwargs):
+    request_id = get_request_id(task)
+    logger.error("[%s] FAILED error=%s request_id=%s", task_name(sender), exception, request_id)
 
 
 @signals.task_retry.connect
-def task_retried(sender=None, reason=None, **kwargs):
-    logger.warning("[%s] retry: %s", task_name(sender), reason)
-
+def task_retried(sender=None, reason=None, task=None, **kwargs):
+    request_id = get_request_id(task)
+    logger.warning("[%s] RETRY reason=%s request_id=%s", task_name(sender), reason, request_id)
