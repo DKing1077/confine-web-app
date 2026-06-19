@@ -2,7 +2,6 @@ from app.models import Artists, Albums, Tracks, Features, SearchResults
 from app.services.musixmatch import ApiData
 from sqlalchemy import select
 import logging
-import debugpy
 import re
 
 logger = logging.getLogger(__name__)
@@ -119,7 +118,8 @@ def db_insert(db_session, classes):
         if not artist_rec:
             artist_rec = add_artist(db_session, artist_name)
         if not album_rec:
-            album_rec = add_album(db_session, obj, artist_rec)
+            if normalize_album(obj):
+                album_rec = add_album(db_session, obj, artist_rec)
         if not track_rec:
             track_rec = add_track(db_session, obj, artist_rec, album_rec)
 
@@ -127,11 +127,8 @@ def db_insert(db_session, classes):
             feat_rec = check_if_exists(db_session, Artists, 'artist_name', feat_name)
             if not feat_rec:
                 feat_rec = add_artist(db_session, artist_name=feat_name)
-                add_feature(db_session, track=track_rec, artist=feat_rec)
-            else:
-                artist = Artists(artist_name=artist_name,)
-                add_feature(db_session, track=track_rec, artist=artist)
-    logger.info('track record(s) inserted')
+            add_feature(db_session, track=track_rec, artist=feat_rec)
+    logger.info('track record(s) inserted=%s', len(classes))
 
 
 def add_artist(db_session, artist_name=None):
@@ -172,7 +169,7 @@ def add_feature(db_session, track=None, artist=None):
     )
     db_session.add(features)
     db_session.flush()
-    logger.info('feature record inserted: features=%s', features.track_name)
+    logger.info('feature record inserted: artist_name=%s', getattr(features.artist, "artist_name", None))
 
 
 def check_if_exists(db_session, table, column, value):
@@ -195,12 +192,13 @@ def parse_features(parse):
 
 
 def normalize(name):
-    name = name.lower().strip()
-    prefixes = ["dj "]
-    for prefix in prefixes:
-        if name.startswith(prefix):
-            name = name[len(prefix):]
-            break
+    if name is not None:
+        name = name.lower().strip()
+        prefixes = ["dj "]
+        for prefix in prefixes:
+            if name.startswith(prefix):
+                name = name[len(prefix):]
+                break
     return name
 
 
@@ -213,6 +211,12 @@ def add_search_result(db_session, user_id, search_input, search_result):
     db_session.add(search_record)
     db_session.flush()
     logger.info('search record inserted: search_text=%s', search_input)
+
+
+def normalize_album(obj):
+    if obj.album_name == obj.track_name:
+        return False
+    return True
 
 
 

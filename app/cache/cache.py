@@ -20,12 +20,15 @@ redis_search_cache = redis.Redis(
 
 
 # search cache key, get, set, delete
-def search_cache_key(artist_input, track_input):
-    key = f'{artist_input}:{track_input}'
+def cache_keys(artist_input, track_input):
+    if track_input:
+        key = f'{artist_input}:{track_input}'
+    else:
+        key = f'{artist_input}'
     return key
 
 
-def search_cache_get(key):
+def cache_get(key):
     cached = redis_search_cache.get(key)
     if not cached:
         logger.info("search cache miss for key: %s", key)
@@ -37,11 +40,11 @@ def search_cache_get(key):
         return None
 
 
-def search_cache_set(key, value, ttl=43200):
+def cache_set(key, value, ttl=43200):
     redis_search_cache.setex(key, ttl, json.dumps([obj for obj in value]))
     logger.info("search cache set for key: %s", key)
 
 
-def search_cache_delete(key):
+def cache_delete(key):
     redis_search_cache.delete(key)
 

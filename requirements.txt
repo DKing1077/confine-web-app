@@ -16,4 +16,5 @@ dotenv
 flask-jwt-extended
 flask-cors
 debugpy
+watchdog
 
