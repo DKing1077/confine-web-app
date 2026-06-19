@@ -65,7 +65,7 @@ def return_message(return_var, method, artist_input=None, track_input=None):
         search_type = "artist search"
         search_value = f"{artist_input}"
 
-    logger.info("\n####### RETURN LOGS START: #######")
+    logger.info("####### RETURN LOGS START: #######")
     logger.info("workflow used: %s", method)
 
     logger.info("return count: %s", len(return_var))
@@ -75,7 +75,7 @@ def return_message(return_var, method, artist_input=None, track_input=None):
     logger.info("sample: %s", sample)
 
     logger.info("return data type: %s", type(sample))
-    logger.info("####### RETURN LOGS END: #######\n")
+    logger.info("####### RETURN LOGS END: #######")
 
 
 
