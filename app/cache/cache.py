@@ -1,6 +1,5 @@
 import json
 import redis
-from app.search import normalize
 import logging
 
 logger = logging.getLogger(__name__)
