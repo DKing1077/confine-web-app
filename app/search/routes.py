@@ -39,11 +39,14 @@ def search():
         process_search_task.s(user_id)
     ).apply_async(headers={"request_id": request_id})
 
+    tabs = result.get()
+    search_tab = tabs.get("search_results", [])
+
     # 200 ok
     return {
         "route": "search",
         "status": "success",
         "job_id": result.id,
-        "result": result.get()
+        "result": search_tab
     }, 200
 
