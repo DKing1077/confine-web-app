@@ -1,5 +1,5 @@
 from flask_jwt_extended import jwt_required, get_jwt_identity
-from flask import Blueprint, request, g
+from flask import Blueprint, request
 from app.celery.tasks import process_search_task, parse_search_task
 from app.schemas import SearchSchema
 from app.extensions import limiter

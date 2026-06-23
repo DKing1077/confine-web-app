@@ -37,25 +37,3 @@ def create_tab_cache(user_id):
         tabs_id
     )
     return key
-
-
-def append_tab_list(user_id, search_result):
-    tabs = get_tab_cache(user_id)
-    existing_ids = {
-        item["commontrack_id"]
-        for item in tabs["search_results"]
-    }
-    for item in search_result:
-        track_id = item["commontrack_id"]
-        if track_id not in existing_ids:
-            tabs["search_results"].append({
-                "commontrack_id": track_id,
-                "artist_name": item["artist_name"],
-                "track_name": item["track_name"],
-            })
-            existing_ids.add(track_id)
-    key = tab_key(user_id, tabs["tabs_id"])
-    tab_cache_set(key, tabs)
-    logger.info('search appended to tab cache:search_results=%s', len(tabs["search_results"]))
-    return tabs
-
