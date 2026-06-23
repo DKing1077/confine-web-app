@@ -11,8 +11,8 @@ redis_tab_cache = redis.Redis(
 
 
 # workflow cache key, get, set, delete
-def tab_key(user_id, workflow_id):
-    key = f"workflow:{user_id}:{workflow_id}"
+def tab_key(user_id, tab_id):
+    key = f"tabs:{user_id}:{tab_id}"
     return key
 
 
