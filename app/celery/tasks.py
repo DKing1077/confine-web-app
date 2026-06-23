@@ -1,7 +1,8 @@
 from app.extensions import celery
 from app.services import AIService
 from app.services import MusixMatch
-from app.logic import search_pipeline, cache_pipeline, get_tab_cache, append_tab_list
+from app.logic import search_pipeline, cache_pipeline
+from app.tabs import append_tabs_list
 from flask import current_app
 from app import extensions
 import logging
@@ -44,7 +45,7 @@ def process_search_task(parsed_data, user_id):
         # search cache
         cached_data, cache_key = cache_pipeline(extensions.db_session, user_id, artist_input, track_input, search_input)
         if cached_data:
-            tabs = append_tab_list(user_id, cached_data)
+            tabs = append_tabs_list(user_id, cached_data, 'search_results')
             return tabs
 
         # search pipeline
@@ -52,7 +53,7 @@ def process_search_task(parsed_data, user_id):
         search_result = search_pipeline(extensions.db_session, api_client, user_id, artist_input, track_input, search_input, cache_key)
 
         # tabs result
-        tabs = append_tab_list(user_id, search_result)
+        tabs = append_tabs_list(user_id, search_result, 'search_results')
 
         extensions.db_session.commit()
         return tabs
