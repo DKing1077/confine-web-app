@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("search_form");
     const resultsDiv = document.getElementById("results");
     const searchDiv = document.getElementById("search");
+    const workspaceDiv = document.getElementById("workspace");
     const addBtn = document.getElementById("add_btn");
 
     form.addEventListener("submit", async (e) => {
@@ -36,8 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 job_id: ${data.job_id}
             `;
 
-            const results = data.result;
-            renderResults(results, searchDiv);
+            renderResults(data.result, searchDiv);
 
             form.reset();
 
@@ -88,30 +88,48 @@ document.addEventListener("DOMContentLoaded", () => {
     async function addSelectedToPanel(targetPanel) {
         const selected = document.querySelectorAll(".selected");
 
-        const items = Array.from(selected).map(el => ({
-            commontrack_id: el.dataset.id,
-            artist_name: el.dataset.artist,
-            track_name: el.dataset.track
-        }));
+        // only send commontrack_id to backend
+        const track_ids = Array.from(selected).map(el => el.dataset.id);
 
-        if (items.length === 0) return;
+        if (track_ids.length === 0) return;
 
         const token = localStorage.getItem("access_token");
 
-        await fetch("/tabs/add_to_panel", {
-            method: "POST",
-            credentials: "include",
-            headers: {
-                "Content-Type": "application/json",
-                ...(token && { "Authorization": `Bearer ${token}` })
-            },
-            body: JSON.stringify({
-                panel: targetPanel,
-                items: items
-            })
-        });
+        try {
+            const response = await fetch("/tabs/add_to_panel", {
+                method: "POST",
+                credentials: "include",
+                headers: {
+                    "Content-Type": "application/json",
+                    ...(token && { "Authorization": `Bearer ${token}` })
+                },
+                body: JSON.stringify({
+                    panel: targetPanel,
+                    items: track_ids
+                })
+            });
 
-        selected.forEach(el => el.classList.remove("selected"));
+            const data = await response.json();
+
+            resultsDiv.innerHTML = `
+                route: ${data.route}<br>
+                status: ${data.status}
+            `;
+
+            const workspaceData = data.result;
+
+            if (Array.isArray(workspaceData)) {
+                renderResults(workspaceData, workspaceDiv);
+            } else {
+                workspaceDiv.textContent = "No workspace data returned";
+            }
+
+            selected.forEach(el => el.classList.remove("selected"));
+
+        } catch (err) {
+            console.error(err);
+            resultsDiv.innerHTML = `<p style="color:red;">Error: ${err}</p>`;
+        }
     }
 
     if (addBtn) {
@@ -143,4 +161,3 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 });
-
