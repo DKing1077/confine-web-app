@@ -4,6 +4,23 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+
+def resolve_by_id(user_id, track_ids):
+    tabs = get_tab_cache(user_id)
+    search_results = tabs.get("search_results", [])
+    track_ids = [int(track_id) for track_id in track_ids]
+    lookup = {
+        item["commontrack_id"]: item
+        for item in search_results
+    }
+    resolved = [
+        lookup[track_id]
+        for track_id in track_ids
+        if track_id in lookup
+    ]
+    return resolved
+
+
 def append_tabs_list(user_id, items_list, tabs_listname):
     tabs = get_tab_cache(user_id)
     existing_ids = {
