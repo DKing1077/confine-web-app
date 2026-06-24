@@ -1,8 +1,19 @@
 from app.cache import tab_key, tab_cache_set
 from app.logic import get_tab_cache
+from app.services import MusixMatch
+from flask import current_app
 import logging
 
 logger = logging.getLogger(__name__)
+
+
+def fetch_lyrics(full_items):
+    api_client = MusixMatch(api_key=current_app.config["MUSIXMATCH_APIKEY"])
+    for item in full_items:
+        track_id = item["commontrack_id"]
+        lyrics = api_client.get_lyrics(track_id)
+        item["lyrics"] = lyrics
+    return full_items
 
 
 def resolve_by_id(user_id, track_ids):

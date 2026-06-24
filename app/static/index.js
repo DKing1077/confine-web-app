@@ -91,7 +91,14 @@ document.addEventListener("DOMContentLoaded", () => {
         // only send commontrack_id to backend
         const track_ids = Array.from(selected).map(el => el.dataset.id);
 
-        if (track_ids.length === 0) return;
+        if (track_ids.length === 0) {
+            resultsDiv.innerHTML = `
+                route: add_to_panel<br>
+                status: error<br>
+                message: no tracks selected
+            `;
+            return;
+        }
 
         const token = localStorage.getItem("access_token");
 
@@ -113,7 +120,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             resultsDiv.innerHTML = `
                 route: ${data.route}<br>
-                status: ${data.status}
+                status: ${data.status}<br>
             `;
 
             const workspaceData = data.result;
@@ -159,5 +166,4 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
     });
-
 });
