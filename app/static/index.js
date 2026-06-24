@@ -46,6 +46,11 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+    function formatFeatures(features) {
+        if (!features || !features.length) return "";
+        return ` feat. ${features.join(", ")}`;
+    }
+
     function renderResults(data, container) {
         container.innerHTML = "";
 
@@ -61,7 +66,8 @@ document.addEventListener("DOMContentLoaded", () => {
         data.forEach(item => {
             const div = document.createElement("div");
 
-            div.textContent = `${item.artist_name} - ${item.track_name}`;
+            div.textContent =
+                `${item.artist_name} - ${item.track_name}${formatFeatures(item.features)}`;
 
             div.dataset.id = item.commontrack_id;
             div.dataset.artist = item.artist_name;
@@ -137,3 +143,4 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 });
+

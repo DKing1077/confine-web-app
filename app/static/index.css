@@ -73,7 +73,7 @@ body::after {
     gap: 18px;
 }
 
-/* AUTH BUTTON (matches confine, no underline) */
+/* AUTH BUTTON */
 
 .auth-button {
     color: rgba(255,255,255,0.75);
@@ -122,7 +122,7 @@ body::after {
     transform: translateY(-1px);
 }
 
-/* USER STATUS (top center indicator) */
+/* USER STATUS */
 
 .user-status {
     position: fixed;
@@ -333,11 +333,36 @@ body::after {
     position: absolute;
     bottom: 30px;
 
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
     color: rgba(255,255,255,0.85);
     font-size: 12px;
 }
 
+#results > * {
+    display: block;
+    width: fit-content;
+
+    transform: none !important;
+    transition: none !important;
+}
+
+/* UPDATED selected state */
 .selected {
-    outline: 2px solid red;
-    background: rgba(0,0,255,0.2);
+    display: block;
+    width: fit-content;
+
+    background: rgba(255,255,255,0.15);
+    color: white;
+    border-radius: 6px;
+
+    padding: 1px 6px;
+
+    transform: none !important;
+}
+
+#results .selected:hover {
+    transform: none !important;
 }

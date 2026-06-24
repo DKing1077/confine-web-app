@@ -17,6 +17,7 @@ def append_tabs_list(user_id, items_list, tabs_listname):
                 "commontrack_id": track_id,
                 "artist_name": item["artist_name"],
                 "track_name": item["track_name"],
+                "features": item["features"]
             })
             existing_ids.add(track_id)
     key = tab_key(user_id, tabs["tabs_id"])
