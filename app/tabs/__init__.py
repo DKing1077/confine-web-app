@@ -1,1 +1,1 @@
-from .actions import append_tabs_list, resolve_by_id
+from .actions import append_tabs_list, resolve_by_id, fetch_lyrics

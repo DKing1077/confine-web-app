@@ -1,6 +1,6 @@
 import requests
-from dataclasses import dataclass
 import logging
+from dataclasses import dataclass
 
 logger = logging.getLogger(__name__)
 
@@ -68,12 +68,6 @@ class MusixMatch:
         )
         for track in tracks:
             item = track.get("track", {})
-            # lyrics = self.get_lyrics(item.get("commontrack_id"))
-            # if lyrics == "blank":
-            #     print(f'return status 202 blank response - lyrics_body : {item.get("artist_name")} - {item.get("track_name")}')
-            # if lyrics:
-            # else:
-            #     print(f'error status 404 : {item.get("artist_name")} - {item.get("track_name")}')
             classes.append(
                 ApiData(
                     artist_name=item.get("artist_name"),
@@ -101,7 +95,7 @@ class MusixMatch:
             .get("status_code")
         )
         if status_code == 404:
-            return False
+            logger.info(f'error status 404 - commontrack_id={track_id}')
         lyrics = (
             res.get("message", {})
             .get("body", {})
@@ -109,7 +103,9 @@ class MusixMatch:
             .get('lyrics_body')
         )
         if lyrics == "":
-            return "blank"
+            logger.info(f'return status 202 blank response - commontrack_id={track_id}')
+        else:
+            logger.info(f'lyrics fetched - commontrack_id={track_id}')
         return lyrics
 
 
