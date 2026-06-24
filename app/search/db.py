@@ -52,13 +52,21 @@ def verify_track(classes, artist_input_norm, track_input_norm):
 
 
 def parse_classes(classes):
+    invalid_features = ["commentary"]
+    parsed = []
     for obj in classes:
         parse = obj.artist_name.split('feat')
-        obj.artist_name = normalize(parse[0].rstrip(' '))
+        artist_name = normalize(parse[0].rstrip(' '))
+        if any(token in artist_name for token in invalid_features):
+            continue
+        obj.artist_name = artist_name
         artist_features = parse_features(parse)
 
         parse = obj.track_name.split('feat')
-        obj.track_name = normalize(parse[0].split(' (')[0])
+        track_name = normalize(parse[0].split(' (')[0])
+        if any(token in track_name for token in invalid_features):
+            continue
+        obj.track_name = track_name
         track_features = parse_features(parse)
 
         all_features = artist_features + track_features
@@ -68,8 +76,9 @@ def parse_classes(classes):
             if feat not in features:
                 features.append(feat)
         obj.features = features
-    logger.info('parsed classes: %s', len(classes))
-    return classes
+        parsed.append(obj)
+    logger.info('parsed classes: %s', len(parsed))
+    return parsed
 
 
 def db_lookup(db_session, artist_input=None, track_input=None):
@@ -81,7 +90,6 @@ def db_lookup(db_session, artist_input=None, track_input=None):
                 Tracks.track_name.ilike(f"%{track_input}%"),
                 Artists.artist_name.ilike(f"%{artist_input}%")
             ).limit(1)
-
         classes = db_session.execute(qry).scalars().all()
         if len(classes) < 1:
             api_flag = True
@@ -92,7 +100,6 @@ def db_lookup(db_session, artist_input=None, track_input=None):
         qry = qry.where(
                 Artists.artist_name.ilike(f"%{artist_input}%")
             ).limit(10)
-
         classes = db_session.execute(qry).scalars().all()
         if len(classes) < 10:
             api_flag = True
@@ -101,7 +108,6 @@ def db_lookup(db_session, artist_input=None, track_input=None):
 
     if api_flag:
         logger.info('db lookup search failed')
-
     return classes, api_flag
 
 
@@ -217,6 +223,14 @@ def normalize_album(obj):
     if obj.album_name == obj.track_name:
         return False
     return True
+
+
+def filter_tracks(api_classes_parsed, artist_input_n):
+    filtered = []
+    for obj in api_classes_parsed:
+        if artist_input_n == obj.artist_name or artist_input_n in obj.features:
+            filtered.append(obj)
+    return filtered
 
 
 

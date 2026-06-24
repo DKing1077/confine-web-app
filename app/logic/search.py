@@ -40,13 +40,14 @@ def search_fetch(db_session, api_client, artist_input, track_input):
         api_classes = api_client.track_search(artist=artist_input, track=track_input)
         api_classes_parsed = parse_classes(api_classes)
 
+        api_classes_parsed_fil = filter_tracks(api_classes_parsed, artist_input_n)
         if artist_input and track_input:
-            api_classes_parsed = verify_track(api_classes_parsed, artist_input_n, track_input_n)
+            api_classes_parsed_fil = verify_track(api_classes_parsed_fil, artist_input_n, track_input_n)
 
-        db_insert(db_session, api_classes_parsed)
-        return_message(api_classes_parsed, 'api call', artist_input, track_input)
+        db_insert(db_session, api_classes_parsed_fil)
+        return_message(api_classes_parsed_fil, 'api call', artist_input, track_input)
 
-        api_classes_ser = serialize_return(api_classes_parsed, 'api')
+        api_classes_ser = serialize_return(api_classes_parsed_fil, 'api')
         return api_classes_ser
 
     db_classes_ser = serialize_return(db_classes, 'postgres')
