@@ -1,1 +1,1 @@
-from .actions import append_tabs_list
+from .actions import append_tabs_list, resolve_by_id
