@@ -1,6 +1,6 @@
+from dataclasses import dataclass
 import requests
 import logging
-from dataclasses import dataclass
 
 logger = logging.getLogger(__name__)
 
