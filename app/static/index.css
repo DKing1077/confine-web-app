@@ -366,3 +366,82 @@ body::after {
 #results .selected:hover {
     transform: none !important;
 }
+
+/* ---------------- WORKSPACE LYRICS UI ---------------- */
+
+.track-item {
+    margin-bottom: 10px;
+    padding: 6px;
+    border-radius: 8px;
+
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.track-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.lyrics-toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    cursor: pointer;
+    user-select: none;
+
+    padding: 6px 10px;
+    margin-top: 6px;
+
+    border-radius: 6px;
+
+    background: rgba(255,255,255,0.10);
+    color: rgba(255,255,255,0.85);
+
+    font-size: 11px;
+    font-family: inherit;
+
+    border: 1px solid rgba(255,255,255,0.12);
+
+    transition: all 0.2s ease;
+}
+
+.lyrics-toggle:hover {
+    background: rgba(255,255,255,0.18);
+    transform: translateY(-1px);
+    color: white;
+}
+
+.lyrics-toggle.open {
+    background: rgba(255,255,255,0.25);
+    color: white;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    border-color: rgba(255,255,255,0.25);
+}
+
+.lyrics-box {
+    margin-top: 6px;
+    padding: 8px;
+
+    border-radius: 6px;
+
+    background: rgba(0, 0, 0, 0.25);
+    border-left: 2px solid rgba(255, 255, 255, 0.2);
+
+    font-size: 11px;
+    line-height: 1.4;
+
+    white-space: pre-wrap;
+
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.chevron {
+    font-size: 10px;
+    opacity: 0.9;
+    transition: transform 0.2s ease;
+}

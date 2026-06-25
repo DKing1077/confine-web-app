@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("search_form");
     const resultsDiv = document.getElementById("results");
     const searchDiv = document.getElementById("search");
-    const workspaceDiv = document.getElementById("workspace");
+    const workspaceDiv = document.getElementById("workspace_list"); // ONLY change needed
     const addBtn = document.getElementById("add_btn");
 
     form.addEventListener("submit", async (e) => {
@@ -54,10 +54,6 @@ document.addEventListener("DOMContentLoaded", () => {
     function renderResults(data, container) {
         container.innerHTML = "";
 
-        console.log(data);
-        console.log(typeof data);
-        console.log("JSON STRING:\n", JSON.stringify(data, null, 2));
-
         if (!Array.isArray(data) || data.length === 0) {
             container.textContent = "No results";
             return;
@@ -83,12 +79,11 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    /* ---------------- ADD SELECTED ---------------- */
+    /* ---------------- WORKSPACE ADD ---------------- */
 
     async function addSelectedToPanel(targetPanel) {
         const selected = document.querySelectorAll(".selected");
 
-        // only send commontrack_id to backend
         const track_ids = Array.from(selected).map(el => el.dataset.id);
 
         if (track_ids.length === 0) {
@@ -126,7 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const workspaceData = data.result;
 
             if (Array.isArray(workspaceData)) {
-                renderResults(workspaceData, workspaceDiv);
+                renderWorkspace(workspaceData, workspaceDiv);
             } else {
                 workspaceDiv.textContent = "No workspace data returned";
             }
@@ -142,6 +137,63 @@ document.addEventListener("DOMContentLoaded", () => {
     if (addBtn) {
         addBtn.addEventListener("click", () => {
             addSelectedToPanel("workspace");
+        });
+    }
+
+    /* ---------------- WORKSPACE RENDER (NEW FEATURE) ---------------- */
+
+    function renderWorkspace(data, container) {
+        container.innerHTML = "";
+
+        if (!Array.isArray(data) || data.length === 0) {
+            container.textContent = "No workspace data returned";
+            return;
+        }
+
+        data.forEach(item => {
+
+            const wrapper = document.createElement("div");
+            wrapper.classList.add("track-item", "selectable");
+
+            wrapper.dataset.id = item.commontrack_id;
+
+            // HEADER
+            const header = document.createElement("div");
+            header.style.display = "flex";
+            header.style.justifyContent = "space-between";
+
+            const title = document.createElement("div");
+            title.textContent = `${item.artist_name} - ${item.track_name}`;
+
+            const toggle = document.createElement("button");
+            toggle.type = "button";
+            toggle.textContent = "Lyrics";
+
+            // DROPDOWN LYRICS
+            const lyricsBox = document.createElement("div");
+            lyricsBox.style.display = "none";
+            lyricsBox.style.whiteSpace = "pre-wrap";
+            lyricsBox.style.marginTop = "6px";
+            lyricsBox.textContent = item.lyrics || "No lyrics available";
+
+            toggle.addEventListener("click", (e) => {
+                e.stopPropagation();
+                lyricsBox.style.display =
+                    lyricsBox.style.display === "none" ? "block" : "none";
+            });
+
+            header.appendChild(title);
+            header.appendChild(toggle);
+
+            wrapper.appendChild(header);
+            wrapper.appendChild(lyricsBox);
+
+            // selection logic unchanged
+            wrapper.addEventListener("click", () => {
+                wrapper.classList.toggle("selected");
+            });
+
+            container.appendChild(wrapper);
         });
     }
 

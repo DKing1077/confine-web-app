@@ -19,7 +19,7 @@ def add_to_panel():
     full_items = resolve_by_id(user_id, track_ids)
     full_items_lyrics = fetch_lyrics(full_items)
 
-    tabs = append_tabs_list(user_id, full_items, panel)
+    tabs = append_tabs_list(user_id, full_items_lyrics, panel)
     workspace_tab = tabs.get("workspace", [])
 
     return {
