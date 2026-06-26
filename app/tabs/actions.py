@@ -49,3 +49,19 @@ def append_tabs_list(user_id, items_list, tabs_listname):
     tab_cache_set(key, tabs)
     logger.info("items list appended to tabs list:%s=%s", tabs_listname, len(tabs[tabs_listname]))
     return tabs
+
+
+def remove_tabs_list(user_id, track_ids, tabs_listname):
+    tabs = get_tab_cache(user_id)
+    remove_ids = set(track_ids)
+    tabs[tabs_listname] = [
+        item
+        for item in tabs[tabs_listname]
+        if item["commontrack_id"] not in remove_ids
+    ]
+    key = tab_key(user_id, tabs["tabs_id"])
+    tab_cache_set(key, tabs)
+    logger.info("items list removed from tabs list:%s=%s", tabs_listname, len(tabs[tabs_listname]))
+    return tabs
+
+

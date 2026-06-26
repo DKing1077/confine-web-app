@@ -168,6 +168,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const toggle = document.createElement("button");
             toggle.type = "button";
             toggle.textContent = "Lyrics";
+            toggle.classList.add("lyrics-toggle");
 
             // DROPDOWN LYRICS
             const lyricsBox = document.createElement("div");
@@ -178,8 +179,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
             toggle.addEventListener("click", (e) => {
                 e.stopPropagation();
-                lyricsBox.style.display =
-                    lyricsBox.style.display === "none" ? "block" : "none";
+                const isOpen = lyricsBox.style.display === "block";
+
+                lyricsBox.style.display = isOpen ? "none" : "block";
+                toggle.classList.toggle("open", !isOpen);
             });
 
             header.appendChild(title);
