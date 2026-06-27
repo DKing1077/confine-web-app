@@ -53,7 +53,7 @@ def append_tabs_list(user_id, items_list, tabs_listname):
 
 def remove_tabs_list(user_id, track_ids, tabs_listname):
     tabs = get_tab_cache(user_id)
-    remove_ids = set(track_ids)
+    remove_ids = {int(track_id) for track_id in track_ids}
     tabs[tabs_listname] = [
         item
         for item in tabs[tabs_listname]
