@@ -9,6 +9,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const searchDiv = document.getElementById("search");
     const workspaceDiv = document.getElementById("workspace_list");
     const addBtn = document.getElementById("add_btn");
+    const removeBtn = document.getElementById("remove_btn"); // optional
+
+    // optional future tab containers (safe if missing)
+    const favoritesSearchDiv = document.getElementById("favorites_search");
 
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
@@ -65,7 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
             div.dataset.artist = item.artist_name;
             div.dataset.track = item.track_name;
 
-            div.classList.add("search-result-item");
+            div.classList.add("search-result-item", "selectable-item");
 
             div.addEventListener("click", () => {
                 div.classList.toggle("selected");
@@ -75,12 +79,30 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    function getSelectedIds(container) {
+        return Array.from(container.querySelectorAll(".selectable-item.selected"))
+            .map(el => el.dataset.id)
+            .filter(Boolean);
+    }
+
+    function getActivePanelId() {
+        const active = document.querySelector(".panel.active");
+        return active ? active.id : null;
+    }
+
+    function getSourceDivForAdd() {
+        const activeId = getActivePanelId();
+
+        if (activeId === "search") return searchDiv;
+        if (activeId === "favorites_search" && favoritesSearchDiv) return favoritesSearchDiv;
+
+        return searchDiv; // fallback
+    }
+
     /* ---------------- WORKSPACE ADD ---------------- */
 
-    async function addSelectedToPanel(targetPanel) {
-        const selected = document.querySelectorAll(".search-result-item.selected");
-
-        const track_ids = Array.from(selected).map(el => el.dataset.id);
+    async function addSelectedToPanel(targetPanel, sourceContainer = searchDiv) {
+        const track_ids = getSelectedIds(sourceContainer);
 
         if (track_ids.length === 0) {
             resultsDiv.innerHTML = `route: add_to_panel &nbsp; success: error &nbsp; message: no tracks selected`;
@@ -115,7 +137,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 workspaceDiv.textContent = "No workspace data returned";
             }
 
-            selected.forEach(el => el.classList.remove("selected"));
+            sourceContainer.querySelectorAll(".selectable-item.selected")
+                .forEach(el => el.classList.remove("selected"));
 
         } catch (err) {
             console.error(err);
@@ -125,7 +148,62 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (addBtn) {
         addBtn.addEventListener("click", () => {
-            addSelectedToPanel("workspace");
+            addSelectedToPanel("workspace", getSourceDivForAdd());
+        });
+    }
+
+    /* ---------------- WORKSPACE REMOVE ---------------- */
+
+    async function removeSelectedFromPanel(targetPanel, sourceContainer = workspaceDiv) {
+        const track_ids = getSelectedIds(sourceContainer);
+
+        if (track_ids.length === 0) {
+            resultsDiv.innerHTML = `route: remove_from_panel &nbsp; success: error &nbsp; message: no tracks selected`;
+            return;
+        }
+
+        const token = localStorage.getItem("access_token");
+
+        try {
+            const response = await fetch("/tabs/remove_from_panel", {
+                method: "POST",
+                credentials: "include",
+                headers: {
+                    "Content-Type": "application/json",
+                    ...(token && { "Authorization": `Bearer ${token}` })
+                },
+                body: JSON.stringify({
+                    panel: targetPanel,
+                    items: track_ids
+                })
+            });
+
+            const data = await response.json();
+
+            resultsDiv.innerHTML = `route: ${data.route} &nbsp; success: ${data.status} &nbsp; message: items removed`;
+
+            const workspaceData = data.result;
+            console.log("remove result count:", Array.isArray(workspaceData) ? workspaceData.length : "not-array");
+
+            if (Array.isArray(workspaceData)) {
+                renderWorkspace(workspaceData, workspaceDiv);
+            } else {
+                workspaceDiv.textContent = "No workspace data returned";
+            }
+
+            sourceContainer.querySelectorAll(".selectable-item.selected")
+                .forEach(el => el.classList.remove("selected"));
+
+        } catch (err) {
+            console.error(err);
+            resultsDiv.innerHTML = `<p style="color:red;">Error: ${err}</p>`;
+        }
+    }
+
+    if (removeBtn) {
+        removeBtn.addEventListener("click", () => {
+            // force remove source to workspace so active-tab mismatch never blocks removal
+            removeSelectedFromPanel("workspace", workspaceDiv);
         });
     }
 
@@ -153,8 +231,11 @@ document.addEventListener("DOMContentLoaded", () => {
             header.classList.add("workspace-header");
 
             const title = document.createElement("div");
-            title.classList.add("workspace-title");
+            title.classList.add("workspace-title", "selectable-item");
             title.textContent = `${item.artist_name} - ${item.track_name}`;
+            title.dataset.id = item.commontrack_id;
+            title.dataset.artist = item.artist_name;
+            title.dataset.track = item.track_name;
 
             const toggle = document.createElement("button");
             toggle.type = "button";

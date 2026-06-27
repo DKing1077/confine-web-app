@@ -401,22 +401,16 @@ body::after {
     transition: none !important;
 }
 
-/* UPDATED selected state */
-.selected {
-    display: block;
-    width: fit-content;
+/* shared selectable behavior */
+.selectable-item {
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
 
+.selectable-item.selected {
     background: rgba(255,255,255,0.15);
     color: white;
     border-radius: 6px;
-
-    padding: 1px 6px;
-
-    transform: none !important;
-}
-
-#results .selected:hover {
-    transform: none !important;
 }
 
 /* SEARCH RESULTS STYLING */
@@ -426,8 +420,6 @@ body::after {
     margin-bottom: 6px;
     padding: 4px 8px;
     border-radius: 6px;
-    cursor: pointer;
-    transition: all 0.2s ease;
     background: transparent;
     color: rgba(255,255,255,0.85);
 }
@@ -447,11 +439,10 @@ body::after {
 
 .workspace-item {
     margin-bottom: 10px;
-    padding: 6px;
-    border-radius: 8px;
-
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 0;
+    border-radius: 0;
+    background: transparent;
+    border: none;
 }
 
 .workspace-header {
@@ -464,7 +455,6 @@ body::after {
 .workspace-title {
     display: block;
     width: fit-content;
-    cursor: pointer;
     transition: all 0.2s ease;
     padding: 4px 8px;
     border-radius: 6px;
