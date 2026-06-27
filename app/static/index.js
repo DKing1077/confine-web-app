@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("search_form");
     const resultsDiv = document.getElementById("results");
     const searchDiv = document.getElementById("search");
-    const workspaceDiv = document.getElementById("workspace_list"); // ONLY change needed
+    const workspaceDiv = document.getElementById("workspace_list");
     const addBtn = document.getElementById("add_btn");
 
     form.addEventListener("submit", async (e) => {
@@ -31,11 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const data = await response.json();
 
-            resultsDiv.innerHTML = `
-                route: ${data.route}<br>
-                status: ${data.status}<br>
-                job_id: ${data.job_id}
-            `;
+            resultsDiv.innerHTML = `route: ${data.route} &nbsp; success: ${data.status} &nbsp; message: ${data.job_id}`;
 
             renderResults(data.result, searchDiv);
 
@@ -69,7 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
             div.dataset.artist = item.artist_name;
             div.dataset.track = item.track_name;
 
-            div.classList.add("selectable");
+            div.classList.add("search-result-item");
 
             div.addEventListener("click", () => {
                 div.classList.toggle("selected");
@@ -82,16 +78,12 @@ document.addEventListener("DOMContentLoaded", () => {
     /* ---------------- WORKSPACE ADD ---------------- */
 
     async function addSelectedToPanel(targetPanel) {
-        const selected = document.querySelectorAll(".selected");
+        const selected = document.querySelectorAll(".search-result-item.selected");
 
         const track_ids = Array.from(selected).map(el => el.dataset.id);
 
         if (track_ids.length === 0) {
-            resultsDiv.innerHTML = `
-                route: add_to_panel<br>
-                status: error<br>
-                message: no tracks selected
-            `;
+            resultsDiv.innerHTML = `route: add_to_panel &nbsp; success: error &nbsp; message: no tracks selected`;
             return;
         }
 
@@ -113,10 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const data = await response.json();
 
-            resultsDiv.innerHTML = `
-                route: ${data.route}<br>
-                status: ${data.status}<br>
-            `;
+            resultsDiv.innerHTML = `route: ${data.route} &nbsp; success: ${data.status} &nbsp; message: items added`;
 
             const workspaceData = data.result;
 
@@ -153,16 +142,18 @@ document.addEventListener("DOMContentLoaded", () => {
         data.forEach(item => {
 
             const wrapper = document.createElement("div");
-            wrapper.classList.add("track-item", "selectable");
+            wrapper.classList.add("workspace-item");
 
             wrapper.dataset.id = item.commontrack_id;
+            wrapper.dataset.artist = item.artist_name;
+            wrapper.dataset.track = item.track_name;
 
             // HEADER
             const header = document.createElement("div");
-            header.style.display = "flex";
-            header.style.justifyContent = "space-between";
+            header.classList.add("workspace-header");
 
             const title = document.createElement("div");
+            title.classList.add("workspace-title");
             title.textContent = `${item.artist_name} - ${item.track_name}`;
 
             const toggle = document.createElement("button");
@@ -172,9 +163,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // DROPDOWN LYRICS
             const lyricsBox = document.createElement("div");
+            lyricsBox.classList.add("lyrics-box");
             lyricsBox.style.display = "none";
-            lyricsBox.style.whiteSpace = "pre-wrap";
-            lyricsBox.style.marginTop = "6px";
             lyricsBox.textContent = item.lyrics || "No lyrics available";
 
             toggle.addEventListener("click", (e) => {
@@ -185,16 +175,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 toggle.classList.toggle("open", !isOpen);
             });
 
+            // selection logic - toggle on title click only
+            title.addEventListener("click", () => {
+                title.classList.toggle("selected");
+            });
+
             header.appendChild(title);
             header.appendChild(toggle);
 
             wrapper.appendChild(header);
             wrapper.appendChild(lyricsBox);
-
-            // selection logic unchanged
-            wrapper.addEventListener("click", () => {
-                wrapper.classList.toggle("selected");
-            });
 
             container.appendChild(wrapper);
         });

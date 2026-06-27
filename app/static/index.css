@@ -3,6 +3,7 @@
 html, body {
     height: 100%;
     margin: 0;
+    overflow: hidden;
 }
 
 /* fallback to prevent any gaps showing */
@@ -11,7 +12,7 @@ html {
 }
 
 body {
-    min-height: 100vh;
+    height: 100vh;
 
     background: linear-gradient(
         180deg,
@@ -19,6 +20,7 @@ body {
         #1e3a8a 40%,
         #2563eb 100%
     );
+    background-attachment: fixed;
 
     display: flex;
     justify-content: center;
@@ -54,7 +56,7 @@ body::after {
     inset: 0;
     z-index: -1;
 
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.15'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' result='noise'/%3E%3CfeDisplacementMap in='SourceGraphic' in2='noise' scale='120' xChannelSelector='R' yChannelSelector='G'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 
     opacity: 0.04;
     mix-blend-mode: overlay;
@@ -161,7 +163,12 @@ body::after {
     align-items: center;
 
     width: 580px;
-    margin-top: 25px;
+    margin-top: 20px;
+    margin-bottom: 80px;
+
+    height: calc(100vh - 80px);
+    display: flex;
+    flex-direction: column;
 }
 
 /* search row */
@@ -169,6 +176,7 @@ body::after {
 .search-row {
     display: flex;
     width: 385px;
+    flex-shrink: 0;
 }
 
 #search_input {
@@ -211,6 +219,8 @@ body::after {
     margin-top: 10px;
     width: 385px;
     gap: 8px;
+    flex-shrink: 0;
+    margin-bottom: 16px;
 }
 
 .action-row button,
@@ -262,8 +272,12 @@ body::after {
 /* dashboard */
 
 .dashboard {
-    margin-top: 35px;
     width: 740px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    margin-bottom: 16px;
 }
 
 /* tabs */
@@ -272,6 +286,7 @@ body::after {
     display: flex;
     flex-wrap: wrap;
     gap: 6px;
+    flex-shrink: 0;
 }
 
 .tab {
@@ -308,13 +323,38 @@ body::after {
     margin-top: 16px;
     padding: 16px;
 
-    min-height: 470px;
+    flex: 1;
+    overflow-y: auto;
 
     background: rgba(255,255,255,0.10);
     border: 1px solid rgba(255,255,255,0.25);
     border-radius: 10px;
 
     backdrop-filter: blur(8px);
+}
+
+/* Custom scrollbar */
+.tab-content::-webkit-scrollbar {
+    width: 4px;
+}
+
+.tab-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.tab-content::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.3);
+    border-radius: 2px;
+}
+
+.tab-content::-webkit-scrollbar-thumb:hover {
+    background: rgba(255,255,255,0.5);
+}
+
+/* Firefox scrollbar */
+.tab-content {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255,255,255,0.3) transparent;
 }
 
 .panel {
@@ -327,22 +367,32 @@ body::after {
     display: block;
 }
 
-/* results */
+/* results - fixed at bottom, no background */
 
 #results {
-    position: absolute;
-    bottom: 30px;
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
 
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row;
+    align-items: center;
+    gap: 0;
 
     color: rgba(255,255,255,0.85);
     font-size: 12px;
+
+    z-index: 1000;
+    pointer-events: none;
+    white-space: nowrap;
+    max-width: 90%;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 #results > * {
-    display: block;
+    display: inline-block;
     width: fit-content;
 
     transform: none !important;
@@ -367,9 +417,33 @@ body::after {
     transform: none !important;
 }
 
-/* ---------------- WORKSPACE LYRICS UI ---------------- */
+/* SEARCH RESULTS STYLING */
+.search-result-item {
+    display: block;
+    width: fit-content;
+    margin-bottom: 6px;
+    padding: 4px 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: transparent;
+    color: rgba(255,255,255,0.85);
+}
 
-.track-item {
+.search-result-item:hover {
+    background: rgba(255,255,255,0.08);
+    color: white;
+}
+
+.search-result-item.selected {
+    background: rgba(255,255,255,0.15);
+    color: white;
+    border-radius: 6px;
+}
+
+/* ============ WORKSPACE STYLING ============ */
+
+.workspace-item {
     margin-bottom: 10px;
     padding: 6px;
     border-radius: 8px;
@@ -378,11 +452,34 @@ body::after {
     border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.track-header {
+.workspace-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 10px;
+}
+
+.workspace-title {
+    display: block;
+    width: fit-content;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    padding: 4px 8px;
+    border-radius: 6px;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 12px;
+}
+
+.workspace-title:hover {
+    background: rgba(255,255,255,0.08);
+    color: white;
+}
+
+.workspace-title.selected {
+    background: rgba(255,255,255,0.15);
+    color: white;
+    border-radius: 6px;
 }
 
 .lyrics-toggle {
@@ -444,4 +541,8 @@ body::after {
     font-size: 10px;
     opacity: 0.9;
     transition: transform 0.2s ease;
+}
+
+.chevron.open {
+    transform: rotate(180deg);
 }
