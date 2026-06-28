@@ -261,9 +261,9 @@ body::after {
     text-align: center;
     text-align-last: center;
 
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
+    appearance: auto;
+    -webkit-appearance: menulist;
+    -moz-appearance: menulist;
 }
 
 .mode-select:hover {
