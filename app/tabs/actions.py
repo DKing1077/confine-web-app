@@ -61,7 +61,7 @@ def remove_tabs_list(user_id, track_ids, tabs_listname):
     ]
     key = tab_key(user_id, tabs["tabs_id"])
     tab_cache_set(key, tabs)
-    logger.info("items list removed from tabs list:%s=%s", tabs_listname, len(tabs[tabs_listname]))
+    logger.info("items list removed from tabs list:%s=%s - %s", tabs_listname, len(tabs[tabs_listname]), len(track_ids))
     return tabs
 
 
