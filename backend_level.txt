@@ -1,0 +1,92 @@
+BACKEND ENGINEERING LEVEL ASSESSMENT — confine-web-app
+=======================================================
+
+STRIPE LEVELS   : L2 (solidly), trending toward L3
+DROPBOX IEC     : IEC2 (solidly), trending toward IEC3
+
+-------------------------------------------------------
+STRIPE LEVEL BREAKDOWN
+-------------------------------------------------------
+
+  L1  — Entry / Junior
+        Works on well-defined, scoped tasks with guidance.
+        Applies basic CRUD, simple REST routes, guided by senior devs.
+
+  L2  — Mid-Level  ← YOU ARE HERE
+        Works independently on features of moderate complexity.
+        Owns a component end-to-end with minimal supervision.
+        Evidence from this project:
+          - Full JWT auth flow (register / login / logout / refresh tokens)
+            with proper access + refresh token separation.
+          - Marshmallow schemas for input validation with clean error
+            handling (400 / 401 responses).
+          - SQLAlchemy ORM with relational models (Artists, Albums, Tracks,
+            Features, Users, SearchResults) including UniqueConstraints and
+            nullable foreign keys handled correctly.
+          - Alembic for database migrations.
+          - Redis-backed search cache (cache-first strategy, 12-hr TTL,
+            separate Redis DBs for Celery broker, rate limiter, and cache).
+          - Celery task chains for async search pipeline
+            (parse_search_task → process_search_task).
+          - Flask-Limiter with per-route rate limits (3/min register,
+            5/min login, 10/min search).
+          - Third-party API integration (MusixMatch, OpenRouter/OpenAI)
+            with a service abstraction layer.
+          - Docker containerization with a multi-step Dockerfile.
+          - Structured logging across all modules.
+          - Multi-tier architecture: routes → logic → services / cache / db.
+
+  L3  — Senior
+        Leads design across systems, writes architecture docs, mentors.
+        Gaps that separate this project from L3:
+          - Test coverage is minimal (one test file, no unit tests per
+            module, no mocking of external services).
+          - Some tasks are incomplete stubs (add_to_workflow_task,
+            remove_from_workflow_task reference an undefined get_workflow).
+          - No observability beyond logging (no metrics, no tracing,
+            no alerting integration).
+          - No CI/CD pipeline in the repo.
+          - Error handling in tasks catches bare Exception; more granular
+            exception hierarchies expected at L3.
+          - No horizontal-scaling story documented (worker concurrency,
+            connection pooling tuning, etc.).
+
+-------------------------------------------------------
+DROPBOX IEC BREAKDOWN
+-------------------------------------------------------
+
+  IEC1 — Entry Level
+         Guided tasks, limited scope, heavy mentorship required.
+
+  IEC2 — Mid-Level  ← YOU ARE HERE
+         Owns features independently, solid fundamentals, growing
+         system-design instincts.
+         Evidence: same as Stripe L2 above — auth, async queues,
+         caching, ORM design, external service abstraction.
+
+  IEC3 — Senior
+         Cross-cutting design, reliability ownership, measurable
+         impact on team quality.
+         Same gaps as Stripe L3 above (tests, observability, CI/CD,
+         complete task implementations).
+
+-------------------------------------------------------
+SUMMARY
+-------------------------------------------------------
+
+Across both frameworks you sit at a confident mid-level
+(Stripe L2 / Dropbox IEC2).  The architectural decisions made here
+(async Celery pipeline, Redis cache tiering, JWT refresh strategy,
+service-layer abstraction) already show senior-level thinking in
+design.  Closing the gaps below would push you to L3 / IEC3:
+
+  1. Expand test coverage — unit tests per module, mock external APIs.
+  2. Finish incomplete Celery tasks (workflow add/remove).
+  3. Add a CI/CD pipeline (GitHub Actions or similar).
+  4. Introduce observability — Prometheus metrics or Sentry for errors.
+  5. Document the system architecture and scaling considerations.
+
+-------------------------------------------------------
+Assessment date : 2026-06-28
+Assessed by     : GitHub Copilot (automated code review)
+-------------------------------------------------------
