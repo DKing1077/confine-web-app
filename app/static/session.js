@@ -30,6 +30,7 @@ form.addEventListener('submit', async (e) => {
     try {
         const options = {
             method: "POST",
+            credentials: "include",
             headers: {
                 "Content-Type": "application/json"
             }
@@ -40,8 +41,18 @@ form.addEventListener('submit', async (e) => {
         }
 
         if (currentMode === "logout") {
-            const token = localStorage.getItem("access_token");
+            // immediate UI/state update on logout submit
+            if (typeof window.applyImmediateLogoutEffects === "function") {
+                window.applyImmediateLogoutEffects();
+            } else {
+                // fallback
+                localStorage.removeItem("access_token");
+                localStorage.removeItem("refresh_token");
+                sessionStorage.removeItem("index_page_state_v1");
+            }
 
+            // send token if present (your backend uses @jwt_required)
+            const token = localStorage.getItem("access_token");
             if (token) {
                 options.headers["Authorization"] = `Bearer ${token}`;
             }
@@ -62,13 +73,13 @@ form.addEventListener('submit', async (e) => {
             if (currentMode === "login") {
                 localStorage.setItem("access_token", data.access_token);
                 localStorage.setItem("refresh_token", data.refresh_token);
-                await window.loadSessionStatus(data.access_token);
+                await window.loadSessionStatus();
             }
 
             if (currentMode === "logout") {
                 localStorage.removeItem("access_token");
                 localStorage.removeItem("refresh_token");
-                await window.loadSessionStatus(null);
+                await window.loadSessionStatus();
             }
 
             authResults.innerHTML =

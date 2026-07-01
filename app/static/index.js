@@ -75,6 +75,38 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    // Exposed so auth/session logout flow can clear UI instantly when on this page
+    function clearIndexUI() {
+        sessionStorage.removeItem(PAGE_STATE_KEY);
+
+        if (resultsDiv) resultsDiv.innerHTML = "";
+
+        if (searchDiv) searchDiv.textContent = "SEARCH PANEL";
+        if (workspaceDiv) workspaceDiv.innerHTML = "";
+
+        const idsToClear = [
+            "concepts_list",
+            "semantics_list",
+            "instructions_list",
+            "input_list",
+            "output_list",
+            "favorites_search"
+        ];
+
+        idsToClear.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.innerHTML = "";
+        });
+
+        // reset to search tab
+        const tabs = document.querySelectorAll(".tab");
+        const panels = document.querySelectorAll(".panel");
+        tabs.forEach(t => t.classList.toggle("active", t.dataset.tab === "search"));
+        panels.forEach(p => p.classList.toggle("active", p.id === "search"));
+    }
+
+    window.clearIndexUI = clearIndexUI;
+
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
 

@@ -31,6 +31,7 @@ def resolve_by_id(user_id, track_ids):
         for track_id in track_ids
         if track_id in lookup
     ]
+    logger.info('track_ids resolved:%s', len(resolved))
     return resolved
 
 

@@ -1,4 +1,4 @@
-from app.prompts import classify_search_messages, classify_concepts_message
+from app.prompts import classify_search_messages, classify_concepts_message, classify_semantics_message
 from openai import OpenAI
 import logging
 import json
@@ -50,6 +50,21 @@ class AIService:
             temperature=0
         )
         logger.info('track concepts response: ', response)
+        return response
+
+
+    def get_semantics(self, track_lyrics):
+        messages = classify_semantics_message(track_lyrics)
+        response = self.client.chat.completions.create(
+            model=self.model,
+            messages=messages,
+            temperature=0
+        )
+        logger.info('track concepts response: ', response)
+        return response
+
+
+
 
 
 
