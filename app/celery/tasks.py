@@ -25,12 +25,8 @@ def parse_search_task(search_input):
         logger.info("parsed raw input: artist=%s, track=%s", artist_input, track_input)
         return artist_input, track_input, search_input
 
-    except Exception:
-        extensions.db_session.rollback()
-        raise
-
-    finally:
-        extensions.db_session.remove()
+    except Exception as e:
+        raise e
 
 
 # @celery.task(
@@ -66,31 +62,24 @@ def process_search_task(parsed_data, user_id):
         extensions.db_session.remove()
 
 
-@celery.task(
-    autoretry_for=(Exception,),
-    retry_backoff=True,
-    retry_kwargs={"max_retries": 3},
-)
-def add_to_workflow_task(search_input, user_id):
+# @celery.task(
+#     autoretry_for=(Exception,),
+#     retry_backoff=True,
+#     retry_kwargs={"max_retries": 3},
+# )
+def analyze_items_task(full_items_lyrics):
     try:
-        workflow = get_workflow(user_id)
+        track_lyrics = full_items_lyrics['lyrics']
+        ai_client = AIService(api_key=current_app.config["OPENROUTER_APIKEY"], model=current_app.config["OPENROUTER_MODEL"])
+
+        concepts = ai_client.get_concepts(track_lyrics)
+        logger.info("concepts fetched=%s", len(concepts))
+
+        semantics = ai_client.get_semantics(track_lyrics)
+        logger.info("semantics fetched=%s", len(semantics))
 
     except Exception as e:
         raise e
-
-
-@celery.task(
-    autoretry_for=(Exception,),
-    retry_backoff=True,
-    retry_kwargs={"max_retries": 3},
-)
-def remove_from_workflow_task(search_input, user_id):
-    try:
-        workflow = get_workflow(user_id)
-
-    except Exception as e:
-        raise e
-
 
 
 
