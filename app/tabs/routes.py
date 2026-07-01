@@ -1,6 +1,8 @@
 from flask import Blueprint, request
 from flask_jwt_extended import get_jwt_identity, jwt_required
 from app.tabs import append_tabs_list, remove_tabs_list, resolve_by_id, fetch_lyrics
+from app.celery import analyze_items_task
+from celery import chain
 import logging
 
 logger = logging.getLogger(__name__)
@@ -46,5 +48,29 @@ def remove_from_panel():
         "status": "success",
         "result": panel_tab
     }, 200
+
+
+@bp.route("/analyze_items", methods=["POST"])
+@jwt_required()
+def analyze_items():
+    data = request.get_json()
+    track_ids = data.get("items", [])
+
+    user_id = int(get_jwt_identity())
+    full_items = resolve_by_id(user_id, track_ids)
+
+    full_items_lyrics = fetch_lyrics(full_items)
+    concepts, semantics = analyze_items_task.delay(full_items_lyrics)
+
+    return {
+        "route": "analyze_items",
+        "status": "success",
+        "result": {
+            "concepts": concepts,
+            "semantics": semantics
+        }
+    }, 200
+
+
 
 

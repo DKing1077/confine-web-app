@@ -34,3 +34,13 @@ def classify_concepts_message(track_lyrics):
             "role": "user", "content": track_lyrics,
         }
     ]
+
+
+def classify_semantics_message(track_lyrics):
+    return [
+        {
+            "role": "user", "content": track_lyrics,
+        }
+    ]
+
+
