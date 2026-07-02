@@ -77,6 +77,3 @@ def return_message(return_var, method, artist_input=None, track_input=None):
 
     logger.info("return data type: %s", type(sample))
     logger.info("####### RETURN LOGS END: #######")
-
-
-

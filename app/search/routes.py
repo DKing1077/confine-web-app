@@ -49,4 +49,3 @@ def search():
         "job_id": result.id,
         "result": search_tab
     }, 200
-

@@ -1,5 +1,6 @@
 .idea/
 config.py
+script.py
 .env
 
 # py cache

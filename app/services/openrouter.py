@@ -38,30 +38,37 @@ class AIService:
 
         if track_input == 'None':
             track_input = None
-
         return artist_input, track_input
-
 
     def get_concepts(self, track_lyrics):
         messages = classify_concepts_message(track_lyrics)
         response = self.client.chat.completions.create(
-            model=self.model,
-            messages=messages,
-            temperature=0
+            model=self.model, messages=messages, temperature=0
         )
-        logger.info('track concepts response: ', response)
-        return response
+        res = response.choices[0].message.content
+        res = re.sub(r"^```(?:json)?\s*", "", res.strip())
+        res = re.sub(r"\s*```$", "", res.strip())
 
+        try:
+            track_concepts = json.loads(res)
+        except json.JSONDecodeError:
+            return None
+        return track_concepts
 
     def get_semantics(self, track_lyrics):
         messages = classify_semantics_message(track_lyrics)
         response = self.client.chat.completions.create(
-            model=self.model,
-            messages=messages,
-            temperature=0
+            model=self.model, messages=messages, temperature=0
         )
-        logger.info('track concepts response: ', response)
-        return response
+        res = response.choices[0].message.content
+        res = re.sub(r"^```(?:json)?\s*", "", res.strip())
+        res = re.sub(r"\s*```$", "", res.strip())
+
+        try:
+            track_semantics = json.loads(res)
+        except json.JSONDecodeError:
+            return None
+        return track_semantics
 
 
 
