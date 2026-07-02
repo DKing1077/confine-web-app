@@ -3,8 +3,8 @@ import json
 import re
 
 
-track_lyrics = [
-"""I stay out too late
+track_lyrics = {
+"shake it off": """I stay out too late
 Got nothing in my brain
 That's what people say, mm-mm
 That's what people say, mm-mm
@@ -25,7 +25,7 @@ Baby, I'm just gonna shake, shake, shake, shake, shake
 I shake it off, I shake it off (whoo-hoo-hoo)
 
 Heartbreakers gonna break, break, break, break, break
-And the fakers gonna fake, fake, fake, fake, fake
+And the fakers gonna fake   , fake, fake, fake, fake
 Baby, I'm just gonna shake, shake, shake, shake, shake
 I shake it off, I shake it off (whoo-hoo-hoo)
 
@@ -89,8 +89,7 @@ Shake it off, I shake it off
 I, I, I shake it off, I shake it off (you got to)
 I, I, I shake it off, I shake it off
 I, I, I shake it off, I shake it off""",
-
-"""For all the times that you rained on my parade
+"love yourself": """For all the times that you rained on my parade
 And all the clubs you get in using my name
 You think you broke my heart, oh girl, for goodness' sake
 You think I'm crying on my own, well, I ain't
@@ -151,8 +150,7 @@ Oh baby, you should go and love yourself (yeah)
 And if you think (you think) that I'm (that I'm)
 Still holdin' on to somethin' (holdin' on, no)
 You should go and love yourself""",
-
-"""Yeah
+"whisper my name": """Yeah
 Hey, hey
 Yeah
 
@@ -237,8 +235,8 @@ Yeah, hey (counted me out)
 Okay, you gotta whisper my name
 (Counted me out)
 (Thought I was gone)
-(Counted me out)"""
-]
+(Counted me out)""",
+}
 
 
 def classify_search_messages(search):
@@ -262,10 +260,10 @@ def classify_search_messages(search):
                 "Make sure to place apostrophes exactly the same as its stored on spotify, search and check its the same\n"
                 "E.G drake - gods plan should return the track name : God's Plan\n"
                 "Make sure to capitalize the letters exactly the same as its stored on spotify, search and check its the same\n"
-                "E.G \"NOKIA\" not \"nokia\" \"thank u, next\" not \"Thank you next\"\n"
+                'E.G "NOKIA" not "nokia" "thank u, next" not "Thank you next"\n'
                 "Make sure you carefully check and search for the name of a track in the input\n"
-                "E.G \"drake\" is just the name of an artist and the track should be returned as None"
-            )
+                'E.G "drake" is just the name of an artist and the track should be returned as None'
+            ),
         },
         {"role": "user", "content": search},
     ]
@@ -274,15 +272,60 @@ def classify_search_messages(search):
 def classify_concepts_message(track_lyrics):
     return [
         {
-            "role": "user", "content": track_lyrics,
-        }
+            "role": "system",
+            "content": (
+                "You are an expert writing coach and lyrical analyst.\n"
+                "Analyze a JSON dictionary: {track_name: lyrics}.\n"
+                "Return exactly one track object per input key.\n\n"
+                "Goal: extract only high-impact, reusable writing concepts that materially improve rewrites.\n"
+                "Reject generic or low-signal concepts.\n\n"
+                "Return valid JSON only with schema:\n"
+                "{\n"
+                '  "tracks": [\n'
+                "    {\n"
+                '      "track": string,\n'
+                '      "concepts": [\n'
+                "        {\n"
+                '          "name": string,\n'
+                '          "display_concept": string,\n'
+                '          "application_instruction": string,\n'
+                '          "evidence": string,\n'
+                '          "transfer_strength": integer,\n'
+                '          "user_visible_value_score": integer,\n'
+                '          "implementation_effort_score": integer\n'
+                "        }\n"
+                "      ]\n"
+                "    }\n"
+                "  ]\n"
+                "}\n\n"
+                "Rules:\n"
+                "- Output track count must equal input key count.\n"
+                "- 'track' must exactly match each input key.\n"
+                "- Max 3 concepts per track.\n"
+                "- Include only concepts that would noticeably improve a weak draft in one pass.\n"
+                "- Reject concepts that could apply to almost any song without lyric-specific proof.\n"
+                "- 'display_concept': 6-14 words, concrete and actionable.\n"
+                "- 'application_instruction': imperative verb first.\n"
+                "- 'evidence': direct quote from same track, <= 12 words.\n"
+                "- 'evidence' must be exact contiguous lyrics, no paraphrase, no ellipses.\n"
+                "- Use different evidence snippets across concepts when possible.\n"
+                "- 'transfer_strength', 'user_visible_value_score', 'implementation_effort_score' are integers 1-10.\n"
+                "- If lyrics are too sparse, return empty concepts array for that track.\n"
+                "- No markdown, no commentary, no code fences.\n"
+            ),
+        },
+        {
+            "role": "user",
+            "content": json.dumps(track_lyrics, ensure_ascii=False),
+        },
     ]
 
 
 def classify_semantics_message(track_lyrics):
     return [
         {
-            "role": "user", "content": track_lyrics,
+            "role": "user",
+            "content": track_lyrics,
         }
     ]
 
@@ -300,9 +343,7 @@ class AIService:
     def parse_search(self, search):
         messages = classify_search_messages(search)
         response = self.client.chat.completions.create(
-            model=self.model,
-            messages=messages,
-            temperature=0
+            model=self.model, messages=messages, temperature=0
         )
         res = response.choices[0].message.content
         res = re.sub(r"^```(?:json)?\s*", "", res.strip())
@@ -313,45 +354,51 @@ class AIService:
         except json.JSONDecodeError:
             return None
 
-        artist_input = search_params['artist']
-        track_input = search_params['track']
+        artist_input = search_params["artist"]
+        track_input = search_params["track"]
 
-        if track_input == 'None':
+        if track_input == "None":
             track_input = None
-
         return artist_input, track_input
-
 
     def get_concepts(self, track_lyrics):
         messages = classify_concepts_message(track_lyrics)
         response = self.client.chat.completions.create(
-            model=self.model,
-            messages=messages,
-            temperature=0
+            model=self.model, messages=messages, temperature=0
         )
-        print(response)
-        return response
+        res = response.choices[0].message.content
+        res = re.sub(r"^```(?:json)?\s*", "", res.strip())
+        res = re.sub(r"\s*```$", "", res.strip())
 
+        try:
+            track_concepts = json.loads(res)
+        except json.JSONDecodeError:
+            return None
+        return track_concepts
 
     def get_semantics(self, track_lyrics):
         messages = classify_semantics_message(track_lyrics)
         response = self.client.chat.completions.create(
-            model=self.model,
-            messages=messages,
-            temperature=0
+            model=self.model, messages=messages, temperature=0
         )
-        print(response)
-        return response
+        res = response.choices[0].message.content
+        res = re.sub(r"^```(?:json)?\s*", "", res.strip())
+        res = re.sub(r"\s*```$", "", res.strip())
+
+        try:
+            track_semantics = json.loads(res)
+        except json.JSONDecodeError:
+            return None
+        return track_semantics
 
 
 print(len(track_lyrics))
-ai_client = AIService(api_key='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', model='deepseek/deepseek-chat')
+ai_client = AIService(
+    api_key="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",
+    model="deepseek/deepseek-chat",
+)
 
 concepts = ai_client.get_concepts(track_lyrics)
-semantics = ai_client.get_semantics(track_lyrics)
+print(json.dumps(concepts, indent=2, ensure_ascii=False))
 
-
-
-
-
-
+# semantics = ai_client.get_semantics(track_lyrics)

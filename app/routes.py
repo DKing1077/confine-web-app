@@ -1,19 +1,18 @@
-from flask import render_template, Blueprint
-from celery import chain
+from flask import Blueprint, render_template
 import logging
+
 
 logger = logging.getLogger(__name__)
 bp = Blueprint("app", __name__)
 
+
 # index root
-@bp.route('/')
+@bp.route("/")
 def index():
-    return render_template('index.html')
+    return render_template("index.html")
 
 
 # session root
-@bp.route('/session')
+@bp.route("/session")
 def session_pg():
-    return render_template('session.html')
-
-
+    return render_template("session.html")

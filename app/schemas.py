@@ -21,4 +21,3 @@ class SearchSchema(Schema):
         required=True,
         validate=validate.Length(min=1)
     )
-
