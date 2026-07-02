@@ -1,12 +1,18 @@
-from flask_jwt_extended import create_access_token, create_refresh_token, jwt_required, get_jwt_identity
-from marshmallow import ValidationError
+import logging
+
 from flask import Blueprint, request
-from app.schemas import RegisterSchema, LoginSchema, SearchSchema
+from flask_jwt_extended import (
+    create_access_token,
+    create_refresh_token,
+    get_jwt_identity,
+    jwt_required,
+)
+from marshmallow import ValidationError
+
+from app import extensions
 from app.auth import add_user, login_user
 from app.models import Users
-from app import extensions
-from celery import chain
-import logging
+from app.schemas import LoginSchema, RegisterSchema, SearchSchema
 
 logger = logging.getLogger(__name__)
 
@@ -34,20 +40,12 @@ def registration():
     # 400 bad request
     result = add_user(extensions.db_session, email, password)
     if not result["ok"]:
-        return {
-            "route": "register",
-            "status": "failed",
-            "email": email
-        }, 400
+        return {"route": "register", "status": "failed", "email": email}, 400
     logger.info("user registered: %s", email)
     logger.info("user id: %s", result["user_id"])
 
     # 201 created
-    return {
-        "route": "register",
-        "status": "success",
-        "email": email
-    }, 201
+    return {"route": "register", "status": "success", "email": email}, 201
 
 
 # login route
@@ -65,11 +63,7 @@ def loginuser():
     # 401 unauthorized
     result = login_user(extensions.db_session, email, password)
     if not result["ok"]:
-        return {
-            "route": "login",
-            "status": "failed",
-            "email": email
-        }, 401
+        return {"route": "login", "status": "failed", "email": email}, 401
     logger.info("user logged in: %s", email)
     logger.info("user id: %s", result["user_id"])
 
@@ -82,7 +76,7 @@ def loginuser():
         "status": "success",
         "email": email,
         "access_token": access_token,
-        "refresh_token": refresh_token
+        "refresh_token": refresh_token,
     }, 200
 
 
@@ -93,11 +87,7 @@ def logout():
     # validate
     identity_string = get_jwt_identity()
     user_id = int(identity_string)
-    return {
-        "route": "logout",
-        "status": "success",
-        "user_id": user_id
-    }, 200
+    return {"route": "logout", "status": "success", "user_id": user_id}, 200
 
 
 # session status route
@@ -111,15 +101,10 @@ def session_status():
     # user exist in db, 200 ok
     user = extensions.db_session.query(Users).filter_by(user_id=user_id).first()
     if not user:
-        return {
-            "logged_in": False
-        }, 200
+        return {"logged_in": False}, 200
 
     # js update
-    return {
-        "logged_in": True,
-        "email": user.email
-    }, 200
+    return {"logged_in": True, "email": user.email}, 200
 
 
 # token refresh
@@ -129,11 +114,4 @@ def refresh():
     identity_string = get_jwt_identity()
     user_id = int(identity_string)
     new_access_token = create_access_token(identity=user_id)
-    return {
-        "access_token": new_access_token
-    }, 200
-
-
-
-
-
+    return {"access_token": new_access_token}, 200

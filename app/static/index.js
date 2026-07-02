@@ -1,7 +1,6 @@
-let prefix = 'search';
+let prefix = "search";
 
 document.addEventListener("DOMContentLoaded", () => {
-
     /* ---------------- SEARCH ---------------- */
 
     const form = document.getElementById("search_form");
@@ -21,12 +20,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function savePageState() {
         const activePanel = document.querySelector(".panel.active")?.id || "search";
-        sessionStorage.setItem(PAGE_STATE_KEY, JSON.stringify({
-            resultsHTML: resultsDiv?.innerHTML || "",
-            searchHTML: searchDiv?.innerHTML || "",
-            workspaceHTML: workspaceDiv?.innerHTML || "",
-            activePanel
-        }));
+        sessionStorage.setItem(
+            PAGE_STATE_KEY,
+            JSON.stringify({
+                resultsHTML: resultsDiv?.innerHTML || "",
+                searchHTML: searchDiv?.innerHTML || "",
+                workspaceHTML: workspaceDiv?.innerHTML || "",
+                activePanel,
+            })
+        );
     }
 
     function restorePageState() {
@@ -45,18 +47,18 @@ document.addEventListener("DOMContentLoaded", () => {
             const tabs = document.querySelectorAll(".tab");
             const panels = document.querySelectorAll(".panel");
 
-            tabs.forEach(t => t.classList.toggle("active", t.dataset.tab === activePanel));
-            panels.forEach(p => p.classList.toggle("active", p.id === activePanel));
+            tabs.forEach((t) => t.classList.toggle("active", t.dataset.tab === activePanel));
+            panels.forEach((p) => p.classList.toggle("active", p.id === activePanel));
 
             // re-bind clickable/selectable items restored from innerHTML
-            document.querySelectorAll(".panel .selectable-item").forEach(div => {
+            document.querySelectorAll(".panel .selectable-item").forEach((div) => {
                 div.addEventListener("click", () => {
                     div.classList.toggle("selected");
                     savePageState();
                 });
             });
 
-            workspaceDiv?.querySelectorAll(".lyrics-toggle").forEach(toggle => {
+            workspaceDiv?.querySelectorAll(".lyrics-toggle").forEach((toggle) => {
                 toggle.addEventListener("click", (e) => {
                     e.stopPropagation();
                     const wrapper = toggle.closest(".workspace-item");
@@ -69,7 +71,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     savePageState();
                 });
             });
-
         } catch (e) {
             console.warn("Failed to restore page state:", e);
         }
@@ -90,10 +91,10 @@ document.addEventListener("DOMContentLoaded", () => {
             "instructions_list",
             "input_list",
             "output_list",
-            "favorites_search"
+            "favorites_search",
         ];
 
-        idsToClear.forEach(id => {
+        idsToClear.forEach((id) => {
             const el = document.getElementById(id);
             if (el) el.innerHTML = "";
         });
@@ -101,16 +102,43 @@ document.addEventListener("DOMContentLoaded", () => {
         // reset to search tab
         const tabs = document.querySelectorAll(".tab");
         const panels = document.querySelectorAll(".panel");
-        tabs.forEach(t => t.classList.toggle("active", t.dataset.tab === "search"));
-        panels.forEach(p => p.classList.toggle("active", p.id === "search"));
+        tabs.forEach((t) => t.classList.toggle("active", t.dataset.tab === "search"));
+        panels.forEach((p) => p.classList.toggle("active", p.id === "search"));
     }
 
     window.clearIndexUI = clearIndexUI;
 
-    form.addEventListener("submit", async (e) => {
+    // ---------- robust response parser ----------
+    async function parseJsonOrThrow(response) {
+        const text = await response.text();
+        const contentType = response.headers.get("content-type") || "";
+
+        if (!contentType.includes("application/json")) {
+            const preview = text.slice(0, 220).replace(/\s+/g, " ");
+            throw new Error(
+                `Expected JSON, got ${contentType || "unknown"} (status ${response.status}). Body: ${preview}`
+            );
+        }
+
+        let data;
+        try {
+            data = JSON.parse(text);
+        } catch {
+            throw new Error(`Invalid JSON (status ${response.status})`);
+        }
+
+        if (!response.ok) {
+            throw new Error(data?.message || `Request failed with status ${response.status}`);
+        }
+
+        return data;
+    }
+
+    form?.addEventListener("submit", async (e) => {
         e.preventDefault();
 
-        const input = document.getElementById("search_input").value;
+        const inputEl = document.getElementById("search_input");
+        const input = inputEl?.value ?? "";
         const token = localStorage.getItem("access_token");
 
         try {
@@ -119,24 +147,27 @@ document.addEventListener("DOMContentLoaded", () => {
                 credentials: "include",
                 headers: {
                     "Content-Type": "application/json",
-                    ...(token && { "Authorization": `Bearer ${token}` })
+                    ...(token && { Authorization: `Bearer ${token}` }),
                 },
                 body: JSON.stringify({
-                    search_input: input
-                })
+                    search_input: input,
+                }),
             });
 
-            const data = await response.json();
+            const data = await parseJsonOrThrow(response);
 
-            resultsDiv.innerHTML = `route: ${data.route} &nbsp; status: ${data.status} &nbsp; message: ${data.job_id}`;
+            if (resultsDiv) {
+                resultsDiv.innerHTML = `route: ${data.route} &nbsp; status: ${data.status} &nbsp; message: ${data.job_id ?? ""}`;
+            }
 
             renderResults(data.result, searchDiv);
             savePageState();
 
             form.reset();
-
         } catch (err) {
-            resultsDiv.innerHTML = `<p style="color:red;">Error: ${err}</p>`;
+            if (resultsDiv) {
+                resultsDiv.innerHTML = `<p style="color:red;">Error: ${String(err)}</p>`;
+            }
             savePageState();
         }
     });
@@ -147,6 +178,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function renderResults(data, container) {
+        if (!container) return;
         container.innerHTML = "";
 
         if (!Array.isArray(data) || data.length === 0) {
@@ -154,11 +186,10 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        data.forEach(item => {
+        data.forEach((item) => {
             const div = document.createElement("div");
 
-            div.textContent =
-                `${item.artist_name} - ${item.track_name}${formatFeatures(item.features)}`;
+            div.textContent = `${item.artist_name} - ${item.track_name}${formatFeatures(item.features)}`;
 
             div.dataset.id = item.commontrack_id;
             div.dataset.artist = item.artist_name;
@@ -176,8 +207,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function getSelectedIds(container) {
+        if (!container) return [];
         return Array.from(container.querySelectorAll(".selectable-item.selected"))
-            .map(el => el.dataset.id)
+            .map((el) => el.dataset.id)
             .filter(Boolean);
     }
 
@@ -202,6 +234,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function renderGenericPanel(data, container) {
+        if (!container) return;
         container.innerHTML = "";
 
         if (!Array.isArray(data) || data.length === 0) {
@@ -209,7 +242,7 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        data.forEach(item => {
+        data.forEach((item) => {
             const div = document.createElement("div");
             div.classList.add("search-result-item", "selectable-item");
             div.dataset.id = item.commontrack_id || item.id || "";
@@ -230,7 +263,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const track_ids = getSelectedIds(sourceContainer);
 
         if (track_ids.length === 0) {
-            resultsDiv.innerHTML = `route: add_to_panel &nbsp; status: error &nbsp; message: no tracks selected`;
+            if (resultsDiv) resultsDiv.innerHTML = `route: add_to_panel &nbsp; status: error &nbsp; message: no tracks selected`;
             savePageState();
             return;
         }
@@ -243,34 +276,32 @@ document.addEventListener("DOMContentLoaded", () => {
                 credentials: "include",
                 headers: {
                     "Content-Type": "application/json",
-                    ...(token && { "Authorization": `Bearer ${token}` })
+                    ...(token && { Authorization: `Bearer ${token}` }),
                 },
                 body: JSON.stringify({
                     panel: targetPanel,
-                    items: track_ids
-                })
+                    items: track_ids,
+                }),
             });
 
-            const data = await response.json();
+            const data = await parseJsonOrThrow(response);
 
-            resultsDiv.innerHTML = `route: ${data.route} &nbsp; status: ${data.status} &nbsp; message: items added`;
+            if (resultsDiv) resultsDiv.innerHTML = `route: ${data.route} &nbsp; status: ${data.status} &nbsp; message: items added`;
 
             const workspaceData = data.result;
 
             if (Array.isArray(workspaceData)) {
                 renderWorkspace(workspaceData, workspaceDiv);
-            } else {
+            } else if (workspaceDiv) {
                 workspaceDiv.textContent = "No workspace data returned";
             }
 
-            sourceContainer.querySelectorAll(".selectable-item.selected")
-                .forEach(el => el.classList.remove("selected"));
+            sourceContainer?.querySelectorAll(".selectable-item.selected").forEach((el) => el.classList.remove("selected"));
 
             savePageState();
-
         } catch (err) {
             console.error(err);
-            resultsDiv.innerHTML = `<p style="color:red;">Error: ${err}</p>`;
+            if (resultsDiv) resultsDiv.innerHTML = `<p style="color:red;">Error: ${String(err)}</p>`;
             savePageState();
         }
     }
@@ -287,7 +318,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const track_ids = getSelectedIds(sourceContainer);
 
         if (track_ids.length === 0) {
-            resultsDiv.innerHTML = `route: remove_from_panel &nbsp; status: error &nbsp; message: no tracks selected`;
+            if (resultsDiv) resultsDiv.innerHTML = `route: remove_from_panel &nbsp; status: error &nbsp; message: no tracks selected`;
             savePageState();
             return;
         }
@@ -300,17 +331,17 @@ document.addEventListener("DOMContentLoaded", () => {
                 credentials: "include",
                 headers: {
                     "Content-Type": "application/json",
-                    ...(token && { "Authorization": `Bearer ${token}` })
+                    ...(token && { Authorization: `Bearer ${token}` }),
                 },
                 body: JSON.stringify({
                     panel: targetPanel,
-                    items: track_ids
-                })
+                    items: track_ids,
+                }),
             });
 
-            const data = await response.json();
+            const data = await parseJsonOrThrow(response);
 
-            resultsDiv.innerHTML = `route: ${data.route} &nbsp; status: ${data.status} &nbsp; message: items removed`;
+            if (resultsDiv) resultsDiv.innerHTML = `route: ${data.route} &nbsp; status: ${data.status} &nbsp; message: items removed`;
 
             const panelData = data.result;
             const targetContainer = getPanelListEl(targetPanel);
@@ -323,14 +354,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             }
 
-            sourceContainer.querySelectorAll(".selectable-item.selected")
-                .forEach(el => el.classList.remove("selected"));
+            sourceContainer?.querySelectorAll(".selectable-item.selected").forEach((el) => el.classList.remove("selected"));
 
             savePageState();
-
         } catch (err) {
             console.error(err);
-            resultsDiv.innerHTML = `<p style="color:red;">Error: ${err}</p>`;
+            if (resultsDiv) resultsDiv.innerHTML = `<p style="color:red;">Error: ${String(err)}</p>`;
             savePageState();
         }
     }
@@ -341,7 +370,9 @@ document.addEventListener("DOMContentLoaded", () => {
             const sourceContainer = getPanelListEl(activePanelId);
 
             if (!activePanelId || activePanelId === "search" || !sourceContainer) {
-                resultsDiv.innerHTML = `route: remove_from_panel &nbsp; status: error &nbsp; message: open a panel tab and highlight items to remove`;
+                if (resultsDiv) {
+                    resultsDiv.innerHTML = `route: remove_from_panel &nbsp; status: error &nbsp; message: open a panel tab and highlight items to remove`;
+                }
                 savePageState();
                 return;
             }
@@ -353,17 +384,19 @@ document.addEventListener("DOMContentLoaded", () => {
     /* ---------------- PROCESS ---------------- */
 
     async function processSelectedItems() {
-        const sourceContainer = getSourceDivForAdd();
+        const sourceContainer = workspaceDiv; // only workspace selections
         const track_ids = getSelectedIds(sourceContainer);
 
         if (track_ids.length === 0) {
-            resultsDiv.innerHTML = `route: process_items &nbsp; status: error &nbsp; message: no tracks selected`;
+            if (resultsDiv) {
+                resultsDiv.innerHTML = `route: process_items &nbsp; status: error &nbsp; message: no tracks selected in workspace`;
+            }
             savePageState();
             return;
         }
 
         const mode = (modeSelect?.value || "Transform").toLowerCase();
-        const route = mode === "analyze" ? "/analyze_items" : "/transform_items";
+        const route = mode === "analyze" ? "/tabs/analyze_items" : "/tabs/transform_items";
         const token = localStorage.getItem("access_token");
 
         try {
@@ -372,20 +405,24 @@ document.addEventListener("DOMContentLoaded", () => {
                 credentials: "include",
                 headers: {
                     "Content-Type": "application/json",
-                    ...(token && { "Authorization": `Bearer ${token}` })
+                    ...(token && { Authorization: `Bearer ${token}` }),
                 },
                 body: JSON.stringify({
-                    items: track_ids
-                })
+                    items: track_ids,
+                }),
             });
 
-            const data = await response.json();
-            resultsDiv.innerHTML = `route: ${data.route || route} &nbsp; status: ${data.status || response.status} &nbsp; message: process started`;
-            savePageState();
+            const data = await parseJsonOrThrow(response);
 
+            if (resultsDiv) {
+                resultsDiv.innerHTML = `route: ${data.route || route} &nbsp; status: ${data.status || response.status} &nbsp; message: ${data.job_id || "process started"}`;
+            }
+            savePageState();
         } catch (err) {
             console.error(err);
-            resultsDiv.innerHTML = `<p style="color:red;">Error: ${err}</p>`;
+            if (resultsDiv) {
+                resultsDiv.innerHTML = `<p style="color:red;">Error: ${String(err)}</p>`;
+            }
             savePageState();
         }
     }
@@ -397,6 +434,7 @@ document.addEventListener("DOMContentLoaded", () => {
     /* ---------------- WORKSPACE RENDER ---------------- */
 
     function renderWorkspace(data, container) {
+        if (!container) return;
         container.innerHTML = "";
 
         if (!Array.isArray(data) || data.length === 0) {
@@ -404,8 +442,7 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        data.forEach(item => {
-
+        data.forEach((item) => {
             const wrapper = document.createElement("div");
             wrapper.classList.add("workspace-item");
 
@@ -465,15 +502,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const tabs = document.querySelectorAll(".tab");
     const panels = document.querySelectorAll(".panel");
 
-    tabs.forEach(tab => {
+    tabs.forEach((tab) => {
         tab.addEventListener("click", () => {
-
             const target = tab.dataset.tab;
 
-            tabs.forEach(t => t.classList.remove("active"));
+            tabs.forEach((t) => t.classList.remove("active"));
             tab.classList.add("active");
 
-            panels.forEach(panel => {
+            panels.forEach((panel) => {
                 panel.classList.remove("active");
                 if (panel.id === target) {
                     panel.classList.add("active");

@@ -231,7 +231,3 @@ def filter_tracks(api_classes_parsed, artist_input_n):
         if artist_input_n == obj.artist_name or artist_input_n in obj.features:
             filtered.append(obj)
     return filtered
-
-
-
-

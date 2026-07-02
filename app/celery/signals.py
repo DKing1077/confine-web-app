@@ -28,7 +28,7 @@ def celery_started(**kwargs):
 @signals.task_prerun.connect
 def task_started(sender=None, task=None, **kwargs):
     request_id = get_request_id(task)
-    logger.info("\n[%s] START request_id=%s",task_name(sender),request_id)
+    logger.info("\n[%s] START request_id=%s", task_name(sender), request_id)
 
 
 @signals.task_success.connect
@@ -40,10 +40,14 @@ def task_success(sender=None, result=None, task=None, **kwargs):
 @signals.task_failure.connect
 def task_failed(sender=None, exception=None, task=None, **kwargs):
     request_id = get_request_id(task)
-    logger.error("[%s] FAILED error=%s request_id=%s", task_name(sender), exception, request_id)
+    logger.error(
+        "[%s] FAILED error=%s request_id=%s", task_name(sender), exception, request_id
+    )
 
 
 @signals.task_retry.connect
 def task_retried(sender=None, reason=None, task=None, **kwargs):
     request_id = get_request_id(task)
-    logger.warning("[%s] RETRY reason=%s request_id=%s", task_name(sender), reason, request_id)
+    logger.warning(
+        "[%s] RETRY reason=%s request_id=%s", task_name(sender), reason, request_id
+    )
