@@ -96,3 +96,5 @@ class MusixMatch:
         else:
             logger.info(f"lyrics fetched - commontrack_id={track_id}")
         return lyrics
+
+

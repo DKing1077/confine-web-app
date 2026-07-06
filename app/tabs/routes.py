@@ -3,7 +3,6 @@ from flask_jwt_extended import get_jwt_identity, jwt_required
 from app.tabs import append_tabs_list, fetch_lyrics, remove_tabs_list, resolve_by_id
 from app.celery import analyze_items_task
 import logging
-import json
 
 logger = logging.getLogger(__name__)
 bp = Blueprint("tabs", __name__, url_prefix="/tabs")
@@ -60,22 +59,25 @@ def analyze_items():
 
     # resolve from workspace - hard coded
     full_items = resolve_by_id(user_id, track_ids, 'workspace')
-    tracks_lyrics = [f'{item.get("track_name", "")}: {item.get("lyrics", "")}' for item in full_items]
+    tracks_lyrics = [
+        {
+            "commontrack_id": item.get("commontrack_id", ""),
+            "track_name": item.get("track_name", ""),
+            "lyrics": item.get("lyrics", ""),
+        }
+        for item in full_items
+    ]
 
     # analyze tracks task
     result = analyze_items_task.delay(tracks_lyrics)
-    concepts = result.get()
-
-    print(json.dumps(concepts, indent=2, ensure_ascii=False))
+    returns = result.get()
+    logger.info(returns)
 
     # append to concepts
-    # tabs = append_tabs_list(user_id, full_items_lyrics, target_panel)
-    # panel_tab = tabs.get(target_panel, [])
+    tabs = append_tabs_list(user_id, returns, 'concepts')
+    concepts = tabs.get('concepts', [])
 
-    # analyze_items = result.get()
-    # logger.info(analyze_items)
-    # search_tab = tabs.get("search_results", [])
-
+    logger.info('panel tab: %s', concepts)
     return {
         "route": "analyze_items",
         "status": "success",
