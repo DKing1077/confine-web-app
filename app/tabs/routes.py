@@ -22,12 +22,12 @@ def add_to_panel():
 
     # append to workspace - hard coded
     tabs = append_tabs_list(user_id, full_items_lyrics, target_panel)
-    panel_tab = tabs.get(target_panel, [])
+    workspace = tabs.get(target_panel, [])
 
     return {
         "route": "add_to_panel",
         "status": "success",
-        "result": panel_tab
+        "result": workspace
     }, 200
 
 
@@ -70,17 +70,48 @@ def analyze_items():
 
     # analyze tracks task
     result = analyze_items_task.delay(tracks_lyrics)
-    returns = result.get()
-    logger.info(returns)
+    concepts_return, semantics_return = result.get()
 
-    # append to concepts
-    tabs = append_tabs_list(user_id, returns, 'concepts')
+    # append concepts
+    tabs = append_tabs_list(user_id, concepts_return, 'concepts')
     concepts = tabs.get('concepts', [])
+    concepts_return = [
+        {
+            "track": t["track"],
+            "commontrack_id": t["commontrack_id"],
+            "concepts": [
+                {
+                    "name": c["name"],
+                    "display_concept": c["display_concept"],
+                    "evidence": c["evidence"]
+                }
+                for c in t["concepts"]
+            ],
+        }
+        for t in concepts
+    ]
 
-    logger.info('panel tab: %s', concepts)
+    tabs = append_tabs_list(user_id, semantics_return, 'semantics')
+    semantics = tabs.get('semantics', [])
+    semantics_return = [
+        {
+            "track": t["track"],
+            "commontrack_id": t["commontrack_id"],
+            "semantics": [
+                {
+                    "name": s["name"],
+                    "display_semantic": s["display_semantic"],
+                    "evidence": s["evidence"]
+                }
+                for s in t["semantics"]
+            ],
+        }
+        for t in semantics
+    ]
+
     return {
         "route": "analyze_items",
         "status": "success",
-        "result": {"concepts": concepts, "semantics": []}
+        "result": {"concepts": concepts_return, "semantics": semantics_return}
     }, 202
 
