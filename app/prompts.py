@@ -37,33 +37,33 @@ def classify_concepts_message(track_lyrics):
             "role": "system",
             "content": (
                 "You are an expert writing coach and lyrical analyst.\n"
-                "Analyze a JSON array of strings where each item is formatted exactly as: 'track_name: lyrics'.\n"
-                "Use lyrics only for analysis. In output, return only the track name (text before the first ':').\n"
-                "Return exactly one track object per input item.\n\n"
+                "Analyze a JSON array of objects where each item has: commontrack_id, track_name, lyrics.\n"
+                "Use lyrics only for analysis.\n"
+                "Return exactly one object per input item.\n\n"
                 "Goal: extract only high-impact, reusable writing concepts that materially improve rewrites.\n"
                 "Reject generic or low-signal concepts.\n\n"
                 "Return valid JSON only with schema:\n"
-                "{\n"
-                '  "tracks": [\n'
-                "    {\n"
-                '      "track": string,\n'
-                '      "concepts": [\n'
-                "        {\n"
-                '          "name": string,\n'
-                '          "display_concept": string,\n'
-                '          "application_instruction": string,\n'
-                '          "evidence": string,\n'
-                '          "transfer_strength": integer,\n'
-                '          "user_visible_value_score": integer,\n'
-                '          "implementation_effort_score": integer\n'
-                "        }\n"
-                "      ]\n"
-                "    }\n"
-                "  ]\n"
-                "}\n\n"
+                "[\n"
+                "  {\n"
+                '    "track": string,\n'
+                '    "commontrack_id": integer,\n'
+                '    "concepts": [\n'
+                "      {\n"
+                '        "name": string,\n'
+                '        "display_concept": string,\n'
+                '        "application_instruction": string,\n'
+                '        "evidence": string,\n'
+                '        "transfer_strength": integer,\n'
+                '        "user_visible_value_score": integer,\n'
+                '        "implementation_effort_score": integer\n'
+                "      }\n"
+                "    ]\n"
+                "  }\n"
+                "]\n\n"
                 "Rules:\n"
-                "- Output track count must equal input item count.\n"
-                "- 'track' must exactly match the track_name substring before the first ':' in each input item.\n"
+                "- Output object count must equal input item count.\n"
+                "- 'track' must exactly match input 'track_name'.\n"
+                "- 'commontrack_id' must exactly match input 'commontrack_id'.\n"
                 "- Never include lyrics text in 'track'.\n"
                 "- Max 3 concepts per track.\n"
                 "- Include only concepts that would noticeably improve a weak draft in one pass.\n"
