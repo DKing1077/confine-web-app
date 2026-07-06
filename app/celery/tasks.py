@@ -75,10 +75,10 @@ def analyze_items_task(tracks_lyrics):
         concepts = ai_client.get_concepts(tracks_lyrics)
         logger.info("concepts fetched=%s", len(concepts))
 
-        # semantics = ai_client.get_semantics(track_lyrics)
-        # logger.info("semantics fetched=%s", len(semantics))
+        semantics = ai_client.get_semantics(tracks_lyrics)
+        logger.info("semantics fetched=%s", len(semantics))
 
-        return concepts
+        return concepts, semantics
 
     except Exception:
         raise e
