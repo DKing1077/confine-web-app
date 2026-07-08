@@ -257,6 +257,50 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    // Render analyze output (concepts / semantics) as selectable per-item rows
+    function renderAnalyzePanel(groups, container, type) {
+        // type: "concepts" | "semantics"
+        if (!container) return;
+        container.innerHTML = "";
+
+        if (!Array.isArray(groups) || groups.length === 0) {
+            container.textContent = "No data";
+            return;
+        }
+
+        groups.forEach((trackGroup) => {
+            const list = Array.isArray(trackGroup[type]) ? trackGroup[type] : [];
+
+            list.forEach((item) => {
+                const div = document.createElement("div");
+                div.classList.add("search-result-item", "selectable-item");
+
+                // IMPORTANT: remove_selected uses this id
+                div.dataset.id = String(item.id || "");
+
+                // optional metadata
+                div.dataset.commontrackId = String(trackGroup.commontrack_id || "");
+                div.dataset.track = trackGroup.track || "";
+                div.dataset.kind = type;
+
+                const title =
+                    type === "concepts"
+                        ? (item.display_concept || item.name || "concept")
+                        : (item.display_semantic || item.name || "semantic");
+
+                const evidence = item.evidence ? `\n"${item.evidence}"` : "";
+                div.textContent = `${title}${evidence}`;
+
+                div.addEventListener("click", () => {
+                    div.classList.toggle("selected");
+                    savePageState();
+                });
+
+                container.appendChild(div);
+            });
+        });
+    }
+
     /* ---------------- ADD (workspace only) ---------------- */
 
     async function addSelectedToPanel(targetPanel, sourceContainer = searchDiv) {
@@ -315,10 +359,10 @@ document.addEventListener("DOMContentLoaded", () => {
     /* ---------------- REMOVE (active tab) ---------------- */
 
     async function removeSelectedFromPanel(targetPanel, sourceContainer) {
-        const track_ids = getSelectedIds(sourceContainer);
+        const item_ids = getSelectedIds(sourceContainer);
 
-        if (track_ids.length === 0) {
-            if (resultsDiv) resultsDiv.innerHTML = `route: remove_from_panel &nbsp; status: error &nbsp; message: no tracks selected`;
+        if (item_ids.length === 0) {
+            if (resultsDiv) resultsDiv.innerHTML = `route: remove_from_panel &nbsp; status: error &nbsp; message: no items selected`;
             savePageState();
             return;
         }
@@ -335,7 +379,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 },
                 body: JSON.stringify({
                     panel: targetPanel,
-                    items: track_ids,
+                    items: item_ids,
                 }),
             });
 
@@ -349,6 +393,10 @@ document.addEventListener("DOMContentLoaded", () => {
             if (targetContainer) {
                 if (targetPanel === "workspace") {
                     renderWorkspace(panelData, targetContainer);
+                } else if (targetPanel === "concepts") {
+                    renderAnalyzePanel(panelData, targetContainer, "concepts");
+                } else if (targetPanel === "semantics") {
+                    renderAnalyzePanel(panelData, targetContainer, "semantics");
                 } else {
                     renderGenericPanel(panelData, targetContainer);
                 }
@@ -417,6 +465,16 @@ document.addEventListener("DOMContentLoaded", () => {
             if (resultsDiv) {
                 resultsDiv.innerHTML = `route: ${data.route || route} &nbsp; status: ${data.status || response.status} &nbsp; message: ${data.job_id || "process started"}`;
             }
+
+            // Render analyze results into their tabs
+            if (route === "/tabs/analyze_items" && data?.result) {
+                const conceptsList = document.getElementById("concepts_list");
+                const semanticsList = document.getElementById("semantics_list");
+
+                renderAnalyzePanel(data.result.concepts, conceptsList, "concepts");
+                renderAnalyzePanel(data.result.semantics, semanticsList, "semantics");
+            }
+
             savePageState();
         } catch (err) {
             console.error(err);

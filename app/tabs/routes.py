@@ -2,6 +2,7 @@ from flask import Blueprint, request
 from flask_jwt_extended import get_jwt_identity, jwt_required
 from app.tabs import append_tabs_list, fetch_lyrics, remove_tabs_list, resolve_by_id
 from app.celery import analyze_items_task
+from app.tabs import _stable_id
 import logging
 
 logger = logging.getLogger(__name__)
@@ -90,7 +91,16 @@ def analyze_items():
         }
         for t in concepts
     ]
+    for t in concepts_return:
+        for c in t.get("concepts", []):
+            c["id"] = _stable_id(
+                "c",
+                t["commontrack_id"],
+                c.get("name", ""),
+                c.get("evidence", "")
+            )
 
+    # append semantics
     tabs = append_tabs_list(user_id, semantics_return, 'semantics')
     semantics = tabs.get('semantics', [])
     semantics_return = [
@@ -108,10 +118,18 @@ def analyze_items():
         }
         for t in semantics
     ]
+    for t in semantics_return:
+        for s in t.get("semantics", []):
+            s["id"] = _stable_id(
+                "s",
+                t["commontrack_id"],
+                s.get("name", ""),
+                s.get("evidence", "")
+            )
 
     return {
         "route": "analyze_items",
         "status": "success",
         "result": {"concepts": concepts_return, "semantics": semantics_return}
-    }, 202
+    }, 200
 
