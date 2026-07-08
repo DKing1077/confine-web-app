@@ -3,6 +3,7 @@ from app.logic import get_tab_cache
 from app.services import MusixMatch
 from flask import current_app
 import logging
+import hashlib
 
 logger = logging.getLogger(__name__)
 
@@ -71,5 +72,12 @@ def remove_tabs_list(user_id, track_ids, tabs_listname):
     tab_cache_set(key, tabs)
     logger.info("items list removed from tabs list:%s=%s - %s", tabs_listname, len(tabs[tabs_listname]), len(track_ids))
     return tabs
+
+
+def _stable_id(prefix: str, commontrack_id: int, name: str, evidence: str) -> str:
+    name_norm = (name or "").strip().lower()
+    evidence_norm = (evidence or "").strip().lower()
+    raw = f"{commontrack_id}|{name_norm}|{evidence_norm}".encode("utf-8")
+    return f"{prefix}_{hashlib.sha1(raw).hexdigest()[:16]}"
 
 
