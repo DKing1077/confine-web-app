@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from flask_jwt_extended import get_jwt_identity, jwt_required
-from app.tabs import append_tabs_list, fetch_lyrics, remove_tabs_list, resolve_by_id, stable_id
+from app.tabs import append_tabs_list, fetch_lyrics, remove_tabs_list, resolve_by_id
 from app.celery import analyze_items_task
 import logging
 
@@ -72,15 +72,7 @@ def analyze_items():
     result = analyze_items_task.delay(tracks_lyrics)
     concepts_return, semantics_return = result.get()
 
-    # attach ids, append, get display concepts
-    for t in concepts_return:
-        for c in t.get("concepts", []):
-            c["id"] = stable_id(
-                "c",
-                t["commontrack_id"],
-                c.get("name", ""),
-                c.get("evidence", "")
-            )
+    # append, get display concepts
     tabs = append_tabs_list(user_id, concepts_return, 'concepts')
     concepts = tabs.get('concepts', [])
     concepts_return = [
@@ -101,14 +93,6 @@ def analyze_items():
     ]
 
     # attach ids, append, get display semantics
-    for t in semantics_return:
-        for s in t.get("semantics", []):
-            s["id"] = stable_id(
-                "s",
-                t["commontrack_id"],
-                s.get("name", ""),
-                s.get("evidence", "")
-            )
     tabs = append_tabs_list(user_id, semantics_return, 'semantics')
     semantics = tabs.get('semantics', [])
     semantics_return = [

@@ -4,7 +4,7 @@ from app import extensions
 from app.extensions import celery
 from app.logic import cache_pipeline, search_pipeline
 from app.services import AIService, MusixMatch
-from app.tabs import append_tabs_list
+from app.tabs import append_tabs_list, stable_id
 
 logger = logging.getLogger(__name__)
 
@@ -73,9 +73,25 @@ def analyze_items_task(tracks_lyrics):
         ai_client = AIService(api_key=current_app.config["OPENROUTER_APIKEY"], model=current_app.config["OPENROUTER_MODEL"],)
 
         concepts = ai_client.get_concepts(tracks_lyrics)
+        for t in concepts:
+            for c in t.get("concepts", []):
+                c["id"] = stable_id(
+                    "c",
+                    t["commontrack_id"],
+                    c.get("name", ""),
+                    c.get("evidence", "")
+                )
         logger.info("concepts fetched=%s", len(concepts))
 
         semantics = ai_client.get_semantics(tracks_lyrics)
+        for t in semantics_return:
+            for s in t.get("semantics", []):
+                s["id"] = stable_id(
+                    "s",
+                    t["commontrack_id"],
+                    s.get("name", ""),
+                    s.get("evidence", "")
+                )
         logger.info("semantics fetched=%s", len(semantics))
 
         return concepts, semantics
