@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const removeBtn = document.getElementById("remove_btn"); // optional
     const modeSelect = document.getElementById("mode_select");
     const processBtn = document.getElementById("process_btn");
+    const inputTextarea = document.getElementById("input_textarea");
 
     // optional future tab containers (safe if missing)
     const favoritesSearchDiv = document.getElementById("favorites_search");
@@ -26,6 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 resultsHTML: resultsDiv?.innerHTML || "",
                 searchHTML: searchDiv?.innerHTML || "",
                 workspaceHTML: workspaceDiv?.innerHTML || "",
+                inputText: inputTextarea?.value || "",
                 activePanel,
             })
         );
@@ -41,6 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (resultsDiv) resultsDiv.innerHTML = state.resultsHTML || "";
             if (searchDiv) searchDiv.innerHTML = state.searchHTML || "";
             if (workspaceDiv) workspaceDiv.innerHTML = state.workspaceHTML || "";
+            if (inputTextarea) inputTextarea.value = state.inputText || "";
 
             // restore active tab/panel
             const activePanel = state.activePanel || "search";
@@ -84,6 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (searchDiv) searchDiv.textContent = "SEARCH PANEL";
         if (workspaceDiv) workspaceDiv.innerHTML = "";
+        if (inputTextarea) inputTextarea.value = "";
 
         const idsToClear = [
             "concepts_list",
@@ -164,6 +168,7 @@ document.addEventListener("DOMContentLoaded", () => {
             savePageState();
 
             form.reset();
+            if (inputTextarea) inputTextarea.value = sessionStorage.getItem(PAGE_STATE_KEY) ? JSON.parse(sessionStorage.getItem(PAGE_STATE_KEY)).inputText || "" : "";
         } catch (err) {
             if (resultsDiv) {
                 resultsDiv.innerHTML = `<p style="color:red;">Error: ${String(err)}</p>`;
@@ -487,6 +492,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (processBtn) {
         processBtn.addEventListener("click", processSelectedItems);
+    }
+
+    if (inputTextarea) {
+        inputTextarea.addEventListener("input", savePageState);
     }
 
     /* ---------------- WORKSPACE RENDER ---------------- */

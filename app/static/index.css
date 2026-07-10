@@ -369,6 +369,47 @@ body::after {
     display: block;
 }
 
+/* INPUT TAB */
+.input-box-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.input-box-wrap label {
+    color: rgba(255,255,255,0.85);
+    font-size: 12px;
+}
+
+.input-textarea {
+    width: 100%;
+    min-height: 180px;
+    resize: vertical;
+
+    padding: 8px;
+    border-radius: 4px;
+
+    background: rgba(0, 0, 0, 0.25);
+    border: none;
+
+    color: rgba(255,255,255,0.95);
+    font-family: inherit;
+    font-size: 11px;
+    line-height: 1.4;
+
+    box-sizing: border-box;
+}
+
+.input-textarea::placeholder {
+    color: rgba(255,255,255,0.55);
+}
+
+.input-textarea:focus {
+    outline: none;
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.25);
+}
+
 /* results - fixed at bottom, no background */
 
 #results {
