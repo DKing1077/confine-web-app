@@ -180,7 +180,7 @@ def classify_semantics_message(track_lyrics):
     ]
 
 
-def transform_lyrics_messages(lyrics, selected_concepts, selected_semantics):
+def transform_lyrics_messages(lyrics, selected_concepts, selected_semantics, user_instructions=None):
     return [
         {
             "role": "system",
@@ -195,13 +195,18 @@ def transform_lyrics_messages(lyrics, selected_concepts, selected_semantics):
                 "- Preserve the speaker perspective.\n"
                 "- Preserve the emotional center.\n"
                 "- Preserve the general scene or relationship logic unless the input explicitly invites a larger shift.\n"
-                "- Keep the same number of lines as the source.\n\n"
+                "- Keep the same number of lines as the source unless the user instructions explicitly request otherwise.\n\n"
                 "HOW TO USE THE SELECTED INPUTS:\n"
                 "- Concepts are craft instructions. Apply them through line design, imagery, repetition, phrasing, contrast, structural turns, sonic texture, hook logic, momentum, and memorability.\n"
                 "- Semantics are meaning instructions. Apply them through emotional logic, implication, thematic framing, relational dynamics, inner conflict, desire, vulnerability, tension, and resolution.\n"
                 "- The selected items are not labels to mention. They are invisible creative constraints that must be felt in the final lyric.\n"
                 "- Merge overlapping selected items into fewer stronger writing moves when possible.\n"
                 "- If one selected item does not fit perfectly, adapt it in spirit rather than forcing awkward wording.\n\n"
+                "HOW TO USE OPTIONAL USER INSTRUCTIONS:\n"
+                "- Follow the user's optional instructions if they do not conflict with the preservation rules above.\n"
+                "- If the user asks for a stronger stylistic shift, keep the original meaning and emotional identity unless they explicitly ask to change them.\n"
+                "- If the user asks for formatting or structural changes, follow them if possible while still applying the selected concepts and semantics.\n"
+                "- If the user instructions conflict with each other, choose the interpretation that produces the strongest coherent lyric.\n\n"
                 "QUALITY BAR:\n"
                 "- Every line should feel intentional.\n"
                 "- Favor concrete images over generic emotional wording.\n"
@@ -226,7 +231,7 @@ def transform_lyrics_messages(lyrics, selected_concepts, selected_semantics):
                 "- Do not imitate, mimic, reference, or closely echo any specific copyrighted song, lyric, or artist.\n"
                 "- Do not become cliché, melodramatic, or incoherent in pursuit of intensity.\n"
                 "- Do not overwrite every line with maximum density; vary intensity so the lyric breathes.\n"
-                "- Keep line breaks.\n"
+                "- Keep line breaks unless the user instructions explicitly request a different structure.\n"
                 "- Output the rewritten lyrics ONLY.\n"
                 "- Do NOT include markdown.\n"
                 "- Do NOT wrap output in ``` or ```text.\n\n"
@@ -234,8 +239,9 @@ def transform_lyrics_messages(lyrics, selected_concepts, selected_semantics):
                 "1. Preserve identity\n"
                 "2. Apply semantic meaning shifts\n"
                 "3. Apply concept-level craft moves\n"
-                "4. Improve imagery, rhythm, and memorability\n"
-                "5. Polish for coherence and singability\n\n"
+                "4. Apply compatible user instructions\n"
+                "5. Improve imagery, rhythm, and memorability\n"
+                "6. Polish for coherence and singability\n\n"
                 "Your output should feel like the user's lyric at its best possible version."
             )
         },
@@ -244,7 +250,8 @@ def transform_lyrics_messages(lyrics, selected_concepts, selected_semantics):
             "content": (
                 f"Source lyrics:\n{lyrics}\n\n"
                 f"Selected concepts:\n{selected_concepts}\n\n"
-                f"Selected semantics:\n{selected_semantics}"
+                f"Selected semantics:\n{selected_semantics}\n\n"
+                f"Optional user instructions:\n{user_instructions if user_instructions else 'None'}"
             )
         },
     ]
