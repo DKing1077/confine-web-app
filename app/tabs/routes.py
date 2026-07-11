@@ -75,6 +75,7 @@ def analyze_items():
     # append, get display concepts
     tabs = append_tabs_list(user_id, concepts_return, 'concepts')
     concepts = tabs.get('concepts', [])
+    logger.info("concepts:\n%s", concepts)
     concepts_return = [
         {
             "track": t["track"],
@@ -95,6 +96,7 @@ def analyze_items():
     # attach ids, append, get display semantics
     tabs = append_tabs_list(user_id, semantics_return, 'semantics')
     semantics = tabs.get('semantics', [])
+    logger.info("concepts:\n%s", semantics)
     semantics_return = [
         {
             "track": t["track"],
