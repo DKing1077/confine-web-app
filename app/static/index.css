@@ -171,6 +171,7 @@ body::after {
     height: calc(100vh - 80px);
     display: flex;
     flex-direction: column;
+    min-height: 0;
 }
 
 /* search row */
@@ -326,6 +327,7 @@ body::after {
     padding: 16px;
 
     flex: 1;
+    min-height: 0;
     overflow-y: auto;
 
     background: rgba(255,255,255,0.10);
@@ -333,6 +335,8 @@ body::after {
     border-radius: 8px;
 
     backdrop-filter: blur(8px);
+    display: flex;
+    flex-direction: column;
 }
 
 /* Custom scrollbar */
@@ -361,31 +365,49 @@ body::after {
 
 .panel {
     display: none;
+    width: 100%;
+    box-sizing: border-box;
     color: rgba(255,255,255,0.9);
     font-size: 12px;
+    min-height: 0;
 }
 
 .panel.active {
     display: block;
 }
 
-/* INPUT TAB */
+/* INPUT + INSTRUCTIONS TAB */
+#input.panel.active,
+#instructions.panel.active {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 0;
+}
+
 .input-box-wrap {
     display: flex;
     flex-direction: column;
     gap: 8px;
-    margin-bottom: 12px;
+    width: 100%;
+    box-sizing: border-box;
+    flex: 1;
+    min-height: 0;
+    margin-bottom: 0;
 }
 
 .input-box-wrap label {
     color: rgba(255,255,255,0.85);
     font-size: 12px;
+    flex-shrink: 0;
 }
 
 .input-textarea {
+    display: block;
     width: 100%;
-    min-height: 180px;
-    resize: vertical;
+    flex: 1;
+    min-height: 0;
+    resize: none;
 
     padding: 8px;
     border-radius: 4px;
@@ -407,7 +429,7 @@ body::after {
 
 .input-textarea:focus {
     outline: none;
-    box-shadow: 0 0 0 1px rgba(255,255,255,0.25);
+    box-shadow: none;
 }
 
 /* results - fixed at bottom, no background */

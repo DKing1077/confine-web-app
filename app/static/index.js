@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const modeSelect = document.getElementById("mode_select");
     const processBtn = document.getElementById("process_btn");
     const inputTextarea = document.getElementById("input_textarea");
+    const instructionsTextarea = document.getElementById("instructions_textarea");
 
     // optional future tab containers (safe if missing)
     const favoritesSearchDiv = document.getElementById("favorites_search");
@@ -28,6 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 searchHTML: searchDiv?.innerHTML || "",
                 workspaceHTML: workspaceDiv?.innerHTML || "",
                 inputText: inputTextarea?.value || "",
+                instructionsText: instructionsTextarea?.value || "",
                 activePanel,
             })
         );
@@ -44,6 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (searchDiv) searchDiv.innerHTML = state.searchHTML || "";
             if (workspaceDiv) workspaceDiv.innerHTML = state.workspaceHTML || "";
             if (inputTextarea) inputTextarea.value = state.inputText || "";
+            if (instructionsTextarea) instructionsTextarea.value = state.instructionsText || "";
 
             // restore active tab/panel
             const activePanel = state.activePanel || "search";
@@ -88,6 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (searchDiv) searchDiv.textContent = "SEARCH PANEL";
         if (workspaceDiv) workspaceDiv.innerHTML = "";
         if (inputTextarea) inputTextarea.value = "";
+        if (instructionsTextarea) instructionsTextarea.value = "";
 
         const idsToClear = [
             "concepts_list",
@@ -496,6 +500,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (inputTextarea) {
         inputTextarea.addEventListener("input", savePageState);
+    }
+
+    if (instructionsTextarea) {
+        instructionsTextarea.addEventListener("input", savePageState);
     }
 
     /* ---------------- WORKSPACE RENDER ---------------- */
