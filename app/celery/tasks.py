@@ -84,7 +84,7 @@ def analyze_items_task(tracks_lyrics):
         logger.info("concepts fetched=%s", len(concepts))
 
         semantics = ai_client.get_semantics(tracks_lyrics)
-        for t in semantics_return:
+        for t in semantics:
             for s in t.get("semantics", []):
                 s["id"] = stable_id(
                     "s",
