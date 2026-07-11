@@ -1,4 +1,5 @@
-from app.prompts import classify_search_messages, classify_concepts_message, classify_semantics_message
+from app.prompts import classify_search_messages, classify_concepts_message
+from app.prompts import transform_lyrics_messages, classify_semantics_message
 from openai import OpenAI
 import logging
 import json
@@ -22,7 +23,8 @@ class AIService:
         response = self.client.chat.completions.create(
             model=self.model,
             messages=messages,
-            temperature=0
+            temperature=0,
+            max_tokens=1200
         )
         res = response.choices[0].message.content
         res = re.sub(r"^```(?:json)?\s*", "", res.strip())
@@ -69,6 +71,20 @@ class AIService:
         except json.JSONDecodeError:
             return None
         return track_semantics
+
+    def transform_lyrics(self, lyrics, selected_concepts, selected_semantics):
+        messages = transform_lyrics_messages(
+            lyrics=lyrics,
+            selected_concepts=selected_concepts,
+            selected_semantics=selected_semantics,
+        )
+        response = self.client.chat.completions.create(
+            model=self.model, messages=messages, temperature=0.7
+        )
+        res = response.choices[0].message.content
+        res = re.sub(r"^```(?:json)?\s*", "", res.strip())
+        res = re.sub(r"\s*```$", "", res.strip())
+        return res
 
 
 
