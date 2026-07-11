@@ -72,11 +72,12 @@ class AIService:
             return None
         return track_semantics
 
-    def transform_lyrics(self, lyrics, selected_concepts, selected_semantics):
+    def transform_lyrics(self, lyrics, selected_concepts, selected_semantics, user_instructions=None):
         messages = transform_lyrics_messages(
             lyrics=lyrics,
             selected_concepts=selected_concepts,
             selected_semantics=selected_semantics,
+            user_instructions=user_instructions,
         )
         response = self.client.chat.completions.create(
             model=self.model, messages=messages, temperature=0.7
