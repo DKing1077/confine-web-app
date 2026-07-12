@@ -75,7 +75,6 @@ def analyze_items():
     # append, get display concepts
     tabs = append_tabs_list(user_id, concepts_return, 'concepts')
     concepts = tabs.get('concepts', [])
-    logger.info("concepts:\n%s", concepts)
     concepts_return = [
         {
             "track": t["track"],
@@ -96,7 +95,6 @@ def analyze_items():
     # attach ids, append, get display semantics
     tabs = append_tabs_list(user_id, semantics_return, 'semantics')
     semantics = tabs.get('semantics', [])
-    logger.info("concepts:\n%s", semantics)
     semantics_return = [
         {
             "track": t["track"],
@@ -125,8 +123,18 @@ def analyze_items():
 @jwt_required()
 def process_items():
     data = request.get_json()
-    track_ids = data.get("items", [])
     user_id = int(get_jwt_identity())
+
+    concept_ids = data.get("concept_ids", [])
+    semantic_ids = data.get("semantic_ids", [])
+    instructions = data.get("instructions", "")
+    input_text = data.get("input_text", "")
+
+    logger.info("process_items concept_ids: %s", concept_ids)
+    logger.info("process_items semantic_ids: %s", semantic_ids)
+    logger.info("process_items instructions: %s", instructions)
+    logger.info("process_items input_text: %s", input_text)
+
 
 
 

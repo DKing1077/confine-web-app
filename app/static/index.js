@@ -441,8 +441,9 @@ document.addEventListener("DOMContentLoaded", () => {
     /* ---------------- PROCESS ---------------- */
 
     async function processSelectedItems() {
-        const sourceContainer = workspaceDiv; // only workspace selections
-        const track_ids = getSelectedIds(sourceContainer);
+        const track_ids = getSelectedIds(workspaceDiv);
+        const concept_ids = getSelectedIds(document.getElementById("concepts_list"));
+        const semantic_ids = getSelectedIds(document.getElementById("semantics_list"));
 
         if (track_ids.length === 0) {
             if (resultsDiv) {
@@ -452,8 +453,11 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
+        const instructions = instructionsTextarea?.value || "";
+        const input_text = inputTextarea?.value || "";
+
         const mode = (modeSelect?.value || "Transform").toLowerCase();
-        const route = mode === "analyze" ? "/tabs/analyze_items" : "/tabs/transform_items";
+        const route = mode === "analyze" ? "/tabs/analyze_items" : "/tabs/process_items";
         const token = localStorage.getItem("access_token");
 
         try {
@@ -466,6 +470,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 },
                 body: JSON.stringify({
                     items: track_ids,
+                    concept_ids,
+                    semantic_ids,
+                    instructions,
+                    input_text,
                 }),
             });
 
