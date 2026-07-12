@@ -45,7 +45,7 @@ class AIService:
     def get_concepts(self, track_lyrics):
         messages = classify_concepts_message(track_lyrics)
         response = self.client.chat.completions.create(
-            model=self.model, messages=messages, temperature=0
+            model=self.model, messages=messages, temperature=0, max_tokens=1200
         )
         res = response.choices[0].message.content
         res = re.sub(r"^```(?:json)?\s*", "", res.strip())
@@ -60,7 +60,7 @@ class AIService:
     def get_semantics(self, track_lyrics):
         messages = classify_semantics_message(track_lyrics)
         response = self.client.chat.completions.create(
-            model=self.model, messages=messages, temperature=0
+            model=self.model, messages=messages, temperature=0, max_tokens=1200
         )
         res = response.choices[0].message.content
         res = re.sub(r"^```(?:json)?\s*", "", res.strip())
@@ -80,7 +80,7 @@ class AIService:
             user_instructions=user_instructions,
         )
         response = self.client.chat.completions.create(
-            model=self.model, messages=messages, temperature=0.7
+            model=self.model, messages=messages, temperature=0, max_tokens=1200
         )
         res = response.choices[0].message.content
         res = re.sub(r"^```(?:json)?\s*", "", res.strip())

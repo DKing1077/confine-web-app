@@ -53,9 +53,9 @@ def process_search_task(parsed_data, user_id):
         extensions.db_session.commit()
         return tabs
 
-    except Exception:
+    except Exception as e:
         extensions.db_session.rollback()
-        raise
+        raise e
 
     finally:
         extensions.db_session.remove()
@@ -96,5 +96,5 @@ def analyze_items_task(tracks_lyrics):
 
         return concepts, semantics
 
-    except Exception:
+    except Exception as e:
         raise e
