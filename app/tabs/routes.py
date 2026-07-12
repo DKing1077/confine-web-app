@@ -1,7 +1,7 @@
 from flask import Blueprint, request
 from flask_jwt_extended import get_jwt_identity, jwt_required
 from app.tabs import append_tabs_list, fetch_lyrics, remove_tabs_list, resolve_by_id
-from app.celery import analyze_items_task
+from app.celery import analyze_items_task, process_input
 import logging
 
 logger = logging.getLogger(__name__)
@@ -130,10 +130,21 @@ def process_items():
     instructions = data.get("instructions", "")
     input_text = data.get("input_text", "")
 
-    logger.info("process_items concept_ids: %s", concept_ids)
-    logger.info("process_items semantic_ids: %s", semantic_ids)
-    logger.info("process_items instructions: %s", instructions)
-    logger.info("process_items input_text: %s", input_text)
+    concepts = resolve_by_id(user_id, concept_ids, 'concepts')
+    semantics = resolve_by_id(user_id, semantic_ids, 'semantics')
+
+    display_result = process_input.delay(concepts, semantics, instructions, input_text)
+    text_result = display_result.get()
+
+    logger.info("display result:\n %s", text_result)
+    return {
+        "route": "process_items",
+        "status": "success",
+        "result": {"display_result": text_result}
+    }, 200
+
+
+
 
 
 
