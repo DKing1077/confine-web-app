@@ -18,7 +18,7 @@ logger = logging.getLogger(__name__)
 def parse_search_task(search_input):
     try:
         # ai parsing
-        ai_client = AIService(api_key=current_app.config["OPENROUTER_APIKEY"], model=current_app.config["OPENROUTER_MODEL"],)
+        ai_client = AIService(api_key=current_app.config["OPENROUTER_APIKEY"], model=current_app.config["OPENROUTER_MODEL"])
         artist_input, track_input = ai_client.parse_search(search_input)
 
         logger.info("parsed raw input: artist=%s, track=%s", artist_input, track_input)
@@ -70,7 +70,7 @@ def process_search_task(parsed_data, user_id):
 def analyze_items_task(tracks_lyrics):
     try:
         logger.info("analyzing items lyrics=%s", len(tracks_lyrics))
-        ai_client = AIService(api_key=current_app.config["OPENROUTER_APIKEY"], model=current_app.config["OPENROUTER_MODEL"],)
+        ai_client = AIService(api_key=current_app.config["OPENROUTER_APIKEY"], model=current_app.config["OPENROUTER_MODEL"])
 
         concepts = ai_client.get_concepts(tracks_lyrics)
         for t in concepts:
@@ -95,6 +95,26 @@ def analyze_items_task(tracks_lyrics):
         logger.info("semantics fetched=%s", len(semantics))
 
         return concepts, semantics
+
+    except Exception as e:
+        raise e
+
+
+# @celery.task(
+#     autoretry_for=(Exception,),
+#     retry_backoff=True,
+#     retry_kwargs={"max_retries": 3},
+# )
+@celery.task
+def process_input(concepts, semantics, instructions, input_text):
+    try:
+        applied = len(concepts) + len(semantics)
+        logger.info("applying transforms=%s", applied)
+
+        ai_client = AIService(api_key=current_app.config["OPENROUTER_APIKEY"], model=current_app.config["OPENROUTER_MODEL"])
+        display_result = ai_client.transform_lyrics(concepts, semantics, instructions, input_text)
+
+        return display_result
 
     except Exception as e:
         raise e
