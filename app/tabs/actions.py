@@ -29,23 +29,29 @@ def append_tabs_list(user_id, items_list, tabs_listname):
 
 
 def resolve_by_id(user_id, track_ids, panel):
-    """
-    this function takes the id sent from the front end
-    and resolves them to the full items from the specific panel in the tabs cache
-    """
     tabs = get_tab_cache(user_id)
-    tabs_panel = tabs.get(f'{panel}', [])
-    track_ids = [int(track_id) for track_id in track_ids]
-    lookup = {
-        item["commontrack_id"]: item
-        for item in tabs_panel
-    }
+    tabs_panel = tabs.get(panel, [])
+    if panel in ["concepts", "semantics"]:
+        track_ids = [str(track_id) for track_id in track_ids]
+        lookup = {}
+        for track_item in tabs_panel:
+            for nested_item in track_item.get(panel, []):
+                item_id = nested_item.get("id")
+                if item_id is not None:
+                    lookup[str(item_id)] = nested_item
+    else:
+        track_ids = [int(track_id) for track_id in track_ids]
+        lookup = {
+            int(item["commontrack_id"]): item
+            for item in tabs_panel
+            if item.get("commontrack_id") is not None
+        }
     resolved = [
         lookup[track_id]
         for track_id in track_ids
         if track_id in lookup
     ]
-    logger.info('track_ids resolved:%s', len(resolved))
+    logger.info("track_ids resolved: %s", len(resolved))
     return resolved
 
 
