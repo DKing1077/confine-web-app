@@ -1,0 +1,29 @@
+Backend Engineering Concepts Covered in This Project
+
+1. Flask application factory pattern and Blueprints
+2. REST API route design and JSON request handling
+3. CORS configuration for cross-origin clients
+4. Stateless JWT authentication and authorization guards
+5. Access/refresh token lifecycle management
+6. Password hashing and credential verification
+7. SQLAlchemy ORM modeling with typed mappings
+8. Relational schema design with foreign keys and many-to-many relationships
+9. Scoped database sessions and request teardown cleanup
+10. Transaction management (commit/rollback) and error handling
+11. Database migrations with Alembic
+12. Background job processing with Celery
+13. Celery task chaining/signatures for multi-step workflows
+14. Celery worker lifecycle signal hooks for observability
+15. Redis-backed caching and cache key strategy
+16. Cache TTL and invalidation-oriented key usage
+17. External service integration with HTTP clients (Requests/OpenAI)
+18. Service-layer separation for external provider logic
+19. Input validation and schema deserialization with Marshmallow
+20. Rate limiting and abuse protection with Flask-Limiter
+21. Structured logging and request-id correlation for tracing
+22. Environment-variable driven configuration management
+23. Containerization with Docker
+24. Automated backend testing with pytest
+25. Authorization boundaries across protected API endpoints
+26. Search/input parsing pipelines for backend processing
+27. Background NLP/AI processing workflows in async tasks
