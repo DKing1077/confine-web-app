@@ -1,6 +1,6 @@
 import logging
 from flask import Blueprint, request
-from flask_jwt_extended import create_access_token, create_refresh_token, get_jwt_identity, jwt_required
+from flask_jwt_extended import create_access_token, create_refresh_token, get_jwt_identity, jwt_required, get_jwt
 from marshmallow import ValidationError
 from app import extensions
 from app.auth import add_user, login_user
@@ -12,6 +12,7 @@ logger = logging.getLogger(__name__)
 bp = Blueprint("auth", __name__, url_prefix="/auth")
 limiter = extensions.limiter
 jwt = extensions.jwt
+revoked_tokens = extensions.revoked_tokens
 
 register_schema = RegisterSchema()
 login_schema = LoginSchema()
@@ -73,14 +74,25 @@ def loginuser():
     }, 200
 
 
-# logout route
+# logout
+@jwt.token_in_blocklist_loader
+def check_if_token_revoked(jwt_header, jwt_payload):
+    return jwt_payload["jti"] in revoked_tokens
+
 @bp.route("/logout", methods=["POST"])
 @jwt_required()
 def logout():
-    # validate
     identity_string = get_jwt_identity()
     user_id = int(identity_string)
-    return {"route": "logout", "status": "success", "user_id": user_id}, 200
+
+    jti = get_jwt()["jti"]
+    revoked_tokens.add(jti)
+    return {
+        "route": "logout",
+        "status": "success",
+        "message": "User logged out",
+        "user_id": user_id,
+    }, 200
 
 
 # session status route
