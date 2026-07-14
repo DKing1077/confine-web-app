@@ -376,9 +376,10 @@ body::after {
     display: block;
 }
 
-/* INPUT + INSTRUCTIONS TAB */
+/* INPUT + INSTRUCTIONS + OUTPUT TAB */
 #input.panel.active,
-#instructions.panel.active {
+#instructions.panel.active,
+#output.panel.active {
     display: flex;
     flex-direction: column;
     height: 100%;

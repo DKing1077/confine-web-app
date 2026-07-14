@@ -17,4 +17,5 @@ flask-jwt-extended
 flask-cors
 debugpy
 watchdog
+watchfiles
 

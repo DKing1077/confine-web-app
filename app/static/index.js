@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const processBtn = document.getElementById("process_btn");
     const inputTextarea = document.getElementById("input_textarea");
     const instructionsTextarea = document.getElementById("instructions_textarea");
+    const outputTextarea = document.getElementById("output_textarea");
 
     // optional future tab containers (safe if missing)
     const favoritesSearchDiv = document.getElementById("favorites_search");
@@ -30,6 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 workspaceHTML: workspaceDiv?.innerHTML || "",
                 inputText: inputTextarea?.value || "",
                 instructionsText: instructionsTextarea?.value || "",
+                outputText: outputTextarea?.value || "",
                 activePanel,
             })
         );
@@ -47,6 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (workspaceDiv) workspaceDiv.innerHTML = state.workspaceHTML || "";
             if (inputTextarea) inputTextarea.value = state.inputText || "";
             if (instructionsTextarea) instructionsTextarea.value = state.instructionsText || "";
+            if (outputTextarea) outputTextarea.value = state.outputText || "";
 
             // restore active tab/panel
             const activePanel = state.activePanel || "search";
@@ -92,6 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (workspaceDiv) workspaceDiv.innerHTML = "";
         if (inputTextarea) inputTextarea.value = "";
         if (instructionsTextarea) instructionsTextarea.value = "";
+        if (outputTextarea) outputTextarea.value = "";
 
         const idsToClear = [
             "concepts_list",
@@ -266,9 +270,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Render analyze output (concepts / semantics) as selectable per-item rows
     function renderAnalyzePanel(groups, container, type) {
-        // type: "concepts" | "semantics"
         if (!container) return;
         container.innerHTML = "";
 
@@ -284,10 +286,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const div = document.createElement("div");
                 div.classList.add("search-result-item", "selectable-item");
 
-                // IMPORTANT: remove_selected uses this id
                 div.dataset.id = String(item.id || "");
-
-                // optional metadata
                 div.dataset.commontrackId = String(trackGroup.commontrack_id || "");
                 div.dataset.track = trackGroup.track || "";
                 div.dataset.kind = type;
@@ -483,13 +482,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 resultsDiv.innerHTML = `route: ${data.route || route} &nbsp; status: ${data.status || response.status} &nbsp; message: ${data.job_id || "process started"}`;
             }
 
-            // Render analyze results into their tabs
             if (route === "/tabs/analyze_items" && data?.result) {
                 const conceptsList = document.getElementById("concepts_list");
                 const semanticsList = document.getElementById("semantics_list");
 
                 renderAnalyzePanel(data.result.concepts, conceptsList, "concepts");
                 renderAnalyzePanel(data.result.semantics, semanticsList, "semantics");
+            }
+
+            if (route === "/tabs/process_items" && data?.result?.display_result && outputTextarea) {
+                outputTextarea.value = data.result.display_result;
             }
 
             savePageState();
@@ -533,7 +535,6 @@ document.addEventListener("DOMContentLoaded", () => {
             wrapper.dataset.artist = item.artist_name;
             wrapper.dataset.track = item.track_name;
 
-            // HEADER
             const header = document.createElement("div");
             header.classList.add("workspace-header");
 
@@ -549,7 +550,6 @@ document.addEventListener("DOMContentLoaded", () => {
             toggle.textContent = "Lyrics";
             toggle.classList.add("lyrics-toggle");
 
-            // DROPDOWN LYRICS
             const lyricsBox = document.createElement("div");
             lyricsBox.classList.add("lyrics-box");
             lyricsBox.style.display = "none";
@@ -564,7 +564,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 savePageState();
             });
 
-            // selection logic - toggle on title click only
             title.addEventListener("click", () => {
                 title.classList.toggle("selected");
                 savePageState();
@@ -603,10 +602,8 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // restore previous index state on load
     restorePageState();
 
-    // save when leaving/hidden
     window.addEventListener("beforeunload", savePageState);
     document.addEventListener("visibilitychange", () => {
         if (document.visibilityState === "hidden") savePageState();
