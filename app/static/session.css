@@ -15,8 +15,8 @@ body {
     background: linear-gradient(
         180deg,
         #1e3a8a 0%,
-        #3b82f6 90%,
-        #ffffff 200%
+        #3b82f6 95%,
+        #ffffff 300%
     );
 
     display: flex;
