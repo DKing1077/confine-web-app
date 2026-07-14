@@ -8,7 +8,7 @@ html, body {
 
 /* fallback to prevent any gaps showing */
 html {
-    background: #0f172a;
+    background: #1e3a8a;
 }
 
 body {
@@ -17,9 +17,9 @@ body {
 
     background: linear-gradient(
         180deg,
-        #0f172a 0%,
-        #1e3a8a 40%,
-        #2563eb 100%
+        #1e3a8a 0%,
+        #3b82f6 80%,
+        #60a5fa 185%
     );
     background-attachment: fixed;
 
@@ -45,7 +45,7 @@ body::before {
 
     background: radial-gradient(
         circle at 50% 20%,
-        rgba(255, 255, 255, 0.08),
+        rgba(255, 255, 255, 0.10),
         transparent 55%
     );
 
@@ -202,7 +202,7 @@ body::after {
     cursor: pointer;
 
     background: rgba(255,255,255,0.9);
-    color: #1e3a8a;
+    color: #2563eb;
 
     border-radius: 0 6px 6px 0;
 
@@ -243,7 +243,7 @@ body::after {
 .action-row button {
     cursor: pointer;
     background: rgba(255,255,255,0.85);
-    color: #1e3a8a;
+    color: #2563eb;
 }
 
 .action-row button:hover {
@@ -257,7 +257,7 @@ body::after {
 .mode-select {
     cursor: pointer;
     background: rgba(255,255,255,0.85);
-    color: #1e3a8a;
+    color: #2563eb;
 
     text-align: center;
     text-align-last: center;
