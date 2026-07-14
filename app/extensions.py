@@ -18,7 +18,8 @@ limiter = Limiter(
 
 engine = None
 db_session = None
-jwt = None
+jwt = JWTManager()
+revoked_tokens = set()
 
 def init_db(config):
     global engine, db_session
@@ -60,8 +61,7 @@ def init_celery(app):
 
 
 def init_jwt(app):
-    global jwt
-    jwt = JWTManager(app)
+    jwt.init_app(app)
 
     @jwt.expired_token_loader
     def expired_token_callback(jwt_header, jwt_payload):
