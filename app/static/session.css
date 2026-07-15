@@ -94,11 +94,11 @@ a,
 
 .nav-link {
     color: #090909;
-    font-size: 14px;
+    font-size: 13px;
 
-    padding: 6px 10px;
+    padding: 5px 9px;
     border-radius: 2px;
-    border: 1.5px solid #0177A4;
+    border: 1.25px solid #0177A4;
 
     text-decoration: none;
 
@@ -166,7 +166,7 @@ a,
     padding: 6px 10px;
     font-size: 12px;
 
-    border: 1.5px solid #0177A4;
+    border: 1.25px solid #0177A4;
     outline: none;
 
     border-radius: 3px;
@@ -202,7 +202,7 @@ a,
     padding: 6px 8px;
     font-size: 12px;
 
-    border: 1.5px solid #0177A4;
+    border: 1.25px solid #0177A4;
     border-radius: 2px;
 
     cursor: pointer;
@@ -233,7 +233,7 @@ a,
     padding: 6px 10px;
     font-size: 12px;
 
-    border: 1.5px solid #0177A4;
+    border: 1.25px solid #0177A4;
     border-radius: 3px;
 
     cursor: pointer;

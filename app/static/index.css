@@ -95,18 +95,18 @@ a,
     left: 10px;
 
     display: flex;
-    gap: 18px;
+    gap: 16px;
 }
 
 /* AUTH BUTTON */
 
 .auth-button {
     color: #090909;
-    font-size: 14px;
+    font-size: 13px;
 
-    padding: 6px 10px;
+    padding: 5px 9px;
     border-radius: 2px;
-    border: 1.5px solid #0177A4;
+    border: 1.25px solid #0177A4;
 
     transition: all 0.2s ease;
     cursor: default;
@@ -135,11 +135,11 @@ a,
     right: 10px;
 
     color: #090909;
-    font-size: 14px;
+    font-size: 13px;
 
-    padding: 6px 10px;
+    padding: 5px 9px;
     border-radius: 2px;
-    border: 1.5px solid #0177A4;
+    border: 1.25px solid #0177A4;
 
     transition: all 0.2s ease;
     cursor: default;
@@ -215,7 +215,7 @@ a,
     padding: 6px 10px;
     font-size: 12px;
 
-    border: 1.5px solid #0177A4;
+    border: 1.25px solid #0177A4;
     outline: none;
 
     border-radius: 3px 0 0 3px;
@@ -235,7 +235,7 @@ a,
     padding: 6px 12px;
     font-size: 12px;
 
-    border: 1.5px solid #0177A4;
+    border: 1.25px solid #0177A4;
     border-left: none;
     cursor: pointer;
 
@@ -272,7 +272,7 @@ a,
     padding: 6px 8px;
     font-size: 12px;
 
-    border: 1.5px solid #0177A4;
+    border: 1.25px solid #0177A4;
     border-radius: 2px;
 
     font-family: inherit;
@@ -339,7 +339,7 @@ a,
     font-size: 11px;
     font-weight: 600;
 
-    border: 1.5px solid #0177A4;
+    border: 1.25px solid #0177A4;
     cursor: pointer;
 
     background: rgba(9, 9, 9, 0.08);
@@ -364,14 +364,14 @@ a,
 
 .tab-content {
     margin-top: 16px;
-    padding: 16px;
+    padding: 10px;
 
     flex: 1;
     min-height: 0;
     overflow-y: auto;
 
     background: rgba(9, 9, 9, 0.05);
-    border: 1.5px solid #0177A4;
+    border: 1.25px solid #0177A4;
     border-radius: 4px;
 
     backdrop-filter: blur(8px);
@@ -430,7 +430,7 @@ a,
 .input-box-wrap {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 6px;
     width: 100%;
     box-sizing: border-box;
     flex: 1;
@@ -456,7 +456,7 @@ a,
     border-radius: 2px;
 
     background: #ffffff;
-    border: 1.5px solid #0177A4;
+    border: 1.25px solid #0177A4;
 
     color: #090909;
     font-family: inherit;
@@ -601,7 +601,7 @@ a,
     font-family: inherit;
     font-weight: 600;
 
-    border: 1.5px solid #0177A4;
+    border: 1.25px solid #0177A4;
 
     transition: all 0.2s ease;
 }
@@ -625,7 +625,7 @@ a,
     border-radius: 2px;
 
     background: #ffffff;
-    border: 1.5px solid #0177A4;
+    border: 1.25px solid #0177A4;
 
     font-size: 11px;
     font-weight: 600;
