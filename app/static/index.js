@@ -1,6 +1,10 @@
 let prefix = "search";
 
 document.addEventListener("DOMContentLoaded", () => {
+    /* ========================================
+       DOM REFERENCES
+    ======================================== */
+
     const form = document.getElementById("search_form");
     const resultsDiv = document.getElementById("results");
     const searchDiv = document.getElementById("search");
@@ -14,34 +18,30 @@ document.addEventListener("DOMContentLoaded", () => {
     const outputTextarea = document.getElementById("output_textarea");
     const favoritesSearchDiv = document.getElementById("favorites_search");
 
+    const tabs = document.querySelectorAll(".tab");
+    const panels = document.querySelectorAll(".panel");
+
     const PAGE_STATE_KEY = "index_page_state_v1";
-    const ANIMATED_ITEMS_KEY = "index_animated_items_v1";
 
-    let animatedItems = new Set();
+    /* ========================================
+       STORAGE / PAGE STATE
+    ======================================== */
 
-    function loadAnimatedItems() {
+    function getSavedState() {
+        const raw = sessionStorage.getItem(PAGE_STATE_KEY);
+        if (!raw) return null;
+
         try {
-            const raw = sessionStorage.getItem(ANIMATED_ITEMS_KEY);
-            if (!raw) return;
-            const parsed = JSON.parse(raw);
-            if (Array.isArray(parsed)) {
-                animatedItems = new Set(parsed);
-            }
+            return JSON.parse(raw);
         } catch (e) {
-            console.warn("Failed to load animated items:", e);
-        }
-    }
-
-    function saveAnimatedItems() {
-        try {
-            sessionStorage.setItem(ANIMATED_ITEMS_KEY, JSON.stringify([...animatedItems]));
-        } catch (e) {
-            console.warn("Failed to save animated items:", e);
+            console.warn("Failed to parse saved page state:", e);
+            return null;
         }
     }
 
     function savePageState() {
         const activePanel = document.querySelector(".panel.active")?.id || "search";
+
         sessionStorage.setItem(
             PAGE_STATE_KEY,
             JSON.stringify({
@@ -57,12 +57,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function restorePageState() {
-        const raw = sessionStorage.getItem(PAGE_STATE_KEY);
-        if (!raw) return;
+        const state = getSavedState();
+        if (!state) return;
 
         try {
-            const state = JSON.parse(raw);
-
             if (resultsDiv) resultsDiv.innerHTML = state.resultsHTML || "";
             if (searchDiv) searchDiv.innerHTML = state.searchHTML || "";
             if (workspaceDiv) workspaceDiv.innerHTML = state.workspaceHTML || "";
@@ -70,33 +68,11 @@ document.addEventListener("DOMContentLoaded", () => {
             if (instructionsTextarea) instructionsTextarea.value = state.instructionsText || "";
             if (outputTextarea) outputTextarea.value = state.outputText || "";
 
-            const activePanel = state.activePanel || "search";
-            const tabs = document.querySelectorAll(".tab");
-            const panels = document.querySelectorAll(".panel");
-
-            tabs.forEach((t) => t.classList.toggle("active", t.dataset.tab === activePanel));
-            panels.forEach((p) => p.classList.toggle("active", p.id === activePanel));
-
-            document.querySelectorAll(".panel .selectable-item").forEach((div) => {
-                div.addEventListener("click", () => {
-                    div.classList.toggle("selected");
-                    savePageState();
-                });
-            });
-
-            workspaceDiv?.querySelectorAll(".lyrics-toggle").forEach((toggle) => {
-                toggle.addEventListener("click", (e) => {
-                    e.stopPropagation();
-                    const wrapper = toggle.closest(".workspace-item");
-                    const lyricsBox = wrapper?.querySelector(".lyrics-box");
-                    if (!lyricsBox) return;
-
-                    const isOpen = lyricsBox.style.display === "block";
-                    lyricsBox.style.display = isOpen ? "none" : "block";
-                    toggle.classList.toggle("open", !isOpen);
-                    savePageState();
-                });
-            });
+            setActivePanel(state.activePanel || "search");
+            rebindRestoredSelectableItems();
+            rebindRestoredWorkspaceToggles();
+            normalizeWorkspaceToggles();
+            animatePanelPopulate(state.activePanel || "search");
         } catch (e) {
             console.warn("Failed to restore page state:", e);
         }
@@ -104,8 +80,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function clearIndexUI() {
         sessionStorage.removeItem(PAGE_STATE_KEY);
-        sessionStorage.removeItem(ANIMATED_ITEMS_KEY);
-        animatedItems.clear();
 
         if (resultsDiv) resultsDiv.innerHTML = "";
         if (searchDiv) searchDiv.textContent = "SEARCH PANEL";
@@ -114,27 +88,103 @@ document.addEventListener("DOMContentLoaded", () => {
         if (instructionsTextarea) instructionsTextarea.value = "";
         if (outputTextarea) outputTextarea.value = "";
 
-        const idsToClear = [
+        [
             "concepts_list",
             "semantics_list",
             "instructions_list",
             "input_list",
             "output_list",
             "favorites_search",
-        ];
-
-        idsToClear.forEach((id) => {
+        ].forEach((id) => {
             const el = document.getElementById(id);
             if (el) el.innerHTML = "";
         });
 
-        const tabs = document.querySelectorAll(".tab");
-        const panels = document.querySelectorAll(".panel");
-        tabs.forEach((t) => t.classList.toggle("active", t.dataset.tab === "search"));
-        panels.forEach((p) => p.classList.toggle("active", p.id === "search"));
+        setActivePanel("search");
     }
 
     window.clearIndexUI = clearIndexUI;
+
+    /* ========================================
+       HELPERS
+    ======================================== */
+
+    function getToken() {
+        return localStorage.getItem("access_token");
+    }
+
+    function setStatus(route, status, message = "") {
+        if (!resultsDiv) return;
+        resultsDiv.innerHTML = `route: ${route} &nbsp; status: ${status} &nbsp; message: ${message}`;
+    }
+
+    function setError(err) {
+        if (!resultsDiv) return;
+        resultsDiv.innerHTML = `<p style="color:red;">Error: ${String(err)}</p>`;
+    }
+
+    function getActivePanelId() {
+        return document.querySelector(".panel.active")?.id || null;
+    }
+
+    function setActivePanel(panelId) {
+        tabs.forEach((tab) => {
+            tab.classList.toggle("active", tab.dataset.tab === panelId);
+        });
+
+        panels.forEach((panel) => {
+            panel.classList.toggle("active", panel.id === panelId);
+        });
+    }
+
+    function getPanelListEl(panelId) {
+        if (!panelId) return null;
+        if (panelId === "workspace") return document.getElementById("workspace_list");
+        return document.getElementById(`${panelId}_list`);
+    }
+
+    function getSourceDivForAdd() {
+        const activeId = getActivePanelId();
+        if (activeId === "search") return searchDiv;
+        if (activeId === "favorites_search" && favoritesSearchDiv) return favoritesSearchDiv;
+        return searchDiv;
+    }
+
+    function getSelectedIds(container) {
+        if (!container) return [];
+
+        return Array.from(container.querySelectorAll(".selectable-item.selected"))
+            .map((el) => el.dataset.id)
+            .filter(Boolean);
+    }
+
+    function clearSelectedItems(container) {
+        container?.querySelectorAll(".selectable-item.selected").forEach((el) => {
+            el.classList.remove("selected");
+        });
+    }
+
+    function toggleSelected(el) {
+        el.classList.toggle("selected");
+        savePageState();
+    }
+
+    function createSelectableResult(text, dataset = {}) {
+        const div = document.createElement("div");
+        div.classList.add("search-result-item", "selectable-item");
+        div.textContent = text;
+
+        Object.entries(dataset).forEach(([key, value]) => {
+            div.dataset[key] = value;
+        });
+
+        div.addEventListener("click", () => toggleSelected(div));
+        return div;
+    }
+
+    /* ========================================
+       FETCH / RESPONSE HANDLING
+    ======================================== */
 
     async function parseJsonOrThrow(response) {
         const text = await response.text();
@@ -161,94 +211,122 @@ document.addEventListener("DOMContentLoaded", () => {
         return data;
     }
 
-    function makeAnimationKey(panelType, item) {
-        if (panelType === "workspace" || panelType === "search") {
-            return `${panelType}:${String(item.commontrack_id || item.id || `${item.artist_name || ""}-${item.track_name || item.name || ""}`)}`;
-        }
+    async function postJson(url, body) {
+        const token = getToken();
 
-        return `${panelType}:${String(item.id || item.commontrack_id || item.display_concept || item.display_semantic || item.name || "")}`;
+        const response = await fetch(url, {
+            method: "POST",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+                ...(token && { Authorization: `Bearer ${token}` }),
+            },
+            body: JSON.stringify(body),
+        });
+
+        return parseJsonOrThrow(response);
     }
 
-    function isFirstAppearance(panelType, item) {
-        const key = makeAnimationKey(panelType, item);
-        if (animatedItems.has(key)) return false;
-        animatedItems.add(key);
-        saveAnimatedItems();
-        return true;
-    }
+    /* ========================================
+       ANIMATION HELPERS
+    ======================================== */
 
-    function applyEnterAnimation(el, index) {
+    function applyPopulateAnimation(el, index) {
         if (!el) return;
-        el.classList.add("item-enter");
+
+        el.classList.remove("item-populate");
         el.style.animationDelay = `${index * 45}ms`;
+
+        requestAnimationFrame(() => {
+            el.classList.add("item-populate");
+        });
+
         el.addEventListener(
             "animationend",
             () => {
-                el.classList.remove("item-enter");
+                el.classList.remove("item-populate");
                 el.style.animationDelay = "";
             },
             { once: true }
         );
     }
 
-    function applyReenterAnimation(el) {
-        if (!el) return;
-        el.classList.add("item-reenter");
-        el.addEventListener(
-            "animationend",
-            () => {
-                el.classList.remove("item-reenter");
-            },
-            { once: true }
-        );
+    function getPanelAnimationItems(panelId) {
+        if (panelId === "search") {
+            return Array.from(searchDiv?.querySelectorAll(".search-result-item") || []);
+        }
+
+        if (panelId === "workspace") {
+            return Array.from(workspaceDiv?.querySelectorAll(".workspace-item") || []);
+        }
+
+        if (panelId === "concepts" || panelId === "semantics") {
+            const listEl = document.getElementById(`${panelId}_list`);
+            return Array.from(listEl?.querySelectorAll(".search-result-item") || []);
+        }
+
+        return [];
     }
 
-    form?.addEventListener("submit", async (e) => {
-        e.preventDefault();
+    function animatePanelPopulate(panelId) {
+        if (!["search", "workspace", "concepts", "semantics"].includes(panelId)) return;
 
-        const inputEl = document.getElementById("search_input");
-        const input = inputEl?.value ?? "";
-        const token = localStorage.getItem("access_token");
+        getPanelAnimationItems(panelId).forEach((el, index) => {
+            applyPopulateAnimation(el, index);
+        });
+    }
 
-        try {
-            const response = await fetch(`/${prefix}`, {
-                method: "POST",
-                credentials: "include",
-                headers: {
-                    "Content-Type": "application/json",
-                    ...(token && { Authorization: `Bearer ${token}` }),
-                },
-                body: JSON.stringify({
-                    search_input: input,
-                }),
+    /* ========================================
+       WORKSPACE TOGGLE REBIND / NORMALIZE
+    ======================================== */
+
+    function normalizeWorkspaceToggles() {
+        workspaceDiv?.querySelectorAll(".lyrics-toggle").forEach((toggle) => {
+            const wrapper = toggle.closest(".workspace-item");
+            const lyricsBox = wrapper?.querySelector(".lyrics-box");
+            const isOpen = lyricsBox?.style.display === "block";
+
+            toggle.setAttribute("aria-label", "Toggle lyrics");
+            toggle.textContent = isOpen ? "v" : "<";
+        });
+    }
+
+    function bindLyricsToggle(toggle) {
+        toggle.addEventListener("click", (e) => {
+            e.stopPropagation();
+
+            const wrapper = toggle.closest(".workspace-item");
+            const lyricsBox = wrapper?.querySelector(".lyrics-box");
+            if (!lyricsBox) return;
+
+            const isOpen = lyricsBox.style.display === "block";
+            lyricsBox.style.display = isOpen ? "none" : "block";
+            toggle.classList.toggle("open", !isOpen);
+            toggle.textContent = isOpen ? "<" : "v";
+
+            savePageState();
+        });
+    }
+
+    function rebindRestoredWorkspaceToggles() {
+        workspaceDiv?.querySelectorAll(".lyrics-toggle").forEach(bindLyricsToggle);
+    }
+
+    function rebindRestoredSelectableItems() {
+        document.querySelectorAll(".panel .selectable-item").forEach((div) => {
+            div.addEventListener("click", () => {
+                div.classList.toggle("selected");
+                savePageState();
             });
+        });
+    }
 
-            const data = await parseJsonOrThrow(response);
-
-            if (resultsDiv) {
-                resultsDiv.innerHTML = `route: ${data.route} &nbsp; status: ${data.status} &nbsp; message: ${data.job_id ?? ""}`;
-            }
-
-            renderResults(data.result, searchDiv);
-            savePageState();
-
-            form.reset();
-            if (inputTextarea) {
-                inputTextarea.value = sessionStorage.getItem(PAGE_STATE_KEY)
-                    ? JSON.parse(sessionStorage.getItem(PAGE_STATE_KEY)).inputText || ""
-                    : "";
-            }
-        } catch (err) {
-            if (resultsDiv) {
-                resultsDiv.innerHTML = `<p style="color:red;">Error: ${String(err)}</p>`;
-            }
-            savePageState();
-        }
-    });
+    /* ========================================
+       RENDERERS
+    ======================================== */
 
     function formatFeatures(features) {
-        if (!features || !features.length) return "";
-        return ` feat. ${features.join(", ")}`;
+        return features?.length ? ` feat. ${features.join(", ")}` : "";
     }
 
     function renderResults(data, container) {
@@ -260,63 +338,23 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        let animationIndex = 0;
-
         data.forEach((item) => {
-            const div = document.createElement("div");
+            const result = createSelectableResult(
+                `${item.artist_name} - ${item.track_name}${formatFeatures(item.features)}`,
+                {
+                    id: item.commontrack_id,
+                    artist: item.artist_name,
+                    track: item.track_name,
+                }
+            );
 
-            div.textContent = `${item.artist_name} - ${item.track_name}${formatFeatures(item.features)}`;
-
-            div.dataset.id = item.commontrack_id;
-            div.dataset.artist = item.artist_name;
-            div.dataset.track = item.track_name;
-
-            div.classList.add("search-result-item", "selectable-item");
-
-            div.addEventListener("click", () => {
-                div.classList.toggle("selected");
-                savePageState();
-            });
-
-            if (isFirstAppearance("search", item)) {
-                applyEnterAnimation(div, animationIndex);
-                animationIndex++;
-            } else {
-                applyReenterAnimation(div);
-            }
-
-            container.appendChild(div);
+            container.appendChild(result);
         });
+
+        animatePanelPopulate("search");
     }
 
-    function getSelectedIds(container) {
-        if (!container) return [];
-        return Array.from(container.querySelectorAll(".selectable-item.selected"))
-            .map((el) => el.dataset.id)
-            .filter(Boolean);
-    }
-
-    function getActivePanelId() {
-        const active = document.querySelector(".panel.active");
-        return active ? active.id : null;
-    }
-
-    function getSourceDivForAdd() {
-        const activeId = getActivePanelId();
-
-        if (activeId === "search") return searchDiv;
-        if (activeId === "favorites_search" && favoritesSearchDiv) return favoritesSearchDiv;
-
-        return searchDiv;
-    }
-
-    function getPanelListEl(panelId) {
-        if (!panelId) return null;
-        if (panelId === "workspace") return document.getElementById("workspace_list");
-        return document.getElementById(`${panelId}_list`);
-    }
-
-    function renderGenericPanel(data, container, panelType = "generic") {
+    function renderGenericPanel(data, container) {
         if (!container) return;
         container.innerHTML = "";
 
@@ -325,25 +363,13 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        let animationIndex = 0;
-
         data.forEach((item) => {
-            const div = document.createElement("div");
-            div.classList.add("search-result-item", "selectable-item");
-            div.dataset.id = item.commontrack_id || item.id || "";
-            div.textContent = `${item.artist_name || ""}${item.artist_name ? " - " : ""}${item.track_name || item.name || "item"}`;
-
-            div.addEventListener("click", () => {
-                div.classList.toggle("selected");
-                savePageState();
-            });
-
-            if (isFirstAppearance(panelType, item)) {
-                applyEnterAnimation(div, animationIndex);
-                animationIndex++;
-            } else {
-                applyReenterAnimation(div);
-            }
+            const div = createSelectableResult(
+                `${item.artist_name || ""}${item.artist_name ? " - " : ""}${item.track_name || item.name || "item"}`,
+                {
+                    id: item.commontrack_id || item.id || "",
+                }
+            );
 
             container.appendChild(div);
         });
@@ -358,243 +384,28 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        let animationIndex = 0;
-
         groups.forEach((trackGroup) => {
             const list = Array.isArray(trackGroup[type]) ? trackGroup[type] : [];
 
             list.forEach((item) => {
-                const div = document.createElement("div");
-                div.classList.add("search-result-item", "selectable-item");
-
-                div.dataset.id = String(item.id || "");
-                div.dataset.commontrackId = String(trackGroup.commontrack_id || "");
-                div.dataset.track = trackGroup.track || "";
-                div.dataset.kind = type;
-
                 const title =
                     type === "concepts"
-                        ? (item.display_concept || item.name || "concept")
-                        : (item.display_semantic || item.name || "semantic");
+                        ? item.display_concept || item.name || "concept"
+                        : item.display_semantic || item.name || "semantic";
 
                 const evidence = item.evidence ? `\n"${item.evidence}"` : "";
-                div.textContent = `${title}${evidence}`;
 
-                div.addEventListener("click", () => {
-                    div.classList.toggle("selected");
-                    savePageState();
+                const div = createSelectableResult(`${title}${evidence}`, {
+                    id: String(item.id || ""),
+                    commontrackId: String(trackGroup.commontrack_id || ""),
+                    track: trackGroup.track || "",
+                    kind: type,
                 });
-
-                const animationItem = {
-                    id: item.id,
-                    name: title,
-                    commontrack_id: trackGroup.commontrack_id,
-                };
-
-                if (isFirstAppearance(type, animationItem)) {
-                    applyEnterAnimation(div, animationIndex);
-                    animationIndex++;
-                } else {
-                    applyReenterAnimation(div);
-                }
 
                 container.appendChild(div);
             });
         });
     }
-
-    async function addSelectedToPanel(targetPanel, sourceContainer = searchDiv) {
-        const track_ids = getSelectedIds(sourceContainer);
-
-        if (track_ids.length === 0) {
-            if (resultsDiv) resultsDiv.innerHTML = `route: add_to_panel &nbsp; status: error &nbsp; message: no tracks selected`;
-            savePageState();
-            return;
-        }
-
-        const token = localStorage.getItem("access_token");
-
-        try {
-            const response = await fetch("/tabs/add_to_panel", {
-                method: "POST",
-                credentials: "include",
-                headers: {
-                    "Content-Type": "application/json",
-                    ...(token && { Authorization: `Bearer ${token}` }),
-                },
-                body: JSON.stringify({
-                    panel: targetPanel,
-                    items: track_ids,
-                }),
-            });
-
-            const data = await parseJsonOrThrow(response);
-
-            if (resultsDiv) resultsDiv.innerHTML = `route: ${data.route} &nbsp; status: ${data.status} &nbsp; message: items added`;
-
-            const workspaceData = data.result;
-
-            if (Array.isArray(workspaceData)) {
-                renderWorkspace(workspaceData, workspaceDiv);
-            } else if (workspaceDiv) {
-                workspaceDiv.textContent = "No workspace data returned";
-            }
-
-            sourceContainer?.querySelectorAll(".selectable-item.selected").forEach((el) => el.classList.remove("selected"));
-            savePageState();
-        } catch (err) {
-            console.error(err);
-            if (resultsDiv) resultsDiv.innerHTML = `<p style="color:red;">Error: ${String(err)}</p>`;
-            savePageState();
-        }
-    }
-
-    if (addBtn) {
-        addBtn.addEventListener("click", () => {
-            addSelectedToPanel("workspace", getSourceDivForAdd());
-        });
-    }
-
-    async function removeSelectedFromPanel(targetPanel, sourceContainer) {
-        const item_ids = getSelectedIds(sourceContainer);
-
-        if (item_ids.length === 0) {
-            if (resultsDiv) resultsDiv.innerHTML = `route: remove_from_panel &nbsp; status: error &nbsp; message: no items selected`;
-            savePageState();
-            return;
-        }
-
-        const token = localStorage.getItem("access_token");
-
-        try {
-            const response = await fetch("/tabs/remove_from_panel", {
-                method: "POST",
-                credentials: "include",
-                headers: {
-                    "Content-Type": "application/json",
-                    ...(token && { Authorization: `Bearer ${token}` }),
-                },
-                body: JSON.stringify({
-                    panel: targetPanel,
-                    items: item_ids,
-                }),
-            });
-
-            const data = await parseJsonOrThrow(response);
-
-            if (resultsDiv) resultsDiv.innerHTML = `route: ${data.route} &nbsp; status: ${data.status} &nbsp; message: items removed`;
-
-            const panelData = data.result;
-            const targetContainer = getPanelListEl(targetPanel);
-
-            if (targetContainer) {
-                if (targetPanel === "workspace") {
-                    renderWorkspace(panelData, targetContainer);
-                } else if (targetPanel === "concepts") {
-                    renderAnalyzePanel(panelData, targetContainer, "concepts");
-                } else if (targetPanel === "semantics") {
-                    renderAnalyzePanel(panelData, targetContainer, "semantics");
-                } else {
-                    renderGenericPanel(panelData, targetContainer, targetPanel);
-                }
-            }
-
-            sourceContainer?.querySelectorAll(".selectable-item.selected").forEach((el) => el.classList.remove("selected"));
-            savePageState();
-        } catch (err) {
-            console.error(err);
-            if (resultsDiv) resultsDiv.innerHTML = `<p style="color:red;">Error: ${String(err)}</p>`;
-            savePageState();
-        }
-    }
-
-    if (removeBtn) {
-        removeBtn.addEventListener("click", () => {
-            const activePanelId = getActivePanelId();
-            const sourceContainer = getPanelListEl(activePanelId);
-
-            if (!activePanelId || activePanelId === "search" || !sourceContainer) {
-                if (resultsDiv) {
-                    resultsDiv.innerHTML = `route: remove_from_panel &nbsp; status: error &nbsp; message: open a panel tab and highlight items to remove`;
-                }
-                savePageState();
-                return;
-            }
-
-            removeSelectedFromPanel(activePanelId, sourceContainer);
-        });
-    }
-
-    async function processSelectedItems() {
-        const track_ids = getSelectedIds(workspaceDiv);
-        const concept_ids = getSelectedIds(document.getElementById("concepts_list"));
-        const semantic_ids = getSelectedIds(document.getElementById("semantics_list"));
-
-        if (track_ids.length === 0) {
-            if (resultsDiv) {
-                resultsDiv.innerHTML = `route: process_items &nbsp; status: error &nbsp; message: no tracks selected in workspace`;
-            }
-            savePageState();
-            return;
-        }
-
-        const instructions = instructionsTextarea?.value || "";
-        const input_text = inputTextarea?.value || "";
-        const mode = (modeSelect?.value || "Transform").toLowerCase();
-        const route = mode === "analyze" ? "/tabs/analyze_items" : "/tabs/process_items";
-        const token = localStorage.getItem("access_token");
-
-        try {
-            const response = await fetch(route, {
-                method: "POST",
-                credentials: "include",
-                headers: {
-                    "Content-Type": "application/json",
-                    ...(token && { Authorization: `Bearer ${token}` }),
-                },
-                body: JSON.stringify({
-                    items: track_ids,
-                    concept_ids,
-                    semantic_ids,
-                    instructions,
-                    input_text,
-                }),
-            });
-
-            const data = await parseJsonOrThrow(response);
-
-            if (resultsDiv) {
-                resultsDiv.innerHTML = `route: ${data.route || route} &nbsp; status: ${data.status || response.status} &nbsp; message: ${data.job_id || "process started"}`;
-            }
-
-            if (route === "/tabs/analyze_items" && data?.result) {
-                const conceptsList = document.getElementById("concepts_list");
-                const semanticsList = document.getElementById("semantics_list");
-
-                renderAnalyzePanel(data.result.concepts, conceptsList, "concepts");
-                renderAnalyzePanel(data.result.semantics, semanticsList, "semantics");
-            }
-
-            if (route === "/tabs/process_items" && data?.result?.display_result && outputTextarea) {
-                outputTextarea.value = data.result.display_result;
-            }
-
-            savePageState();
-        } catch (err) {
-            console.error(err);
-            if (resultsDiv) {
-                resultsDiv.innerHTML = `<p style="color:red;">Error: ${String(err)}</p>`;
-            }
-            savePageState();
-        }
-    }
-
-    if (processBtn) {
-        processBtn.addEventListener("click", processSelectedItems);
-    }
-
-    if (inputTextarea) inputTextarea.addEventListener("input", savePageState);
-    if (instructionsTextarea) instructionsTextarea.addEventListener("input", savePageState);
 
     function renderWorkspace(data, container) {
         if (!container) return;
@@ -605,12 +416,9 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        let animationIndex = 0;
-
         data.forEach((item) => {
             const wrapper = document.createElement("div");
             wrapper.classList.add("workspace-item");
-
             wrapper.dataset.id = item.commontrack_id;
             wrapper.dataset.artist = item.artist_name;
             wrapper.dataset.track = item.track_name;
@@ -624,72 +432,230 @@ document.addEventListener("DOMContentLoaded", () => {
             title.dataset.id = item.commontrack_id;
             title.dataset.artist = item.artist_name;
             title.dataset.track = item.track_name;
+            title.addEventListener("click", () => toggleSelected(title));
 
             const toggle = document.createElement("button");
             toggle.type = "button";
-            toggle.textContent = "Lyrics";
             toggle.classList.add("lyrics-toggle");
+            toggle.setAttribute("aria-label", "Toggle lyrics");
+            toggle.textContent = "<";
 
             const lyricsBox = document.createElement("div");
             lyricsBox.classList.add("lyrics-box");
             lyricsBox.style.display = "none";
             lyricsBox.textContent = item.lyrics || "No lyrics available";
 
-            toggle.addEventListener("click", (e) => {
-                e.stopPropagation();
-                const isOpen = lyricsBox.style.display === "block";
-                lyricsBox.style.display = isOpen ? "none" : "block";
-                toggle.classList.toggle("open", !isOpen);
-                savePageState();
-            });
-
-            title.addEventListener("click", () => {
-                title.classList.toggle("selected");
-                savePageState();
-            });
+            bindLyricsToggle(toggle);
 
             header.appendChild(title);
             header.appendChild(toggle);
             wrapper.appendChild(header);
             wrapper.appendChild(lyricsBox);
 
-            if (isFirstAppearance("workspace", item)) {
-                applyEnterAnimation(wrapper, animationIndex);
-                animationIndex++;
-            } else {
-                applyReenterAnimation(wrapper);
-            }
-
             container.appendChild(wrapper);
         });
+
+        animatePanelPopulate("workspace");
     }
 
-    const tabs = document.querySelectorAll(".tab");
-    const panels = document.querySelectorAll(".panel");
+    /* ========================================
+       PANEL ACTIONS
+    ======================================== */
+
+    async function addSelectedToPanel(targetPanel, sourceContainer = searchDiv) {
+        const track_ids = getSelectedIds(sourceContainer);
+
+        if (track_ids.length === 0) {
+            setStatus("add_to_panel", "error", "no tracks selected");
+            savePageState();
+            return;
+        }
+
+        try {
+            const data = await postJson("/tabs/add_to_panel", {
+                panel: targetPanel,
+                items: track_ids,
+            });
+
+            setStatus(data.route, data.status, "items added");
+
+            if (Array.isArray(data.result)) {
+                renderWorkspace(data.result, workspaceDiv);
+            } else if (workspaceDiv) {
+                workspaceDiv.textContent = "No workspace data returned";
+            }
+
+            clearSelectedItems(sourceContainer);
+            savePageState();
+        } catch (err) {
+            console.error(err);
+            setError(err);
+            savePageState();
+        }
+    }
+
+    async function removeSelectedFromPanel(targetPanel, sourceContainer) {
+        const item_ids = getSelectedIds(sourceContainer);
+
+        if (item_ids.length === 0) {
+            setStatus("remove_from_panel", "error", "no items selected");
+            savePageState();
+            return;
+        }
+
+        try {
+            const data = await postJson("/tabs/remove_from_panel", {
+                panel: targetPanel,
+                items: item_ids,
+            });
+
+            setStatus(data.route, data.status, "items removed");
+
+            const targetContainer = getPanelListEl(targetPanel);
+            if (targetContainer) {
+                if (targetPanel === "workspace") {
+                    renderWorkspace(data.result, targetContainer);
+                } else if (targetPanel === "concepts") {
+                    renderAnalyzePanel(data.result, targetContainer, "concepts");
+                } else if (targetPanel === "semantics") {
+                    renderAnalyzePanel(data.result, targetContainer, "semantics");
+                } else {
+                    renderGenericPanel(data.result, targetContainer);
+                }
+            }
+
+            clearSelectedItems(sourceContainer);
+            savePageState();
+        } catch (err) {
+            console.error(err);
+            setError(err);
+            savePageState();
+        }
+    }
+
+    async function processSelectedItems() {
+        const track_ids = getSelectedIds(workspaceDiv);
+        const concept_ids = getSelectedIds(document.getElementById("concepts_list"));
+        const semantic_ids = getSelectedIds(document.getElementById("semantics_list"));
+
+        if (track_ids.length === 0) {
+            setStatus("process_items", "error", "no tracks selected in workspace");
+            savePageState();
+            return;
+        }
+
+        const instructions = instructionsTextarea?.value || "";
+        const input_text = inputTextarea?.value || "";
+        const mode = (modeSelect?.value || "Transform").toLowerCase();
+        const route = mode === "analyze" ? "/tabs/analyze_items" : "/tabs/process_items";
+
+        try {
+            const data = await postJson(route, {
+                items: track_ids,
+                concept_ids,
+                semantic_ids,
+                instructions,
+                input_text,
+            });
+
+            setStatus(
+                data.route || route,
+                data.status || "success",
+                data.job_id || "process started"
+            );
+
+            if (route === "/tabs/analyze_items" && data?.result) {
+                renderAnalyzePanel(data.result.concepts, document.getElementById("concepts_list"), "concepts");
+                renderAnalyzePanel(data.result.semantics, document.getElementById("semantics_list"), "semantics");
+            }
+
+            if (route === "/tabs/process_items" && data?.result?.display_result && outputTextarea) {
+                outputTextarea.value = data.result.display_result;
+            }
+
+            savePageState();
+        } catch (err) {
+            console.error(err);
+            setError(err);
+            savePageState();
+        }
+    }
+
+    /* ========================================
+       EVENT BINDINGS
+    ======================================== */
+
+    form?.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const input = document.getElementById("search_input")?.value ?? "";
+
+        try {
+            const data = await postJson(`/${prefix}`, {
+                search_input: input,
+            });
+
+            setStatus(data.route, data.status, data.job_id ?? "");
+            renderResults(data.result, searchDiv);
+            savePageState();
+
+            form.reset();
+
+            const savedState = getSavedState();
+            if (inputTextarea) {
+                inputTextarea.value = savedState?.inputText || "";
+            }
+        } catch (err) {
+            setError(err);
+            savePageState();
+        }
+    });
+
+    addBtn?.addEventListener("click", () => {
+        addSelectedToPanel("workspace", getSourceDivForAdd());
+    });
+
+    removeBtn?.addEventListener("click", () => {
+        const activePanelId = getActivePanelId();
+        const sourceContainer = getPanelListEl(activePanelId);
+
+        if (!activePanelId || activePanelId === "search" || !sourceContainer) {
+            setStatus(
+                "remove_from_panel",
+                "error",
+                "open a panel tab and highlight items to remove"
+            );
+            savePageState();
+            return;
+        }
+
+        removeSelectedFromPanel(activePanelId, sourceContainer);
+    });
+
+    processBtn?.addEventListener("click", processSelectedItems);
+
+    inputTextarea?.addEventListener("input", savePageState);
+    instructionsTextarea?.addEventListener("input", savePageState);
 
     tabs.forEach((tab) => {
         tab.addEventListener("click", () => {
             const target = tab.dataset.tab;
-
-            tabs.forEach((t) => t.classList.remove("active"));
-            tab.classList.add("active");
-
-            panels.forEach((panel) => {
-                panel.classList.remove("active");
-                if (panel.id === target) {
-                    panel.classList.add("active");
-                }
-            });
-
+            setActivePanel(target);
+            animatePanelPopulate(target);
             savePageState();
         });
     });
 
-    loadAnimatedItems();
-    restorePageState();
-
     window.addEventListener("beforeunload", savePageState);
     document.addEventListener("visibilitychange", () => {
-        if (document.visibilityState === "hidden") savePageState();
+        if (document.visibilityState === "hidden") {
+            savePageState();
+        }
     });
+
+    /* ========================================
+       INIT
+    ======================================== */
+
+    restorePageState();
 });

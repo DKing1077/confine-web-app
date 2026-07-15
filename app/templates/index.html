@@ -44,11 +44,9 @@
             <option value="Analyze">analyze</option>
         </select>
 
-        <!-- fixed id so index.js can bind process handler -->
         <button type="button" id="process_btn">process</button>
     </div>
 
-    <!-- DASHBOARD -->
     <div class="dashboard">
 
         <div class="tab-bar">
@@ -123,7 +121,6 @@
 
 <div id="results"></div>
 
-<!-- IMPORTANT ORDER -->
 <script src="{{ url_for('static', filename='index.js') }}"></script>
 <script src="{{ url_for('static', filename='auth.js') }}"></script>
 
