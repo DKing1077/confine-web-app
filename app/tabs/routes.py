@@ -2,6 +2,7 @@ from flask import Blueprint, request
 from flask_jwt_extended import get_jwt_identity, jwt_required
 from app.tabs import append_tabs_list, fetch_lyrics, remove_tabs_list, resolve_by_id
 from app.celery import analyze_items_task, process_input
+from app.extensions import limiter
 import logging
 
 logger = logging.getLogger(__name__)
@@ -9,6 +10,7 @@ bp = Blueprint("tabs", __name__, url_prefix="/tabs")
 
 
 @bp.route("/add_to_panel", methods=["POST"])
+@limiter.limit("5/minute")
 @jwt_required()
 def add_to_panel():
     data = request.get_json()
@@ -32,6 +34,7 @@ def add_to_panel():
 
 
 @bp.route("/remove_from_panel", methods=["POST"])
+@limiter.limit("10/minute")
 @jwt_required()
 def remove_from_panel():
     data = request.get_json()
@@ -51,6 +54,7 @@ def remove_from_panel():
 
 
 @bp.route("/analyze_items", methods=["POST"])
+@limiter.limit("3/minute")
 @jwt_required()
 def analyze_items():
     data = request.get_json()
@@ -120,6 +124,7 @@ def analyze_items():
 
 
 @bp.route("/process_items", methods=["POST"])
+@limiter.limit("3/minute")
 @jwt_required()
 def process_items():
     data = request.get_json()
