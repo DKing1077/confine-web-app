@@ -105,7 +105,7 @@ a,
     font-size: 14px;
 
     padding: 6px 10px;
-    border-radius: 4px;
+    border-radius: 2px;
     border: 1.5px solid #0177A4;
 
     transition: all 0.2s ease;
@@ -138,7 +138,7 @@ a,
     font-size: 14px;
 
     padding: 6px 10px;
-    border-radius: 4px;
+    border-radius: 2px;
     border: 1.5px solid #0177A4;
 
     transition: all 0.2s ease;
@@ -218,7 +218,7 @@ a,
     border: 1.5px solid #0177A4;
     outline: none;
 
-    border-radius: 6px 0 0 6px;
+    border-radius: 3px 0 0 3px;
     font-family: inherit;
     font-weight: 600;
 
@@ -242,7 +242,7 @@ a,
     background: rgba(255,255,255,0.9);
     color: #090909;
 
-    border-radius: 0 6px 6px 0;
+    border-radius: 0 3px 3px 0;
 
     font-family: inherit;
     font-weight: 600;
@@ -273,7 +273,7 @@ a,
     font-size: 12px;
 
     border: 1.5px solid #0177A4;
-    border-radius: 4px;
+    border-radius: 2px;
 
     font-family: inherit;
     font-weight: 600;
@@ -345,7 +345,7 @@ a,
     background: rgba(9, 9, 9, 0.08);
     color: rgba(9, 9, 9, 0.85);
 
-    border-radius: 4px;
+    border-radius: 2px;
 
     transition: all 0.2s ease;
 }
@@ -372,7 +372,7 @@ a,
 
     background: rgba(9, 9, 9, 0.05);
     border: 1.5px solid #0177A4;
-    border-radius: 8px;
+    border-radius: 4px;
 
     backdrop-filter: blur(8px);
     display: flex;
@@ -453,7 +453,7 @@ a,
     resize: none;
 
     padding: 8px;
-    border-radius: 4px;
+    border-radius: 2px;
 
     background: #ffffff;
     border: 1.5px solid #0177A4;
@@ -515,7 +515,7 @@ a,
 .selectable-item.selected {
     background: rgba(255, 255, 255, 0.95);
     color: #090909;
-    border-radius: 4px;
+    border-radius: 2px;
 }
 
 .search-result-item {
@@ -523,7 +523,7 @@ a,
     width: fit-content;
     margin-bottom: 6px;
     padding: 4px 8px;
-    border-radius: 4px;
+    border-radius: 2px;
     background: transparent;
     color: rgba(9, 9, 9, 0.85);
     font-weight: 600;
@@ -537,7 +537,7 @@ a,
 .search-result-item.selected {
     background: rgba(255, 255, 255, 0.95);
     color: #090909;
-    border-radius: 4px;
+    border-radius: 2px;
 }
 
 /* ============ WORKSPACE STYLING ============ */
@@ -562,7 +562,7 @@ a,
     width: fit-content;
     transition: all 0.2s ease;
     padding: 4px 8px;
-    border-radius: 4px;
+    border-radius: 2px;
     background: transparent;
     color: rgba(9, 9, 9, 0.9);
     font-size: 12px;
@@ -577,7 +577,7 @@ a,
 .workspace-title.selected {
     background: rgba(255, 255, 255, 0.95);
     color: #090909;
-    border-radius: 4px;
+    border-radius: 2px;
 }
 
 .lyrics-toggle {
@@ -592,7 +592,7 @@ a,
     user-select: none;
 
     padding: 6px 10px;
-    border-radius: 4px;
+    border-radius: 2px;
 
     background: rgba(9, 9, 9, 0.08);
     color: rgba(9, 9, 9, 0.85);
@@ -622,9 +622,9 @@ a,
     margin-top: 6px;
     padding: 8px;
 
-    border-radius: 4px;
+    border-radius: 2px;
 
-    background: rgba(9, 9, 9, 0.06);
+    background: #ffffff;
     border: 1.5px solid #0177A4;
 
     font-size: 11px;
