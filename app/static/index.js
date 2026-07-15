@@ -1,25 +1,44 @@
 let prefix = "search";
 
 document.addEventListener("DOMContentLoaded", () => {
-    /* ---------------- SEARCH ---------------- */
-
     const form = document.getElementById("search_form");
     const resultsDiv = document.getElementById("results");
     const searchDiv = document.getElementById("search");
     const workspaceDiv = document.getElementById("workspace_list");
     const addBtn = document.getElementById("add_btn");
-    const removeBtn = document.getElementById("remove_btn"); // optional
+    const removeBtn = document.getElementById("remove_btn");
     const modeSelect = document.getElementById("mode_select");
     const processBtn = document.getElementById("process_btn");
     const inputTextarea = document.getElementById("input_textarea");
     const instructionsTextarea = document.getElementById("instructions_textarea");
     const outputTextarea = document.getElementById("output_textarea");
-
-    // optional future tab containers (safe if missing)
     const favoritesSearchDiv = document.getElementById("favorites_search");
 
-    // ---------- page state persistence (minimal) ----------
     const PAGE_STATE_KEY = "index_page_state_v1";
+    const ANIMATED_ITEMS_KEY = "index_animated_items_v1";
+
+    let animatedItems = new Set();
+
+    function loadAnimatedItems() {
+        try {
+            const raw = sessionStorage.getItem(ANIMATED_ITEMS_KEY);
+            if (!raw) return;
+            const parsed = JSON.parse(raw);
+            if (Array.isArray(parsed)) {
+                animatedItems = new Set(parsed);
+            }
+        } catch (e) {
+            console.warn("Failed to load animated items:", e);
+        }
+    }
+
+    function saveAnimatedItems() {
+        try {
+            sessionStorage.setItem(ANIMATED_ITEMS_KEY, JSON.stringify([...animatedItems]));
+        } catch (e) {
+            console.warn("Failed to save animated items:", e);
+        }
+    }
 
     function savePageState() {
         const activePanel = document.querySelector(".panel.active")?.id || "search";
@@ -51,7 +70,6 @@ document.addEventListener("DOMContentLoaded", () => {
             if (instructionsTextarea) instructionsTextarea.value = state.instructionsText || "";
             if (outputTextarea) outputTextarea.value = state.outputText || "";
 
-            // restore active tab/panel
             const activePanel = state.activePanel || "search";
             const tabs = document.querySelectorAll(".tab");
             const panels = document.querySelectorAll(".panel");
@@ -59,7 +77,6 @@ document.addEventListener("DOMContentLoaded", () => {
             tabs.forEach((t) => t.classList.toggle("active", t.dataset.tab === activePanel));
             panels.forEach((p) => p.classList.toggle("active", p.id === activePanel));
 
-            // re-bind clickable/selectable items restored from innerHTML
             document.querySelectorAll(".panel .selectable-item").forEach((div) => {
                 div.addEventListener("click", () => {
                     div.classList.toggle("selected");
@@ -85,12 +102,12 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // Exposed so auth/session logout flow can clear UI instantly when on this page
     function clearIndexUI() {
         sessionStorage.removeItem(PAGE_STATE_KEY);
+        sessionStorage.removeItem(ANIMATED_ITEMS_KEY);
+        animatedItems.clear();
 
         if (resultsDiv) resultsDiv.innerHTML = "";
-
         if (searchDiv) searchDiv.textContent = "SEARCH PANEL";
         if (workspaceDiv) workspaceDiv.innerHTML = "";
         if (inputTextarea) inputTextarea.value = "";
@@ -111,7 +128,6 @@ document.addEventListener("DOMContentLoaded", () => {
             if (el) el.innerHTML = "";
         });
 
-        // reset to search tab
         const tabs = document.querySelectorAll(".tab");
         const panels = document.querySelectorAll(".panel");
         tabs.forEach((t) => t.classList.toggle("active", t.dataset.tab === "search"));
@@ -120,7 +136,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     window.clearIndexUI = clearIndexUI;
 
-    // ---------- robust response parser ----------
     async function parseJsonOrThrow(response) {
         const text = await response.text();
         const contentType = response.headers.get("content-type") || "";
@@ -144,6 +159,48 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         return data;
+    }
+
+    function makeAnimationKey(panelType, item) {
+        if (panelType === "workspace" || panelType === "search") {
+            return `${panelType}:${String(item.commontrack_id || item.id || `${item.artist_name || ""}-${item.track_name || item.name || ""}`)}`;
+        }
+
+        return `${panelType}:${String(item.id || item.commontrack_id || item.display_concept || item.display_semantic || item.name || "")}`;
+    }
+
+    function isFirstAppearance(panelType, item) {
+        const key = makeAnimationKey(panelType, item);
+        if (animatedItems.has(key)) return false;
+        animatedItems.add(key);
+        saveAnimatedItems();
+        return true;
+    }
+
+    function applyEnterAnimation(el, index) {
+        if (!el) return;
+        el.classList.add("item-enter");
+        el.style.animationDelay = `${index * 45}ms`;
+        el.addEventListener(
+            "animationend",
+            () => {
+                el.classList.remove("item-enter");
+                el.style.animationDelay = "";
+            },
+            { once: true }
+        );
+    }
+
+    function applyReenterAnimation(el) {
+        if (!el) return;
+        el.classList.add("item-reenter");
+        el.addEventListener(
+            "animationend",
+            () => {
+                el.classList.remove("item-reenter");
+            },
+            { once: true }
+        );
     }
 
     form?.addEventListener("submit", async (e) => {
@@ -176,7 +233,11 @@ document.addEventListener("DOMContentLoaded", () => {
             savePageState();
 
             form.reset();
-            if (inputTextarea) inputTextarea.value = sessionStorage.getItem(PAGE_STATE_KEY) ? JSON.parse(sessionStorage.getItem(PAGE_STATE_KEY)).inputText || "" : "";
+            if (inputTextarea) {
+                inputTextarea.value = sessionStorage.getItem(PAGE_STATE_KEY)
+                    ? JSON.parse(sessionStorage.getItem(PAGE_STATE_KEY)).inputText || ""
+                    : "";
+            }
         } catch (err) {
             if (resultsDiv) {
                 resultsDiv.innerHTML = `<p style="color:red;">Error: ${String(err)}</p>`;
@@ -199,6 +260,8 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
+        let animationIndex = 0;
+
         data.forEach((item) => {
             const div = document.createElement("div");
 
@@ -214,6 +277,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 div.classList.toggle("selected");
                 savePageState();
             });
+
+            if (isFirstAppearance("search", item)) {
+                applyEnterAnimation(div, animationIndex);
+                animationIndex++;
+            } else {
+                applyReenterAnimation(div);
+            }
 
             container.appendChild(div);
         });
@@ -237,7 +307,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (activeId === "search") return searchDiv;
         if (activeId === "favorites_search" && favoritesSearchDiv) return favoritesSearchDiv;
 
-        return searchDiv; // fallback
+        return searchDiv;
     }
 
     function getPanelListEl(panelId) {
@@ -246,7 +316,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return document.getElementById(`${panelId}_list`);
     }
 
-    function renderGenericPanel(data, container) {
+    function renderGenericPanel(data, container, panelType = "generic") {
         if (!container) return;
         container.innerHTML = "";
 
@@ -254,6 +324,8 @@ document.addEventListener("DOMContentLoaded", () => {
             container.textContent = "No data";
             return;
         }
+
+        let animationIndex = 0;
 
         data.forEach((item) => {
             const div = document.createElement("div");
@@ -265,6 +337,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 div.classList.toggle("selected");
                 savePageState();
             });
+
+            if (isFirstAppearance(panelType, item)) {
+                applyEnterAnimation(div, animationIndex);
+                animationIndex++;
+            } else {
+                applyReenterAnimation(div);
+            }
 
             container.appendChild(div);
         });
@@ -278,6 +357,8 @@ document.addEventListener("DOMContentLoaded", () => {
             container.textContent = "No data";
             return;
         }
+
+        let animationIndex = 0;
 
         groups.forEach((trackGroup) => {
             const list = Array.isArray(trackGroup[type]) ? trackGroup[type] : [];
@@ -304,12 +385,23 @@ document.addEventListener("DOMContentLoaded", () => {
                     savePageState();
                 });
 
+                const animationItem = {
+                    id: item.id,
+                    name: title,
+                    commontrack_id: trackGroup.commontrack_id,
+                };
+
+                if (isFirstAppearance(type, animationItem)) {
+                    applyEnterAnimation(div, animationIndex);
+                    animationIndex++;
+                } else {
+                    applyReenterAnimation(div);
+                }
+
                 container.appendChild(div);
             });
         });
     }
-
-    /* ---------------- ADD (workspace only) ---------------- */
 
     async function addSelectedToPanel(targetPanel, sourceContainer = searchDiv) {
         const track_ids = getSelectedIds(sourceContainer);
@@ -349,7 +441,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             sourceContainer?.querySelectorAll(".selectable-item.selected").forEach((el) => el.classList.remove("selected"));
-
             savePageState();
         } catch (err) {
             console.error(err);
@@ -363,8 +454,6 @@ document.addEventListener("DOMContentLoaded", () => {
             addSelectedToPanel("workspace", getSourceDivForAdd());
         });
     }
-
-    /* ---------------- REMOVE (active tab) ---------------- */
 
     async function removeSelectedFromPanel(targetPanel, sourceContainer) {
         const item_ids = getSelectedIds(sourceContainer);
@@ -406,12 +495,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 } else if (targetPanel === "semantics") {
                     renderAnalyzePanel(panelData, targetContainer, "semantics");
                 } else {
-                    renderGenericPanel(panelData, targetContainer);
+                    renderGenericPanel(panelData, targetContainer, targetPanel);
                 }
             }
 
             sourceContainer?.querySelectorAll(".selectable-item.selected").forEach((el) => el.classList.remove("selected"));
-
             savePageState();
         } catch (err) {
             console.error(err);
@@ -437,8 +525,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    /* ---------------- PROCESS ---------------- */
-
     async function processSelectedItems() {
         const track_ids = getSelectedIds(workspaceDiv);
         const concept_ids = getSelectedIds(document.getElementById("concepts_list"));
@@ -454,7 +540,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const instructions = instructionsTextarea?.value || "";
         const input_text = inputTextarea?.value || "";
-
         const mode = (modeSelect?.value || "Transform").toLowerCase();
         const route = mode === "analyze" ? "/tabs/analyze_items" : "/tabs/process_items";
         const token = localStorage.getItem("access_token");
@@ -508,15 +593,8 @@ document.addEventListener("DOMContentLoaded", () => {
         processBtn.addEventListener("click", processSelectedItems);
     }
 
-    if (inputTextarea) {
-        inputTextarea.addEventListener("input", savePageState);
-    }
-
-    if (instructionsTextarea) {
-        instructionsTextarea.addEventListener("input", savePageState);
-    }
-
-    /* ---------------- WORKSPACE RENDER ---------------- */
+    if (inputTextarea) inputTextarea.addEventListener("input", savePageState);
+    if (instructionsTextarea) instructionsTextarea.addEventListener("input", savePageState);
 
     function renderWorkspace(data, container) {
         if (!container) return;
@@ -526,6 +604,8 @@ document.addEventListener("DOMContentLoaded", () => {
             container.textContent = "No workspace data returned";
             return;
         }
+
+        let animationIndex = 0;
 
         data.forEach((item) => {
             const wrapper = document.createElement("div");
@@ -558,7 +638,6 @@ document.addEventListener("DOMContentLoaded", () => {
             toggle.addEventListener("click", (e) => {
                 e.stopPropagation();
                 const isOpen = lyricsBox.style.display === "block";
-
                 lyricsBox.style.display = isOpen ? "none" : "block";
                 toggle.classList.toggle("open", !isOpen);
                 savePageState();
@@ -571,15 +650,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
             header.appendChild(title);
             header.appendChild(toggle);
-
             wrapper.appendChild(header);
             wrapper.appendChild(lyricsBox);
+
+            if (isFirstAppearance("workspace", item)) {
+                applyEnterAnimation(wrapper, animationIndex);
+                animationIndex++;
+            } else {
+                applyReenterAnimation(wrapper);
+            }
 
             container.appendChild(wrapper);
         });
     }
-
-    /* ---------------- TABS ---------------- */
 
     const tabs = document.querySelectorAll(".tab");
     const panels = document.querySelectorAll(".panel");
@@ -602,6 +685,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
+    loadAnimatedItems();
     restorePageState();
 
     window.addEventListener("beforeunload", savePageState);
