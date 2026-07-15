@@ -8,19 +8,14 @@ html, body {
 
 /* fallback to prevent any gaps showing */
 html {
-    background: #1e3a8a;
+    background: #F1F1F0;
 }
 
 body {
     min-height: 100vh;
     min-height: 100dvh;
 
-    background: linear-gradient(
-        180deg,
-        #1e3a8a 0%,
-        #3b82f6 95%,
-        #ffffff 300%
-    );
+    background: #F1F1F0;
     background-attachment: fixed;
 
     display: flex;
@@ -28,11 +23,14 @@ body {
     align-items: flex-start;
 
     font-family: 'Share Tech Mono', monospace;
+    font-weight: 600;
     padding-top: 20px;
 
     position: relative;
     overflow-x: hidden;
     overflow-y: auto;
+
+    color: #090909;
 }
 
 /* FIXED background layers */
@@ -45,7 +43,7 @@ body::before {
 
     background: radial-gradient(
         circle at 50% 20%,
-        rgba(255, 255, 255, 0.10),
+        rgba(0, 0, 0, 0.03),
         transparent 55%
     );
 
@@ -60,10 +58,33 @@ body::after {
 
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' result='noise'/%3E%3CfeDisplacementMap in='SourceGraphic' in2='noise' scale='120' xChannelSelector='R' yChannelSelector='G'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 
-    opacity: 0.04;
-    mix-blend-mode: overlay;
+    opacity: 0.02;
+    mix-blend-mode: multiply;
 
     pointer-events: none;
+}
+
+/* global text weight */
+
+body,
+button,
+input,
+select,
+textarea,
+label,
+a,
+.tab,
+.panel,
+.search-result-item,
+.workspace-title,
+.lyrics-toggle,
+.lyrics-box,
+#results,
+.user-status,
+.confine-label,
+.auth-button {
+    font-family: 'Share Tech Mono', monospace;
+    font-weight: 600;
 }
 
 /* nav */
@@ -80,26 +101,29 @@ body::after {
 /* AUTH BUTTON */
 
 .auth-button {
-    color: rgba(255,255,255,0.75);
+    color: #090909;
     font-size: 14px;
 
     padding: 6px 10px;
     border-radius: 4px;
+    border: 1.5px solid #0177A4;
 
     transition: all 0.2s ease;
     cursor: default;
 
     font-family: inherit;
+    font-weight: 600;
 
     display: inline-flex;
     align-items: center;
 
     text-decoration: none;
+    background: rgba(255,255,255,0.95);
 }
 
 .auth-button:hover {
-    background: rgba(255,255,255,0.15);
-    color: white;
+    background: #ffffff;
+    color: #090909;
     transform: translateY(-1px);
 }
 
@@ -110,19 +134,22 @@ body::after {
     top: 10px;
     right: 10px;
 
-    color: rgba(255,255,255,0.75);
+    color: #090909;
     font-size: 14px;
 
     padding: 6px 10px;
     border-radius: 4px;
+    border: 1.5px solid #0177A4;
 
     transition: all 0.2s ease;
     cursor: default;
+    background: rgba(255,255,255,0.95);
+    font-weight: 600;
 }
 
 .confine-label:hover {
-    background: rgba(255,255,255,0.15);
-    color: white;
+    background: #ffffff;
+    color: #090909;
     transform: translateY(-1px);
 }
 
@@ -140,13 +167,14 @@ body::after {
 
     font-family: 'Share Tech Mono', monospace;
     font-size: 14px;
+    font-weight: 600;
 
     z-index: 9999;
     pointer-events: none;
 }
 
 .user-status .label {
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(9, 9, 9, 0.55);
 }
 
 .user-status .username.logged-in {
@@ -187,31 +215,42 @@ body::after {
     padding: 6px 10px;
     font-size: 12px;
 
-    border: none;
+    border: 1.5px solid #0177A4;
     outline: none;
 
     border-radius: 6px 0 0 6px;
     font-family: inherit;
+    font-weight: 600;
+
+    background: #ffffff;
+    color: #090909;
+}
+
+#search_input::placeholder {
+    color: rgba(9, 9, 9, 0.45);
+    font-weight: 600;
 }
 
 .search-row button {
     padding: 6px 12px;
     font-size: 12px;
 
-    border: none;
+    border: 1.5px solid #0177A4;
+    border-left: none;
     cursor: pointer;
 
     background: rgba(255,255,255,0.9);
-    color: #2563eb;
+    color: #090909;
 
     border-radius: 0 6px 6px 0;
 
     font-family: inherit;
+    font-weight: 600;
     transition: all 0.2s ease;
 }
 
 .search-row button:hover {
-    background: white;
+    background: #ffffff;
     transform: translateY(-1px);
 }
 
@@ -233,21 +272,22 @@ body::after {
     padding: 6px 8px;
     font-size: 12px;
 
-    border: none;
+    border: 1.5px solid #0177A4;
     border-radius: 4px;
 
     font-family: inherit;
+    font-weight: 600;
     transition: all 0.2s ease;
 }
 
 .action-row button {
     cursor: pointer;
-    background: rgba(255,255,255,0.85);
-    color: #2563eb;
+    background: rgba(255,255,255,0.9);
+    color: #090909;
 }
 
 .action-row button:hover {
-    background: white;
+    background: #ffffff;
     transform: translateY(-1px);
     box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
@@ -256,8 +296,8 @@ body::after {
 
 .mode-select {
     cursor: pointer;
-    background: rgba(255,255,255,0.85);
-    color: #2563eb;
+    background: rgba(255,255,255,0.9);
+    color: #090909;
 
     text-align: center;
     text-align-last: center;
@@ -268,7 +308,7 @@ body::after {
 }
 
 .mode-select:hover {
-    background: white;
+    background: #ffffff;
     transform: translateY(-1px);
 }
 
@@ -297,12 +337,13 @@ body::after {
 
     padding: 7px;
     font-size: 11px;
+    font-weight: 600;
 
-    border: none;
+    border: 1.5px solid #0177A4;
     cursor: pointer;
 
-    background: rgba(255,255,255,0.10);
-    color: rgba(255,255,255,0.85);
+    background: rgba(9, 9, 9, 0.08);
+    color: rgba(9, 9, 9, 0.85);
 
     border-radius: 4px;
 
@@ -310,17 +351,16 @@ body::after {
 }
 
 .tab:hover {
-    background: rgba(255,255,255,0.25);
+    background: rgba(255, 255, 255, 0.85);
+    color: #090909;
     transform: translateY(-1px);
 }
 
 .tab.active {
-    background: rgba(255,255,255,0.35);
-    color: white;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    background: #ffffff;
+    color: #090909;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
 }
-
-/* content */
 
 .tab-content {
     margin-top: 16px;
@@ -330,8 +370,8 @@ body::after {
     min-height: 0;
     overflow-y: auto;
 
-    background: rgba(255,255,255,0.10);
-    border: 1px solid rgba(255,255,255,0.25);
+    background: rgba(9, 9, 9, 0.05);
+    border: 1.5px solid #0177A4;
     border-radius: 8px;
 
     backdrop-filter: blur(8px);
@@ -349,26 +389,27 @@ body::after {
 }
 
 .tab-content::-webkit-scrollbar-thumb {
-    background: rgba(255,255,255,0.3);
+    background: rgba(9, 9, 9, 0.25);
     border-radius: 1px;
 }
 
 .tab-content::-webkit-scrollbar-thumb:hover {
-    background: rgba(255,255,255,0.5);
+    background: rgba(9, 9, 9, 0.4);
 }
 
 /* Firefox scrollbar */
 .tab-content {
     scrollbar-width: thin;
-    scrollbar-color: rgba(255,255,255,0.3) transparent;
+    scrollbar-color: rgba(9, 9, 9, 0.25) transparent;
 }
 
 .panel {
     display: none;
     width: 100%;
     box-sizing: border-box;
-    color: rgba(255,255,255,0.9);
+    color: rgba(9, 9, 9, 0.9);
     font-size: 12px;
+    font-weight: 600;
     min-height: 0;
 }
 
@@ -398,8 +439,9 @@ body::after {
 }
 
 .input-box-wrap label {
-    color: rgba(255,255,255,0.85);
+    color: rgba(9, 9, 9, 0.85);
     font-size: 12px;
+    font-weight: 600;
     flex-shrink: 0;
 }
 
@@ -413,11 +455,12 @@ body::after {
     padding: 8px;
     border-radius: 4px;
 
-    background: rgba(0, 0, 0, 0.25);
-    border: none;
+    background: #ffffff;
+    border: 1.5px solid #0177A4;
 
-    color: rgba(255,255,255,0.95);
+    color: #090909;
     font-family: inherit;
+    font-weight: 600;
     font-size: 11px;
     line-height: 1.4;
 
@@ -425,15 +468,13 @@ body::after {
 }
 
 .input-textarea::placeholder {
-    color: rgba(255,255,255,0.55);
+    color: rgba(9, 9, 9, 0.45);
+    font-weight: 600;
 }
 
 .input-textarea:focus {
     outline: none;
-    box-shadow: none;
 }
-
-/* results - fixed at bottom, no background */
 
 #results {
     position: fixed;
@@ -446,8 +487,9 @@ body::after {
     align-items: center;
     gap: 0;
 
-    color: rgba(255,255,255,0.85);
+    color: rgba(9, 9, 9, 0.85);
     font-size: 12px;
+    font-weight: 600;
 
     z-index: 1000;
     pointer-events: none;
@@ -465,19 +507,17 @@ body::after {
     transition: none !important;
 }
 
-/* shared selectable behavior */
 .selectable-item {
     cursor: pointer;
     transition: all 0.2s ease;
 }
 
 .selectable-item.selected {
-    background: rgba(255,255,255,0.15);
-    color: white;
+    background: rgba(255, 255, 255, 0.95);
+    color: #090909;
     border-radius: 4px;
 }
 
-/* SEARCH RESULTS STYLING */
 .search-result-item {
     display: block;
     width: fit-content;
@@ -485,17 +525,18 @@ body::after {
     padding: 4px 8px;
     border-radius: 4px;
     background: transparent;
-    color: rgba(255,255,255,0.85);
+    color: rgba(9, 9, 9, 0.85);
+    font-weight: 600;
 }
 
 .search-result-item:hover {
-    background: rgba(255,255,255,0.08);
-    color: white;
+    background: rgba(9, 9, 9, 0.06);
+    color: #090909;
 }
 
 .search-result-item.selected {
-    background: rgba(255,255,255,0.15);
-    color: white;
+    background: rgba(255, 255, 255, 0.95);
+    color: #090909;
     border-radius: 4px;
 }
 
@@ -523,18 +564,19 @@ body::after {
     padding: 4px 8px;
     border-radius: 4px;
     background: transparent;
-    color: rgba(255, 255, 255, 0.9);
+    color: rgba(9, 9, 9, 0.9);
     font-size: 12px;
+    font-weight: 600;
 }
 
 .workspace-title:hover {
-    background: rgba(255,255,255,0.08);
-    color: white;
+    background: rgba(9, 9, 9, 0.06);
+    color: #090909;
 }
 
 .workspace-title.selected {
-    background: rgba(255,255,255,0.15);
-    color: white;
+    background: rgba(255, 255, 255, 0.95);
+    color: #090909;
     border-radius: 4px;
 }
 
@@ -552,28 +594,28 @@ body::after {
     padding: 6px 10px;
     border-radius: 4px;
 
-    background: rgba(255,255,255,0.10);
-    color: rgba(255,255,255,0.85);
+    background: rgba(9, 9, 9, 0.08);
+    color: rgba(9, 9, 9, 0.85);
 
     font-size: 11px;
     font-family: inherit;
+    font-weight: 600;
 
-    border: 1px solid rgba(255,255,255,0.12);
+    border: 1.5px solid #0177A4;
 
     transition: all 0.2s ease;
 }
 
 .lyrics-toggle:hover {
-    background: rgba(255,255,255,0.18);
+    background: rgba(255, 255, 255, 0.85);
     transform: translateY(-1px);
-    color: white;
+    color: #090909;
 }
 
 .lyrics-toggle.open {
-    background: rgba(255,255,255,0.25);
-    color: white;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    border-color: rgba(255,255,255,0.25);
+    background: #ffffff;
+    color: #090909;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
 }
 
 .lyrics-box {
@@ -582,11 +624,13 @@ body::after {
 
     border-radius: 4px;
 
-    background: rgba(0, 0, 0, 0.25);
-    border: none;
+    background: rgba(9, 9, 9, 0.06);
+    border: 1.5px solid #0177A4;
 
     font-size: 11px;
+    font-weight: 600;
     line-height: 1.4;
+    color: rgba(9, 9, 9, 0.95);
 
     white-space: pre-wrap;
 

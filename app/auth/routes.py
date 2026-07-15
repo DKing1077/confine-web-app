@@ -82,8 +82,7 @@ def check_if_token_revoked(jwt_header, jwt_payload):
 @bp.route("/logout", methods=["POST"])
 @jwt_required()
 def logout():
-    identity_string = get_jwt_identity()
-    user_id = int(identity_string)
+    user_id = int(get_jwt_identity())
 
     jti = get_jwt()["jti"]
     revoked_tokens.add(jti)
@@ -100,8 +99,7 @@ def logout():
 @jwt_required()
 def session_status():
     # validate
-    identity_string = get_jwt_identity()
-    user_id = int(identity_string)
+    user_id = int(get_jwt_identity())
 
     # user exist in db, 200 ok
     user = extensions.db_session.query(Users).filter_by(user_id=user_id).first()
@@ -116,7 +114,6 @@ def session_status():
 @bp.route("/refresh", methods=["POST"])
 @jwt_required(refresh=True)
 def refresh():
-    identity_string = get_jwt_identity()
-    user_id = int(identity_string)
+    user_id = int(get_jwt_identity())
     new_access_token = create_access_token(identity=user_id)
     return {"access_token": new_access_token}, 200

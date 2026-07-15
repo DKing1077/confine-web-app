@@ -25,8 +25,7 @@ def search():
         return {"errors": err.messages}, 400
     request_id = str(uuid.uuid4())
 
-    identity_string = get_jwt_identity()
-    user_id = int(identity_string)
+    user_id = int(get_jwt_identity())
     search_input = data["search_input"]
 
     logger.info('\n===== PROCESS STARTED =====')
