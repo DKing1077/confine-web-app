@@ -1,6 +1,6 @@
 .idea/
+/app/prompts.py
 config.py
-script.py
 .env
 
 # py cache
