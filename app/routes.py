@@ -16,3 +16,8 @@ def index():
 @bp.route("/session")
 def session_pg():
     return render_template("session.html")
+
+
+@bp.route("/sentry-test")
+def sentry_test():
+    raise Exception("Sentry test error")

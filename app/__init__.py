@@ -6,6 +6,9 @@ from app.auth.routes import bp as auth_bp
 from app.search.routes import bp as search_bp
 from app.tabs.routes import bp as tabs_bp
 from app.logger import configure_logging
+from sentry_sdk.integrations.flask import FlaskIntegration
+from sentry_sdk.integrations.celery import CeleryIntegration
+import sentry_sdk
 from . import extensions
 import logging
 
@@ -33,6 +36,19 @@ def create_app(config=None):
     app = Flask(__name__)
     if config:
         app.config.from_object(config)
+
+    # init sentry
+    sentry_dsn = app.config.get("SENTRY_DSN")
+    if sentry_dsn:
+        sentry_sdk.init(
+            dsn=sentry_dsn,
+            environment=app.config.get("SENTRY_ENVIRONMENT", "development"),
+            traces_sample_rate=float(app.config.get("SENTRY_TRACES_SAMPLE_RATE", 0.0)),
+            integrations=[
+                FlaskIntegration(),
+                CeleryIntegration(),
+            ],
+        )
 
     # create database
     db_create(config)
