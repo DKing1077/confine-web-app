@@ -1,0 +1,240 @@
+BACKEND ENGINEERING CONCEPTS COVERED IN THIS PROJECT
+=====================================================
+
+---
+
+1. RESTful API Design
+   - Flask as the web framework
+   - Blueprint-based modular routing (auth, search, tabs, main)
+   - HTTP methods: GET, POST
+   - Semantic HTTP status codes: 200 OK, 201 Created, 400 Bad Request, 401 Unauthorized
+   - JSON request/response payloads
+   - URL prefixes per blueprint (e.g. /auth, /search, /tabs)
+
+---
+
+2. JWT (JSON Web Token) Authentication
+   - Stateless authentication — no server-side session storage
+   - Access tokens (short-lived) and refresh tokens (long-lived)
+   - Token generation: create_access_token(), create_refresh_token()
+   - Protected routes using @jwt_required() decorator
+   - Token identity extraction via get_jwt_identity()
+   - Token refresh endpoint (/auth/refresh)
+   - In-memory token revocation (blocklist set) for logout
+   - Custom JWT error handlers: expired, invalid, missing token
+   - Client-side token storage and Authorization header usage
+
+---
+
+3. Password Security
+   - Password hashing using werkzeug (generate_password_hash)
+   - Password verification using werkzeug (check_password_hash)
+   - Passwords never stored in plaintext
+
+---
+
+4. Input Validation & Serialization
+   - Marshmallow schemas for structured request validation
+   - Schema fields: Email, String with length constraints
+   - Automatic deserialization and error reporting
+   - ValidationError handling returning 400 responses
+
+---
+
+5. Relational Database Design (PostgreSQL)
+   - SQLAlchemy ORM with declarative_base
+   - Typed mapped columns using Mapped[] and mapped_column()
+   - Table relationships:
+     * One-to-many: Artists -> Albums, Artists -> Tracks, Albums -> Tracks
+     * Many-to-many: Tracks <-> Artists via Features junction table
+   - ForeignKey constraints
+   - Composite UniqueConstraints (e.g. artist_id + album_name)
+   - Nullable vs non-nullable columns
+   - JSON column type (SearchResults.search_result)
+   - Server-side timestamps: server_default=func.now()
+   - Text columns for long-form content (lyrics)
+
+---
+
+6. Database Sessions & Connection Pooling
+   - SQLAlchemy scoped_session (one session per request thread)
+   - sessionmaker with autoflush=False
+   - Connection pooling via SQLAlchemy engine
+   - Explicit session lifecycle: flush(), commit(), rollback(), remove()
+   - Teardown hook (teardown_appcontext) to release sessions after each request
+
+---
+
+7. Database Migrations (Alembic)
+   - Alembic for schema version control
+   - Autogenerate migration scripts from ORM models
+   - upgrade() and downgrade() functions
+   - Running migrations in online (connected engine) and offline (URL only) modes
+   - Migration applied via: alembic upgrade head
+
+---
+
+8. Database Setup & Administration
+   - Programmatic PostgreSQL database and role creation via raw SQL
+   - Checking for existing roles/tables before creating (idempotent setup)
+   - pg_dump for database backup/export
+   - psql CLI for running .sql seed files
+   - AUTOCOMMIT isolation level for DDL statements
+
+---
+
+9. Caching with Redis
+   - Redis as an in-memory cache layer
+   - Multiple logical Redis databases: DB0 (Celery broker), DB1 (rate limiting), DB2 (search cache), DB3 (tab/session cache)
+   - Cache key design (artist:track composite keys, tabs:user_id:tab_id)
+   - TTL (time-to-live) set via setex() — 12-hour expiry
+   - Cache hit/miss pattern: check cache -> miss -> fetch -> store
+   - JSON serialization/deserialization for cache values
+   - Per-user session state stored in Redis (tab panels)
+
+---
+
+10. Asynchronous Task Processing (Celery)
+    - Celery as a distributed task queue
+    - Redis as both message broker and result backend
+    - Task definition with @celery.task decorator
+    - Task chaining: chain(task_a.s(), task_b.s()).apply_async()
+    - Task result retrieval: result.get()
+    - Task signals: worker_ready, task_prerun, task_success, task_failure, task_retry
+    - Retry configuration: autoretry_for, retry_backoff, max_retries (scaffolded)
+    - Flask app context injection into Celery tasks via ContextTask
+    - Celery worker configured with JSON serializer, result expiry, and log redirection
+    - result_expires=3600 to auto-clean completed task results
+
+---
+
+11. Application Factory Pattern
+    - create_app(config) factory function for Flask
+    - Config loaded from object (Config, Test classes)
+    - Supports multiple environments (development, test, production)
+    - All extensions initialized inside the factory (db, celery, jwt, limiter, CORS)
+
+---
+
+12. Rate Limiting
+    - flask-limiter for per-route request throttling
+    - Limits defined as strings: "3/minute", "5/minute", "10/minute"
+    - Rate limit keys derived from client IP (get_remote_address)
+    - Redis backend (DB1) used for rate limit counters
+
+---
+
+13. CORS (Cross-Origin Resource Sharing)
+    - flask-cors enabling cross-origin requests from browser clients
+    - Allowing Authorization and Content-Type headers
+    - Wildcard origin policy for development
+
+---
+
+14. External API Integration
+    - HTTP GET requests using the requests library
+    - Musixmatch REST API: track search and lyrics fetch
+    - Timeout handling on HTTP requests (timeout=10)
+    - Response parsing from nested JSON structures
+    - HTTP status code checking within API responses (e.g. 404 from API body)
+
+---
+
+15. LLM / AI API Integration (OpenRouter / OpenAI-compatible)
+    - OpenAI Python SDK pointed at OpenRouter base URL
+    - Chat completions API: client.chat.completions.create()
+    - Structured system + user message design (prompt engineering)
+    - JSON-only output enforcement via prompt constraints
+    - temperature=0 for deterministic outputs
+    - max_tokens budget per call
+    - Regex post-processing to strip markdown code fences from LLM output
+    - JSON parsing of LLM responses with fallback on JSONDecodeError
+    - Retry loop (up to 3 attempts) for invalid AI response schemas
+
+---
+
+16. Data Modeling & Serialization Patterns
+    - Python dataclass (ApiData) as a data transfer object (DTO)
+    - to_dict() and from_dict() methods for serialization/deserialization
+    - Normalizing raw API data before storage (lowercasing, stripping prefixes)
+    - Parsing featured artists from track/artist name strings using regex
+    - Stable deterministic ID generation using SHA-1 hashing (hashlib.sha1)
+
+---
+
+17. Service Layer Architecture
+    - Separation of concerns: routes -> logic -> services
+    - Logic layer orchestrates cache, DB, and API in a pipeline
+    - Services encapsulate external API clients (MusixMatch, AIService)
+    - Extensions module holds global singleton instances (db_session, celery, jwt, limiter)
+
+---
+
+18. Logging
+    - Python standard logging module (logging.getLogger)
+    - Per-module named loggers
+    - Custom root logger configuration (StreamHandler, stdout)
+    - Log level filtering per library (werkzeug, httpx, urllib3, celery set to ERROR/WARNING)
+    - Structured log messages with context (user_id, artist, track, cache key, method)
+
+---
+
+19. Containerization with Docker
+    - Dockerfile: multi-step image build (python:3.11-slim base)
+    - Layer caching optimization (copy requirements.txt before source code)
+    - PYTHONUNBUFFERED=1 for real-time log streaming
+    - PYTHONPATH=/app for consistent module resolution
+    - docker-compose for multi-service orchestration:
+      * web (Flask), postgres, redis, celery worker
+    - Internal Docker DNS (services reference each other by name, not IP)
+    - Port mapping: host:container (e.g. 5001:5000)
+    - host=0.0.0.0 required to expose Flask outside the container
+    - Environment variables for all service connection strings
+
+---
+
+20. Environment-Based Configuration
+    - Config class with class-level attributes loaded from os.getenv()
+    - Separate Test config for automated testing
+    - .env file loading via python-dotenv
+    - Secrets and URLs never hardcoded in source
+
+---
+
+21. Error Monitoring (Sentry)
+    - Sentry SDK integrated into Flask and Celery
+    - FlaskIntegration and CeleryIntegration for automatic error capture
+    - DSN, environment name, and trace sample rate configured via env vars
+    - Conditional initialization (only if SENTRY_DSN is set)
+
+---
+
+22. Request Lifecycle & Session Management
+    - Flask teardown_appcontext to clean up DB sessions after every request
+    - Scoped session tied to the current thread/request context
+    - JWT identity extracted per request for user-scoped operations
+    - UUID-based request tracing (request_id passed through Celery task headers)
+
+---
+
+23. Testing
+    - pytest as the test framework
+    - Session-scoped fixtures for expensive setup (database creation)
+    - Function-scoped fixtures for per-test resources (db_session)
+    - parametrize for data-driven tests
+    - autouse=True fixtures for global test setup
+
+---
+
+24. Remote Debugging
+    - debugpy for remote attach debugging inside Docker containers
+    - Conditional activation via DEBUGPY environment variable
+    - Listening on 0.0.0.0:5678 for IDE connection
+
+---
+
+25. API Security Patterns
+    - All sensitive endpoints protected by JWT
+    - Rate limits on auth endpoints to prevent brute force
+    - Token blocklist checked on every protected request
+    - Input validated at the boundary before any processing
