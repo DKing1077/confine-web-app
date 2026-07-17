@@ -23,6 +23,7 @@ Confine is a Flask-based web application that processes music-related search inp
 - Database migration scaffolding with Alembic
 
 ## Project structure
+```
 app/
 ├── auth/          # Registration, login, logout, token refresh
 ├── cache/         # Cache lookup and result storage logic
@@ -38,6 +39,8 @@ app/
 ├── tabs/          # Tab result building and transformation routes
 ├── database.py    # DB creation and table initialisation
 └── __init__.py    # App factory
+
 alembic/           # Database migration scripts
 tests/             # Pytest test suite
+```
 
