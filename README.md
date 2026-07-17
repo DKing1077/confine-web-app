@@ -21,3 +21,23 @@ Confine is a Flask-based web application that processes music-related search inp
 - External service integration patterns (MusixMatch and OpenRouter)
 - Structured logging and Sentry-based error monitoring
 - Database migration scaffolding with Alembic
+
+## Project structure
+app/
+├── auth/          # Registration, login, logout, token refresh
+├── cache/         # Cache lookup and result storage logic
+├── celery/        # Task definitions, worker config, and signals
+├── logic/         # Search and cache pipeline orchestration
+├── models.py      # SQLAlchemy ORM models
+├── schemas.py     # Marshmallow validation schemas
+├── extensions.py  # Shared extensions (db, celery, jwt, limiter)
+├── logger.py      # Logging configuration
+├── prompts.py     # AI prompt templates
+├── search/        # Search routes and database queries
+├── services/      # MusixMatch and OpenRouter API clients
+├── tabs/          # Tab result building and transformation routes
+├── database.py    # DB creation and table initialisation
+└── __init__.py    # App factory
+alembic/           # Database migration scripts
+tests/             # Pytest test suite
+
