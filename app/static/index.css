@@ -116,7 +116,7 @@ a,
 .auth-button,
 .confine-label,
 .action-row button {
-    border-radius: 3px;
+    border-radius: 5px;
 }
 
 .auth-button,
@@ -228,7 +228,7 @@ a,
     flex: 1;
     padding: 6px 10px;
     border: 1.25px solid #0177A4;
-    border-radius: 3px 0 0 3px;
+    border-radius: 5px 0 0 5px;
     outline: none;
     background: #ffffff;
     color: #090909;
@@ -242,7 +242,7 @@ a,
 .search-row button {
     padding: 6px 12px;
     border-left: none;
-    border-radius: 0 3px 3px 0;
+    border-radius: 0 5px 5px 0;
     cursor: pointer;
 }
 
@@ -275,8 +275,9 @@ a,
     text-align: center;
     text-align-last: center;
     border: 1.25px solid #0177A4;
-    border-radius: 3px;
+    border-radius: 5px;
     background: rgba(255, 255, 255, 0.9);
+    background-position: calc(100% - 10px) 50%;
     color: #090909;
     transition: all 0.2s ease;
 }
@@ -307,7 +308,7 @@ a,
     flex: 1;
     padding: 8px 10px;
     border: 1px solid rgba(1, 119, 164, 0.45);
-    border-radius: 8px;
+    border-radius: 5px;
     cursor: pointer;
 
     background: rgba(255, 255, 255, 0.42);
@@ -341,7 +342,7 @@ a,
     overflow-y: auto;
 
     border: 1px solid rgba(1, 119, 164, 0.42);
-    border-radius: 14px;
+    border-radius: 12px;
     background: rgba(255, 255, 255, 0.5);
     backdrop-filter: blur(14px);
 
@@ -363,7 +364,7 @@ a,
 
 .tab-content::-webkit-scrollbar-thumb {
     background: rgba(9, 9, 9, 0.25);
-    border-radius: 1px;
+    border-radius: 5px;
 }
 
 .tab-content::-webkit-scrollbar-thumb:hover {
@@ -439,7 +440,7 @@ a,
     padding: 10px 12px;
 
     border: 1px solid rgba(1, 119, 164, 0.18);
-    border-radius: 10px;
+    border-radius: 5px;
     outline: none;
 
     background: rgba(255, 255, 255, 0.9);
@@ -509,7 +510,7 @@ a,
 .selectable-item.selected,
 .search-result-item.selected,
 .workspace-title.selected {
-    border-radius: 2px;
+    border-radius: 5px;
     background: rgba(255, 255, 255, 0.95);
     color: #090909;
 }
@@ -519,7 +520,7 @@ a,
     width: 100%;
     margin-bottom: 6px;
     padding: 4px 8px;
-    border-radius: 2px;
+    border-radius: 5px;
     box-sizing: border-box;
 
     background: transparent;
@@ -581,7 +582,7 @@ a,
     display: block;
     width: fit-content;
     padding: 4px 8px;
-    border-radius: 2px;
+    border-radius: 5px;
 
     background: transparent;
     color: rgba(9, 9, 9, 0.9);
@@ -637,7 +638,7 @@ a,
     overflow-y: auto;
 
     border: none;
-    border-radius: 2px;
+    border-radius: 5px;
     background: #ffffff;
 
     color: rgba(9, 9, 9, 0.95);

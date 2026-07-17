@@ -97,7 +97,7 @@ a,
     font-size: 13px;
 
     padding: 5px 9px;
-    border-radius: 2px;
+    border-radius: 5px;
     border: 1.25px solid #0177A4;
 
     text-decoration: none;
@@ -169,7 +169,7 @@ a,
     border: 1.25px solid #0177A4;
     outline: none;
 
-    border-radius: 3px;
+    border-radius: 5px;
 
     font-family: inherit;
     font-weight: 600;
@@ -203,7 +203,7 @@ a,
     font-size: 12px;
 
     border: 1.25px solid #0177A4;
-    border-radius: 2px;
+    border-radius: 5px;
 
     cursor: pointer;
 
@@ -234,7 +234,7 @@ a,
     font-size: 12px;
 
     border: 1.25px solid #0177A4;
-    border-radius: 3px;
+    border-radius: 5px;
 
     cursor: pointer;
 
