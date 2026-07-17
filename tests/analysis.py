@@ -1,17 +1,16 @@
 from transformers import pipeline, AutoTokenizer
 from textblob import TextBlob
 import string
-import logger
+import logging
 
 logger = logging.getLogger(__name__)
 
 
 def analyze(df):
     sentiment_analysis(df, hugging_face=False)
-    # text_summary(df)
+    text_summary(df)
 
 
-# TODO Try hugging face
 def sentiment_analysis(df, hugging_face):
     if hugging_face:
         models = ['roberta-base', 'bert-base-uncased']
