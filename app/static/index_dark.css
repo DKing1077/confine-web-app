@@ -1,0 +1,647 @@
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+/* ========================================
+   BASE / PAGE
+======================================== */
+
+html,
+body {
+    margin: 0;
+    height: auto;
+    min-height: 100%;
+}
+
+html {
+    /* Fallback to prevent visible gaps */
+    background: #0b0d10;
+}
+
+body {
+    position: relative;
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding-top: 20px;
+
+    background: #0b0d10;
+    background-attachment: fixed;
+
+    color: #e8edf2;
+    font-family: 'Share Tech Mono', monospace;
+    font-weight: 600;
+}
+
+/* Fixed background layers */
+
+body::before,
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+}
+
+body::before {
+    background: radial-gradient(
+        circle at 50% 20%,
+        rgba(0, 180, 255, 0.08),
+        transparent 55%
+    );
+}
+
+body::after {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' result='noise'/%3E%3CfeDisplacementMap in='SourceGraphic' in2='noise' scale='120' xChannelSelector='R' yChannelSelector='G'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: 0.025;
+    mix-blend-mode: screen;
+}
+
+/* ========================================
+   GLOBAL TYPOGRAPHY
+======================================== */
+
+body,
+button,
+input,
+select,
+textarea,
+label,
+a,
+.tab,
+.panel,
+.search-result-item,
+.workspace-title,
+.lyrics-toggle,
+.lyrics-box,
+#results,
+.user-status,
+.confine-label,
+.auth-button {
+    font-family: 'Share Tech Mono', monospace;
+    font-weight: 600;
+}
+
+/* ========================================
+   TOP NAV / STATUS
+======================================== */
+
+.nav-links {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: flex;
+    gap: 16px;
+}
+
+.auth-button,
+.confine-label,
+.search-row button,
+.action-row button {
+    appearance: none;
+    -webkit-appearance: none;
+    border: 1.25px solid #2aa4d6;
+    background: rgba(20, 24, 30, 0.88);
+    color: #e8edf2;
+    font-size: 12px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.auth-button,
+.confine-label,
+.action-row button {
+    border-radius: 5px;
+}
+
+.auth-button,
+.confine-label {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 8px;
+}
+
+.auth-button {
+    cursor: default;
+    text-decoration: none;
+    font-family: inherit;
+    font-weight: 600;
+}
+
+.confine-label {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: default;
+}
+
+.auth-button:hover,
+.confine-label:hover {
+    background: rgba(28, 34, 42, 0.98);
+    color: #ffffff;
+    transform: translateY(-1px);
+}
+
+.user-status {
+    position: fixed;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    z-index: 9999;
+    pointer-events: none;
+
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    font-size: 14px;
+}
+
+.user-status .label {
+    color: rgba(232, 237, 242, 0.55);
+}
+
+.user-status .username.logged-in {
+    color: #22c55e;
+}
+
+.user-status .username.logged-out {
+    color: #ef4444;
+}
+
+/* ========================================
+   MAIN FORM LAYOUT
+======================================== */
+
+#search_form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 580px;
+    height: calc(100vh - 80px);
+    min-height: 0;
+
+    margin-top: 20px;
+    margin-bottom: 80px;
+
+    transform: scale(0.92);
+    transform-origin: top center;
+}
+
+/* ========================================
+   SEARCH + ACTION ROWS
+======================================== */
+
+.search-row,
+.action-row {
+    width: 385px;
+    flex-shrink: 0;
+}
+
+.search-row {
+    display: flex;
+}
+
+.action-row {
+    display: flex;
+    gap: 8px;
+    margin: 10px 0 16px;
+}
+
+#search_input,
+.search-row button,
+.action-row button,
+.mode-select {
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 12px;
+}
+
+#search_input {
+    flex: 1;
+    padding: 6px 10px;
+    border: 1.25px solid #2aa4d6;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+    background: #12171d;
+    color: #e8edf2;
+}
+
+#search_input::placeholder,
+.input-textarea::placeholder {
+    color: rgba(232, 237, 242, 0.4);
+}
+
+.search-row button {
+    padding: 6px 12px;
+    border-left: none;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+}
+
+.search-row button:hover,
+.action-row button:hover,
+.mode-select:hover {
+    background: rgba(28, 34, 42, 0.98);
+    transform: translateY(-1px);
+}
+
+.action-row button,
+.mode-select {
+    flex: 1;
+    padding: 6px 8px;
+}
+
+.action-row button {
+    cursor: pointer;
+}
+
+.action-row button:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.28);
+}
+
+.mode-select {
+    cursor: pointer;
+    appearance: auto;
+    -webkit-appearance: menulist;
+    -moz-appearance: menulist;
+    text-align: center;
+    text-align-last: center;
+    border: 1.25px solid #2aa4d6;
+    border-radius: 5px;
+    background: rgba(20, 24, 30, 0.88);
+    color: #e8edf2;
+    transition: all 0.2s ease;
+}
+
+/* ========================================
+   DASHBOARD / TABS
+======================================== */
+
+.dashboard {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-height: 0;
+
+    width: 740px;
+    margin-bottom: 16px;
+}
+
+.tab-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    flex-shrink: 0;
+    margin-bottom: 10px;
+}
+
+.tab {
+    flex: 1;
+    padding: 8px 10px;
+    border: 1px solid rgba(42, 164, 214, 0.4);
+    border-radius: 5px;
+    cursor: pointer;
+
+    background: rgba(20, 24, 30, 0.58);
+    color: rgba(232, 237, 242, 0.68);
+
+    font-size: 11px;
+    transition: all 0.2s ease;
+}
+
+.tab:hover {
+    background: rgba(28, 34, 42, 0.86);
+    color: #ffffff;
+    transform: translateY(-1px);
+}
+
+.tab.active {
+    background: rgba(24, 30, 38, 0.98);
+    color: #ffffff;
+    border-color: rgba(42, 164, 214, 0.75);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.24);
+}
+
+.tab-content {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+
+    min-height: 0;
+    margin-top: 0;
+    padding: 16px;
+    overflow-y: auto;
+
+    border: 1px solid rgba(42, 164, 214, 0.32);
+    border-radius: 12px;
+    background: rgba(18, 23, 29, 0.74);
+    backdrop-filter: blur(14px);
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.28),
+        inset 0 1px 0 rgba(255, 255, 255, 0.04);
+
+    scrollbar-width: thin;
+    scrollbar-color: rgba(232, 237, 242, 0.18) transparent;
+}
+
+.tab-content::-webkit-scrollbar {
+    width: 4px;
+}
+
+.tab-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.tab-content::-webkit-scrollbar-thumb {
+    background: rgba(232, 237, 242, 0.2);
+    border-radius: 5px;
+}
+
+.tab-content::-webkit-scrollbar-thumb:hover {
+    background: rgba(232, 237, 242, 0.32);
+}
+
+/* ========================================
+   PANELS
+======================================== */
+
+.panel {
+    display: none;
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 0;
+
+    color: rgba(232, 237, 242, 0.92);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.panel.active {
+    display: block;
+}
+
+#input.panel.active,
+#instructions.panel.active,
+#output.panel.active {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 0;
+}
+
+#search,
+#workspace_list,
+#concepts_list,
+#semantics_list,
+#favorites_search {
+    width: 100%;
+}
+
+/* ========================================
+   TEXTAREA PANELS
+======================================== */
+
+.input-box-wrap {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 6px;
+
+    width: 100%;
+    min-height: 0;
+    margin-bottom: 0;
+    box-sizing: border-box;
+}
+
+.input-box-wrap label {
+    flex-shrink: 0;
+    color: rgba(232, 237, 242, 0.85);
+    font-size: 12px;
+}
+
+.input-textarea {
+    display: block;
+    flex: 1;
+    width: 100%;
+    min-height: 0;
+    resize: none;
+
+    box-sizing: border-box;
+    padding: 10px 12px;
+
+    border: 1px solid rgba(42, 164, 214, 0.18);
+    border-radius: 5px;
+    outline: none;
+
+    background: rgba(15, 20, 26, 0.96);
+    color: #e8edf2;
+
+    font-family: inherit;
+    font-size: 11px;
+    line-height: 1.45;
+}
+
+.input-textarea:focus,
+.lyrics-box:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+/* ========================================
+   RESULTS FOOTER
+======================================== */
+
+#results {
+    position: fixed;
+    left: 50%;
+    bottom: 34px;
+    transform: translateX(-50%);
+
+    z-index: 1000;
+    pointer-events: none;
+
+    display: block;
+    min-height: 18px;
+    max-width: min(720px, 88vw);
+    padding: 0;
+
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    backdrop-filter: none;
+    box-shadow: none;
+
+    color: rgba(232, 237, 242, 0.68);
+    font-size: 11px;
+    line-height: 1.2;
+    text-align: center;
+}
+
+#results > * {
+    display: block;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* ========================================
+   SELECTABLE / RESULT ITEMS
+======================================== */
+
+.selectable-item {
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.selectable-item.selected,
+.search-result-item.selected,
+.workspace-title.selected {
+    border-radius: 5px;
+    background: rgba(28, 34, 42, 0.96);
+    color: #ffffff;
+}
+
+.search-result-item {
+    display: block;
+    width: 100%;
+    margin-bottom: 6px;
+    padding: 4px 8px;
+    border-radius: 5px;
+    box-sizing: border-box;
+
+    background: transparent;
+    color: rgba(232, 237, 242, 0.86);
+
+    will-change: transform, opacity;
+}
+
+.search-result-item:hover,
+.workspace-title:hover {
+    background: rgba(255, 255, 255, 0.06);
+    color: #ffffff;
+}
+
+/* ========================================
+   POPULATE ANIMATION
+======================================== */
+
+.search-result-item.item-populate,
+.workspace-item.item-populate {
+    opacity: 0;
+    transform: translate3d(0, 6px, 0);
+    animation: panelPopulate 0.22s ease forwards;
+}
+
+@keyframes panelPopulate {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 6px, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+/* ========================================
+   WORKSPACE
+======================================== */
+
+.workspace-item {
+    margin-bottom: 10px;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+
+    will-change: transform, opacity;
+}
+
+.workspace-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.workspace-title {
+    display: block;
+    width: fit-content;
+    padding: 4px 8px;
+    border-radius: 5px;
+
+    background: transparent;
+    color: rgba(232, 237, 242, 0.92);
+    font-size: 12px;
+
+    transition: all 0.2s ease;
+}
+
+.lyrics-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+
+    width: 20px;
+    height: 20px;
+    margin-top: 2px;
+    margin-left: -2px;
+    padding: 0;
+
+    appearance: none;
+    -webkit-appearance: none;
+    user-select: none;
+    cursor: pointer;
+
+    border: none;
+    background: transparent;
+    box-shadow: none;
+
+    color: #e8edf2;
+    font-size: 14px;
+    line-height: 1;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.lyrics-toggle:hover {
+    background: transparent;
+    box-shadow: none;
+    color: #57c7f5;
+    transform: translateY(-1px);
+}
+
+.lyrics-toggle.open {
+    background: transparent;
+    box-shadow: none;
+    color: #e8edf2;
+}
+
+.lyrics-box {
+    max-height: 200px;
+    margin-top: 6px;
+    padding: 8px;
+    overflow-y: auto;
+
+    border: none;
+    border-radius: 5px;
+    background: #11161c;
+
+    color: rgba(232, 237, 242, 0.96);
+    font-size: 11px;
+    line-height: 1.4;
+    white-space: pre-wrap;
+}
