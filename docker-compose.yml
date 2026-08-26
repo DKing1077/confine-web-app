@@ -1,0 +1,65 @@
+services:
+  redis:
+    image: redis:7
+    expose:
+      - "6379"
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    expose:
+      - "5432"
+    restart: unless-stopped
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  web:
+    build: .
+    command: python run.py
+    ports:
+      - "5001:5000"
+      - "5678:5678"
+    environment:
+      PYTHONUNBUFFERED: "1"
+      DEBUGPY: "1"
+    env_file:
+      - .env
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+    volumes:
+      - .:/app
+
+  celery:
+    build: .
+    command: >
+      watchfiles
+      --filter python
+      "celery -A app.celery.worker:celery worker -l info --pool=solo"
+      /app
+    environment:
+      PYTHONUNBUFFERED: "1"
+      DEBUGPY: "1"
+    env_file:
+      - .env
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+    volumes:
+      - .:/app
+    ports:
+      - "5679:5678"
+
+volumes:
+  postgres_data:
