@@ -1,7 +1,7 @@
 .idea/
 /app/prompts.py
-/app/statis
-/app/templates
+/app/static/
+/app/templates/
 config.py
 .env
 
