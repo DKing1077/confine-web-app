@@ -1,0 +1,44 @@
+1) What is concurrency, and how is it used in this app?
+Answer: Concurrency means handling multiple units of work without blocking the main request flow. This app uses Celery tasks and task chaining to run parsing and processing work outside the request handler while the web API remains responsive.
+
+2) Why use rate limiting in a web API?
+Answer: Rate limiting protects endpoints from abuse, brute-force attacks, and accidental traffic spikes. This app applies per-route limits (for example, login, register, and search routes) using Flask-Limiter backed by Redis.
+
+3) Why are JWT access and refresh tokens both used?
+Answer: Access tokens support short-lived authenticated API calls, while refresh tokens allow issuing new access tokens without forcing frequent re-login. This improves security and user experience.
+
+4) What is token revocation, and why is it important?
+Answer: Token revocation invalidates tokens before natural expiration (for example, on logout). This app keeps a token blocklist so revoked JWTs cannot be used again.
+
+5) Why validate request payloads with Marshmallow schemas?
+Answer: Schema validation enforces expected input structure and constraints (such as required fields and minimum lengths), reducing bad data and preventing downstream errors.
+
+6) What problem does caching solve in this codebase?
+Answer: Caching avoids repeating expensive lookups and external API calls for the same search inputs. This app stores search results in Redis with a TTL so repeated queries can return faster.
+
+7) Why use Redis for multiple concerns (Celery, rate limits, cache)?
+Answer: Redis is a fast in-memory datastore that supports different workloads efficiently. This app separates responsibilities by Redis DB index: task broker/backend, limiter storage, and search cache.
+
+8) What is the benefit of the Flask app factory pattern?
+Answer: The app factory pattern centralizes setup and allows cleaner initialization of extensions, routes, and environment-specific configuration. It also improves testability and modularity.
+
+9) Why use SQLAlchemy relationships and uniqueness constraints?
+Answer: Relationships model real domain links (artist-album-track-feature), and uniqueness constraints prevent duplicate records in key combinations, improving data integrity.
+
+10) What is a scoped database session, and why use it?
+Answer: A scoped session gives each request/task an isolated SQLAlchemy session lifecycle. This helps avoid cross-request state leakage and supports safe cleanup with teardown/remove patterns.
+
+11) Why wrap Celery tasks in Flask application context?
+Answer: Task code often needs app config and extension state. The custom Celery Task wrapper ensures each task runs with Flask app context so configuration and resources are available safely.
+
+12) Why include retries/validation loops around AI-generated structured output?
+Answer: LLM outputs can be malformed or inconsistent. This app validates response schema and retries to increase reliability before passing data deeper into business logic.
+
+13) Why keep service clients (OpenRouter, MusixMatch) separate from route handlers?
+Answer: Separation of concerns keeps routes thin and business logic reusable. Service classes isolate external API interaction, making code easier to test and maintain.
+
+14) Why is structured logging useful in backend systems?
+Answer: Structured logs improve traceability across request handling, task execution, and external integrations. This app logs workflow stages and outcomes to simplify debugging and operations.
+
+15) Why integrate Sentry with both Flask and Celery?
+Answer: Errors can happen in request handlers and background workers. Dual integration captures failures across both execution paths for better monitoring and faster incident response.
