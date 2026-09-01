@@ -1,0 +1,679 @@
+================================================================================
+  BACKEND ENGINEERING INTERVIEW Q&A
+  Based on concepts from the confine-web-app project
+================================================================================
+
+--------------------------------------------------------------------------------
+  1. FLASK & WEB FRAMEWORKS
+--------------------------------------------------------------------------------
+
+Q: What is Flask?
+A: Flask is a lightweight Python web micro-framework. It provides the minimum
+   needed to build a web app (routing, request/response handling, templating)
+   without bundling things like an ORM or form validation — you add those yourself.
+   This project uses Flask as the core web server.
+
+Q: What is a Blueprint in Flask?
+A: A Blueprint is a way to organise related routes, templates, and static files
+   into modular components. In this project there are four blueprints:
+   main (routes.py), auth (auth/routes.py), search (search/routes.py), and tabs
+   (tabs/routes.py). Each is registered on the Flask app during create_app().
+   This keeps the codebase clean and makes features independently testable.
+
+Q: What is the application factory pattern and why use it?
+A: Instead of creating the Flask app at module level, you wrap creation inside a
+   create_app() function that accepts configuration. This lets you create multiple
+   app instances with different configs (e.g. testing vs production) and avoids
+   circular import problems. This project uses create_app(Config) called from
+   run.py and from the Celery worker.
+
+Q: What is the Flask request context?
+A: When Flask receives an HTTP request it pushes a request context onto a stack,
+   making the `request`, `g`, and `session` proxies available to your view
+   functions. The context is torn down after the response is sent. This project
+   hooks into teardown_appcontext to remove the SQLAlchemy session after each
+   request.
+
+Q: What does @app.teardown_appcontext do?
+A: It registers a function that Flask calls when the application context is
+   popped — either after a request finishes or when the with-block around
+   app.app_context() exits. This project uses it to call db_session.remove(),
+   which returns the database connection back to the pool and closes the scoped
+   session.
+
+Q: What is CORS and why does this project enable it?
+A: Cross-Origin Resource Sharing (CORS) is a browser security mechanism that
+   blocks JavaScript in one origin (domain/port) from calling APIs on a different
+   origin. This project's frontend and API may run on different ports during
+   development (e.g. 3000 vs 5001), so flask-cors is configured to allow all
+   origins, with Content-Type and Authorization headers permitted.
+
+Q: What is a URL prefix on a Blueprint?
+A: It is a string prepended to all routes in a blueprint. For example,
+   url_prefix="/auth" means the login route defined as @bp.route("/login")
+   becomes accessible at /auth/login. This namespaces API endpoints cleanly.
+
+--------------------------------------------------------------------------------
+  2. REST APIs & HTTP
+--------------------------------------------------------------------------------
+
+Q: What are the common HTTP methods and when would you use each?
+A: GET — retrieve data (read only, no body).
+   POST — create a new resource or submit data.
+   PUT — replace an existing resource in full.
+   PATCH — partial update to an existing resource.
+   DELETE — remove a resource.
+   This project uses POST for register/login/search/logout and GET for
+   session-status.
+
+Q: What do HTTP status codes mean?
+A: 200 OK — success.
+   201 Created — resource successfully created (used after registration).
+   400 Bad Request — client sent invalid data (used for validation errors).
+   401 Unauthorized — authentication required or failed (used for bad credentials
+       or missing/expired JWT).
+   403 Forbidden — authenticated but not allowed.
+   404 Not Found — resource does not exist.
+   429 Too Many Requests — rate limit hit.
+   500 Internal Server Error — unhandled server-side failure.
+
+Q: What is a stateless API?
+A: The server keeps no session state between requests; every request carries all
+   information needed to process it (e.g. a JWT in the Authorization header). This
+   enables horizontal scaling because any server instance can handle any request.
+   This project is stateless — identity is carried by the JWT, not server-side
+   sessions.
+
+Q: What is request validation and why is it important?
+A: Validating incoming data before processing it prevents bad data from reaching
+   the database and protects against certain injections. This project uses
+   Marshmallow schemas (RegisterSchema, LoginSchema, SearchSchema) to validate
+   types, required fields, email format, and minimum lengths before any business
+   logic runs.
+
+Q: What is serialisation / deserialisation?
+A: Serialisation converts objects into a transmittable format (e.g. JSON).
+   Deserialisation is the reverse. Marshmallow's schema.load() deserialises and
+   validates incoming JSON; schema.dump() (not used here, but common) would
+   serialise objects for the response. In this project, SQLAlchemy model objects
+   are converted to dicts via to_dict() before being serialised to JSON.
+
+--------------------------------------------------------------------------------
+  3. AUTHENTICATION & SECURITY
+--------------------------------------------------------------------------------
+
+Q: What is JWT (JSON Web Token)?
+A: A compact, self-contained token that encodes a JSON payload and signs it with a
+   secret key. The server issues a JWT on login; the client sends it on every
+   subsequent request in the Authorization: ****** header. The server
+   verifies the signature without hitting the database. This project uses
+   flask-jwt-extended.
+
+Q: What are access tokens and refresh tokens?
+A: An access token is short-lived (minutes to hours) and authorises API calls.
+   When it expires, the client uses the longer-lived refresh token to get a new
+   access token from /auth/refresh without re-entering credentials. This limits
+   the exposure window if an access token is stolen.
+
+Q: What is a token blocklist / revocation?
+A: Because JWTs are stateless, signing out by deleting the token client-side is
+   not enough — someone who intercepted the token could still use it. A blocklist
+   stores revoked JTIs (JWT IDs) and the server checks every request against it.
+   This project stores revoked JTIs in an in-memory Python set (revoked_tokens).
+   A production system would store this in Redis so all server instances share it.
+
+Q: What is password hashing and why not store plain text passwords?
+A: Hashing is a one-way transformation. Even if the database is leaked, attackers
+   cannot recover the original passwords. This project uses Werkzeug's
+   generate_password_hash() (PBKDF2 by default) and check_password_hash() to
+   verify login attempts.
+
+Q: What is the difference between authentication and authorisation?
+A: Authentication — verifying who you are (login, JWT validation).
+   Authorisation — verifying what you are allowed to do (checking permissions,
+   roles, or ownership). In this project, @jwt_required() handles authentication;
+   the search route then uses the identity from the JWT to scope results to that
+   user.
+
+Q: What is input validation and why is it a security concern?
+A: Accepting unvalidated user input can lead to SQL injection, XSS, or other
+   attacks. This project validates with Marshmallow before any DB or business
+   logic runs, and uses SQLAlchemy's parameterised queries which prevent SQL
+   injection by design.
+
+Q: What is HTTPS and why is it important?
+A: HTTPS encrypts traffic between client and server using TLS. Without it, tokens,
+   passwords, and other sensitive data can be intercepted (man-in-the-middle).
+   Production deployments of this app should terminate TLS at a load balancer or
+   reverse proxy (e.g. nginx).
+
+--------------------------------------------------------------------------------
+  4. RATE LIMITING
+--------------------------------------------------------------------------------
+
+Q: What is rate limiting?
+A: Rate limiting caps how many requests a client can make in a time window. It
+   protects the server from brute-force attacks, abuse, and resource exhaustion.
+
+Q: How is rate limiting implemented in this project?
+A: Using flask-limiter with Redis as the storage backend (DB 1). Each route can
+   have its own limit: register is 3/minute, login is 5/minute, and search is
+   10/minute. The limiter keys requests by remote IP (get_remote_address).
+
+Q: Why use Redis for rate limit storage instead of in-memory?
+A: In-memory counters are per-process and lost on restart. Redis is a shared,
+   persistent store accessible to all worker processes and server instances, so
+   the rate limit is enforced consistently across the entire application.
+
+Q: What is a sliding window vs a fixed window rate limit?
+A: Fixed window resets the counter at fixed intervals (e.g. at :00 and :01 of
+   each minute). Sliding window tracks requests over the last N seconds from the
+   current moment, giving a smoother and stricter limit. flask-limiter uses a
+   fixed window by default but supports other strategies.
+
+Q: What happens when a client exceeds the rate limit?
+A: flask-limiter returns a 429 Too Many Requests response automatically. The
+   client should back off and retry after the reset time indicated in the
+   Retry-After header.
+
+--------------------------------------------------------------------------------
+  5. DATABASES & SQLALCHEMY
+--------------------------------------------------------------------------------
+
+Q: What is an ORM (Object-Relational Mapper)?
+A: An ORM maps database tables to Python classes and rows to instances, letting
+   you write Python instead of raw SQL. SQLAlchemy is the ORM used here. Tables
+   are defined as classes that inherit from Base, and relationships between tables
+   are expressed as Python attributes.
+
+Q: What is a database session in SQLAlchemy?
+A: A session is the unit of work — it tracks Python objects and their state
+   (new, modified, deleted), batches changes, and flushes them to the database
+   as a single transaction. In this project db_session is a scoped_session, which
+   gives each thread its own session automatically.
+
+Q: What is a scoped session and why is it used?
+A: A scoped_session creates or reuses a session bound to the current scope
+   (thread by default). In a multi-threaded Flask app, each request runs in its
+   own thread, so each gets an isolated session. The session is cleaned up at the
+   end of the request via teardown_appcontext.
+
+Q: What is flush vs commit in SQLAlchemy?
+A: flush() sends pending SQL statements to the database within the current
+   transaction but does not commit — the changes are visible to the same session
+   but not to others. commit() finalises the transaction and makes changes
+   permanent and visible to all connections. This project calls flush() after
+   each insert during a search (so IDs are available for FK references) and then
+   commits once at the end.
+
+Q: What is a rollback?
+A: If an error occurs mid-transaction, rollback() undoes all uncommitted changes,
+   returning the database to the state before the transaction started. This project
+   calls db_session.rollback() inside except blocks and in Celery tasks.
+
+Q: What is a foreign key?
+A: A column that references the primary key of another table, enforcing
+   referential integrity — you cannot have a Track without an existing Artist.
+   SQLAlchemy enforces this with ForeignKey("artists.artist_id").
+
+Q: What is a unique constraint?
+A: A constraint that prevents duplicate values in a column or combination of
+   columns. This project uses UniqueConstraint("artist_id", "album_name") on
+   Albums so the same artist cannot have two albums with the same name.
+
+Q: What is a database relationship (one-to-many, many-to-many)?
+A: One-to-many: one Artist has many Albums. Many-to-many: many Tracks can have
+   many featured Artists. SQLAlchemy's relationship() sets these up; the Features
+   join table represents the many-to-many between Tracks and Artists.
+
+Q: What is a connection pool?
+A: A pool of pre-established database connections that are reused across requests
+   rather than opened and closed for every query. SQLAlchemy manages a pool by
+   default. At request teardown, the connection is returned to the pool rather
+   than destroyed.
+
+Q: What is Alembic and what problem does it solve?
+A: Alembic is a database migration tool for SQLAlchemy. It tracks schema changes
+   (adding/removing columns, tables, indexes) in versioned migration scripts. This
+   allows the schema to evolve in a controlled, reversible way without losing data.
+
+Q: What is the difference between ilike and like in SQLAlchemy?
+A: like() is case-sensitive; ilike() is case-insensitive. This project uses ilike
+   for artist and track name searches so that "Drake" and "drake" both match.
+
+Q: What is PostgreSQL and why use it over SQLite?
+A: PostgreSQL is a production-grade relational database with support for
+   concurrent connections, ACID transactions, complex queries, and many data types
+   (including JSON, used for search_result in this project). SQLite is file-based
+   and unsuitable for multi-process production workloads.
+
+--------------------------------------------------------------------------------
+  6. REDIS & CACHING
+--------------------------------------------------------------------------------
+
+Q: What is Redis?
+A: Redis is an in-memory data store commonly used as a cache, message broker, and
+   session store. It stores data in key-value pairs and supports rich data
+   structures (strings, lists, hashes, sets). Its in-memory nature makes reads
+   and writes extremely fast.
+
+Q: How is Redis used in this project?
+A: Three logical databases within the same Redis instance:
+   DB 0 — Celery task broker and result backend.
+   DB 1 — flask-limiter rate limit counters.
+   DB 2 — search result cache (cache.py).
+
+Q: What is a cache hit vs a cache miss?
+A: Cache hit: the requested data is found in the cache, so the slow source
+   (database or external API) is not called. Cache miss: the data is absent from
+   the cache, so the system fetches it from the origin and then stores it in the
+   cache for future requests.
+
+Q: What is a TTL (Time To Live)?
+A: A TTL is an expiry time attached to a cache entry. After the TTL elapses,
+   Redis automatically deletes the entry. This project sets a 12-hour TTL
+   (43200 seconds) on search results via setex(). This prevents stale data from
+   living forever and manages memory.
+
+Q: What is cache invalidation and why is it hard?
+A: Cache invalidation means removing or updating a cached value when the
+   underlying data changes. It is hard because you must know when data has changed
+   and ensure all cache layers are updated atomically. Common strategies are TTL
+   expiry, write-through (update cache on every write), and cache-aside (check
+   cache; miss → fetch → store). This project uses TTL-based expiry.
+
+Q: What is the cache-aside (lazy loading) pattern?
+A: On a read: check the cache first (cache_get); if miss, fetch from the DB or
+   API (search_pipeline), then store the result in the cache (cache_set). This
+   project implements cache-aside in cache_pipeline() and search_pipeline().
+
+Q: Why serialize data before storing it in Redis?
+A: Redis stores bytes. Python objects must be serialised to a byte-compatible
+   format first. This project uses json.dumps() when storing and json.loads()
+   when retrieving. You could also use pickle, but JSON is safer and portable.
+
+--------------------------------------------------------------------------------
+  7. CELERY & ASYNC TASK QUEUES
+--------------------------------------------------------------------------------
+
+Q: What is Celery?
+A: Celery is a distributed task queue for Python. You define functions as tasks,
+   and Celery runs them asynchronously in background worker processes, decoupling
+   heavy work from the HTTP request/response cycle.
+
+Q: What is a message broker and why does Celery need one?
+A: A broker is a message-passing intermediary. When the Flask app calls
+   task.apply_async(), it pushes a message into the broker (Redis DB 0 here).
+   The Celery worker polls the broker, picks up the message, and executes the
+   task. This decouples the producer (Flask) from the consumer (Celery worker).
+
+Q: What is the difference between apply_async() and delay()?
+A: Both dispatch a task asynchronously. delay() is a shorthand wrapper around
+   apply_async() that does not support extra options. apply_async() lets you pass
+   countdown, eta, headers, retries, etc. This project uses apply_async() to
+   attach a request_id header for tracing.
+
+Q: What is a Celery chain?
+A: A chain is a series of tasks where the output of one task is passed as the
+   first argument to the next. In this project:
+       chain(parse_search_task.s(search_input), process_search_task.s(user_id))
+   parse_search_task returns (artist, track, input) which is passed to
+   process_search_task automatically.
+
+Q: What is result.get() and what are its risks?
+A: result.get() blocks the calling thread until the task (or chain) finishes and
+   returns the result. The risk is that it can block the Flask request for a long
+   time, effectively making an asynchronous task synchronous. For long-running
+   tasks you would instead return a job_id and have the client poll a separate
+   status endpoint.
+
+Q: What is the Celery result backend?
+A: After a task finishes, the worker stores the return value in the result backend
+   (Redis DB 0 here) keyed by task ID. The caller can then retrieve it via
+   result.get(). result_expires=3600 means results are deleted from Redis after
+   one hour.
+
+Q: Why does the Celery ContextTask exist?
+A: Celery workers run outside the Flask request cycle, so Flask's application
+   context (config, extensions, etc.) is not set up. ContextTask wraps every task
+   execution in with app.app_context(), making Flask globals (current_app, db
+   session, etc.) available inside tasks.
+
+Q: What are Celery task retries and exponential backoff?
+A: If a task raises an exception, Celery can automatically retry it. With
+   retry_backoff=True, each retry waits progressively longer (1 s, 2 s, 4 s …)
+   to avoid hammering a flaky external service. This project has retry code
+   commented out but shows the pattern for reference.
+
+Q: What are Celery signals?
+A: Signals are hooks that fire at specific points in the task lifecycle
+   (worker_ready, task_prerun, task_success, task_failure, task_retry). This
+   project connects to each signal in signals.py to emit structured log lines,
+   including a request_id for tracing a chain end-to-end.
+
+Q: What is the difference between concurrency and parallelism?
+A: Concurrency means handling multiple tasks by interleaving them (not necessarily
+   at the same instant). Parallelism means running multiple tasks at the exact
+   same moment on separate CPU cores. Celery workers can be parallelised across
+   multiple processes. This project runs the worker with --pool=solo (single
+   process) for simplicity.
+
+Q: What is a task queue vs a job queue?
+A: They are often used interchangeably. Technically a task queue (Celery) focuses
+   on distributing function calls to workers. A job queue is a broader term for
+   any queuing system (including batch processing systems). Both decouple producers
+   from consumers.
+
+--------------------------------------------------------------------------------
+  8. DOCKER & CONTAINERS
+--------------------------------------------------------------------------------
+
+Q: What is Docker and why use it?
+A: Docker packages an application and all its dependencies into a lightweight,
+   portable container. This ensures the app runs identically on any machine
+   regardless of the host OS. This project's Dockerfile creates an image from
+   python:3.11-slim.
+
+Q: What is a Docker image vs a container?
+A: An image is a read-only blueprint (defined by a Dockerfile). A container is a
+   running instance of that image. Multiple containers can be created from the
+   same image.
+
+Q: What is docker-compose and what does it do in this project?
+A: docker-compose defines and manages multi-container applications via a YAML
+   file. This project's docker-compose.yml orchestrates four services: redis,
+   postgres, web (Flask), and celery (Celery worker), wiring them together on the
+   same internal network.
+
+Q: What is a volume in Docker?
+A: Volumes persist data outside the container's writable layer. This project uses
+   a named volume (postgres_data) so database data survives container restarts.
+   The web and celery containers also mount the project directory into /app so
+   code changes are reflected without rebuilding the image.
+
+Q: What is a health check in docker-compose?
+A: A health check is a command Docker runs periodically to decide if a service is
+   ready. The postgres service uses pg_isready. The web service has
+   depends_on: postgres: condition: service_healthy, meaning Flask only starts
+   after PostgreSQL passes its health check.
+
+Q: What does PYTHONUNBUFFERED=1 do?
+A: Python buffers stdout/stderr by default. Setting PYTHONUNBUFFERED=1 disables
+   this so log output appears in Docker logs immediately rather than after a
+   buffer fills — important for debugging long-running processes.
+
+Q: What is a multi-stage build?
+A: A Dockerfile technique where you use one image to compile/build artefacts and
+   copy only the result into a smaller final image, reducing image size. Not used
+   here but common in production Python builds.
+
+--------------------------------------------------------------------------------
+  9. APIs & THIRD-PARTY SERVICES
+--------------------------------------------------------------------------------
+
+Q: What is an API (Application Programming Interface)?
+A: A defined contract for how software components communicate. In web development
+   this usually means an HTTP-based interface. This project consumes two external
+   APIs: Musixmatch (music/lyrics data) and OpenRouter (LLM inference).
+
+Q: What is the OpenAI SDK and how is it used here with OpenRouter?
+A: The openai Python package is a client for OpenAI's API. OpenRouter is a
+   third-party proxy that exposes many LLMs behind an OpenAI-compatible endpoint.
+   This project points the OpenAI client at OpenRouter's base URL with an
+   OpenRouter API key, allowing a drop-in swap of models.
+
+Q: What is temperature in an LLM API call?
+A: Temperature controls randomness in the model's output. 0 = deterministic
+   (always the most likely token). Higher values (up to 2) increase creativity
+   but also hallucination risk. This project uses temperature=0 everywhere because
+   it needs consistent, parseable JSON output.
+
+Q: What is max_tokens?
+A: It caps how many tokens (roughly words/subwords) the model will generate in a
+   single response. Setting it avoids runaway costs and timeouts for tasks that
+   only need short structured outputs.
+
+Q: What is prompt engineering?
+A: Crafting the system and user messages sent to an LLM so it reliably produces
+   the desired output format and quality. This project has a prompts module that
+   constructs messages for search parsing, concept extraction, semantics
+   extraction, and lyric transformation.
+
+Q: What is retry logic and why is it used with external APIs?
+A: External APIs can fail transiently (network hiccup, rate limit, server error).
+   Retry logic automatically re-sends the request after a delay. This project
+   validates LLM response schemas and retries up to 3 times in validate_concepts()
+   and validate_semantics() if the JSON structure is wrong.
+
+Q: What is JSON and why is it the standard for APIs?
+A: JSON (JavaScript Object Notation) is a human-readable text format for
+   representing structured data. It is language-agnostic, widely supported, and
+   natively understood by browsers. All request/response bodies in this project
+   are JSON.
+
+--------------------------------------------------------------------------------
+  10. LOGGING & OBSERVABILITY
+--------------------------------------------------------------------------------
+
+Q: What is structured logging and why is it useful?
+A: Structured logging emits log entries as key-value pairs or JSON rather than
+   free-form strings, making them easy to search and aggregate in log management
+   tools (e.g. Datadog, ELK). This project uses Python's standard logging module
+   with a custom format.
+
+Q: What are log levels?
+A: DEBUG — fine-grained diagnostic info.
+   INFO — general events (request received, user registered).
+   WARNING — unexpected but recoverable (invalid AI response, retrying).
+   ERROR — failures that need attention (task failed, DB error).
+   CRITICAL — system-level failures.
+   This project uses INFO for normal flow and WARNING/ERROR for failures.
+
+Q: What is Sentry and what does it do?
+A: Sentry is an error-tracking and performance-monitoring platform. When an
+   unhandled exception occurs, the Sentry SDK captures it with full stack trace,
+   breadcrumbs, and context, and sends it to the Sentry dashboard. This project
+   integrates FlaskIntegration and CeleryIntegration so errors from both are
+   captured automatically.
+
+Q: What is traces_sample_rate in Sentry?
+A: It controls the fraction of transactions (requests) that Sentry records for
+   performance tracing. 1.0 means 100% of requests; 0.0 means none. A low rate
+   like 0.1 reduces cost and overhead while still giving performance visibility.
+
+Q: What is a request ID / correlation ID?
+A: A unique identifier (UUID) generated per request and propagated through all
+   logs and tasks belonging to that request. This project generates a UUID in
+   the search route and passes it as a Celery task header so every log line from
+   parse_search_task and process_search_task can be correlated.
+
+Q: What is debugpy?
+A: debugpy is the Python debugger used by VS Code and other tools. The Celery
+   worker starts it when DEBUGPY=1 is set, listening on port 5678. This allows
+   attaching a debugger to a running Docker container and setting breakpoints in
+   async tasks.
+
+--------------------------------------------------------------------------------
+  11. DATA VALIDATION & SCHEMAS
+--------------------------------------------------------------------------------
+
+Q: What is Marshmallow?
+A: Marshmallow is a Python serialisation/deserialisation and validation library.
+   You define a Schema class with typed fields and rules; calling schema.load()
+   validates and deserialises incoming data, raising ValidationError on failure.
+   This project uses it for RegisterSchema, LoginSchema, and SearchSchema.
+
+Q: What is schema validation vs business logic validation?
+A: Schema validation checks structure and types (is the email a valid email? is
+   the password at least 8 characters?). Business logic validation checks domain
+   rules (does this email already exist?). Both are needed; Marshmallow handles
+   the former, and the auth functions handle the latter.
+
+Q: What is defensive programming?
+A: Writing code that anticipates and handles unexpected inputs or states gracefully
+   rather than crashing. Examples in this project: checking `if not cached` before
+   using a cache result, wrapping JSON parsing in try/except, validating AI
+   response schemas before using them.
+
+Q: What is idempotency?
+A: An operation is idempotent if calling it multiple times produces the same
+   result as calling it once. GET and PUT are conventionally idempotent; POST is
+   not. The db_insert function in this project checks if records already exist
+   before inserting (check_if_exists), making it safe to re-run.
+
+--------------------------------------------------------------------------------
+  12. APPLICATION ARCHITECTURE
+--------------------------------------------------------------------------------
+
+Q: What is separation of concerns?
+A: Dividing a system into layers where each layer has a single, well-defined
+   responsibility. This project separates: routes (HTTP), logic (business rules),
+   services (external APIs), models (data structure), schemas (validation), cache
+   (Redis), and celery (background tasks). Each can be changed independently.
+
+Q: What is a service layer?
+A: A layer that encapsulates calls to external systems (APIs, ML models). In this
+   project app/services/ contains AIService (OpenRouter LLM) and MusixMatch (music
+   API). Routes and tasks use these classes, not raw HTTP calls, making them easy
+   to mock in tests or swap for a different provider.
+
+Q: What is dependency injection?
+A: Passing dependencies (like a db session or API client) into a function or class
+   rather than creating them inside. This makes code testable because you can
+   inject a fake/mock. This project passes db_session and api_client into
+   functions like search_pipeline() rather than referencing globals directly.
+
+Q: What is the difference between synchronous and asynchronous request handling?
+A: Synchronous: the server blocks until a response is ready. Asynchronous: the
+   server offloads work and responds later (or the client polls). This project's
+   search route is partly async — it delegates to Celery tasks — but then blocks
+   on result.get(), so from the HTTP perspective it is still synchronous.
+
+Q: What is horizontal scaling?
+A: Running multiple instances of the same service to handle more traffic. Stateless
+   APIs (like this one, with JWT auth and shared Redis/Postgres) scale horizontally
+   because any instance can serve any request.
+
+Q: What is a monolith vs microservices?
+A: A monolith bundles all features into one deployable unit. Microservices split
+   features into independently deployed services. This project is a modular
+   monolith — it is one Flask app but structured with clear internal boundaries.
+
+Q: What is environment-based configuration?
+A: Storing configuration (secrets, URLs, flags) in environment variables rather
+   than hard-coding them. This project reads config from a .env file via dotenv
+   and from docker-compose's environment/env_file blocks, keeping secrets out of
+   source code.
+
+--------------------------------------------------------------------------------
+  13. TESTING
+--------------------------------------------------------------------------------
+
+Q: What is pytest?
+A: pytest is the standard Python testing framework. It discovers test files
+   (test_*.py), provides fixtures for setup/teardown, and offers rich assertions.
+   This project has a tests/ directory using pytest.
+
+Q: What is a unit test vs an integration test?
+A: Unit test: tests a single function/class in isolation, with dependencies mocked.
+   Integration test: tests how multiple components work together (e.g. routes +
+   database). Good coverage requires both.
+
+Q: What is mocking?
+A: Replacing a real dependency with a controlled fake during tests so you can
+   test a unit in isolation and simulate edge cases (e.g. API errors). In Python,
+   unittest.mock.patch() is commonly used.
+
+Q: What is a test fixture?
+A: A function that sets up the state needed for a test (e.g. creating a test
+   database, inserting seed data) and tears it down afterwards. pytest fixtures
+   are decorated with @pytest.fixture and injected into test functions by name.
+
+--------------------------------------------------------------------------------
+  14. MISCELLANEOUS BACKEND CONCEPTS
+--------------------------------------------------------------------------------
+
+Q: What is UUID and when would you use it?
+A: UUID (Universally Unique Identifier) is a 128-bit identifier that is
+   effectively unique without a central authority. This project generates a UUID
+   for each search request (request_id) for log tracing. UUIDs are also used as
+   primary keys when you do not want predictable sequential IDs.
+
+Q: What is normalisation (in the context of this project)?
+A: In this project, normalize() lowercases and strips whitespace from artist/track
+   names so that "Drake" and "  drake  " are treated as the same key. This is
+   distinct from database normalisation (reducing data redundancy).
+
+Q: What is a connection string / DSN?
+A: A formatted string that contains all parameters needed to connect to a database
+   or service: protocol, user, password, host, port, and database name. Example:
+   ******host:5432/dbname. This project builds it dynamically
+   from config values.
+
+Q: What is pg_dump and when would you use it?
+A: pg_dump is a PostgreSQL utility that exports a database to a SQL file
+   (schema + data). It is used for backups. This project has a save_db() function
+   that calls pg_dump with --column-inserts to produce INSERT statements.
+
+Q: What is a singleton pattern?
+A: Ensuring only one instance of a class or resource exists. SQLAlchemy's engine
+   and session factory are effectively singletons in this project — created once
+   in init_db() and reused across requests.
+
+Q: What is a race condition?
+A: When the outcome of code depends on the timing of concurrent operations.
+   Example: two requests both check if a user exists, both get False, both try
+   to insert — one will fail with a unique constraint violation. This project
+   handles that by catching the exception and calling rollback().
+
+Q: What is the difference between flush and commit at the database level?
+A: Flush sends buffered SQL statements to the DB server within the current
+   transaction (visible to this session). Commit ends the transaction and makes
+   changes durable and visible to other sessions. Rollback discards all unflushed/
+   uncommitted changes.
+
+Q: What is an environment variable?
+A: A key-value pair set in the operating system or container runtime that a
+   process can read at runtime (os.getenv()). Used for secrets (API keys,
+   passwords), feature flags, and environment-specific config (dev vs prod URLs).
+
+Q: What is watchfiles / watchdog?
+A: File watching libraries that detect changes to source files and trigger a
+   callback (e.g. restart a process). The Celery container uses watchfiles to
+   automatically restart the worker when Python files change, enabling hot-reload
+   during development.
+
+Q: What is the principle of least privilege?
+A: Every component should have only the permissions it needs to function. In
+   production, the database user should not be a superuser — it should only have
+   SELECT/INSERT/UPDATE/DELETE on the application's schema. This project creates
+   a superuser for convenience in development but this would be locked down for
+   production.
+
+Q: What is an ORM N+1 query problem?
+A: When code fetches a list of N records and then issues one extra query per
+   record to load related data, totalling N+1 queries. SQLAlchemy avoids this
+   with eager loading (joinedload / selectinload). Awareness of when lazy vs
+   eager loading occurs is important for performance.
+
+Q: What is a health check endpoint?
+A: An HTTP endpoint (e.g. /health) that returns a simple OK response when the
+   service is running correctly. Load balancers and orchestrators (Kubernetes,
+   docker-compose) use it to decide whether to route traffic to an instance.
+   This project has a PostgreSQL health check in docker-compose but no HTTP
+   health endpoint in the Flask app.
+
+Q: What is API versioning?
+A: Prefixing routes with a version (e.g. /v1/search, /v2/search) so old clients
+   continue to work when you introduce breaking changes. This project does not
+   implement versioning but it is a common interview topic.
+
+Q: What is idempotency and why does it matter for background tasks?
+A: If a Celery task is retried due to a transient failure, it may run more than
+   once. An idempotent task produces the same end state regardless of how many
+   times it runs. The db_insert function's check_if_exists pattern is a step
+   toward idempotency.
+
+================================================================================
+  END OF Q&A — Good luck with your interview!
+================================================================================
