@@ -1,5 +1,6 @@
 from app.cache import tab_key, tab_cache_get, tab_cache_set
 from app.cache import redis_tab_cache
+from app.prompts import create_tabs
 import logging
 import uuid
 
@@ -20,17 +21,7 @@ def get_tab_cache(user_id):
 def create_tab_cache(user_id):
     tabs_id = str(uuid.uuid4())
     key = tab_key(user_id, tabs_id)
-    tabs = {
-        "tabs_id": tabs_id,
-        "user_id": user_id,
-        "search_results": [],
-        "workspace": [],
-        "concepts": [],
-        "semantics": [],
-        "instructions": [],
-        "input": [],
-        "output": []
-    }
+    tabs = create_tabs(tabs_id, user_id)
     tab_cache_set(key, tabs)
     redis_tab_cache.set(
         f"user_tabs:{user_id}",
