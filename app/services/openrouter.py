@@ -1,5 +1,7 @@
-from app.prompts import classify_search_messages, classify_concepts_message
-from app.prompts import transform_lyrics_messages, classify_semantics_message
+from app.prompts import classify_search_messages
+from app.prompts import classify_concepts_message as build_primary_messages
+from app.prompts import transform_lyrics_messages
+from app.prompts import classify_semantics_message as build_secondary_messages
 from openai import OpenAI
 import logging
 import json
@@ -42,8 +44,8 @@ class AIService:
             track_input = None
         return artist_input, track_input
 
-    def get_concepts(self, track_lyrics):
-        messages = classify_concepts_message(track_lyrics)
+    def get_primary_panel(self, track_lyrics):
+        messages = build_primary_messages(track_lyrics)
         response = self.client.chat.completions.create(
             model=self.model, messages=messages, temperature=0, max_tokens=128
         )
@@ -52,13 +54,13 @@ class AIService:
         res = re.sub(r"\s*```$", "", res.strip())
 
         try:
-            track_concepts = json.loads(res)
+            primary_panel = json.loads(res)
         except json.JSONDecodeError:
             return None
-        return track_concepts
+        return primary_panel
 
-    def get_semantics(self, track_lyrics):
-        messages = classify_semantics_message(track_lyrics)
+    def get_secondary_panel(self, track_lyrics):
+        messages = build_secondary_messages(track_lyrics)
         response = self.client.chat.completions.create(
             model=self.model, messages=messages, temperature=0, max_tokens=128
         )
@@ -67,10 +69,10 @@ class AIService:
         res = re.sub(r"\s*```$", "", res.strip())
 
         try:
-            track_semantics = json.loads(res)
+            secondary_panel = json.loads(res)
         except json.JSONDecodeError:
             return None
-        return track_semantics
+        return secondary_panel
 
     def transform_lyrics(self, lyrics, selected_concepts, selected_semantics, user_instructions=None):
         messages = transform_lyrics_messages(
@@ -86,7 +88,6 @@ class AIService:
         res = re.sub(r"^```(?:json)?\s*", "", res.strip())
         res = re.sub(r"\s*```$", "", res.strip())
         return res
-
 
 
 

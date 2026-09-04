@@ -26,52 +26,51 @@ class SearchSchema(Schema):
     )
 
 
-def validate_concepts(ai_client, tracks_lyrics):
-    concepts_flag = True
-    concepts = None
+def validate_primary_panel(ai_client, tracks_lyrics):
+    pending = True
+    panel_items = None
     max_attempts = 3
     attempt = 0
-    while concepts_flag and attempt < max_attempts:
+    while pending and attempt < max_attempts:
         attempt += 1
-        concepts = ai_client.get_concepts(tracks_lyrics)
+        panel_items = ai_client.get_primary_panel(tracks_lyrics)
         if (
-                isinstance(concepts, list)
-                and len(concepts) == len(tracks_lyrics)
+                isinstance(panel_items, list)
+                and len(panel_items) == len(tracks_lyrics)
                 and all(
             isinstance(t, dict)
             and "commontrack_id" in t
             and "track" in t
             and isinstance(t.get("concepts"), list)
-            for t in concepts
+            for t in panel_items
         )
         ):
-            concepts_flag = False
+            pending = False
         else:
-            logger.warning("invalid concepts schema on attempt=%s response=%r", attempt, concepts)
-    return concepts
+            logger.warning("invalid primary panel schema on attempt=%s response=%r", attempt, panel_items)
+    return panel_items
 
 
-def validate_semantics(ai_client, tracks_lyrics):
-    semantics_flag = True
-    semantics = None
+def validate_secondary_panel(ai_client, tracks_lyrics):
+    pending = True
+    panel_items = None
     max_attempts = 3
     attempt = 0
-    while semantics_flag and attempt < max_attempts:
+    while pending and attempt < max_attempts:
         attempt += 1
-        semantics = ai_client.get_semantics(tracks_lyrics)
+        panel_items = ai_client.get_secondary_panel(tracks_lyrics)
         if (
-                isinstance(semantics, list)
-                and len(semantics) == len(tracks_lyrics)
+                isinstance(panel_items, list)
+                and len(panel_items) == len(tracks_lyrics)
                 and all(
             isinstance(t, dict)
             and "commontrack_id" in t
             and "track" in t
             and isinstance(t.get("semantics"), list)
-            for t in semantics
+            for t in panel_items
         )
         ):
-            semantics_flag = False
+            pending = False
         else:
-            logger.warning("invalid semantics schema on attempt=%s response=%r", attempt, semantics)
-    return semantics
-
+            logger.warning("invalid secondary panel schema on attempt=%s response=%r", attempt, panel_items)
+    return panel_items

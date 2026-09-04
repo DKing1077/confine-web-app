@@ -436,14 +436,14 @@ A: It caps how many tokens (roughly words/subwords) the model will generate in a
 Q: What is prompt engineering?
 A: Crafting the system and user messages sent to an LLM so it reliably produces
    the desired output format and quality. This project has a prompts module that
-   constructs messages for search parsing, concept extraction, semantics
-   extraction, and lyric transformation.
+   constructs messages for search parsing, panel preparation,
+   and lyric transformation.
 
 Q: What is retry logic and why is it used with external APIs?
 A: External APIs can fail transiently (network hiccup, rate limit, server error).
    Retry logic automatically re-sends the request after a delay. This project
-   validates LLM response schemas and retries up to 3 times in validate_concepts()
-   and validate_semantics() if the JSON structure is wrong.
+   validates LLM response schemas and retries up to 3 times in
+   validate_primary_panel() and validate_secondary_panel() if the JSON structure is wrong.
 
 Q: What is JSON and why is it the standard for APIs?
 A: JSON (JavaScript Object Notation) is a human-readable text format for

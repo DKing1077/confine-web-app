@@ -5,7 +5,7 @@ from app.extensions import celery
 from app.logic import cache_pipeline, search_pipeline
 from app.services import AIService, MusixMatch
 from app.tabs import append_tabs_list, stable_id
-from app.schemas import validate_concepts, validate_semantics
+from app.schemas import validate_primary_panel, validate_secondary_panel
 
 logger = logging.getLogger(__name__)
 
@@ -68,13 +68,13 @@ def process_search_task(parsed_data, user_id):
 #     retry_kwargs={"max_retries": 3},
 # )
 @celery.task
-def analyze_items_task(tracks_lyrics):
+def build_panel_data_task(tracks_lyrics):
     try:
-        logger.info("analyzing items lyrics=%s", len(tracks_lyrics))
+        logger.info("building panel data lyrics=%s", len(tracks_lyrics))
         ai_client = AIService(api_key=current_app.config["OPENROUTER_APIKEY"], model=current_app.config["OPENROUTER_MODEL"])
 
-        concepts = validate_concepts(ai_client, tracks_lyrics)
-        for t in concepts:
+        primary_panel = validate_primary_panel(ai_client, tracks_lyrics)
+        for t in primary_panel:
             for c in t.get("concepts", []):
                 c["id"] = stable_id(
                     "c",
@@ -82,10 +82,10 @@ def analyze_items_task(tracks_lyrics):
                     c.get("name", ""),
                     c.get("evidence", "")
                 )
-        logger.info("concepts fetched=%s", len(concepts))
+        logger.info("primary panel fetched=%s", len(primary_panel))
 
-        semantics = validate_semantics(ai_client, tracks_lyrics)
-        for t in semantics:
+        secondary_panel = validate_secondary_panel(ai_client, tracks_lyrics)
+        for t in secondary_panel:
             for s in t.get("semantics", []):
                 s["id"] = stable_id(
                     "s",
@@ -93,9 +93,9 @@ def analyze_items_task(tracks_lyrics):
                     s.get("name", ""),
                     s.get("evidence", "")
                 )
-        logger.info("semantics fetched=%s", len(semantics))
+        logger.info("secondary panel fetched=%s", len(secondary_panel))
 
-        return concepts, semantics
+        return primary_panel, secondary_panel
 
     except Exception as e:
         raise e
@@ -107,13 +107,13 @@ def analyze_items_task(tracks_lyrics):
 #     retry_kwargs={"max_retries": 3},
 # )
 @celery.task
-def process_input(concepts, semantics, instructions, input_text):
+def render_selection_task(primary_panel, secondary_panel, instructions, input_text):
     try:
-        applied = len(concepts) + len(semantics)
+        applied = len(primary_panel) + len(secondary_panel)
         logger.info("applying transforms=%s", applied)
 
         ai_client = AIService(api_key=current_app.config["OPENROUTER_APIKEY"], model=current_app.config["OPENROUTER_MODEL"])
-        display_result = ai_client.transform_lyrics(concepts, semantics, instructions, input_text)
+        display_result = ai_client.transform_lyrics(primary_panel, secondary_panel, instructions, input_text)
 
         return display_result
 

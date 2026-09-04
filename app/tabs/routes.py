@@ -1,7 +1,7 @@
 from flask import Blueprint, request
 from flask_jwt_extended import get_jwt_identity, jwt_required
 from app.tabs import append_tabs_list, fetch_lyrics, remove_tabs_list, resolve_by_id
-from app.celery import analyze_items_task, process_input
+from app.celery import build_panel_data_task, render_selection_task
 from app.extensions import limiter
 import logging
 
@@ -56,7 +56,7 @@ def remove_from_panel():
 @bp.route("/analyze_items", methods=["POST"])
 @limiter.limit("3/minute")
 @jwt_required()
-def analyze_items():
+def build_panel_data():
     data = request.get_json()
     track_ids = data.get("items", [])
     user_id = int(get_jwt_identity())
@@ -72,14 +72,14 @@ def analyze_items():
         for item in full_items
     ]
 
-    # analyze tracks task
-    result = analyze_items_task.delay(tracks_lyrics)
-    concepts_return, semantics_return = result.get()
+    # prepare panel data task
+    result = build_panel_data_task.delay(tracks_lyrics)
+    primary_panel, secondary_panel = result.get()
 
-    # append, get display concepts
-    tabs = append_tabs_list(user_id, concepts_return, 'concepts')
-    concepts = tabs.get('concepts', [])
-    concepts_return = [
+    # append, get primary panel display data
+    tabs = append_tabs_list(user_id, primary_panel, 'concepts')
+    primary_display = tabs.get('concepts', [])
+    primary_panel = [
         {
             "track": t["track"],
             "commontrack_id": t["commontrack_id"],
@@ -93,13 +93,13 @@ def analyze_items():
                 for c in t["concepts"]
             ],
         }
-        for t in concepts
+        for t in primary_display
     ]
 
-    # attach ids, append, get display semantics
-    tabs = append_tabs_list(user_id, semantics_return, 'semantics')
-    semantics = tabs.get('semantics', [])
-    semantics_return = [
+    # append, get secondary panel display data
+    tabs = append_tabs_list(user_id, secondary_panel, 'semantics')
+    secondary_display = tabs.get('semantics', [])
+    secondary_panel = [
         {
             "track": t["track"],
             "commontrack_id": t["commontrack_id"],
@@ -113,32 +113,32 @@ def analyze_items():
                 for s in t["semantics"]
             ],
         }
-        for t in semantics
+        for t in secondary_display
     ]
 
     return {
         "route": "analyze_items",
         "status": "success",
-        "result": {"concepts": concepts_return, "semantics": semantics_return}
+        "result": {"concepts": primary_panel, "semantics": secondary_panel}
     }, 200
 
 
 @bp.route("/process_items", methods=["POST"])
 @limiter.limit("3/minute")
 @jwt_required()
-def process_items():
+def render_selected_items():
     data = request.get_json()
     user_id = int(get_jwt_identity())
 
-    concept_ids = data.get("concept_ids", [])
-    semantic_ids = data.get("semantic_ids", [])
+    primary_ids = data.get("concept_ids", [])
+    secondary_ids = data.get("semantic_ids", [])
     instructions = data.get("instructions", "")
     input_text = data.get("input_text", "")
 
-    concepts = resolve_by_id(user_id, concept_ids, 'concepts')
-    semantics = resolve_by_id(user_id, semantic_ids, 'semantics')
+    primary_panel = resolve_by_id(user_id, primary_ids, 'concepts')
+    secondary_panel = resolve_by_id(user_id, secondary_ids, 'semantics')
 
-    display_result = process_input.delay(concepts, semantics, instructions, input_text)
+    display_result = render_selection_task.delay(primary_panel, secondary_panel, instructions, input_text)
     text_result = display_result.get()
 
     logger.info("display result:\n %s", text_result)
@@ -147,7 +147,6 @@ def process_items():
         "status": "success",
         "result": {"display_result": text_result}
     }, 200
-
 
 
 
