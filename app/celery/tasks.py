@@ -46,7 +46,7 @@ def process_search_task(parsed_data, user_id):
 
         # search pipeline
         api_client = MusixMatch(api_key=current_app.config["MUSIXMATCH_APIKEY"])
-        search_result = search_pipeline(extensions.db_session, api_client,user_id, artist_input, track_input, search_input, cache_key)
+        search_result = search_pipeline(extensions.db_session, api_client, user_id, artist_input, track_input, search_input, cache_key)
 
         # tabs result
         tabs = append_tabs_list(user_id, search_result, "search_results")
@@ -73,7 +73,7 @@ def analyze_items_task(tracks_lyrics):
         logger.info("analyzing items lyrics=%s", len(tracks_lyrics))
         ai_client = AIService(api_key=current_app.config["OPENROUTER_APIKEY"], model=current_app.config["OPENROUTER_MODEL"])
 
-        concepts = validate_concepts(ai_client, tracks_lyrics)
+        concepts = validate_concepts(ai_client, tracks_lyrics) or []
         for t in concepts:
             for c in t.get("concepts", []):
                 c["id"] = stable_id(
@@ -84,7 +84,7 @@ def analyze_items_task(tracks_lyrics):
                 )
         logger.info("concepts fetched=%s", len(concepts))
 
-        semantics = validate_semantics(ai_client, tracks_lyrics)
+        semantics = validate_semantics(ai_client, tracks_lyrics) or []
         for t in semantics:
             for s in t.get("semantics", []):
                 s["id"] = stable_id(
