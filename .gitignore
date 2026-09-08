@@ -1,6 +1,6 @@
 .idea/
 /app/prompts.py
-/app/static/
+/app/static/*.css
 /app/templates/
 config.py
 .env
