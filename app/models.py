@@ -1,7 +1,7 @@
 from sqlalchemy import Integer, String, ForeignKey, Text, JSON
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import DateTime, func, UniqueConstraint
+from sqlalchemy import DateTime, func, UniqueConstraint, Index
 from datetime import datetime
 
 Base = declarative_base()
@@ -32,7 +32,7 @@ class Albums(Base):
     album_name: Mapped[str] = mapped_column(String, nullable=False)
 
     # belongs to an artist
-    artist_id: Mapped[int] = mapped_column(ForeignKey('artists.artist_id'), nullable=False)
+    artist_id: Mapped[int] = mapped_column(ForeignKey('artists.artist_id'), nullable=False, index=True)
     artist: Mapped['Artists'] = relationship('Artists', back_populates='albums')
 
     # has many tracks
@@ -51,15 +51,15 @@ class Tracks(Base):
 
     # content
     track_name: Mapped[str] = mapped_column(String, nullable=False)
-    commontrack_id: Mapped[int] = mapped_column(Integer, nullable=False)
+    commontrack_id: Mapped[int] = mapped_column(Integer, nullable=False, index=True)
     lyrics: Mapped[str] = mapped_column(Text, nullable=False)
 
     # belongs to artist
-    artist_id: Mapped[int] = mapped_column(ForeignKey('artists.artist_id'), nullable=False)
+    artist_id: Mapped[int] = mapped_column(ForeignKey('artists.artist_id'), nullable=False, index=True)
     artist: Mapped['Artists'] = relationship('Artists', back_populates='tracks')
 
     # can belong to album
-    album_id: Mapped[int | None] = mapped_column(ForeignKey("albums.album_id"), nullable=True)
+    album_id: Mapped[int | None] = mapped_column(ForeignKey("albums.album_id"), nullable=True, index=True)
     album: Mapped['Albums | None'] = relationship('Albums', back_populates="tracks")
 
     # has features
@@ -98,7 +98,7 @@ class SearchResults(Base):
 
     # ids
     search_id: Mapped[int] = mapped_column(Integer, primary_key=True)
-    user_id: Mapped[int] = mapped_column(ForeignKey('users.user_id'))
+    user_id: Mapped[int] = mapped_column(ForeignKey('users.user_id'), index=True)
 
     # content
     search_input: Mapped[str] = mapped_column(Text, nullable=False)
@@ -112,7 +112,6 @@ class SearchResults(Base):
         DateTime(timezone=True), server_default=func.now(), nullable=False
     )
 
-
-
-
-
+    __table_args__ = (
+        Index("ix_search_results_user_created_at", "user_id", "created_at"),
+    )

@@ -53,6 +53,7 @@ def validate_concepts(ai_client, tracks_lyrics):
 
         if valid:
             return concepts
+        return None
 
 
 def validate_semantics(ai_client, tracks_lyrics):
@@ -82,4 +83,5 @@ def validate_semantics(ai_client, tracks_lyrics):
 
         if valid:
             return semantics
+        return None
 
